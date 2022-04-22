@@ -1,6 +1,5 @@
 package me.logicologist.wordiple.server.managers;
 
-import me.logicologist.wordiple.server.packets.LoginPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class SessionManager {
             if (v.getId().equals(user.getId())) invalidSessionIds.add(k);
         });
         for (UUID sessionId : invalidSessionIds) {
+            DatabaseManager.instance.saveUser(sessions.get(sessionId));
             this.sessions.remove(sessionId);
         }
         UUID newSessionId = UUID.randomUUID();

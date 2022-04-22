@@ -110,4 +110,24 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    public void saveUser(WordipleUser user) {
+        try {
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=? WHERE uuid=?");
+            ps.setInt(1, user.getRating());
+            ps.setInt(2, user.getLevel());
+            ps.setInt(3, user.getExperience());
+            ps.setInt(4, user.getWins());
+            ps.setInt(5, user.getGamesPlayed());
+            ps.setLong(6, user.getPlaytime());
+            ps.setLong(7, user.getBannedTime());
+            ps.setBoolean(8, user.isCompetitiveBan());
+            ps.setBoolean(9, user.isOnlineBan());
+            ps.setBoolean(10, user.isGlobalBan());
+            ps.setString(11, user.getId().toString());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
