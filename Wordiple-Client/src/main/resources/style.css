@@ -1,5 +1,12 @@
+@font-face {
+    font-family: "Nexa Bold";
+    src: url("NexaBold.ttf");
+}
+
 .mainscreen {
     -fx-background-image: url("./mainscreen.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }
 
 .button {
@@ -7,14 +14,5 @@
     -fx-font-size: 40px;
     -fx-background-color: #a7a7a7;
     -fx-border-radius: 60px;
-}
-
-@font-face {
-    font-family: "Nexa Bold";
-    src: url("Nexa Bold.otf");
-}
-
-@font-face {
-    font-family: "Nexa Light";
-    src: url("Nexa Light.otf");
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
