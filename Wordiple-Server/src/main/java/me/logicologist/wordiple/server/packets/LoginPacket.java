@@ -3,6 +3,8 @@ package me.logicologist.wordiple.server.packets;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
+import me.logicologist.wordiple.server.managers.PacketManager;
+import me.logicologist.wordiple.server.managers.SessionManager;
 
 import java.util.UUID;
 
@@ -16,7 +18,14 @@ public class LoginPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments packetArguments) {
-        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", UUID.randomUUID())).waitForResponse();
+        String username = packetArguments.get("username", String.class);
+        String password = packetArguments.get("password", String.class);
+        UUID session = SessionManager.getInstance().createSession(username, password);
+        if (session == null) {
+            PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("response", null));
+            return;
+        }
+        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", session));
     }
 
     @Override
