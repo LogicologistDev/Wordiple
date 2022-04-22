@@ -1,0 +1,20 @@
+.mainscreen {
+    -fx-background-image: url("./mainscreen.png");
+}
+
+.button {
+    -fx-font-family: "Nexa Bold";
+    -fx-font-size: 40px;
+    -fx-background-color: #a7a7a7;
+    -fx-border-radius: 60px;
+}
+
+@font-face {
+    font-family: "Nexa Bold";
+    src: url("Nexa Bold.otf");
+}
+
+@font-face {
+    font-family: "Nexa Light";
+    src: url("Nexa Light.otf");
+}
