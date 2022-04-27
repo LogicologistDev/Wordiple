@@ -101,7 +101,7 @@ public class SessionManager {
                     "[Do not reply to this email. You will not be given a response.]"
             );
             Transport.send(message);
-            this.signupSessions.put(stringBuilder.toString(), packetArguments);
+            this.signupSessions.put(stringBuilder.toString() + ":" + packetArguments.get("email", String.class), packetArguments);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
@@ -118,12 +118,13 @@ public class SessionManager {
         return "There was an error processing your request. Please try again!";
     }
 
-    public UUID createNewAccount(String verificationCode) {
-        PacketArguments packetArguments = signupSessions.get(verificationCode);
+    public UUID createNewAccount(String verificationCode, String email) {
+        PacketArguments packetArguments = signupSessions.remove(verificationCode + ":" + email);
         if (packetArguments == null) return null;
         WordipleUser wordipleUser = new WordipleUser(packetArguments.get("email", String.class), packetArguments.get("username", String.class));
         DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password", String.class));
-        return wordipleUser.getId();
+
+        return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class));
     }
 
     public static SessionManager getInstance() {
