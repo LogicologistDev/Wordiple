@@ -24,6 +24,6 @@ public class SignupPacket extends PacketAdapter implements PacketType {
                 .setArgument("email", String.class)
                 .setArgument("username", String.class)
                 .setArgument("password", String.class)
-                .setArgument("response", UUID.class);
+                .setArgument("response", String.class);
     }
 }

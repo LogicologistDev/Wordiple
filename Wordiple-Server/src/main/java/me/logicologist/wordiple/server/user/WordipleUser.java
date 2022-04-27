@@ -1,5 +1,7 @@
 package me.logicologist.wordiple.server.user;
 
+import me.logicologist.wordiple.server.managers.DatabaseManager;
+
 import java.util.UUID;
 
 public class WordipleUser {
@@ -34,6 +36,9 @@ public class WordipleUser {
         this.globalBan = globalBan;
     }
 
+    public WordipleUser(String email, String username) {
+        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, false, false, false);
+    }
     // Generate getters and setters
     public String getEmail() {
         return email;

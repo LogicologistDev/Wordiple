@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 import java.util.UUID;
 
 public class DatabaseManager {
@@ -129,5 +130,49 @@ public class DatabaseManager {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void createUser(WordipleUser user, String password) {
+        StringBuilder salt = new StringBuilder();
+        String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        for (int i = 0; i < 16; i++) {
+            salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
+        }
+        String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users (uuid, username, email, passwordhash, passwordsalt, rating, level, experience, wins, games_played, playtime, bannedtime, competitiveban, onlineban, globalban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, user.getId().toString());
+            ps.setString(2, user.getUsername());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, hashed);
+            ps.setString(5, salt.toString());
+            ps.setInt(6, 0);
+            ps.setInt(7, 0);
+            ps.setInt(8, 0);
+            ps.setInt(9, 0);
+            ps.setLong(10, 0);
+            ps.setLong(11, 0);
+            ps.setBoolean(12, false);
+            ps.setBoolean(13, false);
+            ps.setBoolean(14, false);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public UUID generateNewId() {
+        UUID potentialUUID = UUID.randomUUID();
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE uuid=?");
+            ps.setString(1, potentialUUID.toString());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return generateNewId();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return potentialUUID;
     }
 }
