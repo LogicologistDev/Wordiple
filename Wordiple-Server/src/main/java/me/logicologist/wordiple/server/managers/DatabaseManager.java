@@ -155,11 +155,12 @@ public class DatabaseManager {
             ps.setInt(7, 0);
             ps.setInt(8, 0);
             ps.setInt(9, 0);
-            ps.setLong(10, 0);
+            ps.setInt(10, 0);
             ps.setLong(11, 0);
-            ps.setBoolean(12, false);
+            ps.setLong(12, 0);
             ps.setBoolean(13, false);
             ps.setBoolean(14, false);
+            ps.setBoolean(15, false);
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
