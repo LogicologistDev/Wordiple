@@ -76,12 +76,12 @@ public class SessionManager {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("wordiple@gmail.com"));
+            message.setFrom(new InternetAddress("wordiple@gmail.com", "Wordiple System"));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(packetArguments.get("email", String.class))
             );
-            message.setSubject("Wordiple E-Mail Verification Code");
+            message.setSubject("Wordiple Email Verification Code");
 
             StringBuilder stringBuilder = new StringBuilder();
             String possibleCodePart = "0123456789";
@@ -109,7 +109,7 @@ public class SessionManager {
                             signupSessions.remove(stringBuilder.toString());
                         }
                     },
-                    5000
+                    10 * 60 * 1000
             );
             return "You have been sent a verification code at: " + packetArguments.get("email", String.class) + "!\nPlease type in the code you have received below.\nIt will expire in 10 minutes.";
         } catch (Exception e) {

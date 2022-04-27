@@ -3,8 +3,7 @@ package me.logicologist.wordiple.server.packets;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
-
-import java.util.UUID;
+import me.logicologist.wordiple.server.managers.SessionManager;
 
 public class SignupPacket extends PacketAdapter implements PacketType {
     public SignupPacket() {
@@ -14,9 +13,7 @@ public class SignupPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments packetArguments) {
-        String email = packetArguments.get("email", String.class);
-        String username = packetArguments.get("username", String.class);
-        String password = packetArguments.get("password", String.class);
+        SessionManager.getInstance().createSignupSession(packetArguments);
     }
 
     @Override

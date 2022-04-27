@@ -24,9 +24,13 @@ public class DatabaseManager {
 
     public void setup() {
         try {
+            if (!databaseFile.exists()) {
+                databaseFile.getParentFile().mkdirs();
+                databaseFile.createNewFile();
+            }
             this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS users(" +
                     "email VARCHAR(255)," +
-                    "uuid VARCHAR(255)" +
+                    "uuid VARCHAR(255)," +
                     "username VARCHAR(255)," +
                     "passwordhash VARCHAR(255)," +
                     "passwordsalt VARCHAR(255)," +
@@ -36,10 +40,10 @@ public class DatabaseManager {
                     "wins INTEGER," +
                     "games_played INTEGER," +
                     "playtime LONG," +
-                    "bannedtime LONG" +
-                    "competitiveban BOOLEAN" +
+                    "bannedtime LONG," +
+                    "competitiveban BOOLEAN," +
                     "onlineban BOOLEAN," +
-                    "globalban BOOLEAN" +
+                    "globalban BOOLEAN," +
                     "PRIMARY KEY(email))"
             ).executeUpdate();
             this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS replays(" +
@@ -50,10 +54,10 @@ public class DatabaseManager {
             ).executeUpdate();
             this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS reports(" +
                     "uuid VARCHAR(255)," +
-                    "reported VARCHAR(255))," +
+                    "reported VARCHAR(255)," +
                     "reporter VARCHAR(255)," +
                     "reason LONGTEXT," +
-                    "PRIMARY KEY(uuid)"
+                    "PRIMARY KEY(uuid))"
             ).executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
