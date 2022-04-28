@@ -100,7 +100,16 @@ public class SessionManager {
                     "\n" +
                     "[Do not reply to this email. You will not be given a response.]"
             );
-            Transport.send(message);
+            System.out.println("Sending email...");
+
+            new Thread(() -> {
+                try {
+                    Transport.send(message);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
+            System.out.println("Email sent!");
             this.signupSessions.put(stringBuilder.toString() + ":" + packetArguments.get("email", String.class), packetArguments);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
