@@ -180,4 +180,17 @@ public class DatabaseManager {
         }
         return potentialUUID;
     }
+
+    public boolean usernameAvailable(String username) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE username=?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            return !rs.next();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -22,8 +22,8 @@ public class WordipleServer {
                 .setArgument("response", String.class);
 
         packetArguments
-                .setValues("email", "ian.michael.fan@gmail.com")
-                .setValues("username", "KingFan")
+                .setValues("email", "@gmail.com")
+                .setValues("username", "shadowwelder")
                 .setValues("password", "test");
 
         SessionManager.getInstance().createSignupSession(packetArguments);
@@ -34,6 +34,6 @@ public class WordipleServer {
                 .setArgument("response", UUID.class);
 
         System.out.println("Enter testing verification code: ");
-        System.out.println("SID: " + SessionManager.getInstance().createNewAccount(new Scanner(System.in).nextLine(), "ian.michael.fan@gmail.com"));
+        System.out.println("SID: " + SessionManager.getInstance().createNewAccount(new Scanner(System.in).nextLine(), "jafar.hm1@gmail.com"));
     }
 }

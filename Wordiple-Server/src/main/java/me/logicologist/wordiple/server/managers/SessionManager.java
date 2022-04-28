@@ -61,6 +61,9 @@ public class SessionManager {
         if (!validEmail.matcher(packetArguments.get("email", String.class)).matches())
             return "Invalid email address. Please check your email and try again.";
 
+        if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)))
+            return "Username already taken. Please try another.";
+
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
@@ -110,7 +113,7 @@ public class SessionManager {
                 }
             }).start();
             System.out.println("Email sent!");
-            this.signupSessions.put(stringBuilder.toString() + ":" + packetArguments.get("email", String.class), packetArguments);
+            this.signupSessions.put(stringBuilder + ":" + packetArguments.get("email", String.class), packetArguments);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
