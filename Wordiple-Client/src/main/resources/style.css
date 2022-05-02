@@ -1,3 +1,7 @@
+@font-face {
+    src: url('nexalight.ttf') format('truetype');
+}
+
 .mainscreen {
     -fx-background-image: url("./mainscreen.png");
     -fx-background-repeat: no-repeat;
@@ -5,8 +9,8 @@
 }
 
 .button {
-    -fx-font-family: "Nexa Bold";
     -fx-font-size: 40px;
+    -fx-font-family: 'Nexa Light';
     -fx-background-color: #a7a7a7;
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
@@ -14,11 +18,11 @@
 
 .button:hover {
     -fx-background-color: #dcdcdc;
-    -fx-font-family: "Nexa Light";
+    -fx-font-family: 'Nexa Light';
     -fx-effect: dropshadow(three-pass-box, #000000, 30, 0.2, 0, 0);
 }
 
 .button:armed {
     -fx-background-color: #9d2a2a;
-    -fx-font-family: "Nexa Light";
+    -fx-font-family: 'Nexa Light';
 }

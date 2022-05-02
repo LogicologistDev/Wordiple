@@ -4,15 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="1057.0" layoutY="789.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" stylesheets="@style.css" text="Sign Up">
+      <Button layoutX="1057.0" layoutY="789.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" text="Sign Up">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button layoutX="657.0" layoutY="789.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" stylesheets="@style.css" text="Log In">
+      <Button layoutX="657.0" layoutY="789.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" text="Log In">
          <font>
             <Font size="30.0" />
          </font>
