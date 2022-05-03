@@ -11,7 +11,7 @@
 .button {
     -fx-font-size: 40px;
     -fx-font-family: 'Nexa Light';
-    -fx-background-color: #a45aff;
+    -fx-background-color: #2e1c3e;
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
