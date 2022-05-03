@@ -18,7 +18,7 @@
             <Line endX="591.0" layoutX="474.0" layoutY="528.0" startX="-100.0" />
             <Label layoutX="384.0" layoutY="500.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
             <Button fx:id="loginButton" layoutX="663.0" layoutY="669.0" mnemonicParsing="false" styleClass="button-2" stylesheets="@style.css" text="Log In" />
-            <Label fx:id="errorMessageLabel" layoutX="392.0" layoutY="645.0" prefHeight="19.0" prefWidth="362.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
+            <Label fx:id="errorMessageLabel" layoutX="392.0" layoutY="645.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
             <Button fx:id="mainScreenButton" layoutX="374.0" layoutY="735.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
             <PasswordField fx:id="passwordField" layoutX="390.0" layoutY="594.0" prefHeight="48.0" prefWidth="661.0" promptText="Password" styleClass="text-field-1" stylesheets="@style.css" />
          </children>

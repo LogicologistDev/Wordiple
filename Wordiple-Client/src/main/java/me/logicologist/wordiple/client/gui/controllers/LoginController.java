@@ -52,7 +52,7 @@ public class LoginController extends FadeTransitionAdapter {
             Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
             errorMessageLabel.setText("");
             if (!usernamePattern.matcher(usernameField.getText()).matches()) {
-                errorMessageLabel.setText("Invalid username");
+                errorMessageLabel.setText("Usernames can only contain letters, numbers, underscores, and must be 3-16 characters.");
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }

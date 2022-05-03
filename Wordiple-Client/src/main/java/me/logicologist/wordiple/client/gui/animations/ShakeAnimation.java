@@ -19,10 +19,11 @@ public class ShakeAnimation {
     }
 
     public void play() {
+        int portions = this.duration / 12;
         Timeline shakeOne = new Timeline();
         shakeOne.setCycleCount(1);
         KeyValue kvOne = new KeyValue(writableValue, 10 * intensity);
-        KeyFrame kfOne = new KeyFrame(Duration.millis(this.duration / 3), kvOne);
+        KeyFrame kfOne = new KeyFrame(Duration.millis(portions * 2), kvOne);
         shakeOne.getKeyFrames().add(kfOne);
         shakeOne.setAutoReverse(false);
         shakeOne.play();
@@ -30,7 +31,7 @@ public class ShakeAnimation {
             Timeline shakeTwo = new Timeline();
             shakeTwo.setCycleCount(1);
             KeyValue kvTwo = new KeyValue(writableValue, -20 * intensity);
-            KeyFrame kfTwo = new KeyFrame(Duration.millis(this.duration / 3), kvTwo);
+            KeyFrame kfTwo = new KeyFrame(Duration.millis(portions * 3), kvTwo);
             shakeTwo.getKeyFrames().add(kfTwo);
             shakeTwo.setAutoReverse(false);
             shakeTwo.play();
@@ -38,7 +39,7 @@ public class ShakeAnimation {
                 Timeline shakeThree = new Timeline();
                 shakeThree.setCycleCount(1);
                 KeyValue kvThree = new KeyValue(writableValue, 15 * intensity);
-                KeyFrame kfThree = new KeyFrame(Duration.millis(this.duration / 6), kvThree);
+                KeyFrame kfThree = new KeyFrame(Duration.millis(portions * 4), kvThree);
                 shakeThree.getKeyFrames().add(kfThree);
                 shakeThree.setAutoReverse(false);
                 shakeThree.play();
@@ -46,7 +47,7 @@ public class ShakeAnimation {
                     Timeline shakeFour = new Timeline();
                     shakeFour.setCycleCount(1);
                     KeyValue kvFour = new KeyValue(writableValue, -5 * intensity);
-                    KeyFrame kfFour = new KeyFrame(Duration.millis(this.duration / 6), kvFour);
+                    KeyFrame kfFour = new KeyFrame(Duration.millis(portions * 5), kvFour);
                     shakeFour.getKeyFrames().add(kfFour);
                     shakeFour.setAutoReverse(false);
                     shakeFour.play();
