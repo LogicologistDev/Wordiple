@@ -47,7 +47,7 @@ public class LoadScreenController implements Initializable {
         fadeOut.play();
         fadeOut.setOnFinished(event -> {
             this.parent.getChildren().remove(movablePane);
-            runAfter.run();
+            if (runAfter != null) runAfter.run();
         });
     }
 }

@@ -26,11 +26,4 @@ public class LoginPacket extends PacketAdapter implements PacketType {
                 .setArgument("password", String.class)
                 .setArgument("response", UUID.class);
     }
-
-    public void test() {
-        PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                .setValues("username", "test")
-                .setValues("password", "test")
-        );
-    }
 }
