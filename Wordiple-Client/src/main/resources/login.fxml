@@ -7,7 +7,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane fx:id="movablePane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0">
@@ -20,6 +19,7 @@
             <Label layoutX="624.0" layoutY="770.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
             <Button fx:id="logInButton" layoutX="903.0" layoutY="939.0" mnemonicParsing="false" styleClass="button-2" stylesheets="@style.css" text="Log In" />
             <Label fx:id="errorMessage" layoutX="632.0" layoutY="915.0" prefHeight="19.0" prefWidth="362.0" styleClass="label-body" stylesheets="@style.css" text="Invalid username and password. Please try again." textFill="RED" />
+            <Button fx:id="mainScreenButton" layoutX="614.0" layoutY="1005.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

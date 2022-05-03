@@ -47,9 +47,17 @@
 
 .button-2 {
     -fx-font-size: 25px;
-    -fx-font-family: 'Nexa Light';
+    -fx-font-family: 'Nexa Bold';
     -fx-background-color: #c1c1c1;
     -fx-border-radius: 60px;
+}
+
+.button-3 {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-color: #ff4f4f;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
 
 .rectangle-bg {
