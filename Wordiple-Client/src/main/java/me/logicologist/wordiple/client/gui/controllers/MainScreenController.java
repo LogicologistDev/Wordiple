@@ -19,12 +19,16 @@ public class MainScreenController extends FadeTransitionAdapter {
     @FXML
     private Button signUpButton;
 
+    private boolean midAction = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
 
         loginButton.setOnAction(event -> {
+            if (midAction) return;
             if (!loginButton.isHover()) return;
+            midAction = true;
 
             super.transitionOut(() -> {
                 GUIManager.getInstance().showLoginScreen(true);

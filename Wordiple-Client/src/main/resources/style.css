@@ -50,6 +50,7 @@
     -fx-font-family: 'Nexa Bold';
     -fx-background-color: #c1c1c1;
     -fx-border-radius: 60px;
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.BaseLockedSkin';
 }
 
 .button-3 {
