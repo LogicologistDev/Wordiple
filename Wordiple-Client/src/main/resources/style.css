@@ -11,20 +11,18 @@
 .button {
     -fx-font-size: 40px;
     -fx-font-family: 'Nexa Light';
-    -fx-background-color: #a7a7a7;
+    -fx-background-color: #a45aff;
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
 }
 
 .button:hover {
-    -fx-background-color: #d45858;
     -fx-font-family: 'Nexa Light';
     -fx-effect: dropshadow(three-pass-box, #000000, 30, 0.2, 0, 0);
 }
 
 .button:armed {
-    -fx-background-color: #9d2a2a;
     -fx-font-family: 'Nexa Light';
 }
 
