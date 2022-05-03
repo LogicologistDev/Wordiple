@@ -56,6 +56,12 @@ public class LoginController extends FadeTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }
+            if (passwordField.getText().isEmpty()){
+                errorMessageLabel.setText("Password cannot be empty.");
+                new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                return;
+            }
+            GUIManager.getInstance().showLoadScreen("Logging in...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
         });
     }
 }

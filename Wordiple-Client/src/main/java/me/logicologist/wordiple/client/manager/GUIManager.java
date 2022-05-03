@@ -3,7 +3,9 @@ package me.logicologist.wordiple.client.manager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.LoginController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.SignupController;
@@ -58,6 +60,20 @@ public class GUIManager extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public LoadScreenController showLoadScreen(String title, Pane parentPane) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/loadscreen.fxml"));
+            fxmlLoader.load();
+            LoadScreenController loadScreenController = fxmlLoader.getController();
+            loadScreenController.setText(title);
+            loadScreenController.setParentPane(parentPane);
+            return loadScreenController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public static void launch(String[] args) {
