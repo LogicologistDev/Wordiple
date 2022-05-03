@@ -5,10 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.manager.GUIManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class LoginController extends FadeTransitionAdapter {
 
@@ -44,6 +46,16 @@ public class LoginController extends FadeTransitionAdapter {
             super.transitionOut(() -> {
                 GUIManager.getInstance().showMainScreen(true);
             });
+        });
+
+        loginButton.setOnAction(event -> {
+            Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
+            errorMessageLabel.setText("");
+            if (!usernamePattern.matcher(usernameField.getText()).matches()) {
+                errorMessageLabel.setText("Invalid username");
+                new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                return;
+            }
         });
     }
 }

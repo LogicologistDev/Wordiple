@@ -31,7 +31,6 @@ public class GUIManager extends Application {
     }
 
     public void showMainScreen(boolean fadeIn) {
-        System.out.println(stage.getWidth() + ", " + stage.getHeight());
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainscreen.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));

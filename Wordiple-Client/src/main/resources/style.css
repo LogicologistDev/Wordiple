@@ -24,6 +24,11 @@
     -fx-font-family: 'Nexa Bold';
 }
 
+.label-bigtitle {
+    -fx-font-size: 100px;
+    -fx-font-family: 'Nexa Bold';
+}
+
 .label-body {
     -fx-font-size: 15px;
     -fx-font-family: 'Nexa Light';
