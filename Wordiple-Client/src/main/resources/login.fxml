@@ -8,19 +8,19 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.LoginController">
+<AnchorPane maxHeight="810.0" maxWidth="1440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="mainscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.LoginController">
    <children>
-      <AnchorPane fx:id="movablePane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0">
+      <AnchorPane fx:id="movablePane" maxHeight="810.0" maxWidth="1440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0">
          <children>
-            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="269.0" layoutX="615.0" layoutY="725.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />
-            <TextField fx:id="usernameField" layoutX="630.0" layoutY="809.0" prefHeight="48.0" prefWidth="661.0" promptText="Username" styleClass="text-field-1" stylesheets="@style.css" />
-            <Label layoutX="624.0" layoutY="733.0" styleClass="label-title" stylesheets="@style.css" text="Welcome back!" />
-            <Line endX="591.0" layoutX="714.0" layoutY="798.0" startX="-100.0" />
-            <Label layoutX="624.0" layoutY="770.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
-            <Button fx:id="loginButton" layoutX="903.0" layoutY="939.0" mnemonicParsing="false" styleClass="button-2" stylesheets="@style.css" text="Log In" />
-            <Label fx:id="errorMessageLabel" layoutX="632.0" layoutY="915.0" prefHeight="19.0" prefWidth="362.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
-            <Button fx:id="mainScreenButton" layoutX="614.0" layoutY="1005.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
-            <PasswordField fx:id="passwordField" layoutX="630.0" layoutY="864.0" prefHeight="48.0" prefWidth="661.0" promptText="Password" styleClass="text-field-1" stylesheets="@style.css" />
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="269.0" layoutX="375.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />
+            <TextField fx:id="usernameField" layoutX="390.0" layoutY="539.0" prefHeight="48.0" prefWidth="661.0" promptText="Username" styleClass="text-field-1" stylesheets="@style.css" />
+            <Label layoutX="384.0" layoutY="463.0" styleClass="label-title" stylesheets="@style.css" text="Welcome back!" />
+            <Line endX="591.0" layoutX="474.0" layoutY="528.0" startX="-100.0" />
+            <Label layoutX="384.0" layoutY="500.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
+            <Button fx:id="loginButton" layoutX="663.0" layoutY="669.0" mnemonicParsing="false" styleClass="button-2" stylesheets="@style.css" text="Log In" />
+            <Label fx:id="errorMessageLabel" layoutX="392.0" layoutY="645.0" prefHeight="19.0" prefWidth="362.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
+            <Button fx:id="mainScreenButton" layoutX="374.0" layoutY="735.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
+            <PasswordField fx:id="passwordField" layoutX="390.0" layoutY="594.0" prefHeight="48.0" prefWidth="661.0" promptText="Password" styleClass="text-field-1" stylesheets="@style.css" />
          </children>
       </AnchorPane>
    </children>

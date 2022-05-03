@@ -8,8 +8,6 @@
 
 .mainscreen {
     -fx-background-image: url("./mainscreen.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
 }
 
 .text-field-1 {
