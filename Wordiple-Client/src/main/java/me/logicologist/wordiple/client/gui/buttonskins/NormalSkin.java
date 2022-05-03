@@ -59,9 +59,9 @@ public class NormalSkin extends ButtonSkin {
         });
 
         button.setOnMouseExited(e -> {
-            fadeOut.playFromStart();
             exited = true;
             if (pressed) return;
+            fadeOut.playFromStart();
             timelineIn.stop();
             timelineOut.play();
         });
