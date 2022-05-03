@@ -36,7 +36,7 @@ public class LoadScreenController implements Initializable {
         this.parent.getChildren().add(movablePane);
         FadeTransition fadeIn = new FadeTransition(Duration.millis(500));
         fadeIn.setNode(movablePane);
-        fadeIn.setToValue(0.75);
+        fadeIn.setToValue(1);
         fadeIn.play();
     }
 
