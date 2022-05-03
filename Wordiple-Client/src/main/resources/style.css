@@ -26,7 +26,6 @@
 .button:armed {
     -fx-background-color: #9d2a2a;
     -fx-font-family: 'Nexa Light';
-    -fx-translate-y: -4;
 }
 
 /*
