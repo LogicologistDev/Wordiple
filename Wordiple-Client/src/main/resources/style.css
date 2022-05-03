@@ -2,13 +2,41 @@
     src: url('NexaLight.ttf') format('truetype');
 }
 
+@font-face {
+    src: url('NexaBold.ttf') format('truetype');
+}
+
 .mainscreen {
     -fx-background-image: url("./mainscreen.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
 }
 
-.button {
+.text-field-1 {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #131313;
+    -fx-prompt-text-fill: #616161;
+    -fx-background-color: #c1c1c1;
+    -fx-background-radius: 10px;
+}
+
+.label-title {
+    -fx-font-size: 30px;
+    -fx-font-family: 'Nexa Bold';
+}
+
+.label-body {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Nexa Light';
+}
+
+.label-subtext-warning {
+    -fx-font-size: 13px;
+    -fx-font-family: 'Nexa Bold';
+}
+
+.button-1 {
     -fx-font-size: 40px;
     -fx-font-family: 'Nexa Light';
     -fx-background-color: #2e1c3e;
@@ -17,15 +45,20 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
 }
 
-.button:hover {
+.button-2 {
+    -fx-font-size: 25px;
     -fx-font-family: 'Nexa Light';
-    -fx-effect: dropshadow(three-pass-box, #000000, 30, 0.2, 0, 0);
+    -fx-background-color: #c1c1c1;
+    -fx-border-radius: 60px;
 }
 
-.button:armed {
+.rectangle-bg {
+    -fx-font-size: 40px;
     -fx-font-family: 'Nexa Light';
+    -fx-background-color: #2e1c3e;
+    -fx-border-radius: 60px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
-
 /*
 .button {
   padding: 15px 25px;
