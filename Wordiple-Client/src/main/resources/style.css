@@ -58,6 +58,15 @@
     -fx-background-color: #ff4f4f;
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
+}
+
+.button-3-outline {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-color: rgba(255, 79, 79, 0.18);
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
 
 .rectangle-bg {

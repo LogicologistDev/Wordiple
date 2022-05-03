@@ -7,13 +7,12 @@ import javafx.stage.Stage;
 import me.logicologist.wordiple.client.gui.controllers.LoginController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 
-import java.io.IOException;
-
 public class GUIManager extends Application {
 
     private static GUIManager instance;
 
     public Stage stage;
+
     @Override
     public void start(Stage stage) {
         instance = this;

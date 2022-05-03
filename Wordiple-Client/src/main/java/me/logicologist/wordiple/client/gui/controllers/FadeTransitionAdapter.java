@@ -20,14 +20,14 @@ public abstract class FadeTransitionAdapter implements Initializable {
         pane.setOpacity(0);
         pane.setLayoutY(pane.getLayoutY() + 100);
 
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(250));
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(400));
         fadeIn.setNode(this.pane);
         fadeIn.setToValue(1);
 
         final Timeline timelineIn = new Timeline();
         timelineIn.setCycleCount(1);
         final KeyValue kvOut = new KeyValue(this.pane.layoutYProperty(), -100);
-        final KeyFrame kfOut = new KeyFrame(Duration.millis(250), kvOut);
+        final KeyFrame kfOut = new KeyFrame(Duration.millis(400), kvOut);
         timelineIn.getKeyFrames().add(kfOut);
         timelineIn.setAutoReverse(false);
 
@@ -36,14 +36,14 @@ public abstract class FadeTransitionAdapter implements Initializable {
     }
 
     public void transitionOut(Runnable onFinished) {
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(250));
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(400));
         fadeOut.setNode(this.pane);
         fadeOut.setToValue(0);
 
         final Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
         final KeyValue kvOut = new KeyValue(this.pane.layoutYProperty(), 100);
-        final KeyFrame kfOut = new KeyFrame(Duration.millis(250), kvOut);
+        final KeyFrame kfOut = new KeyFrame(Duration.millis(400), kvOut);
         timelineOut.getKeyFrames().add(kfOut);
         timelineOut.setAutoReverse(false);
 

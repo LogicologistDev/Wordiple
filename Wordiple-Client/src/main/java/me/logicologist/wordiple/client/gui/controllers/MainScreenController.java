@@ -24,7 +24,6 @@ public class MainScreenController extends FadeTransitionAdapter {
         super.setPane(movablePane);
 
         loginButton.setOnAction(event -> {
-            System.out.println("Log in button pressed");
             if (!loginButton.isHover()) return;
 
             super.transitionOut(() -> {
