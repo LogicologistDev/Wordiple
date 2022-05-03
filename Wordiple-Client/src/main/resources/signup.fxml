@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainscreen" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.SignupController">
+   <children>
+      <AnchorPane fx:id="movablePane" maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0">
+         <children>
+            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="297.0" layoutX="615.0" layoutY="699.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />
+            <Label layoutX="624.0" layoutY="707.0" styleClass="label-title" stylesheets="@style.css" text="Hello, Newcomer!" />
+            <Label layoutX="624.0" layoutY="744.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="Welcome to Wordiple! Here, you are able to sign up for a new Wordiple account!" />
+            <Line endX="591.0" layoutX="714.0" layoutY="770.0" startX="-100.0" />
+            <Label fx:id="errorMessageLabel" layoutX="631.0" layoutY="935.0" prefHeight="19.0" prefWidth="257.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
+            <TextField fx:id="emailField" layoutX="630.0" layoutY="777.0" prefHeight="48.0" prefWidth="661.0" promptText="Email" styleClass="text-field-1" stylesheets="@style.css" />
+            <TextField fx:id="usernameField" layoutX="630.0" layoutY="830.0" prefHeight="48.0" prefWidth="661.0" promptText="Username" styleClass="text-field-1" stylesheets="@style.css" />
+            <PasswordField fx:id="passwordField" layoutX="630.0" layoutY="883.0" prefHeight="48.0" prefWidth="320.0" promptText="Password" styleClass="text-field-1" stylesheets="@style.css" />
+            <PasswordField fx:id="verifyPasswordField" layoutX="971.0" layoutY="883.0" prefHeight="48.0" prefWidth="320.0" promptText="Verify Password" styleClass="text-field-1" stylesheets="@style.css" />
+            <Button fx:id="signupButton" layoutX="892.0" layoutY="941.0" mnemonicParsing="false" styleClass="button-2" stylesheets="@style.css" text="Sign Up" />
+            <Button fx:id="mainScreenButton" layoutX="614.0" layoutY="1005.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

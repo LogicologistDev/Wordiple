@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import me.logicologist.wordiple.client.gui.controllers.LoginController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
+import me.logicologist.wordiple.client.gui.controllers.SignupController;
 
 public class GUIManager extends Application {
 
@@ -45,6 +46,16 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
             if (fadeIn) ((LoginController) fxmlLoader.getController()).transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showSignupScreen(boolean fadeIn) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/signup.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            if (fadeIn) ((SignupController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

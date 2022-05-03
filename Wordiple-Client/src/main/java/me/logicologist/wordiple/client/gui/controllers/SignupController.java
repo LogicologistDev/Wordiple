@@ -2,22 +2,39 @@ package me.logicologist.wordiple.client.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.manager.GUIManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainScreenController extends FadeTransitionAdapter {
+public class SignupController extends FadeTransitionAdapter{
 
     @FXML
     private AnchorPane movablePane;
 
     @FXML
-    private Button loginButton;
+    private Label errorMessageLabel;
 
     @FXML
-    private Button signUpButton;
+    private TextField emailField;
+
+    @FXML
+    private TextField usernameField;
+
+    @FXML
+    private TextField passwordField;
+
+    @FXML
+    private TextField verifyPasswordField;
+
+    @FXML
+    private Button signupButton;
+
+    @FXML
+    private Button mainScreenButton;
 
     private boolean midAction = false;
 
@@ -25,23 +42,13 @@ public class MainScreenController extends FadeTransitionAdapter {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
 
-        loginButton.setOnAction(event -> {
+        mainScreenButton.setOnAction(event -> {
             if (midAction) return;
-            if (!loginButton.isHover()) return;
+            if (!mainScreenButton.isHover()) return;
             midAction = true;
 
             super.transitionOut(() -> {
-                GUIManager.getInstance().showLoginScreen(true);
-            });
-        });
-
-        signUpButton.setOnAction(event -> {
-            if (midAction) return;
-            if (!signUpButton.isHover()) return;
-            midAction = true;
-
-            super.transitionOut(() -> {
-                GUIManager.getInstance().showSignupScreen(true);
+                GUIManager.getInstance().showMainScreen(true);
             });
         });
     }
