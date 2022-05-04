@@ -12,6 +12,11 @@ public class SignupPacket extends PacketAdapter implements PacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
         this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", SessionManager.getInstance().createSignupSession(packetArguments)));
     }

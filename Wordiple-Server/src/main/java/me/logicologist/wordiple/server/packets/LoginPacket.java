@@ -9,6 +9,11 @@ import java.util.UUID;
 
 public class LoginPacket extends PacketAdapter implements PacketType {
 
+    @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
     public LoginPacket() {
         super("login_packet");
         this.packetType = this;

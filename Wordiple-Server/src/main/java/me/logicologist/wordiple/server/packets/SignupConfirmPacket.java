@@ -15,6 +15,11 @@ public class SignupConfirmPacket extends PacketAdapter implements PacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
         String email = packetArguments.get("email", String.class);
         String code = packetArguments.get("code", String.class);
