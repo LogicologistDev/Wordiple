@@ -8,6 +8,7 @@ import me.logicologist.wordiple.client.packets.UserInfoPacket;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class PacketManager {
 
@@ -33,7 +34,7 @@ public class PacketManager {
                         }
                         Platform.runLater(() -> GUIManager.getInstance().showGameSelectScreen(false));
                         return false;
-                    });
+                    }, null, 5, TimeUnit.SECONDS);
         });
         this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> {
 
