@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.GameSelectController">
@@ -12,7 +13,10 @@
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="299.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="519.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="629.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
+            <Label layoutX="112.0" layoutY="441.0" prefHeight="37.0" prefWidth="427.0" styleClass="label-title" stylesheets="@style.css" text="Rank Image + Progress Here" />
+            <Label layoutX="537.0" layoutY="50.0" prefHeight="37.0" prefWidth="427.0" styleClass="label-title" stylesheets="@style.css" text="Stats + Leveling Bar here" />
          </children>
       </AnchorPane>
+      <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1287.0" layoutY="765.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
    </children>
 </AnchorPane>
