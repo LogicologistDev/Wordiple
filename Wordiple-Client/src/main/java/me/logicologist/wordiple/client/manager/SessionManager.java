@@ -40,7 +40,7 @@ public class SessionManager {
     public void setLocalSessionID(UUID localSessionID) {
         try {
             Properties properties = new Properties();
-            properties.setProperty("sessionID", localSessionID.toString());
+            if (localSessionID != null) properties.setProperty("sessionID", localSessionID.toString());
             properties.store(Files.newOutputStream(file.toPath()), "Please do not give share/touch this file.");
         } catch (Exception ex) {
             ex.printStackTrace();
