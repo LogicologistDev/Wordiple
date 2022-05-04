@@ -31,9 +31,7 @@ public class PacketManager {
                         if (username == null) {
                             return false;
                         }
-                        Platform.runLater(() -> {
-                            GUIManager.getInstance().showGameSelectScreen(false);
-                        });
+                        Platform.runLater(() -> GUIManager.getInstance().showGameSelectScreen(false));
                         return false;
                     });
         });
