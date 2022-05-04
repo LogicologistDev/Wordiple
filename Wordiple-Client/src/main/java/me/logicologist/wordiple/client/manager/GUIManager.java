@@ -21,8 +21,8 @@ public class GUIManager extends Application {
         stage.setTitle("Wordiple");
         stage.setResizable(false);
 
-        stage.setHeight(810);
-        stage.setWidth(1440);
+        stage.setHeight(849);
+        stage.setWidth(1456);
 
         showMainScreen(false);
 

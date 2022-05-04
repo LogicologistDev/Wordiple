@@ -26,7 +26,7 @@ public abstract class FadeTransitionAdapter implements Initializable {
 
         final Timeline timelineIn = new Timeline();
         timelineIn.setCycleCount(1);
-        final KeyValue kvOut = new KeyValue(this.pane.layoutYProperty(), -100);
+        final KeyValue kvOut = new KeyValue(this.pane.layoutYProperty(), 0);
         final KeyFrame kfOut = new KeyFrame(Duration.millis(400), kvOut);
         timelineIn.getKeyFrames().add(kfOut);
         timelineIn.setAutoReverse(false);

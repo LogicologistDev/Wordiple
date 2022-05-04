@@ -46,7 +46,7 @@ public class NormalSkin extends ButtonSkin {
 
         final Timeline timelinePress = new Timeline();
         timelinePress.setCycleCount(1);
-        final KeyValue kvPress = new KeyValue(button.layoutYProperty(), button.getLayoutY() + 15);
+        final KeyValue kvPress = new KeyValue(button.layoutYProperty(), button.getLayoutY() + 20);
         final KeyFrame kfPress = new KeyFrame(Duration.millis(25), kvPress);
         timelinePress.getKeyFrames().add(kfPress);
         timelinePress.setAutoReverse(false);

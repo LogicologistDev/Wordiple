@@ -18,7 +18,7 @@
             <Label fx:id="errorMessageLabel" alignment="CENTER" layoutX="507.0" layoutY="633.0" prefHeight="19.0" prefWidth="427.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
             <TextField fx:id="codeField" alignment="CENTER" layoutX="589.0" layoutY="535.0" prefHeight="95.0" prefWidth="264.0" promptText="XXXXXX" styleClass="text-field-2" stylesheets="@style.css" />
             <Button fx:id="signupButton" layoutX="658.0" layoutY="656.0" mnemonicParsing="false" pickOnBounds="false" styleClass="button-2" stylesheets="@style.css" text="Sign Up" />
-            <Button fx:id="mainScreenButton" layoutX="374.0" layoutY="731.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="48.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
+            <Button fx:id="mainScreenButton" alignment="TOP_CENTER" layoutX="374.0" layoutY="731.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="175.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
             <Label layoutX="452.0" layoutY="507.0" prefHeight="19.0" prefWidth="525.0" styleClass="label-body" stylesheets="@style.css" text="You have been sent an email with a verification code. Please type it below!" />
          </children>
       </AnchorPane>
