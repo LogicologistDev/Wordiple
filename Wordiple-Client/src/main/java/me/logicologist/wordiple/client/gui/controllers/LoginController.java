@@ -79,7 +79,15 @@ public class LoginController extends FadeTransitionAdapter {
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                     });
+                    return false;
                 }
+                Platform.runLater(() -> {
+                    loadScreen.remove(() -> {
+                        super.transitionOut(() -> {
+                            GUIManager.getInstance().showGameSelectScreen(true);
+                        });
+                    });
+                });
                 return false;
             }, () -> Platform.runLater(() -> {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");

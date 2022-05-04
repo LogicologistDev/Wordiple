@@ -35,6 +35,9 @@ public class SignupConfirmController extends FadeTransitionAdapter {
     @FXML
     private Button mainScreenButton;
 
+    @FXML
+    private Label titleLabel;
+
     private boolean midAction = false;
     private String email = null;
 
@@ -95,7 +98,7 @@ public class SignupConfirmController extends FadeTransitionAdapter {
                 Platform.runLater(() -> {
                     loadScreen.remove(() -> {
                         super.transitionOut(() -> {
-                            GUIManager.getInstance().showMainScreen(true);
+                            GUIManager.getInstance().showGameSelectScreen(true);
                         });
                     });
                 });
@@ -111,5 +114,9 @@ public class SignupConfirmController extends FadeTransitionAdapter {
     public void setEmail(String email) {
         if (this.email != null) return;
         this.email = email;
+    }
+
+    public void setUsername(String username) {
+        this.titleLabel.setText("Hello, " + username + "!");
     }
 }

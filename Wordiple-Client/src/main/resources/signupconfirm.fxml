@@ -12,7 +12,7 @@
       <AnchorPane fx:id="movablePane" maxHeight="810.0" maxWidth="1440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0">
          <children>
             <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="297.0" layoutX="375.0" layoutY="413.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />
-            <Label layoutX="384.0" layoutY="421.0" styleClass="label-title" stylesheets="@style.css" text="Hello, Newcomer!" />
+            <Label fx:id="titleLabel" layoutX="384.0" layoutY="421.0" styleClass="label-title" stylesheets="@style.css" text="Hello, Newcomer!" />
             <Label layoutX="384.0" layoutY="458.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="Welcome to Wordiple! Here, you are able to sign up for a new Wordiple account!" />
             <Line endX="591.0" layoutX="474.0" layoutY="484.0" startX="-100.0" />
             <Label fx:id="errorMessageLabel" alignment="CENTER" layoutX="507.0" layoutY="621.0" prefHeight="19.0" prefWidth="427.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />

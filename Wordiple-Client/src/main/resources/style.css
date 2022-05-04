@@ -17,12 +17,12 @@
 }
 
 .button-4 {
-    -fx-shape: "M 800 300 L 75 300 C 0 300 75 125 150 125 L 800 125 L 800 300 ";
     -fx-font-size: 50px;
     -fx-font-family: 'Nexa Bold';
-    -fx-background-color: linear-gradient(to right, #7ddfff, #4682fd, #2532ff);
+    -fx-background-image: url("./bar.png");
+    -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    /*-fx-background-image: url("./background.png");*/
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
 }
 
 .text-field-1 {

@@ -72,12 +72,13 @@ public class GUIManager extends Application {
         }
     }
 
-    public void showSignupConfirmScreen(boolean fadeIn, String email) {
+    public void showSignupConfirmScreen(boolean fadeIn, String email, String username) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/signupconfirm.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
             SignupConfirmController controller = fxmlLoader.getController();
             controller.setEmail(email);
+            controller.setUsername(username);
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,6 +97,16 @@ public class GUIManager extends Application {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public void showGameSelectScreen(boolean fadeIn) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+//            if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void launch(String[] args) {

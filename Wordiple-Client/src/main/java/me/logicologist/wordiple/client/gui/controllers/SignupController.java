@@ -103,7 +103,7 @@ public class SignupController extends FadeTransitionAdapter {
                 Platform.runLater(() -> {
                     loadScreen.remove(() -> {
                         super.transitionOut(() -> {
-                            GUIManager.getInstance().showSignupConfirmScreen(true, emailField.getText());
+                            GUIManager.getInstance().showSignupConfirmScreen(true, emailField.getText(), usernameField.getText());
                         });
                     });
                 });
