@@ -26,10 +26,7 @@ public class SessionManager {
     }
 
     public WordipleUser getSessionFromToken(UUID token) {
-        if (sessions.containsKey(token)) {
-            return sessions.get(token);
-        }
-        return null;
+        return sessions.get(token);
     }
 
     public UUID createSession(String username, String password) {
