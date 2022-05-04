@@ -82,16 +82,16 @@ public class SignupController extends FadeTransitionAdapter {
                 return;
             }
 
-            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Signing up...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
+            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending verification...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
             PacketManager.getInstance().getSocket().getPacket(SignupPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                    .setValues("email", emailField.getText())
+                    .setValues("email", emailField.getText().toLowerCase())
                     .setValues("username", usernameField.getText())
                     .setValues("password", passwordField.getText())
             ).waitForResponse(args -> {
                 String response = args.get("response", String.class);
                 if (!response.equals("Success")) {
                     Platform.runLater(() -> {
-                        errorMessageLabel.setText("Invalid username or password. Please try again.");
+                        errorMessageLabel.setText(response);
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                     });
@@ -101,8 +101,10 @@ public class SignupController extends FadeTransitionAdapter {
                 midAction = true;
 
                 Platform.runLater(() -> {
-                    super.transitionOut(() -> {
-                        GUIManager.getInstance().showSignupConfirmScreen(true, emailField.getText());
+                    loadScreen.remove(() -> {
+                        super.transitionOut(() -> {
+                            GUIManager.getInstance().showSignupConfirmScreen(true, emailField.getText());
+                        });
                     });
                 });
                 return false;

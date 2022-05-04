@@ -63,7 +63,9 @@ public class GUIManager extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/signupconfirm.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
-            if (fadeIn) ((SignupConfirmController) fxmlLoader.getController()).transitionIn();
+            SignupConfirmController controller = fxmlLoader.getController();
+            controller.setEmail(email);
+            if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
