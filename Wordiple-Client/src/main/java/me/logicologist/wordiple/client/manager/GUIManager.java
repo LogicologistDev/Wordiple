@@ -1,18 +1,12 @@
 package me.logicologist.wordiple.client.manager;
 
-import com.olziedev.olziesocket.OlzieSocket;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import me.logicologist.wordiple.client.gui.controllers.*;
-import me.logicologist.wordiple.client.packets.UserInfoPacket;
-
-import java.util.UUID;
 
 public class GUIManager extends Application {
 
