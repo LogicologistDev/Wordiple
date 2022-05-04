@@ -3,10 +3,8 @@ package me.logicologist.wordiple.client;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.packets.UserInfoPacket;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 public class WordipleClient {
 
@@ -23,8 +21,7 @@ public class WordipleClient {
 
         String OS = (System.getProperty("os.name")).toUpperCase();
         String workingDirectory;
-        if (OS.contains("WIN"))
-        {
+        if (OS.contains("WIN")) {
             workingDirectory = System.getenv("AppData");
         } else {
             workingDirectory = System.getProperty("user.home");
