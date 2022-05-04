@@ -14,5 +14,6 @@
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="629.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
          </children>
       </AnchorPane>
+      <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1287.0" layoutY="765.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
    </children>
 </AnchorPane>
