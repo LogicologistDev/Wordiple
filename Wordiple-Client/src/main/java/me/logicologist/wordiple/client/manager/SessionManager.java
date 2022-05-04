@@ -1,5 +1,7 @@
 package me.logicologist.wordiple.client.manager;
 
+import me.logicologist.wordiple.client.WordipleClient;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.util.Properties;
@@ -12,8 +14,7 @@ public class SessionManager {
     private final File file;
 
     public SessionManager() {
-        System.out.println(System.getenv("LOCALAPPDATA"));
-        this.file = new File("data", "session.properties");
+        this.file = new File(WordipleClient.getAppData(), "session.properties");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
 
         try {
