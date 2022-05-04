@@ -193,4 +193,17 @@ public class DatabaseManager {
         }
         return false;
     }
+
+    public boolean emailAvailable(String email) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return !rs.next();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

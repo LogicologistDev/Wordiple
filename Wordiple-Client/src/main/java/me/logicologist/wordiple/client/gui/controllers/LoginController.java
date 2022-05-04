@@ -69,18 +69,20 @@ public class LoginController extends FadeTransitionAdapter {
 
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Logging in...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
             PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                            .setValues("username", usernameField.getText())
-                            .setValues("password", passwordField.getText())
+                    .setValues("username", usernameField.getText())
+                    .setValues("password", passwordField.getText())
             ).waitForResponse(args -> {
                 UUID response = args.get("response", UUID.class);
                 if (response == null) {
-                    errorMessageLabel.setText("Invalid username or password. Please try again.");
-                    loadScreen.remove(null);
-                    new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                    Platform.runLater(() -> {
+                        errorMessageLabel.setText("Invalid username or password. Please try again.");
+                        loadScreen.remove(null);
+                        new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                    });
                 }
                 return false;
             }, () -> Platform.runLater(() -> {
-                errorMessageLabel.setText("Timed out. Are you connected to the internet? Is the connection being blocked?");
+                errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
             }), 10, TimeUnit.SECONDS);

@@ -8,12 +8,12 @@
    <children>
       <AnchorPane fx:id="movablePane" maxHeight="810.0" maxWidth="1440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0">
          <children>
-            <Button fx:id="signUpButton" layoutX="816.0" layoutY="620.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" styleClass="button-1" stylesheets="@style.css" text="Sign Up" textFill="#693dff">
+            <Button fx:id="signUpButton" layoutX="816.0" layoutY="620.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="113.0" prefWidth="207.0" styleClass="button-1" stylesheets="@style.css" text="Sign Up" textFill="#693dff">
                <font>
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="loginButton" layoutX="416.0" layoutY="620.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="207.0" styleClass="button-1" stylesheets="@style.css" text="Log In" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="416.0" layoutY="620.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="113.0" prefWidth="207.0" styleClass="button-1" stylesheets="@style.css" text="Log In" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>

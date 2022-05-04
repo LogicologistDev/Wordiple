@@ -13,7 +13,7 @@ public class SignupPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments packetArguments) {
-        SessionManager.getInstance().createSignupSession(packetArguments);
+        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", SessionManager.getInstance().createSignupSession(packetArguments)));
     }
 
     @Override

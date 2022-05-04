@@ -3,7 +3,6 @@ package me.logicologist.wordiple.client.packets;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
-import me.logicologist.wordiple.client.manager.PacketManager;
 
 import java.util.UUID;
 

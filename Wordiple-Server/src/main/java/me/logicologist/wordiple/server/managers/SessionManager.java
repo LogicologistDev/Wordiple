@@ -57,18 +57,28 @@ public class SessionManager {
         final String password = "LK8!MUY'^{-qW%es";
 
         Pattern validEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
 
         if (!validEmail.matcher(packetArguments.get("email", String.class)).matches())
-            return "Invalid email address. Please check your email and try again.";
+            return "Invalid email address.";
+
+        if (!DatabaseManager.instance.emailAvailable(packetArguments.get("email", String.class)))
+            return "Email address already in use.";
+
+        if (!usernamePattern.matcher(packetArguments.get("username", String.class)).matches())
+            return "Invalid username.";
 
         if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)))
-            return "Username already taken. Please try another.";
+            return "Username already taken.";
+
+        if (packetArguments.get("password", String.class).length() <= 5)
+            return "Invalid password.";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true"); //TLS
+        properties.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
@@ -123,7 +133,7 @@ public class SessionManager {
                     },
                     10 * 60 * 1000
             );
-            return "You have been sent a verification code at: " + packetArguments.get("email", String.class) + "!\nPlease type in the code you have received below.\nIt will expire in 10 minutes.";
+            return "Success";
         } catch (Exception e) {
             e.printStackTrace();
         }

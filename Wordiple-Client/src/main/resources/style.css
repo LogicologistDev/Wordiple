@@ -19,6 +19,15 @@
     -fx-background-radius: 10px;
 }
 
+.text-field-2 {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #131313;
+    -fx-prompt-text-fill: #616161;
+    -fx-background-color: #c1c1c1;
+    -fx-background-radius: 10px;
+}
+
 .label-title {
     -fx-font-size: 30px;
     -fx-font-family: 'Nexa Bold';
