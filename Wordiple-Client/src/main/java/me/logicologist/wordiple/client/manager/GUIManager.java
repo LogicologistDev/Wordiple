@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.manager;
 
+import com.olziedev.olziesocket.OlzieSocket;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import me.logicologist.wordiple.client.gui.controllers.*;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
+
+import java.util.UUID;
 
 public class GUIManager extends Application {
 
@@ -112,16 +115,6 @@ public class GUIManager extends Application {
 
     public static void launch(String[] args) {
         Application.launch(args);
-        PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
-                .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", SessionManager.getInstance().getLocalSessionID()))
-                .waitForResponse(response -> {
-                    String username = response.get("username", String.class);
-                    if (username == null) {
-                        return false;
-                    }
-                    GUIManager.getInstance().showGameSelectScreen(false);
-                    return false;
-                });
     }
 
     public static GUIManager getInstance() {

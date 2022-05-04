@@ -13,8 +13,8 @@ public class SessionManager {
 
     private final File file;
 
-    public SessionManager() {
-        this.file = new File(WordipleClient.getAppData(), "session.properties");
+    public SessionManager(boolean developer) {
+        this.file = new File(developer ? "data" : WordipleClient.getAppData().getAbsolutePath(), "session.properties");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
 
         try {

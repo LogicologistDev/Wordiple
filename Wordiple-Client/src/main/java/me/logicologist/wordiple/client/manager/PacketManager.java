@@ -3,7 +3,11 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.OlzieSocket;
 import com.olziedev.olziesocket.framework.SocketConfig;
 import com.olziedev.olziesocket.framework.action.SocketActionType;
+import javafx.application.Platform;
+import me.logicologist.wordiple.client.packets.UserInfoPacket;
 import org.apache.logging.log4j.LogManager;
+
+import java.util.UUID;
 
 public class PacketManager {
 
@@ -18,7 +22,21 @@ public class PacketManager {
 
     public void load() {
         this.socket.registerPackets();
-        this.socket.connect(false);
+        this.socket.connect(false, socket -> {
+            UUID id = SessionManager.getInstance().getLocalSessionID();
+            this.socket.getPacket(UserInfoPacket.class)
+                    .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", id))
+                    .waitForResponse(response -> {
+                        String username = response.get("username", String.class);
+                        if (username == null) {
+                            return false;
+                        }
+                        Platform.runLater(() -> {
+                            GUIManager.getInstance().showGameSelectScreen(false);
+                        });
+                        return false;
+                    });
+        });
         this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> {
 
         });

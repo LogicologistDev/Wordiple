@@ -5,13 +5,14 @@ import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class WordipleClient {
 
     private static File appData;
 
     public static void main(String[] args) {
-        new SessionManager();
+        new SessionManager(Arrays.asList(args).contains("-developer"));
         new PacketManager().load();
         GUIManager.launch(args);
     }
