@@ -19,7 +19,9 @@ public class PacketManager {
     public void load() {
         this.socket.registerPackets();
         this.socket.connect(false);
-        this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> null);
+        this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> {
+
+        });
     }
 
     public static PacketManager getInstance() {
