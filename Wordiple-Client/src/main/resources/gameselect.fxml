@@ -3,14 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.GameSelectController">
    <children>
       <AnchorPane prefHeight="810.0" prefWidth="1440.0">
          <children>
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="339.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-casual" stylesheets="@style.css" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="116.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="228.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="744.0" layoutY="338.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-casual" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="744.0" layoutY="115.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="744.0" layoutY="227.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="744.0" layoutY="448.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="744.0" layoutY="560.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
