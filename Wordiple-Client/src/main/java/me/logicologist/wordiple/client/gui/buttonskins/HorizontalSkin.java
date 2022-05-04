@@ -19,11 +19,11 @@ public class HorizontalSkin extends ButtonSkin {
 
         FadeTransition fadeIn = new FadeTransition(Duration.millis(25));
         fadeIn.setNode(button);
-        fadeIn.setToValue(0.8);
+        fadeIn.setToValue(0.9);
 
         FadeTransition fadeOut = new FadeTransition(Duration.millis(50));
         fadeOut.setNode(button);
-        fadeOut.setToValue(0.6);
+        fadeOut.setToValue(0.8);
 
         FadeTransition fadePress = new FadeTransition(Duration.millis(10));
         fadePress.setNode(button);
@@ -83,6 +83,6 @@ public class HorizontalSkin extends ButtonSkin {
             fadeOut.play();
         });
 
-        button.setOpacity(0.6);
+        button.setOpacity(0.8);
     }
 }

@@ -16,10 +16,10 @@
     -fx-background-repeat: no-repeat;
 }
 
-.button-4 {
+.button-zen {
     -fx-font-size: 50px;
     -fx-font-family: 'Nexa Bold';
-    -fx-background-image: url("./bar.png");
+    -fx-background-image: url("./zenbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';

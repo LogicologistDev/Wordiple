@@ -8,9 +8,9 @@
    <children>
       <AnchorPane prefHeight="810.0" prefWidth="1440.0">
          <children>
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="341.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-4" stylesheets="@style.css" text="Party Mode" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="115.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="751.0" styleClass="button-4" stylesheets="@style.css" text="Party Mode" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="228.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="751.0" styleClass="button-4" stylesheets="@style.css" text="Party Mode" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="339.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="116.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" layoutX="819.0" layoutY="228.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
