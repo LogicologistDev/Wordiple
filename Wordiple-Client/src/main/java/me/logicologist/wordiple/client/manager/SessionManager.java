@@ -12,6 +12,7 @@ public class SessionManager {
     private final File file;
 
     public SessionManager() {
+        System.out.println(System.getenv("LOCALAPPDATA"));
         this.file = new File("data", "session.properties");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
 

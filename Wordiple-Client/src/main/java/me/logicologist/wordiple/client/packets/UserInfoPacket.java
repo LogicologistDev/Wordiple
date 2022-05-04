@@ -9,7 +9,7 @@ import java.util.UUID;
 public class UserInfoPacket extends PacketAdapter implements PacketType {
 
     public UserInfoPacket() {
-        super("session_check_packet");
+        super("user_info_packet");
         this.packetType = this;
     }
 

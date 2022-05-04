@@ -8,17 +8,17 @@ import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.UUID;
 
-public class SessionCheckPacket extends PacketAdapter implements PacketType {
+public class UserInfoPacket extends PacketAdapter implements PacketType {
 
-    public SessionCheckPacket() {
-        super("session_check_packet");
+    public UserInfoPacket() {
+        super("user_info_packet");
         this.packetType = this;
     }
 
     @Override
     public void onReceive(PacketArguments arguments) {
         SessionManager sessionManager = SessionManager.getInstance();
-        WordipleUser wordipleUser = sessionManager.getSessionFromToken(arguments.get("token", UUID.class));
+        WordipleUser wordipleUser = sessionManager.getSessionFromToken(arguments.get("session_id", UUID.class));
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())
                 .setValues("id", wordipleUser.getId())
