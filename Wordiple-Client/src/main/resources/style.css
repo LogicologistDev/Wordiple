@@ -52,6 +52,15 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
 }
 
+.button-private-match {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-image: url("./privatematchbutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+}
+
 .text-field-1 {
     -fx-font-size: 25px;
     -fx-font-family: 'Nexa Bold';
