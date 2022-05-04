@@ -25,6 +25,24 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
 }
 
+.button-competitive {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-image: url("./competitivebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+}
+
+.button-casual {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-image: url("./casualbutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+}
+
 .text-field-1 {
     -fx-font-size: 25px;
     -fx-font-family: 'Nexa Bold';

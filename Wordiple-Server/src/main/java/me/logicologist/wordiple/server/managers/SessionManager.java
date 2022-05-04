@@ -103,6 +103,7 @@ public class SessionManager {
                 stringBuilder.append(possibleCodePart.charAt(new Random().nextInt(10)));
             }
 
+
             message.setText("Hello, " + packetArguments.get("username", String.class) + "!\n" +
                     "You have signed up for a wordiple account! In order to finish registration, please type in this verification code below:\n" +
                     stringBuilder.toString() + " (This code will expire in 10 minutes.)\n" +
