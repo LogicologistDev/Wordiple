@@ -11,6 +11,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class SessionManager {
 
@@ -86,7 +87,6 @@ public class SessionManager {
                         return new PasswordAuthentication(username, password);
                     }
                 });
-
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("wordiple@gmail.com", "Wordiple System"));
@@ -123,6 +123,7 @@ public class SessionManager {
                 }
             }).start();
             System.out.println("Email sent!");
+            this.signupSessions.keySet().stream().filter(x -> x.contains(packetArguments.get("email", String.class))).collect(Collectors.toList()).forEach(this.signupSessions::remove);
             this.signupSessions.put(stringBuilder + ":" + packetArguments.get("email", String.class), packetArguments);
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
