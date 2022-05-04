@@ -1,10 +1,13 @@
 package me.logicologist.wordiple.client.manager;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import me.logicologist.wordiple.client.gui.controllers.*;
 
 public class GUIManager extends Application {
@@ -27,6 +30,16 @@ public class GUIManager extends Application {
         showMainScreen(false);
 
         stage.show();
+
+        stage.setOnCloseRequest(e -> {
+            try {
+                Platform.exit();
+                PacketManager.getInstance().getSocket().shutdownClient();
+                System.exit(0);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     public void showMainScreen(boolean fadeIn) {
