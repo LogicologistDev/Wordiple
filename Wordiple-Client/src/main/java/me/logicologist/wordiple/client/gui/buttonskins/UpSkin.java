@@ -12,8 +12,6 @@ import javafx.util.Duration;
 
 public class UpSkin extends ButtonSkin {
 
-    private boolean pressed;
-
     public UpSkin(Button button) {
         super(button);
 
@@ -30,12 +28,12 @@ public class UpSkin extends ButtonSkin {
         fadePress.setToValue(1);
 
         FadeTransition fadePressToOut = new FadeTransition(Duration.millis(150));
-        fadePress.setNode(button);
-        fadePress.setToValue(0.6);
+        fadePressToOut.setNode(button);
+        fadePressToOut.setToValue(0.6);
 
         FadeTransition fadePressToIn = new FadeTransition(Duration.millis(130));
-        fadePress.setNode(button);
-        fadePress.setToValue(0.8);
+        fadePressToIn.setNode(button);
+        fadePressToIn.setToValue(0.8);
 
         final Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
@@ -73,14 +71,14 @@ public class UpSkin extends ButtonSkin {
         timelinePressToIn.setAutoReverse(false);
 
         button.setOnMouseEntered(e -> {
-            if (pressed) return;
+            if (button.isPressed()) return;
             fadeIn.playFromStart();
             timelineIn.play();
             timelineOut.stop();
         });
 
         button.setOnMouseExited(e -> {
-            if (pressed) return;
+            if (button.isPressed()) return;
             timelineIn.stop();
             fadeIn.stop();
             timelinePressToIn.stop();
@@ -93,12 +91,10 @@ public class UpSkin extends ButtonSkin {
             if (e.getButton() != MouseButton.PRIMARY) return;
             timelinePress.play();
             fadePress.playFromStart();
-            pressed = true;
         });
 
         button.setOnMouseReleased(e -> {
             timelinePressToOut.stop();
-            pressed = false;
             if (button.isHover()) {
                 timelinePressToIn.play();
                 fadePressToIn.play();
