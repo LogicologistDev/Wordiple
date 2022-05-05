@@ -18,7 +18,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class LoginController extends FadeTransitionAdapter {
+public class LoginController extends FadeVerticalTransitionAdapter {
 
     @FXML
     private AnchorPane movablePane;
@@ -68,7 +68,7 @@ public class LoginController extends FadeTransitionAdapter {
                 return;
             }
 
-            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Logging in...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
+            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Logging in...");
             PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("username", usernameField.getText())
                     .setValues("password", passwordField.getText())
@@ -86,7 +86,7 @@ public class LoginController extends FadeTransitionAdapter {
                 Platform.runLater(() -> {
                     loadScreen.remove(() -> {
                         super.transitionOut(() -> {
-                            GUIManager.getInstance().showGameSelectScreen(true);
+                            GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));
                         });
                     });
                 });

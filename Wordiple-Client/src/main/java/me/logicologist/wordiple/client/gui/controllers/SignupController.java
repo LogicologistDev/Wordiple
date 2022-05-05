@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class SignupController extends FadeTransitionAdapter {
+public class SignupController extends FadeVerticalTransitionAdapter {
 
     @FXML
     private AnchorPane movablePane;
@@ -82,7 +82,7 @@ public class SignupController extends FadeTransitionAdapter {
                 return;
             }
 
-            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending verification...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
+            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending verification...");
             PacketManager.getInstance().getSocket().getPacket(SignupPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("email", emailField.getText().toLowerCase())
                     .setValues("username", usernameField.getText())

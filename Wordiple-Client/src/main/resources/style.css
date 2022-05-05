@@ -140,6 +140,11 @@
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
+
+.rectangle-swipetransition {
+    -fx-background-image: url("./swipetransition.png");
+    -fx-background-color: transparent;
+}
 /*
 .button {
   padding: 15px 25px;

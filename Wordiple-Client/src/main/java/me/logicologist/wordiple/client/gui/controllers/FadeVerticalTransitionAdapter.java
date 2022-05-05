@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-public abstract class FadeTransitionAdapter implements Initializable {
+public abstract class FadeVerticalTransitionAdapter implements Initializable {
 
     private AnchorPane pane;
 

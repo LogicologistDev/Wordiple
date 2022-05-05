@@ -1,18 +1,12 @@
 package me.logicologist.wordiple.client.manager;
 
-import com.olziedev.olziesocket.OlzieSocket;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import me.logicologist.wordiple.client.gui.controllers.*;
-import me.logicologist.wordiple.client.packets.UserInfoPacket;
-
-import java.util.UUID;
 
 public class GUIManager extends Application {
 
@@ -89,20 +83,6 @@ public class GUIManager extends Application {
         }
     }
 
-    public LoadScreenController showLoadScreen(String title, Pane parentPane) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/loadscreen.fxml"));
-            fxmlLoader.load();
-            LoadScreenController loadScreenController = fxmlLoader.getController();
-            loadScreenController.setText(title);
-            loadScreenController.setParentPane(parentPane);
-            return loadScreenController;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
     public void showGameSelectScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
@@ -111,6 +91,47 @@ public class GUIManager extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public LoadScreenController showLoadScreen(String title) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/loadscreen.fxml"));
+            fxmlLoader.load();
+            LoadScreenController loadScreenController = fxmlLoader.getController();
+            loadScreenController.setText(title);
+            loadScreenController.setParent((AnchorPane) stage.getScene().getRoot());
+            loadScreenController.setParentPane();
+            return loadScreenController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public SwipeTransitionController startSwipeTransition(Runnable runFirst, Runnable runAfter) {
+        if (runFirst != null) runFirst.run();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/swipetransition.fxml"));
+            fxmlLoader.load();
+            SwipeTransitionController swipeTransitionController = fxmlLoader.getController();
+            swipeTransitionController.setParent((AnchorPane) stage.getScene().getRoot());
+            swipeTransitionController.transitionIn(() -> {
+                runAfter.run();
+                try {
+                    FXMLLoader outTransition = new FXMLLoader(getClass().getResource("/swipetransition.fxml"));
+                    outTransition.load();
+                    SwipeTransitionController outTransitionController = outTransition.getController();
+                    outTransitionController.setParent((AnchorPane) stage.getScene().getRoot());
+                    outTransitionController.transitionOut();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            return swipeTransitionController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public static void launch(String[] args) {

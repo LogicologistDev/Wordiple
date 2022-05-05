@@ -25,11 +25,12 @@ public class GameSelectController implements Initializable {
             if (midAction) return;
             midAction = true;
 
-            LoadScreenController controller = GUIManager.getInstance().showLoadScreen("Logging out...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
+            LoadScreenController controller = GUIManager.getInstance().showLoadScreen("Logging out...");
             SessionManager.getInstance().setLocalSessionID(null);
 
             controller.remove(() -> {
-                GUIManager.getInstance().showMainScreen(true);
+                GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));
+
             });
         });
     }

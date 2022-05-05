@@ -8,7 +8,7 @@ import me.logicologist.wordiple.client.manager.GUIManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainScreenController extends FadeTransitionAdapter {
+public class MainScreenController extends FadeVerticalTransitionAdapter {
 
     @FXML
     private AnchorPane movablePane;
