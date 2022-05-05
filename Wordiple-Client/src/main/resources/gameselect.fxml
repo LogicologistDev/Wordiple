@@ -14,8 +14,8 @@
          <children>
             <AnchorPane layoutY="-68.0" prefHeight="238.0" prefWidth="1440.0" styleClass="bar">
                <children>
-                  <Button layoutY="-23.0" mnemonicParsing="false" prefHeight="238.0" prefWidth="1440.0" styleClass="button-overlay" stylesheets="@style.css" />
-                  <Label alignment="CENTER" layoutX="516.0" layoutY="106.0" mouseTransparent="true" prefHeight="72.0" prefWidth="409.0" styleClass="label-level" stylesheets="@style.css" text="Logicologist">
+                  <Button fx:id="profileButton" layoutY="-23.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="238.0" prefWidth="1440.0" styleClass="button-overlay" stylesheets="@style.css" />
+                  <Label alignment="CENTER" layoutX="516.0" layoutY="96.0" mouseTransparent="true" prefHeight="72.0" prefWidth="409.0" styleClass="label-level" stylesheets="@style.css" text="Logicologist">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -38,7 +38,7 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <Label layoutX="16.0" layoutY="124.0" mouseTransparent="true" prefHeight="72.0" prefWidth="152.0" styleClass="label-level" stylesheets="@style.css" text="999">
+                  <Label fx:id="currentLevelLabel" layoutX="16.0" layoutY="124.0" mouseTransparent="true" prefHeight="72.0" prefWidth="202.0" styleClass="label-level" stylesheets="@style.css" text="999">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -61,9 +61,31 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <ProgressBar layoutX="16.0" layoutY="188.0" mouseTransparent="true" prefHeight="18.0" prefWidth="1410.0" progress="0.0" styleClass="level-bar" stylesheets="@style.css" />
-                  <Label alignment="CENTER" layoutX="602.0" layoutY="187.0" mouseTransparent="true" prefHeight="19.0" prefWidth="237.0" styleClass="label-body" stylesheets="@style.css" text="0 XP / 0 XP" textAlignment="CENTER" />
-                  <Label alignment="CENTER_RIGHT" layoutX="1274.0" layoutY="124.0" mouseTransparent="true" prefHeight="72.0" prefWidth="152.0" styleClass="label-level" stylesheets="@style.css" text="1000">
+                  <ProgressBar fx:id="levelProgressBar" layoutX="16.0" layoutY="188.0" mouseTransparent="true" prefHeight="18.0" prefWidth="1410.0" progress="0.5" styleClass="level-bar" stylesheets="@style.css" />
+                  <Label fx:id="levelProgressLabel" alignment="CENTER" layoutX="602.0" layoutY="187.0" mouseTransparent="true" prefHeight="19.0" prefWidth="237.0" styleClass="label-level-progress" stylesheets="@style.css" text="50 XP / 100 XP" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.007662835249042145">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="newLevelLabel" alignment="CENTER_RIGHT" layoutX="1224.0" layoutY="124.0" mouseTransparent="true" prefHeight="72.0" prefWidth="202.0" styleClass="label-level" stylesheets="@style.css" text="1000">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -80,6 +102,42 @@
                               <Stop offset="1.0">
                                  <color>
                                     <Color red="1.0" green="0.9272961616516113" blue="0.33000001311302185" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="101.0" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="1344.0" layoutY="101.0" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
                                  </color>
                               </Stop>
                            </stops>

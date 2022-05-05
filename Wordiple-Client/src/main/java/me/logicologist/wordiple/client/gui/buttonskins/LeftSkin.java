@@ -6,13 +6,12 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.skin.ButtonSkin;
+import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
 
 public class LeftSkin extends ButtonSkin {
 
     private boolean pressed;
-
-    private boolean exited;
 
     public LeftSkin(Button button) {
         super(button);
@@ -28,6 +27,14 @@ public class LeftSkin extends ButtonSkin {
         FadeTransition fadePress = new FadeTransition(Duration.millis(10));
         fadePress.setNode(button);
         fadePress.setToValue(1);
+
+        FadeTransition fadePressToOut = new FadeTransition(Duration.millis(150));
+        fadePress.setNode(button);
+        fadePress.setToValue(0.6);
+
+        FadeTransition fadePressToIn = new FadeTransition(Duration.millis(130));
+        fadePress.setNode(button);
+        fadePress.setToValue(0.8);
 
         final Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
@@ -50,37 +57,55 @@ public class LeftSkin extends ButtonSkin {
         timelinePress.getKeyFrames().add(kfPress);
         timelinePress.setAutoReverse(false);
 
+
+        final Timeline timelinePressToOut = new Timeline();
+        timelinePressToOut.setCycleCount(1);
+        final KeyValue kvPressToOut = new KeyValue(button.layoutXProperty(), button.getLayoutX());
+        final KeyFrame kfPressToOut = new KeyFrame(Duration.millis(150), kvPressToOut);
+        timelinePressToOut.getKeyFrames().add(kfPressToOut);
+        timelinePressToOut.setAutoReverse(false);
+
+        final Timeline timelinePressToIn = new Timeline();
+        timelinePressToOut.setCycleCount(1);
+        final KeyValue kvPressToIn = new KeyValue(button.layoutXProperty(), button.getLayoutX() -20);
+        final KeyFrame kfPressToIn = new KeyFrame(Duration.millis(130), kvPressToIn);
+        timelinePressToIn.getKeyFrames().add(kfPressToIn);
+        timelinePressToIn.setAutoReverse(false);
+
         button.setOnMouseEntered(e -> {
+            if (pressed) return;
             fadeIn.playFromStart();
             timelineIn.play();
             timelineOut.stop();
-            exited = false;
         });
 
         button.setOnMouseExited(e -> {
-            exited = true;
             if (pressed) return;
-            fadeOut.playFromStart();
             timelineIn.stop();
+            fadeIn.stop();
+            timelinePressToIn.stop();
+            fadePressToIn.stop();
+            fadeOut.play();
             timelineOut.play();
         });
 
         button.setOnMousePressed(e -> {
+            if (e.getButton() != MouseButton.PRIMARY) return;
             timelinePress.play();
             fadePress.playFromStart();
             pressed = true;
         });
 
         button.setOnMouseReleased(e -> {
-            timelinePress.stop();
+            timelinePressToOut.stop();
             pressed = false;
-            if (!exited) {
-                timelineIn.play();
-                fadeIn.play();
+            if (button.isHover()) {
+                timelinePressToIn.play();
+                fadePressToIn.play();
                 return;
             }
-            timelineOut.play();
-            fadeOut.play();
+            timelinePressToOut.play();
+            fadePressToOut.play();
         });
 
         button.setOpacity(0.8);

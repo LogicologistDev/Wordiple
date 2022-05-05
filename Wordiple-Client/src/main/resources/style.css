@@ -87,7 +87,15 @@
 .label-level {
     -fx-font-size: 60px;
     -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
+
+.label-level-progress {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.7, 0, 0);
+}
+
 
 .label-bigtitle {
     -fx-font-size: 100px;
@@ -158,24 +166,15 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.DownSkin';
 }
 
-.progress-bar {
-    -fx-background-color:
-            -fx-box-border,
-            linear-gradient(to bottom, red, orange);
-    -fx-background-insets: 0;
-    -fx-background-radius: 8px;
-    -fx-indeterminate-bar-length: 60;
-    -fx-indeterminate-bar-escape: true;
-    -fx-indeterminate-bar-flip: true;
-    -fx-indeterminate-bar-animation-time: 2;
-}
-
 .progress-bar > .track {
     -fx-background-radius: 8px;
+    -fx-background-image: url("./levelbarbackground.png");
+    -fx-background-color: transparent;
 }
 
 .progress-bar > .bar {
-    -fx-background-image: url("./casualbutton.png");
+    -fx-background-image: url("./levelbarforeground.png");
+    -fx-background-color: transparent;
     -fx-background-radius: 8px;
     -fx-padding: 1px;
     -fx-background-insets: 0;
