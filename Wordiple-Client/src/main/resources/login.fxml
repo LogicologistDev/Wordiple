@@ -15,11 +15,11 @@
             <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="269.0" layoutX="375.0" layoutY="441.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />
             <TextField fx:id="usernameField" layoutX="390.0" layoutY="525.0" prefHeight="48.0" prefWidth="661.0" promptText="Username" styleClass="text-field-1" stylesheets="@style.css" />
             <PasswordField fx:id="passwordField" layoutX="390.0" layoutY="580.0" prefHeight="48.0" prefWidth="661.0" promptText="Password" styleClass="text-field-1" stylesheets="@style.css" />
-            <Label layoutX="384.0" layoutY="449.0" styleClass="label-title" stylesheets="@style.css" text="Welcome back!" />
+            <Label focusTraversable="false" layoutX="384.0" layoutY="449.0" styleClass="label-title" stylesheets="@style.css" text="Welcome back!" />
             <Line endX="591.0" layoutX="474.0" layoutY="514.0" startX="-100.0" />
-            <Label layoutX="384.0" layoutY="486.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
+            <Label focusTraversable="false" layoutX="384.0" layoutY="486.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" text="We're glad to see you return! If you're new to Wordiple, consider signing up instead!" />
             <Button fx:id="loginButton" layoutX="663.0" layoutY="655.0" mnemonicParsing="false" pickOnBounds="false" styleClass="button-2" stylesheets="@style.css" text="Log In" />
-            <Label fx:id="errorMessageLabel" layoutX="392.0" layoutY="631.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
+            <Label fx:id="errorMessageLabel" focusTraversable="false" layoutX="392.0" layoutY="631.0" prefHeight="19.0" prefWidth="661.0" styleClass="label-body" stylesheets="@style.css" textFill="RED" />
             <Button fx:id="mainScreenButton" alignment="TOP_CENTER" layoutX="374.0" layoutY="764.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="692.0" styleClass="button-3" stylesheets="@style.css" text="Back to Main Screen" textFill="WHITE" />
          </children>
       </AnchorPane>

@@ -9,8 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
+import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.packets.SignupConfirmPacket;
-import me.logicologist.wordiple.client.packets.SignupPacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +18,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class SignupConfirmController extends FadeTransitionAdapter {
+public class SignupConfirmController extends FadeVerticalTransitionAdapter {
 
     @FXML
     private AnchorPane movablePane;
@@ -77,7 +77,7 @@ public class SignupConfirmController extends FadeTransitionAdapter {
                 return;
             }
 
-            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Verifying code...", (AnchorPane) GUIManager.getInstance().stage.getScene().getRoot());
+            LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Verifying code...");
 
             PacketManager.getInstance().getSocket().getPacket(SignupConfirmPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("code", codeField.getText())
@@ -94,11 +94,11 @@ public class SignupConfirmController extends FadeTransitionAdapter {
                 }
                 if (midAction) return false;
                 midAction = true;
-
+                SessionManager.getInstance().setLocalSessionID(response);
                 Platform.runLater(() -> {
                     loadScreen.remove(() -> {
                         super.transitionOut(() -> {
-                            GUIManager.getInstance().showGameSelectScreen(true);
+                            GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));
                         });
                     });
                 });

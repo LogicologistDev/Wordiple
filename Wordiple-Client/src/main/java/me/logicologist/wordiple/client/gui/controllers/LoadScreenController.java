@@ -2,7 +2,6 @@ package me.logicologist.wordiple.client.gui.controllers;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -11,15 +10,13 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoadScreenController implements Initializable {
+public class LoadScreenController extends AttachableAdapter {
 
     @FXML
     public AnchorPane movablePane;
 
     @FXML
     public Label displayLabel;
-
-    private Pane parent = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -30,10 +27,9 @@ public class LoadScreenController implements Initializable {
         displayLabel.setText(text);
     }
 
-    public void setParentPane(Pane pane) {
-        if (parent != null) return;
-        this.parent = pane;
-        this.parent.getChildren().add(movablePane);
+    public void setParentPane() {
+        super.setAttachment(movablePane);
+        super.attach();
         FadeTransition fadeIn = new FadeTransition(Duration.millis(500));
         fadeIn.setNode(movablePane);
         fadeIn.setToValue(1);
@@ -46,7 +42,7 @@ public class LoadScreenController implements Initializable {
         fadeOut.setToValue(0);
         fadeOut.play();
         fadeOut.setOnFinished(event -> {
-            this.parent.getChildren().remove(movablePane);
+            super.detach();
             if (runAfter != null) runAfter.run();
         });
     }

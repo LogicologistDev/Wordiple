@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.SwipeTransitionController">
+   <children>
+      <AnchorPane layoutX="-200.0" prefHeight="810.0" prefWidth="1840.0" styleClass="rectangle-swipetransition" stylesheets="@style.css" />
+   </children>
+</AnchorPane>

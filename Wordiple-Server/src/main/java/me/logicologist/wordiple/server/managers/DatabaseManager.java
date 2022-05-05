@@ -29,9 +29,9 @@ public class DatabaseManager {
                 databaseFile.createNewFile();
             }
             this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS users(" +
-                    "email VARCHAR(255)," +
+                    "email VARCHAR(255) COLLATE NOCASE," +
                     "uuid VARCHAR(255)," +
-                    "username VARCHAR(255)," +
+                    "username VARCHAR(255) COLLATE NOCASE," +
                     "passwordhash VARCHAR(255)," +
                     "passwordsalt VARCHAR(255)," +
                     "rating INTEGER," +

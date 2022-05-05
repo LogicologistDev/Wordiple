@@ -22,7 +22,7 @@
     -fx-background-image: url("./zenbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .button-competitive {
@@ -31,7 +31,7 @@
     -fx-background-image: url("./competitivebutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .button-casual {
@@ -40,7 +40,7 @@
     -fx-background-image: url("./casualbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .button-time-royale {
@@ -49,7 +49,7 @@
     -fx-background-image: url("./timeroyalebutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .button-private-match {
@@ -58,7 +58,7 @@
     -fx-background-image: url("./privatematchbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.HorizontalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .text-field-1 {
@@ -84,9 +84,23 @@
     -fx-font-family: 'Nexa Bold';
 }
 
+.label-level {
+    -fx-font-size: 60px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+}
+
+.label-level-progress {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.7, 0, 0);
+}
+
+
 .label-bigtitle {
     -fx-font-size: 100px;
     -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
 
 .label-body {
@@ -105,7 +119,7 @@
     -fx-background-color: #2e1c3e;
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.UpSkin';
 }
 
 .button-2 {
@@ -122,7 +136,7 @@
     -fx-background-color: #ff4f4f;
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.NormalSkin';
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.UpSkin';
 }
 
 .button-3-outline {
@@ -140,25 +154,37 @@
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
-/*
-.button {
-  padding: 15px 25px;
-  font-size: 24px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #04AA6D;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
+
+.rectangle-swipetransition {
+    -fx-background-image: url("./swipetransition.png");
+    -fx-background-color: transparent;
 }
 
-.button:hover {background-color: #3e8e41}
-
-.button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+.rectangle-chirank {
+    -fx-background-image: url("./chirank.png");
+    -fx-background-color: transparent;
+    -fx-border-radius: 60px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
- */
+
+.button-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.DownSkin';
+}
+
+.progress-bar > .track {
+    -fx-background-radius: 8px;
+    -fx-background-image: url("./levelbarbackground.png");
+    -fx-background-color: transparent;
+}
+
+.progress-bar > .bar {
+    -fx-background-image: url("./levelbarforeground.png");
+    -fx-background-color: transparent;
+    -fx-background-radius: 8px;
+    -fx-padding: 1px;
+    -fx-background-insets: 0;
+}
+

@@ -32,7 +32,7 @@ public class PacketManager {
                         if (username == null) {
                             return false;
                         }
-                        Platform.runLater(() -> GUIManager.getInstance().showGameSelectScreen(false));
+                        Platform.runLater(() -> GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false)));
                         return false;
                     }, null, 5, TimeUnit.SECONDS);
         });
