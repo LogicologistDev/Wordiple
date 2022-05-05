@@ -30,11 +30,11 @@ public class LeftSkin extends ButtonSkin {
 
         FadeTransition fadePressToOut = new FadeTransition(Duration.millis(150));
         fadePress.setNode(button);
-        fadePress.setToValue(0.6);
+        fadePress.setToValue(0.8);
 
         FadeTransition fadePressToIn = new FadeTransition(Duration.millis(130));
         fadePress.setNode(button);
-        fadePress.setToValue(0.8);
+        fadePress.setToValue(0.9);
 
         final Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
@@ -81,10 +81,10 @@ public class LeftSkin extends ButtonSkin {
 
         button.setOnMouseExited(e -> {
             if (pressed) return;
-            timelineIn.stop();
-            fadeIn.stop();
-            timelinePressToIn.stop();
-            fadePressToIn.stop();
+//            timelineIn.stop();
+//            fadeIn.stop();
+//            timelinePressToIn.stop();
+//            fadePressToIn.stop();
             fadeOut.play();
             timelineOut.play();
         });
