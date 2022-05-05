@@ -23,7 +23,7 @@ public class SwipeTransitionController extends AttachableAdapter {
         Timeline timelineIn = new Timeline();
         timelineIn.setCycleCount(1);
         KeyValue kvIn = new KeyValue(movablePane.layoutXProperty(), 0);
-        KeyFrame kfIn = new KeyFrame(Duration.millis(200), kvIn);
+        KeyFrame kfIn = new KeyFrame(Duration.millis(300), kvIn);
         timelineIn.getKeyFrames().add(kfIn);
         timelineIn.setAutoReverse(false);
 
@@ -41,7 +41,7 @@ public class SwipeTransitionController extends AttachableAdapter {
         Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
         KeyValue kvIn = new KeyValue(movablePane.layoutXProperty(), -1840);
-        KeyFrame kfIn = new KeyFrame(Duration.millis(200), kvIn);
+        KeyFrame kfIn = new KeyFrame(Duration.millis(300), kvIn);
         timelineOut.getKeyFrames().add(kfIn);
         timelineOut.setAutoReverse(false);
 

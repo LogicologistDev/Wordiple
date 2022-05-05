@@ -30,7 +30,6 @@ public class GameSelectController implements Initializable {
 
             controller.remove(() -> {
                 GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));
-
             });
         });
     }
