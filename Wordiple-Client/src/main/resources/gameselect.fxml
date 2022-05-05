@@ -150,7 +150,26 @@
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="299.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="519.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="629.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
-            <Label layoutX="112.0" layoutY="441.0" prefHeight="37.0" prefWidth="427.0" styleClass="label-title" stylesheets="@style.css" text="Rank Image + Progress Here" />
+            <Label layoutX="33.0" layoutY="335.0" prefHeight="330.0" prefWidth="250.0" styleClass="rectangle-chirank" stylesheets="@style.css" />
+            <Label layoutX="33.0" layoutY="207.0" prefHeight="120.0" prefWidth="291.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Rank:" textFill="WHITE" />
+            <Label alignment="CENTER" layoutX="114.0" layoutY="679.0" styleClass="label-level" stylesheets="@style.css" text="Chi">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.6705882549285889" green="0.250980406999588" blue="0.007843137718737125" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.6705882549285889" green="0.250980406999588" blue="0.007843137718737125" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
          </children>
       </AnchorPane>
       <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1287.0" layoutY="765.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
