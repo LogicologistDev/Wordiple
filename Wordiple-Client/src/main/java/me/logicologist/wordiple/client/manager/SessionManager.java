@@ -10,6 +10,7 @@ import java.util.UUID;
 public class SessionManager {
 
     private static SessionManager instance;
+    private boolean loggedIn;
 
     private final File file;
 
@@ -40,11 +41,22 @@ public class SessionManager {
     public void setLocalSessionID(UUID localSessionID) {
         try {
             Properties properties = new Properties();
-            if (localSessionID != null) properties.setProperty("sessionID", localSessionID.toString());
+            if (localSessionID != null) {
+                properties.setProperty("sessionID", localSessionID.toString());
+                this.loggedIn = true;
+            }
             properties.store(Files.newOutputStream(file.toPath()), "Please do not give share/touch this file.");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public boolean isLoggedIn() {
+        return this.loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     public static SessionManager getInstance() {

@@ -6,11 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class GUIManager extends Application {
 
     private static GUIManager instance;
+    private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
 
     public Stage stage;
 
@@ -38,6 +44,8 @@ public class GUIManager extends Application {
                 e1.printStackTrace();
             }
         });
+        readyListeners.forEach(x -> x.accept(this));
+        readyListeners.clear();
     }
 
     public void showMainScreen(boolean fadeIn) {
@@ -136,6 +144,14 @@ public class GUIManager extends Application {
 
     public static void launch(String[] args) {
         Application.launch(args);
+    }
+
+    public static void addReadyListener(Consumer<GUIManager> runnable) {
+        if (instance != null) {
+            Platform.runLater(() -> runnable.accept(instance));
+            return;
+        }
+        readyListeners.add(runnable);
     }
 
     public static GUIManager getInstance() {

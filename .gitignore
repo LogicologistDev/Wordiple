@@ -1,3 +1,4 @@
-# Project exclude paths
-/Wordiple-Client/target/
-/Wordiple-Server/target/
+*.iml
+/.idea
+target/
+data/

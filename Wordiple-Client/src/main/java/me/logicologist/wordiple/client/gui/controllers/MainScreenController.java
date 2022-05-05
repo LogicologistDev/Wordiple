@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class MainScreenController extends FadeVerticalTransitionAdapter {
 
     @FXML
-    private AnchorPane movablePane;
+    public AnchorPane movablePane;
 
     @FXML
     private Button loginButton;

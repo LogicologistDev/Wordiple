@@ -42,10 +42,11 @@ public class SessionManager {
             DatabaseManager.instance.saveUser(sessions.get(sessionId));
             this.sessions.remove(sessionId);
         }
-        UUID newSessionId = UUID.randomUUID();
-        while (this.sessions.containsKey(newSessionId)) {
+        UUID newSessionId;
+        do {
             newSessionId = UUID.randomUUID();
-        }
+        } while (this.sessions.containsKey(newSessionId));
+
         this.sessions.put(newSessionId, user);
         return newSessionId;
     }

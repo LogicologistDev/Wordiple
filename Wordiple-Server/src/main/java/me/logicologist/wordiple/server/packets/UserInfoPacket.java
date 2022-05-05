@@ -24,7 +24,10 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
     public void onReceive(PacketArguments arguments) {
         SessionManager sessionManager = SessionManager.getInstance();
         WordipleUser wordipleUser = sessionManager.getSessionFromToken(arguments.get("session_id", UUID.class));
-        if (wordipleUser == null) return;
+        if (wordipleUser == null) {
+            this.sendPacket(packet -> arguments.replace(this.getArguments()));
+            return;
+        }
 
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())
