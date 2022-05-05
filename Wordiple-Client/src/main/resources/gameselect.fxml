@@ -108,7 +108,7 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <Label layoutX="16.0" layoutY="101.0" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
+                  <Label layoutX="16.0" layoutY="101.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -126,7 +126,7 @@
                         </LinearGradient>
                      </textFill>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="1344.0" layoutY="101.0" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
+                  <Label alignment="CENTER_RIGHT" layoutX="1344.0" layoutY="101.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Level">
                      <textFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
