@@ -60,7 +60,6 @@ public class PlayerHeaderController extends AttachableAdapter {
         Timeline textTimeline = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
             if (finished.get()) return;
             frameCounter.getAndIncrement();
-            System.out.println("Not finished yet");
             this.levelProgressLabel.setText((int) (finalXp * ((double) frameCounter.get() / maxFrames)) + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");
         }));
         textTimeline.setCycleCount(maxFrames);
@@ -73,7 +72,6 @@ public class PlayerHeaderController extends AttachableAdapter {
         ));
         timeline.play();
         timeline.setOnFinished(e -> {
-            System.out.println("Finished");
             finished.set(true);
             textTimeline.stop();
             this.levelProgressLabel.setText(SessionManager.getInstance().getCurrentXp() + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");

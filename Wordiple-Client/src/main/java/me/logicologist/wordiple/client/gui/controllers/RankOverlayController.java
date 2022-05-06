@@ -33,7 +33,7 @@ public class RankOverlayController extends AttachableAdapter {
 
     public void transitionIn(Runnable runAfter) {
         midAction = true;
-        Duration rotateDuration = Duration.seconds(1);
+        Duration rotateDuration = Duration.seconds(0.5);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutXProperty(), -200)), // initial rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), -1005)), // initial rotate
@@ -52,7 +52,7 @@ public class RankOverlayController extends AttachableAdapter {
     }
 
     public void transitionOut() {
-        Duration rotateDuration = Duration.seconds(1);
+        Duration rotateDuration = Duration.seconds(0.5);
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutXProperty(), 0)),// end value of rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), 0)), // initial rotate
