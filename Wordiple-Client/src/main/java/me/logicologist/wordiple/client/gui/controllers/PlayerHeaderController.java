@@ -51,6 +51,7 @@ public class PlayerHeaderController extends AttachableAdapter {
         this.levelProgressLabel.setText((int) Math.max(this.levelProgressBar.getProgress(), 0) * SessionManager.getInstance().getNeededXp() + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");
 
         Duration duration = Duration.seconds(Math.abs(percentage - Math.max(this.levelProgressBar.getProgress(), 0)) * 2);
+        System.out.println(duration);
         AtomicInteger frameCounter = new AtomicInteger();
         int maxFrames = (int) (duration.toSeconds() / 0.01);
         int finalXp = (int) (SessionManager.getInstance().getNeededXp() * percentage);

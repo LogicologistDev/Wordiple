@@ -9,8 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.GameSelectController">
    <children>
-      <AnchorPane prefHeight="810.0" prefWidth="1440.0">
+      <AnchorPane fx:id="movablePane" prefHeight="810.0" prefWidth="1440.0">
          <children>
+            <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1301.0" layoutY="767.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="409.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-casual" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="189.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="299.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
@@ -56,6 +57,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1287.0" layoutY="765.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
    </children>
 </AnchorPane>

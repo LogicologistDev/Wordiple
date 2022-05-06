@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.*;
 
 import java.util.ArrayList;
@@ -95,7 +94,11 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
             attachPlayerHeader();
-//            if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
+            PlayerHeaderController playerHeaderController = PlayerHeaderController.instance;
+            playerHeaderController.setUsername(SessionManager.getInstance().getUsername());
+            playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
+            playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
+            if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

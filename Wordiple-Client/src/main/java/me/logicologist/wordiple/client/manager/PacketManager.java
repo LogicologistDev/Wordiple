@@ -44,10 +44,6 @@ public class PacketManager {
 
                         GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> {
                             GUIManager.getInstance().showGameSelectScreen(false);
-                            PlayerHeaderController playerHeaderController = PlayerHeaderController.instance;
-                            playerHeaderController.setUsername(username);
-                            playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
-                            playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
                         }));
                         SessionManager.getInstance().setLoggedIn(true);
                         return false;

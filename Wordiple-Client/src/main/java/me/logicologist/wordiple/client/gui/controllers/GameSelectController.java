@@ -1,18 +1,20 @@
 package me.logicologist.wordiple.client.gui.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameSelectController implements Initializable {
+public class GameSelectController extends FadeHorizontalTransitionAdapter {
 
     public static GameSelectController instance;
+
+    @FXML
+    private AnchorPane movablePane;
 
     @FXML
     private Button logoutButton;
@@ -24,6 +26,7 @@ public class GameSelectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.setPane(movablePane);
 
         logoutButton.setOnAction(event -> {
             if (!logoutButton.isHover()) return;

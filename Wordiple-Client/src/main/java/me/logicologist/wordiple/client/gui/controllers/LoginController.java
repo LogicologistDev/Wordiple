@@ -11,6 +11,7 @@ import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.packets.LoginPacket;
+import me.logicologist.wordiple.client.packets.UserInfoPacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,8 +74,8 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                     .setValues("username", usernameField.getText())
                     .setValues("password", passwordField.getText())
             ).waitForResponse(args -> {
-                UUID response = args.get("response", UUID.class);
-                if (response == null) {
+                UUID uuidResponse = args.get("response", UUID.class);
+                if (uuidResponse == null) {
                     Platform.runLater(() -> {
                         errorMessageLabel.setText("Invalid username or password. Please try again.");
                         loadScreen.remove(null);
@@ -82,13 +83,33 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                     });
                     return false;
                 }
-                SessionManager.getInstance().setLocalSessionID(response);
+                SessionManager.getInstance().setLocalSessionID(uuidResponse);
                 Platform.runLater(() -> {
-                    loadScreen.remove(() -> {
-                        super.transitionOut(() -> {
-                            GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));
-                        });
-                    });
+                    PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
+                            .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", uuidResponse))
+                            .waitForResponse(response -> {
+                                String username = response.get("username", String.class);
+                                if (username == null) {
+                                    GUIManager.addReadyListener(instance -> instance.showLoginScreen(true));
+                                    return false;
+                                }
+                                SessionManager.getInstance().setCurrentXp(response.get("xp", Integer.class));
+                                SessionManager.getInstance().setNeededXp(response.get("neededXp", Integer.class));
+                                SessionManager.getInstance().setLevel(response.get("level", Integer.class));
+                                SessionManager.getInstance().setUsername(username);
+
+                                SessionManager.getInstance().setLoggedIn(true);
+                                loadScreen.remove(() -> {
+                                    super.transitionOut(() -> {
+                                        GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));
+                                    });
+                                });
+                                return false;
+                            }, () -> {
+                                errorMessageLabel.setText("Unable to verify session ID. Please try again.");
+                                loadScreen.remove(null);
+                                new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                            }, 5, TimeUnit.SECONDS);
                 });
                 return false;
             }, () -> Platform.runLater(() -> {
