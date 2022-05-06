@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.managers;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
+import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import javax.mail.Message;
@@ -10,6 +11,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -112,27 +114,19 @@ public class SessionManager {
                     "\n" +
                     "[Do not reply to this email. You will not be given a response.]"
             );
-            System.out.println("Sending email...");
+            WordipleServer.getLogger().info("Sending email to " + packetArguments.get("email", String.class));
 
-            new Thread(() -> {
+            WordipleServer.getExecutor().submit(() -> {
                 try {
                     Transport.send(message);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            }).start();
-            System.out.println("Email sent!");
+            });
+            WordipleServer.getLogger().info("Email sent!");
             this.signupSessions.keySet().stream().filter(x -> x.contains(packetArguments.get("email", String.class))).collect(Collectors.toList()).forEach(this.signupSessions::remove);
             this.signupSessions.put(stringBuilder + ":" + packetArguments.get("email", String.class), packetArguments);
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            signupSessions.remove(stringBuilder.toString());
-                        }
-                    },
-                    10 * 60 * 1000
-            );
+            WordipleServer.getExecutor().schedule(() -> signupSessions.remove(stringBuilder.toString()), 10 * 60 * 1000, TimeUnit.MILLISECONDS);
             return "Success";
         } catch (Exception e) {
             e.printStackTrace();
