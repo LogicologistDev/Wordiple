@@ -211,13 +211,13 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.RightSkin';
 }
 
-.progress-bar > .track {
+.progress-bar-level > .track {
     -fx-background-radius: 8px;
     -fx-background-image: url("./levelbarbackground.png");
     -fx-background-color: transparent;
 }
 
-.progress-bar > .bar {
+.progress-bar-level > .bar {
     -fx-background-image: url("./levelbarforeground.png");
     -fx-background-color: transparent;
     -fx-background-radius: 8px;
@@ -225,3 +225,16 @@
     -fx-background-insets: 0;
 }
 
+.progress-bar-rank > .track {
+    -fx-background-radius: 8px;
+    -fx-background-image: url("./rankbarbackground.png");
+    -fx-background-color: transparent;
+}
+
+.progress-bar-rank > .bar {
+    -fx-background-image: url("./rankbarforeground.png");
+    -fx-background-color: transparent;
+    -fx-background-radius: 8px;
+    -fx-padding: 1px;
+    -fx-background-insets: 0;
+}
