@@ -142,6 +142,21 @@ public class GUIManager extends Application {
         return null;
     }
 
+    public RankOverlayController showRankOverlay(Runnable runAfter) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
+            fxmlLoader.load();
+            RankOverlayController rankOverlayController = fxmlLoader.getController();
+            rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            rankOverlayController.attach();
+            rankOverlayController.transitionIn(runAfter);
+            return rankOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public static void launch(String[] args) {
         Application.launch(args);
     }

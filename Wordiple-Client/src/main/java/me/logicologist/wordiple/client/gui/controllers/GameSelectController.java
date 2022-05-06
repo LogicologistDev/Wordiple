@@ -15,6 +15,9 @@ public class GameSelectController implements Initializable {
     @FXML
     private Button logoutButton;
 
+    @FXML
+    private Button rankButton;
+
     private boolean midAction = false;
 
     @Override
@@ -32,5 +35,16 @@ public class GameSelectController implements Initializable {
                 GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));
             });
         });
+
+        rankButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+            if (!rankButton.isHover()) return;
+
+            GUIManager.getInstance().showRankOverlay(() -> {
+                midAction = false;
+            });
+        });
+
     }
 }

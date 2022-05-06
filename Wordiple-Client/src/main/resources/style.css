@@ -84,10 +84,33 @@
     -fx-font-family: 'Nexa Bold';
 }
 
+.label-subtitle {
+    -fx-font-size: 30px;
+    -fx-font-family: 'Nexa Light';
+}
+
 .label-level {
     -fx-font-size: 60px;
     -fx-font-family: 'Nexa Bold';
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+}
+
+.label-60-light {
+    -fx-font-size: 60px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
+.label-40-light {
+    -fx-font-size: 60px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
+.label-30-light {
+    -fx-font-size: 30px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
 
 .label-level-progress {
@@ -161,10 +184,17 @@
 }
 
 .rectangle-chirank {
-    -fx-background-image: url("./chirank.png");
+    -fx-background-image: url("chirankbig.png");
     -fx-background-color: transparent;
     -fx-border-radius: 60px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+}
+
+.rectangle-chirank-small {
+    -fx-background-image: url("chiranksmall.png");
+    -fx-background-color: transparent;
+    -fx-border-radius: 60px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
 
 .button-overlay {
@@ -172,6 +202,13 @@
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.DownSkin';
+}
+
+.button-overlay-right {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.RightSkin';
 }
 
 .progress-bar > .track {

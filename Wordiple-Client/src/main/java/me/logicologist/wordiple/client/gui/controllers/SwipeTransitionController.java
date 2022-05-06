@@ -16,7 +16,6 @@ public class SwipeTransitionController extends AttachableAdapter {
     private AnchorPane movablePane;
 
     public void transitionIn(Runnable runnable) {
-        super.setAttachment(movablePane);
         super.attach();
         movablePane.setLayoutX(1640);
 
@@ -36,7 +35,6 @@ public class SwipeTransitionController extends AttachableAdapter {
     }
 
     public void transitionOut() {
-        super.setAttachment(movablePane);
         super.attach();
         Timeline timelineOut = new Timeline();
         timelineOut.setCycleCount(1);
@@ -50,6 +48,6 @@ public class SwipeTransitionController extends AttachableAdapter {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        super.setAttachment(movablePane);
     }
 }
