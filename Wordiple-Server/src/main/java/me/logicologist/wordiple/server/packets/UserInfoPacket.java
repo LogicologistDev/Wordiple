@@ -6,6 +6,8 @@ import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.UUID;
 
 public class UserInfoPacket extends PacketAdapter implements PacketType {
@@ -28,6 +30,8 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
             this.sendPacket(packet -> arguments.replace(this.getArguments()));
             return;
         }
+        wordipleUser.setSocket(arguments.getPacketHolder());
+        this.sendPacket(packet -> packet.getPacketType().getArguments(), wordipleUser.getOutputStream());
 
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())

@@ -4,6 +4,7 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 
+import java.net.Socket;
 import java.util.UUID;
 
 public class LoginPacket extends PacketAdapter implements PacketType {

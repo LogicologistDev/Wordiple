@@ -5,6 +5,8 @@ import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.server.managers.SessionManager;
 
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.UUID;
 
 public class LoginPacket extends PacketAdapter implements PacketType {
@@ -23,7 +25,7 @@ public class LoginPacket extends PacketAdapter implements PacketType {
     public void onReceive(PacketArguments packetArguments) {
         String username = packetArguments.get("username", String.class);
         String password = packetArguments.get("password", String.class);
-        UUID session = SessionManager.getInstance().createSession(username, password);
+        UUID session = SessionManager.getInstance().createSession(username, password, packetArguments.getPacketHolder());
         this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", session));
     }
 

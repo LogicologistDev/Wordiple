@@ -1,7 +1,14 @@
 package me.logicologist.wordiple.server.user;
 
+import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
+import me.logicologist.wordiple.server.managers.PacketManager;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.UUID;
 
 public class WordipleUser {
@@ -19,8 +26,9 @@ public class WordipleUser {
     private boolean competitiveBan;
     private boolean onlineBan;
     private boolean globalBan;
+    private PacketHolder socket;
 
-    public WordipleUser(String email, UUID id, String username, int rating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan) {
+    public WordipleUser(String email, UUID id, String username, int rating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, PacketHolder socket) {
         this.email = email;
         this.id = id;
         this.username = username;
@@ -34,10 +42,11 @@ public class WordipleUser {
         this.competitiveBan = competitiveBan;
         this.onlineBan = onlineBan;
         this.globalBan = globalBan;
+        this.socket = socket;
     }
 
     public WordipleUser(String email, String username) {
-        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, false, false, false);
+        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, false, false, false, null);
     }
 
     // Generate getters and setters
@@ -142,5 +151,18 @@ public class WordipleUser {
 
     public void setGlobalBan(boolean globalBan) {
         this.globalBan = globalBan;
+    }
+
+    public ObjectOutputStream getOutputStream() {
+        try {
+            return PacketManager.getInstance().getSocket().getOutputStream(this.socket);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setSocket(PacketHolder socket) {
+        this.socket = socket;
     }
 }
