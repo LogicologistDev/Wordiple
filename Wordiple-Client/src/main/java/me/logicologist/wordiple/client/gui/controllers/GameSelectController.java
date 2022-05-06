@@ -1,6 +1,5 @@
 package me.logicologist.wordiple.client.gui.controllers;
 
-import com.jcraft.jsch.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;

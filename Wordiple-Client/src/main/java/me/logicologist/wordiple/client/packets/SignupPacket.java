@@ -4,8 +4,6 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 
-import java.util.UUID;
-
 public class SignupPacket extends PacketAdapter implements PacketType {
 
     public SignupPacket() {

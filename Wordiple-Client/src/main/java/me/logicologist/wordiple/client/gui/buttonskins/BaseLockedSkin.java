@@ -1,9 +1,6 @@
 package me.logicologist.wordiple.client.gui.buttonskins;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.effect.DropShadow;

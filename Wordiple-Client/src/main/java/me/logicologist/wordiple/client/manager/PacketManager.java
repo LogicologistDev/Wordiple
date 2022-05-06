@@ -5,7 +5,6 @@ import com.olziedev.olziesocket.framework.SocketConfig;
 import com.olziedev.olziesocket.framework.action.SocketActionType;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
-import me.logicologist.wordiple.client.gui.controllers.PlayerHeaderController;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
 import org.apache.logging.log4j.LogManager;
 
