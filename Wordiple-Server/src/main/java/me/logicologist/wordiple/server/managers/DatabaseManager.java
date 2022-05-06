@@ -1,9 +1,12 @@
 package me.logicologist.wordiple.server.managers;
 
 import com.google.common.hash.Hashing;
+import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.File;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -89,7 +92,7 @@ public class DatabaseManager {
         }
     }
 
-    public WordipleUser constructWordipleUser(String username) {
+    public WordipleUser constructWordipleUser(String username, PacketHolder socket) {
         try {
             PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM users WHERE username=?");
             ps.setString(1, username);
@@ -108,7 +111,8 @@ public class DatabaseManager {
                     rs.getLong("bannedtime"),
                     rs.getBoolean("competitiveban"),
                     rs.getBoolean("onlineban"),
-                    rs.getBoolean("globalban")
+                    rs.getBoolean("globalban"),
+                    socket
             );
         } catch (Exception ex) {
             ex.printStackTrace();

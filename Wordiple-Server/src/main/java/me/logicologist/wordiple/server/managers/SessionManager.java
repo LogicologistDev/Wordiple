@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.managers;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
+import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
@@ -10,6 +11,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -31,11 +34,11 @@ public class SessionManager {
         return sessions.get(token);
     }
 
-    public UUID createSession(String username, String password) {
+    public UUID createSession(String username, String password, PacketHolder socket) {
         if (!DatabaseManager.instance.validateLogin(username, password)) {
             return null;
         }
-        WordipleUser user = DatabaseManager.instance.constructWordipleUser(username);
+        WordipleUser user = DatabaseManager.instance.constructWordipleUser(username, socket);
         List<UUID> invalidSessionIds = new ArrayList<>();
         sessions.forEach((k, v) -> {
             if (v.getId().equals(user.getId())) invalidSessionIds.add(k);
@@ -137,14 +140,13 @@ public class SessionManager {
     public UUID createNewAccount(String verificationCode, String email) {
         PacketArguments packetArguments = signupSessions.remove(verificationCode + ":" + email);
         if (packetArguments == null) return null;
+
         WordipleUser wordipleUser = new WordipleUser(packetArguments.get("email", String.class), packetArguments.get("username", String.class));
         DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password", String.class));
-
-        return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class));
+        return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class), packetArguments.getPacketHolder());
     }
 
     public static SessionManager getInstance() {
         return instance;
     }
-
 }
