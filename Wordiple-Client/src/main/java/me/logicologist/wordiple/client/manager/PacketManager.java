@@ -5,6 +5,7 @@ import com.olziedev.olziesocket.framework.SocketConfig;
 import com.olziedev.olziesocket.framework.action.SocketActionType;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
+import me.logicologist.wordiple.client.gui.controllers.PlayerHeaderController;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
 import org.apache.logging.log4j.LogManager;
 
@@ -41,7 +42,13 @@ public class PacketManager {
                         SessionManager.getInstance().setLevel(response.get("level", Integer.class));
                         SessionManager.getInstance().setUsername(username);
 
-                        GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false)));
+                        GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> {
+                            GUIManager.getInstance().showGameSelectScreen(false);
+                            PlayerHeaderController playerHeaderController = PlayerHeaderController.instance;
+                            playerHeaderController.setUsername(username);
+                            playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
+                            playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
+                        }));
                         SessionManager.getInstance().setLoggedIn(true);
                         return false;
                     }, null, 5, TimeUnit.SECONDS);
