@@ -77,7 +77,7 @@ public class WordipleUser {
         if (level == 0) {
             return 100;
         }
-        return Math.min((int) (((int) (Math.log(level * 10) / Math.log(2)) ^ 2) * Math.sqrt(level) + 100), 2000);
+        return Math.min((int) ((Math.pow(Math.log(182 * 10) / Math.log(2), 2)) * Math.sqrt(182) + 100), 2000);
     }
 
     public int getExperience() {
