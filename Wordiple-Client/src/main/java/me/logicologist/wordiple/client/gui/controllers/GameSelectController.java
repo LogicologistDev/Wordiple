@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.gui.controllers;
 
+import com.jcraft.jsch.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -35,6 +36,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
 
             LoadScreenController controller = GUIManager.getInstance().showLoadScreen("Logging out...");
             SessionManager.getInstance().setLocalSessionID(null);
+            SessionManager.getInstance().setLoggedIn(false);
 
             controller.remove(() -> {
                 GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));
