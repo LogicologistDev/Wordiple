@@ -36,6 +36,11 @@ public class PacketManager {
                             GUIManager.addReadyListener(instance -> instance.showLoginScreen(true));
                             return false;
                         }
+                        SessionManager.getInstance().setCurrentXp(response.get("xp", Integer.class));
+                        SessionManager.getInstance().setNeededXp(response.get("neededXp", Integer.class));
+                        SessionManager.getInstance().setLevel(response.get("level", Integer.class));
+                        SessionManager.getInstance().setUsername(username);
+
                         GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false)));
                         SessionManager.getInstance().setLoggedIn(true);
                         return false;

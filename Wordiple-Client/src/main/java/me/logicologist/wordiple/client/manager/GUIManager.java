@@ -17,7 +17,6 @@ public class GUIManager extends Application {
 
     private static GUIManager instance;
     private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
-
     public Stage stage;
 
     @Override
@@ -95,6 +94,7 @@ public class GUIManager extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
+            attachPlayerHeader();
 //            if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -155,6 +155,19 @@ public class GUIManager extends Application {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public void attachPlayerHeader() {
+        try {
+            if (PlayerHeaderController.instance == null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/playerheader.fxml"));
+                fxmlLoader.load();
+            }
+            PlayerHeaderController.instance.setParent((AnchorPane) stage.getScene().getRoot());
+            PlayerHeaderController.instance.attach();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void launch(String[] args) {

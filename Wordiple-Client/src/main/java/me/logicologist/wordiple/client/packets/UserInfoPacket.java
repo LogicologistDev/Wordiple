@@ -33,6 +33,7 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
                 .setArgument("rating", Integer.class)
                 .setArgument("level", Integer.class)
                 .setArgument("xp", Integer.class)
+                .setArgument("neededXp", Integer.class)
                 .setArgument("wins", Integer.class)
                 .setArgument("bannedTime", Long.class)
                 .setArgument("playtime", Long.class)

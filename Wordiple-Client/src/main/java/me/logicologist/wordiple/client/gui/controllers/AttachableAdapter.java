@@ -14,7 +14,6 @@ public abstract class AttachableAdapter implements Initializable {
     }
 
     public void setParent(Pane pane) {
-        if (parent != null) return;
         this.parent = pane;
     }
 

@@ -11,8 +11,12 @@ public class SessionManager {
 
     private static SessionManager instance;
     private boolean loggedIn;
-
     private final File file;
+    private int level;
+    private int currentXp;
+    private int neededXp;
+    private String username;
+
 
     public SessionManager(boolean developer) {
         this.file = new File(developer ? "data" : WordipleClient.getAppData().getAbsolutePath(), "session.properties");
@@ -55,8 +59,40 @@ public class SessionManager {
         return this.loggedIn;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public int getCurrentXp() {
+        return currentXp;
+    }
+
+    public int getNeededXp() {
+        return neededXp;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setCurrentXp(int currentXp) {
+        this.currentXp = currentXp;
+    }
+
+    public void setNeededXp(int neededXp) {
+        this.neededXp = neededXp;
     }
 
     public static SessionManager getInstance() {

@@ -39,6 +39,7 @@ public class WordipleUser {
     public WordipleUser(String email, String username) {
         this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, false, false, false);
     }
+
     // Generate getters and setters
     public String getEmail() {
         return email;
@@ -70,6 +71,13 @@ public class WordipleUser {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getNeededExperience() {
+        if (level == 0) {
+            return 100;
+        }
+        return Math.min((int) (((int) (Math.log(level * 10) / Math.log(2)) ^ 2) * Math.sqrt(level) + 100), 2000);
     }
 
     public int getExperience() {
