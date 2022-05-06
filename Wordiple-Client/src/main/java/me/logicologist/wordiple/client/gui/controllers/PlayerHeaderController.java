@@ -13,6 +13,7 @@ import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerHeaderController extends AttachableAdapter {
@@ -51,10 +52,15 @@ public class PlayerHeaderController extends AttachableAdapter {
 
         Duration duration = Duration.seconds(Math.abs(percentage - Math.max(this.levelProgressBar.getProgress(), 0)) * 2);
         AtomicInteger frameCounter = new AtomicInteger();
+
+        AtomicBoolean finished = new AtomicBoolean(false);
+
         int maxFrames = (int) (duration.toSeconds() / 0.01);
         int finalXp = (int) (SessionManager.getInstance().getNeededXp() * percentage);
         Timeline textTimeline = new Timeline(new KeyFrame(Duration.seconds(0.01), e -> {
+            if (finished.get()) return;
             frameCounter.getAndIncrement();
+            System.out.println("Not finished yet");
             this.levelProgressLabel.setText((int) (finalXp * ((double) frameCounter.get() / maxFrames)) + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");
         }));
         textTimeline.setCycleCount(maxFrames);
@@ -67,10 +73,13 @@ public class PlayerHeaderController extends AttachableAdapter {
         ));
         timeline.play();
         timeline.setOnFinished(e -> {
+            System.out.println("Finished");
+            finished.set(true);
             textTimeline.stop();
-            this.levelProgressLabel.setText(finalXp + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");
+            this.levelProgressLabel.setText(SessionManager.getInstance().getCurrentXp() + " XP / " + SessionManager.getInstance().getNeededXp() + " XP");
             if (runAfter != null) runAfter.run();
         });
+
     }
 
     public void setUsername(String username) {
