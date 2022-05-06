@@ -16,9 +16,8 @@
          <children>
             <Rectangle height="810.0" mouseTransparent="true" opacity="0.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
             <Button fx:id="backgroundButton" mnemonicParsing="false" opacity="0.0" prefHeight="810.0" prefWidth="1440.0" textFill="TRANSPARENT" />
-            <Label alignment="CENTER" layoutX="113.0" layoutY="-5.0" mouseTransparent="true" styleClass="label-bigtitle" stylesheets="@style.css" text="Wordiple Ranking System" textFill="WHITE" />
             <Line endX="601.0" fill="WHITE" layoutX="713.0" layoutY="129.0" mouseTransparent="true" smooth="false" startX="-586.0" stroke="WHITE" />
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="131.0" mouseTransparent="true" prefHeight="120.0" prefWidth="1305.0" styleClass="label-title" stylesheets="@style.css" text="Wordiple features a ranking system, where players are able to ascend and descend ranks to compete for rank titles. Word Points (WP) are gained on a win, and lost on a loss. Below is a charting of the ranks below:" textAlignment="CENTER" wrapText="true">
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="131.0" mouseTransparent="true" prefHeight="120.0" prefWidth="1305.0" styleClass="label-title" stylesheets="@style.css" text="Wordiple features a ranking system, where players are able to ascend and descend ranks to compete for rank titles. Word Rating (WR) are gained on a win, and lost on a loss. Below is a charting of the ranks below:" textAlignment="CENTER" wrapText="true">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -55,7 +54,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" layoutX="486.0" layoutY="-5.0" mouseTransparent="true" prefHeight="120.0" prefWidth="546.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Ranking">
+            <Label alignment="CENTER" layoutX="312.0" layoutY="-7.0" mouseTransparent="true" prefHeight="120.0" prefWidth="820.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Wordiple League">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>

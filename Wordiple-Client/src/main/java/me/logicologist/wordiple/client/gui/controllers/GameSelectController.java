@@ -3,7 +3,6 @@ package me.logicologist.wordiple.client.gui.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
@@ -11,6 +10,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameSelectController implements Initializable {
+
+    public static GameSelectController instance;
+
+    private int setNeededXp = 100;
 
     @FXML
     private Button logoutButton;
@@ -45,6 +48,10 @@ public class GameSelectController implements Initializable {
                 midAction = false;
             });
         });
+
+    }
+
+    public void setLevelBar() {
 
     }
 }
