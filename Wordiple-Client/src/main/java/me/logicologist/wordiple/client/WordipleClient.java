@@ -3,6 +3,8 @@ package me.logicologist.wordiple.client;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ public class WordipleClient {
 
     private static File appData;
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
         new SessionManager(Arrays.asList(args).contains("-developer"));
@@ -33,10 +36,15 @@ public class WordipleClient {
         }
 
         appData = new File(workingDirectory + File.separator + "Wordiple");
+        logger.info("AppData: " + appData.getAbsolutePath());
         return appData;
     }
 
     public static ScheduledExecutorService getExecutor() {
         return executor;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 }
