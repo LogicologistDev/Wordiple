@@ -74,6 +74,8 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 return;
             }
 
+            if (midAction) return;
+            midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Logging in...");
             PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("username", usernameField.getText())
@@ -85,6 +87,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                         errorMessageLabel.setText("Invalid username or password. Please try again.");
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                        midAction = false;
                     });
                     return false;
                 }
@@ -106,6 +109,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                                 });
                                 return false;
                             }, () -> {
+                                midAction = false;
                                 errorMessageLabel.setText("Unable to verify session ID. Please try again.");
                                 loadScreen.remove(null);
                                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
@@ -116,6 +120,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                midAction = false;
             }), 10, TimeUnit.SECONDS);
         });
         forgotPasswordButton.setOnAction(event -> super.transitionOut(() -> GUIManager.getInstance().showForgotPasswordScreen(true)));

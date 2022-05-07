@@ -84,6 +84,8 @@ public class SignupController extends FadeVerticalTransitionAdapter {
                 return;
             }
 
+            if (midAction) return;
+            midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending verification...");
             PacketManager.getInstance().getSocket().getPacket(SignupPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("email", emailField.getText().toLowerCase())
@@ -96,11 +98,10 @@ public class SignupController extends FadeVerticalTransitionAdapter {
                         errorMessageLabel.setText(response);
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                        midAction = false;
                     });
                     return false;
                 }
-                if (midAction) return false;
-                midAction = true;
 
                 Platform.runLater(() -> {
                     loadScreen.remove(() -> {
@@ -114,6 +115,7 @@ public class SignupController extends FadeVerticalTransitionAdapter {
                 errorMessageLabel.setText("Timed out. Please try again.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                midAction = false;
             }), 10, TimeUnit.SECONDS);
         });
     }
