@@ -3,7 +3,7 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.client.WordipleClient;
-import me.logicologist.wordiple.client.gui.controllers.PlayerHeaderController;
+import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 
 import java.io.File;
 import java.nio.file.Files;
