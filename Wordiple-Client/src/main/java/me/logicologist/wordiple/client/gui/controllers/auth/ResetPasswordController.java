@@ -77,7 +77,10 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("email", email).setValues("password", passwordField.getText())
             ).waitForResponse(x -> {
-                loadScreen.remove(() -> Platform.runLater(() -> GUIManager.getInstance().showLoginScreen(true)));
+                Platform.runLater(() -> {
+                    loadScreen.remove(null);
+                    super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
+                });
                 return false;
             }, () -> Platform.runLater(() -> {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
