@@ -15,6 +15,11 @@ public class LogoutPacket extends PacketAdapter implements PacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
         SessionManager.getInstance().removeSession(packetArguments.get("session", UUID.class));
     }
