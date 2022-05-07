@@ -1,14 +1,10 @@
 package me.logicologist.wordiple.server.packets.auth;
 
-import com.jcraft.jsch.Session;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
-import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
-
-import java.util.concurrent.TimeUnit;
 
 public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
 
@@ -25,20 +21,27 @@ public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
     @Override
     public void onReceive(PacketArguments packetArguments) {
         SessionManager manager = SessionManager.getInstance();
-        boolean success = manager.isCodeValid(packetArguments.get("email", String.class), packetArguments.get("code", String.class));
-        if (success) {
-            manager.logoutMatchingUsers(DatabaseManager.instance.getUUID(packetArguments.get("email", String.class)));
-            DatabaseManager.instance.setPassword(packetArguments.get("email", String.class), packetArguments.get("password", String.class));
+        boolean validCode = manager.isResetCodeValid(packetArguments.get("email", String.class), packetArguments.get("code", String.class));
+        if (!validCode) {
+            this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", "Invalid code. Please try again."));
+            return;
         }
-        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("success", success));
+        boolean validSalt = DatabaseManager.instance.setPassword(packetArguments.get("email", String.class), packetArguments.get("salt", String.class), packetArguments.get("password_hash", String.class));
+        if (!validSalt) {
+            this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", "Invalid salt. Please try again."));
+            return;
+        }
+        manager.logoutMatchingUsers(DatabaseManager.instance.getUUID(packetArguments.get("email", String.class)));
+        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", "Success"));
     }
 
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
                 .setArgument("email", String.class)
-                .setArgument("success", Boolean.class)
+                .setArgument("response", String.class)
                 .setArgument("code", String.class)
-                .setArgument("password", String.class);
+                .setArgument("salt", String.class)
+                .setArgument("password_hash", String.class);
     }
 }

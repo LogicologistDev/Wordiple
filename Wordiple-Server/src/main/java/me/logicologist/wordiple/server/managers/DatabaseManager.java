@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class DatabaseManager {
 
@@ -75,37 +76,33 @@ public class DatabaseManager {
         return this.connection;
     }
 
-    public boolean validateLogin(String username, String password) {
+    public boolean validateLogin(String username, String passwordHash) {
         try {
-            PreparedStatement ps = getConnection().prepareStatement("SELECT passwordhash, passwordsalt FROM users WHERE username=?");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT passwordhash FROM users WHERE username=?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) return false;
-            String saltedPassword = password + rs.getString("passwordsalt");
-            String salted = Hashing.sha256().hashString(saltedPassword, Charset.defaultCharset()).toString();
-            return salted.equals(rs.getString("passwordhash"));
+            return passwordHash.equals(rs.getString("passwordhash"));
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
 
-    public void setPassword(String email, String password) {
+    public boolean setPassword(String email, String salt, String hashed) {
+        Pattern validSalt = Pattern.compile("^[a-zA-Z0-9]{16}$");
+        if (!validSalt.matcher(salt).matches()) return false;
         try {
-            StringBuilder salt = new StringBuilder();
-            String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            for (int i = 0; i < 16; i++) {
-                salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
-            }
-            String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
             PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ?, passwordsalt = ? WHERE email = ?");
             ps.setString(1, hashed);
             ps.setString(2, salt.toString());
             ps.setString(3, email);
             ps.executeUpdate();
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     public WordipleUser constructWordipleUser(String username, PacketHolder socket) {
@@ -158,13 +155,7 @@ public class DatabaseManager {
         }
     }
 
-    public void createUser(WordipleUser user, String password) {
-        StringBuilder salt = new StringBuilder();
-        String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        for (int i = 0; i < 16; i++) {
-            salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
-        }
-        String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
+    public void createUser(WordipleUser user, String hashed, String salt) {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("INSERT INTO users (uuid, username, email, passwordhash, passwordsalt, rating, level, experience, wins, games_played, playtime, bannedtime, competitiveban, onlineban, globalban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -253,6 +244,21 @@ public class DatabaseManager {
             if (!rs.next()) return null;
 
             return UUID.fromString(rs.getString("uuid"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getSalt(String username) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT passwordsalt FROM users WHERE username=?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+
+            return rs.getString("passwordsalt");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

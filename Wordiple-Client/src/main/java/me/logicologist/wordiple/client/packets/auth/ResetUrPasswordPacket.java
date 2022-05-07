@@ -25,8 +25,9 @@ public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
     public PacketArguments getArguments() {
         return new PacketArguments()
                 .setArgument("email", String.class)
-                .setArgument("success", Boolean.class)
+                .setArgument("response", String.class)
                 .setArgument("code", String.class)
-                .setArgument("password", String.class);
+                .setArgument("salt", String.class)
+                .setArgument("password_hash", String.class);
     }
 }

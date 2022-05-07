@@ -39,8 +39,8 @@ public class SessionManager {
         sessions.remove(session);
     }
 
-    public UUID createSession(String username, String password, PacketHolder socket) {
-        if (!DatabaseManager.instance.validateLogin(username, password)) {
+    public UUID createSession(String username, String passwordHash, PacketHolder socket) {
+        if (!DatabaseManager.instance.validateLogin(username, passwordHash)) {
             return null;
         }
         WordipleUser user = DatabaseManager.instance.constructWordipleUser(username, socket);
@@ -55,11 +55,14 @@ public class SessionManager {
     }
 
     public String createSignupSession(PacketArguments packetArguments) {
+        // Username and password for the email
         final String username = "wordiple@gmail.com";
         final String password = "LK8!MUY'^{-qW%es";
 
+        // Server sided checking for valid email, username, and password salt.
         Pattern validEmail = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
+        Pattern validSalt = Pattern.compile("^[a-zA-Z0-9]{16}$");
 
         if (!validEmail.matcher(packetArguments.get("email", String.class)).matches())
             return "Invalid email address.";
@@ -76,19 +79,28 @@ public class SessionManager {
         if (packetArguments.get("password", String.class).length() <= 5)
             return "Invalid password.";
 
+        if (!validSalt.matcher(packetArguments.get("salt", String.class)).matches()) {
+            return "Security feature violation.";
+        }
+
+        // Mail properties to set for sending an email
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
 
+        // Create a new mail session to send recipient email
         Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
-                });
+                }
+        );
+
         try {
+            // Create a new email message and set content
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("wordiple@gmail.com", "Wordiple System"));
             message.setRecipients(
@@ -97,6 +109,7 @@ public class SessionManager {
             );
             message.setSubject("Wordiple Email Verification Code");
 
+            // Create a verification code and add it to the email
             StringBuilder stringBuilder = new StringBuilder();
             String possibleCodePart = "0123456789";
 
@@ -104,7 +117,7 @@ public class SessionManager {
                 stringBuilder.append(possibleCodePart.charAt(new Random().nextInt(10)));
             }
 
-
+            // Set email content
             message.setText("Hello, " + packetArguments.get("username", String.class) + "!\n" +
                     "You have signed up for a Wordiple account! In order to finish registration, please type in this verification code below:\n" +
                     stringBuilder.toString() + " (This code will expire in 10 minutes.)\n" +
@@ -115,8 +128,10 @@ public class SessionManager {
                     "\n" +
                     "[Do not reply to this email. You will not be given a response.]"
             );
+            // Log the email sending
             WordipleServer.getLogger().info("Sending email to " + packetArguments.get("email", String.class));
 
+            // Send the email
             WordipleServer.getExecutor().submit(() -> {
                 try {
                     Transport.send(message);
@@ -124,9 +139,17 @@ public class SessionManager {
                     ex.printStackTrace();
                 }
             });
+
+            // Log the email sent
             WordipleServer.getLogger().info("Email sent!");
+
+            // Remove previous signup sessions for the email
             this.signupSessions.keySet().stream().filter(x -> x.contains(packetArguments.get("email", String.class))).collect(Collectors.toList()).forEach(this.signupSessions::remove);
+
+            // Add the new signup session
             this.signupSessions.put(stringBuilder + ":" + packetArguments.get("email", String.class), packetArguments);
+
+            // Remove verification code if not used in 10 minutes
             WordipleServer.getExecutor().schedule(() -> signupSessions.remove(stringBuilder.toString()), 10 * 60 * 1000, TimeUnit.MILLISECONDS);
             return "Success";
         } catch (Exception e) {
@@ -190,7 +213,7 @@ public class SessionManager {
         if (packetArguments == null) return null;
 
         WordipleUser wordipleUser = new WordipleUser(packetArguments.get("email", String.class), packetArguments.get("username", String.class));
-        DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password", String.class));
+        DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password_hash", String.class), packetArguments.get("salt", String.class));
         return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class), packetArguments.getPacketHolder());
     }
 
@@ -216,7 +239,7 @@ public class SessionManager {
         this.sessions.forEach((k, v) -> DatabaseManager.instance.saveUser(v));
     }
 
-    public boolean isCodeValid(String email, String code) {
+    public boolean isResetCodeValid(String email, String code) {
         boolean success = resetPasswords.get(email) != null && resetPasswords.get(email).equals(code);
         if (success) resetPasswords.remove(email);
 

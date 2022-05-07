@@ -4,12 +4,10 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 
-import java.util.UUID;
+public class SaltRetrievePacket extends PacketAdapter implements PacketType {
 
-public class LoginPacket extends PacketAdapter implements PacketType {
-
-    public LoginPacket() {
-        super("login_packet");
+    public SaltRetrievePacket() {
+        super("salt_retrieve_packet");
         this.packetType = this;
     }
 
@@ -26,8 +24,7 @@ public class LoginPacket extends PacketAdapter implements PacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("username", String.class)
-                .setArgument("password_hash", String.class)
-                .setArgument("response", UUID.class);
+                .setValues("username", String.class)
+                .setValues("salt", String.class);
     }
 }

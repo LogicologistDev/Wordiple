@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.gui.controllers.auth;
 
+import com.google.common.hash.Hashing;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,8 @@ import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.packets.auth.SignupPacket;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -87,10 +90,20 @@ public class SignupController extends FadeVerticalTransitionAdapter {
             if (midAction) return;
             midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending verification...");
+
+            StringBuilder salt = new StringBuilder();
+            String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            for (int i = 0; i < 16; i++) {
+                salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
+            }
+
+            String passwordHash = Hashing.sha256().hashString(passwordField.getText() + salt, Charset.defaultCharset()).toString();
+
             PacketManager.getInstance().getSocket().getPacket(SignupPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("email", emailField.getText().toLowerCase())
                     .setValues("username", usernameField.getText())
-                    .setValues("password", passwordField.getText())
+                    .setValues("password_hash", passwordHash)
+                    .setValues("salt", salt.toString())
             ).waitForResponse(args -> {
                 String response = args.get("response", String.class);
                 if (!response.equals("Success")) {

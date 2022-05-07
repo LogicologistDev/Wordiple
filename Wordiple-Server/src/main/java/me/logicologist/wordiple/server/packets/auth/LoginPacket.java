@@ -22,8 +22,8 @@ public class LoginPacket extends PacketAdapter implements PacketType {
     @Override
     public void onReceive(PacketArguments packetArguments) {
         String username = packetArguments.get("username", String.class);
-        String password = packetArguments.get("password", String.class);
-        UUID session = SessionManager.getInstance().createSession(username, password, packetArguments.getPacketHolder());
+        String passwordHash = packetArguments.get("password_hash", String.class);
+        UUID session = SessionManager.getInstance().createSession(username, passwordHash, packetArguments.getPacketHolder());
         this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", session));
     }
 
@@ -31,7 +31,7 @@ public class LoginPacket extends PacketAdapter implements PacketType {
     public PacketArguments getArguments() {
         return new PacketArguments()
                 .setArgument("username", String.class)
-                .setArgument("password", String.class)
+                .setArgument("password_hash", String.class)
                 .setArgument("response", UUID.class);
     }
 }

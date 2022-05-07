@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.gui.controllers.auth;
 
+import com.google.common.hash.Hashing;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,8 @@ import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.packets.auth.ResetUrPasswordPacket;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
@@ -71,8 +74,19 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             if (midAction) return;
             midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Resetting...");
-            PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet ->
-                    packet.getPacketType().getArguments().setValues("email", email).setValues("code", codeField.getText()).setValues("password", passwordField.getText())
+
+            StringBuilder salt = new StringBuilder();
+            String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            for (int i = 0; i < 16; i++) {
+                salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
+            }
+            String passwordHash = Hashing.sha256().hashString(passwordField.getText() + salt, Charset.defaultCharset()).toString();
+
+            PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                    .setValues("email", email)
+                    .setValues("code", codeField.getText())
+                    .setValues("password_hash", passwordHash)
+                    .setValues("salt", salt.toString())
             ).waitForResponse(x -> {
                 Platform.runLater(() -> {
                     loadScreen.remove(null);
