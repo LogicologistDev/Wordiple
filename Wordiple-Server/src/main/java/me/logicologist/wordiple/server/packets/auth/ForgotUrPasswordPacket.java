@@ -8,7 +8,7 @@ public class ForgotUrPasswordPacket extends PacketAdapter implements PacketType 
 
     public ForgotUrPasswordPacket() {
         super("forgot_ur_password_packet");
-        this.packetType = new AuthPacket();
+        this.packetType = this;
     }
 
     @Override
@@ -18,6 +18,6 @@ public class ForgotUrPasswordPacket extends PacketAdapter implements PacketType 
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments(this.packetType.getArguments());
+        return new PacketArguments().setArgument("username", String.class);
     }
 }
