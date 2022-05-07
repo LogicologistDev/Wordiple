@@ -13,6 +13,7 @@ import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.client.packets.auth.LoginPacket;
 
 import java.net.URL;
@@ -90,7 +91,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 SessionManager.getInstance().setLocalSessionID(uuidResponse);
                 Platform.runLater(() -> {
                     PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
-                            .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", uuidResponse))
+                            .sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(uuidResponse))
                             .waitForResponse(response -> {
                                 String username = response.get("username", String.class);
                                 if (username == null) {

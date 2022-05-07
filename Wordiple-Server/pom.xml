@@ -13,6 +13,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>me.logicologist</groupId>
+            <artifactId>wordiple-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>

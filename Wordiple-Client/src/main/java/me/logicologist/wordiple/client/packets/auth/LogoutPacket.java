@@ -2,17 +2,16 @@ package me.logicologist.wordiple.client.packets.auth;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import javafx.application.Platform;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class LogoutPacket extends PacketAdapter implements PacketType {
+public class LogoutPacket extends PacketAdapter implements AuthPacketType {
 
     public LogoutPacket() {
         super("logout_packet");
@@ -37,6 +36,6 @@ public class LogoutPacket extends PacketAdapter implements PacketType {
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments().setArgument("session", UUID.class).setArgument("reason", String.class);
+        return new PacketArguments().setArgument("reason", String.class);
     }
 }

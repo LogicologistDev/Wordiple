@@ -11,6 +11,7 @@
     <modules>
         <module>Wordiple-Server</module>
         <module>Wordiple-Client</module>
+        <module>Worldiple-Common</module>
     </modules>
 
     <properties>

@@ -2,11 +2,11 @@ package me.logicologist.wordiple.client.packets;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import com.olziedev.olziesocket.framework.api.packet.PacketType;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.util.UUID;
 
-public class UserInfoPacket extends PacketAdapter implements PacketType {
+public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
 
     public UserInfoPacket() {
         super("user_info_packet");
@@ -26,7 +26,6 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("session_id", UUID.class)
                 .setArgument("email", String.class)
                 .setArgument("id", UUID.class)
                 .setArgument("username", String.class)

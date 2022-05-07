@@ -2,16 +2,17 @@ package me.logicologist.wordiple.server.packets;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import com.olziedev.olziesocket.framework.api.packet.PacketType;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.UUID;
 
-public class UserInfoPacket extends PacketAdapter implements PacketType {
+public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
 
     public UserInfoPacket() {
         super("user_info_packet");
@@ -26,7 +27,7 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
     @Override
     public void onReceive(PacketArguments arguments) {
         SessionManager sessionManager = SessionManager.getInstance();
-        WordipleUser wordipleUser = sessionManager.getSessionFromToken(arguments.get("session_id", UUID.class));
+        WordipleUser wordipleUser = sessionManager.getSessionFromToken(this.getSessionID(arguments));
         if (wordipleUser == null) {
             this.sendPacket(packet -> arguments.replace(this.getArguments()));
             return;
@@ -37,6 +38,7 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
                     .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), oldStream);
         }
         wordipleUser.setSocket(arguments.getPacketHolder());
+        wordipleUser.setLoggedInTime(new Date());
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())
                 .setValues("id", wordipleUser.getId())
@@ -57,7 +59,6 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("session_id", UUID.class)
                 .setArgument("email", String.class)
                 .setArgument("id", UUID.class)
                 .setArgument("username", String.class)

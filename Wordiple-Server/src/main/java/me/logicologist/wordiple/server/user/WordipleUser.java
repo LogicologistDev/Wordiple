@@ -5,6 +5,7 @@ import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.UUID;
 
 public class WordipleUser {
@@ -18,6 +19,7 @@ public class WordipleUser {
     private int wins;
     private int gamesPlayed;
     private long playtime;
+    private Date loggedInTime;
     private long bannedTime;
     private boolean competitiveBan;
     private boolean onlineBan;
@@ -160,5 +162,13 @@ public class WordipleUser {
 
     public void setSocket(PacketHolder socket) {
         this.socket = socket;
+    }
+
+    public Date getLoggedInTime() {
+        return loggedInTime;
+    }
+
+    public void setLoggedInTime(Date loggedInTime) {
+        this.loggedInTime = loggedInTime;
     }
 }

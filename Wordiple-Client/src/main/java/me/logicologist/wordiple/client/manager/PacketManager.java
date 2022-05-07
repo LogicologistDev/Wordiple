@@ -6,6 +6,7 @@ import com.olziedev.olziesocket.framework.action.SocketActionType;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.UUID;
@@ -32,7 +33,7 @@ public class PacketManager {
             if (id == null) return;
 
             this.socket.getPacket(UserInfoPacket.class)
-                    .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", id))
+                    .sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(id))
                     .waitForResponse(response -> {
                         String username = response.get("username", String.class);
                         if (username == null) {

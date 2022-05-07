@@ -12,6 +12,12 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>me.logicologist</groupId>
+            <artifactId>wordiple-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
         <!--> Maven dependencies !-->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>

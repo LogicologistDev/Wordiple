@@ -2,9 +2,9 @@ package me.logicologist.wordiple.client.packets;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import com.olziedev.olziesocket.framework.api.packet.PacketType;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
-public class StatInfoPacket extends PacketAdapter implements PacketType {
+public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
 
     public StatInfoPacket() {
         super("stat_info_packet");
@@ -14,6 +14,11 @@ public class StatInfoPacket extends PacketAdapter implements PacketType {
     @Override
     public void onReceive(PacketArguments arguments) {
 
+    }
+
+    @Override
+    public boolean onlySendToServer() {
+        return true;
     }
 
     @Override

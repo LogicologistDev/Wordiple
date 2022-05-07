@@ -17,6 +17,7 @@ import me.logicologist.wordiple.client.gui.controllers.select.GameSelectControll
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
 import me.logicologist.wordiple.client.packets.StatInfoPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -199,7 +200,7 @@ public class GUIManager extends Application {
     public void showProfileOverlay(String username, Runnable runAfter, Consumer<ProfileOverlayController> controller) {
         LoadScreenController loadScreenController = showLoadScreen("Fetching profile...");
         PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
-                packet.getPacketType().getArguments().setValues("username", username)
+                packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
         ).waitForResponse(packet -> {
             loadScreenController.remove(() -> {
                 try {
