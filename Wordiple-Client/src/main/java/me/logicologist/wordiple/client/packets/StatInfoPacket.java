@@ -13,8 +13,9 @@ public class StatInfoPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
+        String userName = arguments.get("username", String.class);
+
         this.sendPacket(packet -> arguments.replace(this.getArguments())
-                .setValues("username", "")
                 .setValues("games_played", "")
                 .setValues("wins", "")
                 .setValues("losses", "")
