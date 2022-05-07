@@ -1,10 +1,12 @@
 package me.logicologist.wordiple.client.gui.controllers;
 
+import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -23,6 +25,9 @@ public class ProfileOverlayController extends AttachableAdapter {
 
     @FXML
     public TextField gamesPlayedField;
+
+    @FXML
+    public Label usernameLabel;
 
     @FXML
     public TextField winsField;
@@ -105,5 +110,22 @@ public class ProfileOverlayController extends AttachableAdapter {
         timeline.setOnFinished(x -> {
             super.detach();
         });
+    }
+
+    public void setData(PacketArguments args) {
+        usernameLabel.setText(args.get("username", String.class));
+        gamesPlayedField.setText(args.get("games_played", String.class));
+        winsField.setText(args.get("wins", String.class));
+        lossesField.setText(args.get("losses", String.class));
+        playtimeField.setText(args.get("playtime", String.class));
+        currentSessionField.setText(args.get("curren_session", String.class));
+        seasonField.setText(args.get("season", String.class));
+        currentRankField.setText(args.get("current_rank", String.class));
+        currentRatingField.setText(args.get("current_rating", String.class));
+        highestRankField.setText(args.get("highest_rank", String.class));
+        highestRatingField.setText(args.get("highest_rating", String.class));
+        solveTimeField.setText(args.get("solve_time", String.class));
+        openerField.setText(args.get("opener", String.class));
+        guessesField.setText(args.get("guesses", String.class));
     }
 }

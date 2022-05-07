@@ -189,6 +189,7 @@ public class GUIManager extends Application {
             loadScreenController.remove(() -> {
                 LoadScreenController errorPopup = showLoadScreen("Error fetching data!");
                 WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                runAfter.run();
             });
         }, 3, TimeUnit.SECONDS);
     }
