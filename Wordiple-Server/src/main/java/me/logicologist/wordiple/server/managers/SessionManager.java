@@ -3,7 +3,7 @@ package me.logicologist.wordiple.server.managers;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.WordipleServer;
-import me.logicologist.wordiple.server.packets.auth.ForceLogoutPacket;
+import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import javax.mail.Message;
@@ -12,8 +12,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
@@ -35,6 +33,10 @@ public class SessionManager {
         return sessions.get(token);
     }
 
+    public void removeSession(UUID session) {
+        sessions.remove(session);
+    }
+
     public UUID createSession(String username, String password, PacketHolder socket) {
         if (!DatabaseManager.instance.validateLogin(username, password)) {
             return null;
@@ -44,7 +46,7 @@ public class SessionManager {
         sessions.forEach((k, v) -> {
             if (v.getId().equals(user.getId())) invalidSessionIds.add(k);
         });
-        ForceLogoutPacket logoutPacket = PacketManager.getInstance().getSocket().getPacket(ForceLogoutPacket.class);
+        LogoutPacket logoutPacket = PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class);
         for (UUID sessionId : invalidSessionIds) {
             WordipleUser wordipleUser = sessions.get(sessionId);
             logoutPacket.sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());

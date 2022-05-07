@@ -9,12 +9,13 @@ import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class ForceLogoutPacket extends PacketAdapter implements PacketType {
+public class LogoutPacket extends PacketAdapter implements PacketType {
 
-    public ForceLogoutPacket() {
-        super("force_logout_packet");
+    public LogoutPacket() {
+        super("logout_packet");
         this.packetType = this;
     }
 
@@ -33,6 +34,6 @@ public class ForceLogoutPacket extends PacketAdapter implements PacketType {
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments().setArgument("reason", String.class);
+        return new PacketArguments().setArgument("session", UUID.class).setArgument("reason", String.class);
     }
 }

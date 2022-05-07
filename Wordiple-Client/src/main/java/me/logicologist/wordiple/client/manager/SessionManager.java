@@ -4,6 +4,7 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
+import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -50,6 +51,7 @@ public class SessionManager {
             if (localSessionID == null) {
                 this.loggedIn = false;
                 PlayerHeaderController.instance = null;
+                PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("session", this.getLocalSessionID()));
             }
             Properties properties = new Properties();
             if (localSessionID != null) {

@@ -3,11 +3,11 @@ package me.logicologist.wordiple.server.packets;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
+import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
+import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.UUID;
 
 public class UserInfoPacket extends PacketAdapter implements PacketType {
@@ -30,6 +30,8 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
             this.sendPacket(packet -> arguments.replace(this.getArguments()));
             return;
         }
+        PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class)
+                .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());
         wordipleUser.setSocket(arguments.getPacketHolder());
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())
