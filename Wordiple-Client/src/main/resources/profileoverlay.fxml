@@ -107,7 +107,7 @@
          </stroke>
       </Line>
       <AnchorPane layoutX="255.0" layoutY="230.0" mouseTransparent="true" prefHeight="56.0" prefWidth="930.0" styleClass="pane-overlay" stylesheets="@style.css" />
-      <Label layoutX="923.0" layoutY="186.0" styleClass="label-25-light" stylesheets="@style.css" text="Wordiple Player Stats" textFill="#707070" />
+      <Label layoutX="923.0" layoutY="186.0" mouseTransparent="true" styleClass="label-25-light" stylesheets="@style.css" text="Wordiple Player Stats" textFill="#707070" />
       <Label layoutX="255.0" layoutY="515.0" mouseTransparent="true" prefHeight="37.0" prefWidth="233.0" styleClass="label-30-light" stylesheets="@style.css" text="Playtime:">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
