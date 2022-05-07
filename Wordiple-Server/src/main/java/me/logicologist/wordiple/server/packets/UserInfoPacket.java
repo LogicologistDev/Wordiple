@@ -8,6 +8,7 @@ import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
+import java.io.ObjectOutputStream;
 import java.util.UUID;
 
 public class UserInfoPacket extends PacketAdapter implements PacketType {
@@ -30,8 +31,11 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
             this.sendPacket(packet -> arguments.replace(this.getArguments()));
             return;
         }
-        PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class)
-                .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());
+        ObjectOutputStream oldStream = wordipleUser.getOutputStream();
+        if (!oldStream.equals(PacketManager.getInstance().getSocket().getOutputStream(arguments.getPacketHolder()))) {
+            PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class)
+                    .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), oldStream);
+        }
         wordipleUser.setSocket(arguments.getPacketHolder());
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())

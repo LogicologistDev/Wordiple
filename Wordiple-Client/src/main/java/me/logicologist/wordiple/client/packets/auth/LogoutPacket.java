@@ -20,16 +20,19 @@ public class LogoutPacket extends PacketAdapter implements PacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
         GUIManager guiManager = GUIManager.getInstance();
-        Platform.runLater(() -> {
-            GUIManager.getInstance().startSwipeTransition(null, () -> {
-                guiManager.showMainScreen(false);
-                LoadScreenController lsc = guiManager.showLoadScreen("Connection has been lost!");
-                SessionManager.getInstance().setLocalSessionID(null);
-                WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
-            });
-        });
+        Platform.runLater(() -> GUIManager.getInstance().startSwipeTransition(null, () -> {
+            guiManager.showMainScreen(false);
+            LoadScreenController lsc = guiManager.showLoadScreen(packetArguments.get("reason", String.class));
+            SessionManager.getInstance().setLocalSessionID(null);
+            WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
+        }));
     }
 
     @Override
