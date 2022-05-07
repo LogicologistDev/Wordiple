@@ -3,6 +3,7 @@ package me.logicologist.wordiple.server.managers;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.WordipleServer;
+import me.logicologist.wordiple.server.packets.auth.ForceLogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import javax.mail.Message;
@@ -43,8 +44,11 @@ public class SessionManager {
         sessions.forEach((k, v) -> {
             if (v.getId().equals(user.getId())) invalidSessionIds.add(k);
         });
+        ForceLogoutPacket logoutPacket = PacketManager.getInstance().getSocket().getPacket(ForceLogoutPacket.class);
         for (UUID sessionId : invalidSessionIds) {
-            DatabaseManager.instance.saveUser(sessions.get(sessionId));
+            WordipleUser wordipleUser = sessions.get(sessionId);
+            logoutPacket.sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());
+            DatabaseManager.instance.saveUser(wordipleUser);
             this.sessions.remove(sessionId);
         }
         UUID newSessionId;
