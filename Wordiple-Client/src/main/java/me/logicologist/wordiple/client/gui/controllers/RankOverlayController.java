@@ -37,9 +37,9 @@ public class RankOverlayController extends AttachableAdapter {
         midAction = true;
         Duration rotateDuration = Duration.seconds(0.5);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutXProperty(), -200)), // initial rotate
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), -1005)), // initial rotate
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.rotateProperty(), -45)), // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutXProperty(), -100)), // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), -500)), // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.rotateProperty(), -25)), // initial rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 0)), // initial rotate
                 new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutXProperty(), 0)),// end value of rotate
                 new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutYProperty(), 0)), // initial rotate
@@ -60,9 +60,12 @@ public class RankOverlayController extends AttachableAdapter {
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), 0)), // initial rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.rotateProperty(), 0)), // end value of rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 1)), // initial rotate
-                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutXProperty(), 200)), // initial rotate
-                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutYProperty(), 1005)), // initial rotate
-                new KeyFrame(rotateDuration, new KeyValue(movablePane.rotateProperty(), 45)), // initial rotate
+                new KeyFrame(Duration.seconds(0.3), e -> {
+                    this.overlayController.transitionOut();
+                }),
+                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutXProperty(), 100)), // initial rotate
+                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutYProperty(), 500)), // initial rotate
+                new KeyFrame(rotateDuration, new KeyValue(movablePane.rotateProperty(), 25)), // initial rotate
                 new KeyFrame(rotateDuration, new KeyValue(movablePane.opacityProperty(), 0)) // initial rotate
         );
         timeline.play();

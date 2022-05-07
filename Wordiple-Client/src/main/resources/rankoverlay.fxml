@@ -1,315 +1,314 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.RankOverlayController">
+
+<AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.RankOverlayController">
    <children>
-      <AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0">
-         <children>
-            <Rectangle height="810.0" mouseTransparent="true" opacity="0.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
-            <Button fx:id="backgroundButton" mnemonicParsing="false" opacity="0.0" prefHeight="810.0" prefWidth="1440.0" textFill="TRANSPARENT" />
-            <Line endX="601.0" fill="WHITE" layoutX="713.0" layoutY="129.0" mouseTransparent="true" smooth="false" startX="-586.0" stroke="WHITE" />
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="131.0" mouseTransparent="true" prefHeight="120.0" prefWidth="1305.0" styleClass="label-title" stylesheets="@style.css" text="Wordiple features a ranking system, where players are able to ascend and descend ranks to compete for rank titles. Word Rating (WR) are gained on a win, and lost on a loss. Below is a charting of the ranks below:" textAlignment="CENTER" wrapText="true">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="58.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label alignment="CENTER" layoutX="76.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Chi" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.6129629611968994" blue="0.3888888955116272" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.6052631735801697" green="0.229028582572937" blue="0.011208577081561089" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="312.0" layoutY="-7.0" mouseTransparent="true" prefHeight="120.0" prefWidth="820.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Wordiple League">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.9729938507080078" green="1.0" blue="0.18981482088565826" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.5574845671653748" blue="0.14351852238178253" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Line endX="601.0" fill="WHITE" layoutX="726.0" layoutY="251.0" mouseTransparent="true" smooth="false" startX="-586.0" stroke="WHITE" />
-            <Label layoutX="358.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="658.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="958.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.02631578966975212" green="0.02631578966975212" blue="0.02631578966975212" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="1258.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label alignment="CENTER" layoutX="376.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Phi" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.7454484701156616" blue="0.3199999928474426" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.7236841917037964" green="0.265350878238678" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="602.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Lambda" textAlignment="CENTER">
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8157894611358643" green="0.8157894611358643" blue="0.8157894611358643" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5789473652839661" green="0.5789473652839661" blue="0.5789473652839661" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="920.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Epsilon" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.19736842811107635" green="0.19736842811107635" blue="0.19736842811107635" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="1245.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Delta" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.7692901492118835" blue="0.46759259700775146" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.9908179044723511" blue="0.44907405972480774" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label layoutX="58.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="358.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="658.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="958.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label layoutX="1258.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
-            <Label alignment="CENTER" layoutX="8.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Gamma" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.5895061492919922" blue="0.12037037312984467" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.9961685823754789">
-                           <color>
-                              <Color red="0.9222221970558167" green="1.0" blue="0.2222222238779068" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.9222221970558167" green="1.0" blue="0.2222222238779068" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="352.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Beta" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.4861111044883728" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007662835249042145">
-                           <color>
-                              <Color red="0.4861111044883728" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.18518517911434174" green="0.809876561164856" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="637.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Alpha" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.24074074625968933" green="0.8101851940155029" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.24537037312984467" green="0.33341050148010254" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="932.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Sigma" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.43981480598449707" blue="0.43981480598449707" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.06018518656492233" blue="0.06018518656492233" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="1218.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Omega" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="1.0" green="0.4313725531101227" blue="0.4313725531101227" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.1647509578544058">
-                           <color>
-                              <Color red="1.0" green="0.7407407164573669" blue="0.35185185074806213" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.3387447169885847">
-                           <color>
-                              <Color red="0.9773381352424622" green="1.0" blue="0.3700000047683716" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.49828178694158076">
-                           <color>
-                              <Color red="0.3700000047683716" green="1.0" blue="0.4289208650588989" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.6725915392819055">
-                           <color>
-                              <Color red="0.3700000047683716" green="0.9184172749519348" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.8282971916103804">
-                           <color>
-                              <Color red="0.6699280738830566" green="0.3799999952316284" blue="1.0" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.29629629850387573" blue="0.29629629850387573" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="759.0" mouseTransparent="true" prefHeight="11.0" prefWidth="1305.0" styleClass="label-subtitle" stylesheets="@style.css" text="(Click anywhere to close)" textAlignment="CENTER" wrapText="true">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.6431372761726379" green="0.6431372761726379" blue="0.6431372761726379" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.6431372761726379" green="0.6431372761726379" blue="0.6431372761726379" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-         </children>
-      </AnchorPane>
+      <Button fx:id="backgroundButton" layoutX="-322.0" mnemonicParsing="false" opacity="0.0" prefHeight="810.0" prefWidth="1762.0" textFill="TRANSPARENT" />
+      <Line endX="601.0" fill="WHITE" layoutX="713.0" layoutY="129.0" mouseTransparent="true" smooth="false" startX="-586.0" stroke="WHITE" />
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="131.0" mouseTransparent="true" prefHeight="120.0" prefWidth="1305.0" styleClass="label-title" stylesheets="@style.css" text="Wordiple features a ranking system, where players are able to ascend and descend ranks to compete for rank titles. Word Rating (WR) are gained on a win, and lost on a loss. Below is a charting of the ranks below:" textAlignment="CENTER" wrapText="true">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="58.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label alignment="CENTER" layoutX="76.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Chi" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.6129629611968994" blue="0.3888888955116272" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6052631735801697" green="0.229028582572937" blue="0.011208577081561089" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="312.0" layoutY="-7.0" mouseTransparent="true" prefHeight="120.0" prefWidth="820.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Wordiple League">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9729938507080078" green="1.0" blue="0.18981482088565826" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.5574845671653748" blue="0.14351852238178253" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Line endX="601.0" fill="WHITE" layoutX="726.0" layoutY="251.0" mouseTransparent="true" smooth="false" startX="-586.0" stroke="WHITE" />
+      <Label layoutX="358.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="658.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="958.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.02631578966975212" green="0.02631578966975212" blue="0.02631578966975212" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="1258.0" layoutY="270.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label alignment="CENTER" layoutX="376.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Phi" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.7454484701156616" blue="0.3199999928474426" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7236841917037964" green="0.265350878238678" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="602.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Lambda" textAlignment="CENTER">
+         <textFill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8157894611358643" green="0.8157894611358643" blue="0.8157894611358643" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.5789473652839661" green="0.5789473652839661" blue="0.5789473652839661" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="920.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Epsilon" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.19736842811107635" green="0.19736842811107635" blue="0.19736842811107635" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="1245.0" layoutY="435.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Delta" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.7692901492118835" blue="0.46759259700775146" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.9908179044723511" blue="0.44907405972480774" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="58.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="358.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="658.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="958.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label layoutX="1258.0" layoutY="507.0" mouseTransparent="true" prefHeight="165.0" prefWidth="125.0" styleClass="rectangle-chirank-small" stylesheets="@style.css" />
+      <Label alignment="CENTER" layoutX="8.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Gamma" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.5895061492919922" blue="0.12037037312984467" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.9961685823754789">
+                     <color>
+                        <Color red="0.9222221970558167" green="1.0" blue="0.2222222238779068" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9222221970558167" green="1.0" blue="0.2222222238779068" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="352.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Beta" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.4861111044883728" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007662835249042145">
+                     <color>
+                        <Color red="0.4861111044883728" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.18518517911434174" green="0.809876561164856" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="637.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Alpha" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.24074074625968933" green="0.8101851940155029" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.24537037312984467" green="0.33341050148010254" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="932.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Sigma" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.43981480598449707" blue="0.43981480598449707" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.06018518656492233" blue="0.06018518656492233" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="1218.0" layoutY="672.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Omega" textAlignment="CENTER">
+         <textFill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.4313725531101227" blue="0.4313725531101227" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.1647509578544058">
+                     <color>
+                        <Color red="1.0" green="0.7407407164573669" blue="0.35185185074806213" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.3387447169885847">
+                     <color>
+                        <Color red="0.9773381352424622" green="1.0" blue="0.3700000047683716" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.49828178694158076">
+                     <color>
+                        <Color red="0.3700000047683716" green="1.0" blue="0.4289208650588989" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.6725915392819055">
+                     <color>
+                        <Color red="0.3700000047683716" green="0.9184172749519348" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.8282971916103804">
+                     <color>
+                        <Color red="0.6699280738830566" green="0.3799999952316284" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="0.29629629850387573" blue="0.29629629850387573" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="759.0" mouseTransparent="true" prefHeight="11.0" prefWidth="1305.0" styleClass="label-subtitle" stylesheets="@style.css" text="(Click anywhere to close)" textAlignment="CENTER" wrapText="true">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6431372761726379" green="0.6431372761726379" blue="0.6431372761726379" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6431372761726379" green="0.6431372761726379" blue="0.6431372761726379" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
 </AnchorPane>

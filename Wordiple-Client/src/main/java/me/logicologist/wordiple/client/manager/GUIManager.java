@@ -147,7 +147,7 @@ public class GUIManager extends Application {
 
     public RankOverlayController showRankOverlay(Runnable runAfter) {
         try {
-            OverlayController overlayController = showOverlay(false);
+            OverlayController overlayController = showOverlay(true);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
             fxmlLoader.load();
             RankOverlayController rankOverlayController = fxmlLoader.getController();

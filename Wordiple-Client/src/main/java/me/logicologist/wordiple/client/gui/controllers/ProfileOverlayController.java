@@ -78,9 +78,9 @@ public class ProfileOverlayController extends AttachableAdapter {
         midAction = true;
         Duration rotateDuration = Duration.seconds(0.5);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), -800)), // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), -200)), // initial rotate
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 0)), // initial rotate
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), 0)), // initial rotate
+                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutYProperty(), 0)), // initial rotate
                 new KeyFrame(rotateDuration, new KeyValue(movablePane.opacityProperty(), 1)) // initial rotate
         );
         timeline.play();
@@ -98,7 +98,7 @@ public class ProfileOverlayController extends AttachableAdapter {
                 new KeyFrame(Duration.seconds(0.4), e -> {
                     this.overlayController.transitionOut();
                 }),
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.layoutYProperty(), 800)), // initial rotate
+                new KeyFrame(rotateDuration, new KeyValue(movablePane.layoutYProperty(), 200)), // initial rotate
                 new KeyFrame(rotateDuration, new KeyValue(movablePane.opacityProperty(), 0)) // initial rotate
         );
         timeline.play();
