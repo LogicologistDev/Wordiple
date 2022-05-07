@@ -6,10 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.*;
+import me.logicologist.wordiple.client.packets.StatInfoPacket;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class GUIManager extends Application {
@@ -163,13 +167,28 @@ public class GUIManager extends Application {
 
     public ProfileOverlayController showProfileOverlay(String username, Runnable runAfter) {
         try {
-            OverlayController overlayController = showOverlay(true);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/profileoverlay.fxml"));
             fxmlLoader.load();
             ProfileOverlayController profileOverlayController = fxmlLoader.getController();
-            profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
-            profileOverlayController.attach();
-            profileOverlayController.transitionIn(overlayController, runAfter);
+            LoadScreenController loadScreenController = showLoadScreen("Fetching profile...");
+            PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
+                packet.getPacketType().getArguments().setValues("username", username)
+            ).waitForResponse(packet -> {
+                loadScreenController.remove(() -> {
+                    OverlayController overlayController = showOverlay(true);
+                    profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
+                    profileOverlayController.attach();
+                    profileOverlayController.transitionIn(overlayController, runAfter);
+                });
+                return false;
+            }, () -> {
+                loadScreenController.remove(() -> {
+                    LoadScreenController errorPopup = showLoadScreen("Error fetching data!");
+                    WordipleClient.getExecutor().schedule(() -> {
+                        errorPopup.remove(null);
+                    }, 2, TimeUnit.SECONDS);
+                });
+            }, 3, TimeUnit.SECONDS);
             return profileOverlayController;
         } catch (Exception ex) {
             ex.printStackTrace();
