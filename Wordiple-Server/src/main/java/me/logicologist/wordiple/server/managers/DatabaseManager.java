@@ -243,4 +243,19 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    public UUID getUUID(String email) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT uuid FROM users WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+
+            return UUID.fromString(rs.getString("uuid"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -42,17 +42,7 @@ public class SessionManager {
             return null;
         }
         WordipleUser user = DatabaseManager.instance.constructWordipleUser(username, socket);
-        List<UUID> invalidSessionIds = new ArrayList<>();
-        sessions.forEach((k, v) -> {
-            if (v.getId().equals(user.getId())) invalidSessionIds.add(k);
-        });
-        LogoutPacket logoutPacket = PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class);
-        for (UUID sessionId : invalidSessionIds) {
-            WordipleUser wordipleUser = sessions.get(sessionId);
-            logoutPacket.sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());
-            DatabaseManager.instance.saveUser(wordipleUser);
-            this.sessions.remove(sessionId);
-        }
+        logoutMatchingUsers(user.getId());
         UUID newSessionId;
         do {
             newSessionId = UUID.randomUUID();
@@ -198,6 +188,20 @@ public class SessionManager {
         WordipleUser wordipleUser = new WordipleUser(packetArguments.get("email", String.class), packetArguments.get("username", String.class));
         DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password", String.class));
         return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class), packetArguments.getPacketHolder());
+    }
+
+    public void logoutMatchingUsers(UUID uuid) {
+        List<UUID> invalidSessionIds = new ArrayList<>();
+        sessions.forEach((k, v) -> {
+            if (v.getId().equals(uuid)) invalidSessionIds.add(k);
+        });
+        LogoutPacket logoutPacket = PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class);
+        for (UUID sessionId : invalidSessionIds) {
+            WordipleUser wordipleUser = sessions.get(sessionId);
+            logoutPacket.sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), wordipleUser.getOutputStream());
+            DatabaseManager.instance.saveUser(wordipleUser);
+            this.sessions.remove(sessionId);
+        }
     }
 
     public static SessionManager getInstance() {
