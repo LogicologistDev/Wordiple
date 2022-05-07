@@ -179,7 +179,7 @@ public class GUIManager extends Application {
                     profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
                     profileOverlayController.attach();
                     profileOverlayController.transitionIn(overlayController, runAfter);
-                    controller.accept(profileOverlayController);
+                    if (controller != null) controller.accept(profileOverlayController);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -188,9 +188,7 @@ public class GUIManager extends Application {
         }, () -> {
             loadScreenController.remove(() -> {
                 LoadScreenController errorPopup = showLoadScreen("Error fetching data!");
-                WordipleClient.getExecutor().schedule(() -> {
-                    errorPopup.remove(null);
-                }, 2, TimeUnit.SECONDS);
+                WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
             });
         }, 3, TimeUnit.SECONDS);
     }

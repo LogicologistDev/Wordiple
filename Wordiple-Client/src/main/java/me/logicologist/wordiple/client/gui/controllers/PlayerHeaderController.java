@@ -56,7 +56,7 @@ public class PlayerHeaderController extends AttachableAdapter {
 
             GUIManager.getInstance().showProfileOverlay(SessionManager.getInstance().getUsername(), () -> {
                 midAction = false;
-            });
+            }, null);
         });
     }
 
