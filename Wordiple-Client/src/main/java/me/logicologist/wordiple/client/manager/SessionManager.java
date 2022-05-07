@@ -3,6 +3,7 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.client.WordipleClient;
+import me.logicologist.wordiple.client.gui.controllers.PlayerHeaderController;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -46,6 +47,10 @@ public class SessionManager {
 
     public void setLocalSessionID(UUID localSessionID) {
         try {
+            if (localSessionID == null) {
+                this.loggedIn = false;
+                PlayerHeaderController.instance = null;
+            }
             Properties properties = new Properties();
             if (localSessionID != null) {
                 properties.setProperty("sessionID", localSessionID.toString());

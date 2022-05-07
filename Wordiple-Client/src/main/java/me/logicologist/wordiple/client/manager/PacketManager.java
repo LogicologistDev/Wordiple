@@ -50,9 +50,12 @@ public class PacketManager {
             if (!manager.isLoggedIn()) return;
 
             GUIManager.addReadyListener(instance -> {
-                instance.showMainScreen(false);
-                LoadScreenController lsc = instance.showLoadScreen("Connection has been lost!");
-                WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
+                instance.startSwipeTransition(null, () -> {
+                    instance.showMainScreen(false);
+                    LoadScreenController lsc = instance.showLoadScreen("Connection has been lost!");
+                    manager.setLocalSessionID(null);
+                    WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
+                });
             });
         });
     }
