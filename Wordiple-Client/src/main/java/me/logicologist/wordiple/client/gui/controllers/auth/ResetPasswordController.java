@@ -79,6 +79,7 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
                     if (!x.get("success", Boolean.class)) {
                         errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                        midAction = false;
                         return;
                     }
                     super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
