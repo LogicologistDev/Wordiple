@@ -78,6 +78,8 @@ public class ProfileOverlayController extends AttachableAdapter {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
+        movablePane.setLayoutY(-200);
+        movablePane.setOpacity(0);
         backgroundButton.setOnAction(x -> {
             if (midAction) return;
             midAction = true;

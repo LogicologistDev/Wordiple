@@ -19,9 +19,6 @@ public class OverlayController extends AttachableAdapter {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
-    }
-
-    public void addAsInvisible() {
         movablePane.setOpacity(0);
     }
 

@@ -205,6 +205,7 @@ public class GUIManager extends Application {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/profileoverlay.fxml"));
                     fxmlLoader.load();
                     ProfileOverlayController profileOverlayController = fxmlLoader.getController();
+                    profileOverlayController.setData(packet);
                     OverlayController overlayController = showOverlay(true);
                     profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
                     profileOverlayController.attach();
@@ -235,7 +236,6 @@ public class GUIManager extends Application {
                 overlayController.transitionIn();
                 return overlayController;
             }
-            overlayController.addAsInvisible();
             return overlayController;
         } catch (Exception ex) {
             ex.printStackTrace();
