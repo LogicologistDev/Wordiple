@@ -165,35 +165,34 @@ public class GUIManager extends Application {
         return null;
     }
 
-    public ProfileOverlayController showProfileOverlay(String username, Runnable runAfter) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/profileoverlay.fxml"));
-            fxmlLoader.load();
-            ProfileOverlayController profileOverlayController = fxmlLoader.getController();
-            LoadScreenController loadScreenController = showLoadScreen("Fetching profile...");
-            PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
+    public void showProfileOverlay(String username, Runnable runAfter, Consumer<ProfileOverlayController> controller) {
+        LoadScreenController loadScreenController = showLoadScreen("Fetching profile...");
+        PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
                 packet.getPacketType().getArguments().setValues("username", username)
-            ).waitForResponse(packet -> {
-                loadScreenController.remove(() -> {
+        ).waitForResponse(packet -> {
+            loadScreenController.remove(() -> {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/profileoverlay.fxml"));
+                    fxmlLoader.load();
+                    ProfileOverlayController profileOverlayController = fxmlLoader.getController();
                     OverlayController overlayController = showOverlay(true);
                     profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
                     profileOverlayController.attach();
                     profileOverlayController.transitionIn(overlayController, runAfter);
-                });
-                return false;
-            }, () -> {
-                loadScreenController.remove(() -> {
-                    LoadScreenController errorPopup = showLoadScreen("Error fetching data!");
-                    WordipleClient.getExecutor().schedule(() -> {
-                        errorPopup.remove(null);
-                    }, 2, TimeUnit.SECONDS);
-                });
-            }, 3, TimeUnit.SECONDS);
-            return profileOverlayController;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
+                    controller.accept(profileOverlayController);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            return false;
+        }, () -> {
+            loadScreenController.remove(() -> {
+                LoadScreenController errorPopup = showLoadScreen("Error fetching data!");
+                WordipleClient.getExecutor().schedule(() -> {
+                    errorPopup.remove(null);
+                }, 2, TimeUnit.SECONDS);
+            });
+        }, 3, TimeUnit.SECONDS);
     }
 
     public OverlayController showOverlay(boolean visible) {
