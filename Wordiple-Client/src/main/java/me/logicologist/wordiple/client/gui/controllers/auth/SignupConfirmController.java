@@ -81,8 +81,9 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                 return;
             }
 
+            if (midAction) return;
+            midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Verifying code...");
-
             PacketManager.getInstance().getSocket().getPacket(SignupConfirmPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("code", codeField.getText())
                     .setValues("email", this.email)
@@ -93,11 +94,10 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                         errorMessageLabel.setText("The code you entered is invalid. Please try again.");
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                        midAction = false;
                     });
                     return false;
                 }
-                if (midAction) return false;
-                midAction = true;
                 SessionManager.getInstance().setLocalSessionID(uuidResponse);
                 Platform.runLater(() -> {
                     PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
@@ -119,6 +119,7 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                                 errorMessageLabel.setText("Unable to verify session ID. Please try again.");
                                 loadScreen.remove(null);
                                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                                midAction = false;
                             }, 5, TimeUnit.SECONDS);
                 });
                 return false;
@@ -126,6 +127,7 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                 errorMessageLabel.setText("Timed out. Please try again.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                midAction = false;
             }), 10, TimeUnit.SECONDS);
         });
     }

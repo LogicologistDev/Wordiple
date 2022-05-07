@@ -56,6 +56,8 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }
+            if (midAction) return;
+            midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Sending instructions...");
             PacketManager.getInstance().getSocket().getPacket(ForgotUrPasswordPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("email", emailField.getText())
@@ -67,17 +69,16 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                         loadScreen.remove(null);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                     });
+                    midAction = false;
                     return false;
                 }
-                if (midAction) return false;
-                midAction = true;
-
                 loadScreen.remove(() -> Platform.runLater(() -> super.transitionOut(() -> GUIManager.getInstance().showResetPasswordScreen(true, emailField.getText(), code))));
                 return false;
             }, () -> Platform.runLater(() -> {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                midAction = false;
             }), 10, TimeUnit.SECONDS);
         });
     }

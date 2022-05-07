@@ -43,6 +43,7 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
     private boolean midAction = false;
 
     private String email = null;
+    private String code = null;
 
 
     @Override
@@ -67,6 +68,8 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }
+            if (midAction) return;
+            midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Resetting...");
             PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("email", email).setValues("code", codeField.getText()).setValues("password", passwordField.getText())
@@ -85,6 +88,7 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
                 loadScreen.remove(null);
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                midAction = false;
             }), 10, TimeUnit.SECONDS);
         });
     }
@@ -93,5 +97,9 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
         if (this.email != null) return;
 
         this.email = email;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
