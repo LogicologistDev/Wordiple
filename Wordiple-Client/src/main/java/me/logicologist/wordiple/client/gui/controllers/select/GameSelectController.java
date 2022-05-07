@@ -1,8 +1,10 @@
-package me.logicologist.wordiple.client.gui.controllers;
+package me.logicologist.wordiple.client.gui.controllers.select;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
+import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 

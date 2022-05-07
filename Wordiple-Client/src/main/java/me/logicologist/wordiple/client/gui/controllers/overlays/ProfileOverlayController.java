@@ -1,4 +1,4 @@
-package me.logicologist.wordiple.client.gui.controllers;
+package me.logicologist.wordiple.client.gui.controllers.overlays;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.animation.KeyFrame;
@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
 
 import java.net.URL;
 import java.util.ResourceBundle;

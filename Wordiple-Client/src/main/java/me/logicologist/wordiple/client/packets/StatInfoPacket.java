@@ -13,24 +13,7 @@ public class StatInfoPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
-        String userName = arguments.get("username", String.class);
 
-        this.sendPacket(packet -> arguments.replace(this.getArguments())
-                .setValues("games_played", "")
-                .setValues("wins", "")
-                .setValues("losses", "")
-                .setValues("playtime", "")
-                .setValues("curren_session", "")
-                .setValues("season", "")
-                .setValues("current_rank", "")
-                .setValues("current_rating", "")
-                .setValues("highest_rank", "")
-                .setValues("highest_rating", "")
-                .setValues("solve_time", "")
-                .setValues("opener", "")
-                .setValues("level", "")
-                .setValues("total_xp", "")
-                .setValues("guesses", ""));
     }
 
     @Override

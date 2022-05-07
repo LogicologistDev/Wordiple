@@ -1,4 +1,4 @@
-package me.logicologist.wordiple.client.gui.controllers;
+package me.logicologist.wordiple.client.gui.controllers.transitions;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;

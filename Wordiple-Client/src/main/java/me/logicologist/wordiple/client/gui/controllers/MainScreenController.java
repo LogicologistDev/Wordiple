@@ -3,6 +3,7 @@ package me.logicologist.wordiple.client.gui.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
 
 import java.net.URL;

@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.ProfileOverlayController">
+<AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController">
    <children>
       <Button fx:id="backgroundButton" layoutX="237.0" layoutY="113.0" mnemonicParsing="false" opacity="0.7" prefHeight="585.0" prefWidth="966.0" styleClass="button-overlay" stylesheets="@style.css" textFill="TRANSPARENT" />
       <Label fx:id="usernameLabel" layoutX="260.0" layoutY="140.0" mouseTransparent="true" styleClass="label-40-light" stylesheets="@style.css" text="Logicologist">
