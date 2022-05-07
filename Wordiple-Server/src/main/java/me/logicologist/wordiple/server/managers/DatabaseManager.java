@@ -5,8 +5,6 @@ import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.File;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;

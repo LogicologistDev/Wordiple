@@ -12,8 +12,8 @@ import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalT
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.packets.auth.LoginPacket;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
+import me.logicologist.wordiple.client.packets.auth.LoginPacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;

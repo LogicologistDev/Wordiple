@@ -5,8 +5,6 @@ import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.server.managers.SessionManager;
 
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.UUID;
 
 public class LoginPacket extends PacketAdapter implements PacketType {

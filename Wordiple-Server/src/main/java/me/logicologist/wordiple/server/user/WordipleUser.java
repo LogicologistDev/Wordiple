@@ -4,11 +4,7 @@ import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.util.UUID;
 
 public class WordipleUser {

@@ -1,6 +1,5 @@
 package me.logicologist.wordiple.server.packets.auth;
 
-import com.jcraft.jsch.Session;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;

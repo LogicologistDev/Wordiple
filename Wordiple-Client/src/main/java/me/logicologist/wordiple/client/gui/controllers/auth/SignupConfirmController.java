@@ -7,13 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
-import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalTransitionAdapter;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
+import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.packets.auth.SignupConfirmPacket;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
+import me.logicologist.wordiple.client.packets.auth.SignupConfirmPacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;
