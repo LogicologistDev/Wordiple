@@ -22,10 +22,12 @@ public class SessionManager {
     private static SessionManager instance;
     private final HashMap<UUID, WordipleUser> sessions;
     private final HashMap<String, PacketArguments> signupSessions;
+    private final HashMap<String, String> resetPasswords;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
         this.signupSessions = new HashMap<>();
+        this.resetPasswords = new HashMap<>();
         instance = this;
     }
 
@@ -158,7 +160,7 @@ public class SessionManager {
             );
             message.setSubject("Wordiple Reset Password");
             message.setText("Hello, " + name + "!\n" +
-                    "You have requested to reset your password for your Wordiple account! In order to reset your password, please type in this verification code below:\n" + code + "\n" +
+                    "You have requested to reset your password for your Wordiple account! In order to reset your password, please type in this verification code below:\n" + code + " (This code will expire in 10 minutes.)\n" +
                     "\n" +
                     "If you have not requested to reset your password or do not recognise this action, simply ignore this email.\n" +
                     "\n" +
@@ -176,6 +178,8 @@ public class SessionManager {
                 }
             });
             WordipleServer.getLogger().info("Email sent!");
+            this.resetPasswords.put(email, code.toString());
+            WordipleServer.getExecutor().schedule(() -> resetPasswords.remove(email), 10 * 60 * 1000, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -210,5 +214,12 @@ public class SessionManager {
 
     public void close() {
         this.sessions.forEach((k, v) -> DatabaseManager.instance.saveUser(v));
+    }
+
+    public boolean isCodeValid(String email, String code) {
+        boolean success = resetPasswords.get(email) != null && resetPasswords.get(email).equals(code);
+        if (success) resetPasswords.remove(email);
+
+        return success;
     }
 }
