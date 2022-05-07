@@ -28,7 +28,7 @@ public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
         }
         boolean validSalt = DatabaseManager.instance.setPassword(packetArguments.get("email", String.class), packetArguments.get("salt", String.class), packetArguments.get("password_hash", String.class));
         if (!validSalt) {
-            this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", "Invalid salt. Please try again."));
+            this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("response", "Security feature violation. Please re-install the OFFICIAL client."));
             return;
         }
         manager.logoutMatchingUsers(DatabaseManager.instance.getUUID(packetArguments.get("email", String.class)));

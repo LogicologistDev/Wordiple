@@ -81,7 +81,6 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
                 salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
             }
             String passwordHash = Hashing.sha256().hashString(passwordField.getText() + salt, Charset.defaultCharset()).toString();
-
             PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                     .setValues("email", email)
                     .setValues("code", codeField.getText())
@@ -90,8 +89,9 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             ).waitForResponse(x -> {
                 Platform.runLater(() -> {
                     loadScreen.remove(null);
-                    if (!x.get("success", Boolean.class)) {
-                        errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
+                    String response = x.get("response", String.class);
+                    if (!response.equals("Success")) {
+                        errorMessageLabel.setText(response);
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                         midAction = false;
                         return;

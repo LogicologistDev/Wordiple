@@ -76,11 +76,8 @@ public class SessionManager {
         if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)))
             return "Username already taken.";
 
-        if (packetArguments.get("password", String.class).length() <= 5)
-            return "Invalid password.";
-
         if (!validSalt.matcher(packetArguments.get("salt", String.class)).matches()) {
-            return "Security feature violation.";
+            return "Security feature violation. Please re-install the OFFICIAL client.";
         }
 
         // Mail properties to set for sending an email

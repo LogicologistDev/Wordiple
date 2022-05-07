@@ -91,6 +91,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                         new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                         midAction = false;
                     });
+                    return false;
                 }
                 PacketManager.getInstance().getSocket().getPacket(LoginPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                         .setValues("username", usernameField.getText())
