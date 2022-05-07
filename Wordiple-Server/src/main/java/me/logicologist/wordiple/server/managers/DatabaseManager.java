@@ -101,9 +101,9 @@ public class DatabaseManager {
             }
             String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
             PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ?, passwordsalt = ? WHERE email = ?");
-            ps.setString(1, email);
-            ps.setString(2, hashed);
-            ps.setString(3, salt.toString());
+            ps.setString(1, hashed);
+            ps.setString(2, salt.toString());
+            ps.setString(3, email);
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
