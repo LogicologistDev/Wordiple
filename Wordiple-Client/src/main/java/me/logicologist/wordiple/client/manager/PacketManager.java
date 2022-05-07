@@ -54,7 +54,7 @@ public class PacketManager {
                 instance.startSwipeTransition(null, () -> {
                     instance.showMainScreen(false);
                     LoadScreenController lsc = instance.showLoadScreen("Connection has been lost!");
-                    manager.setLocalSessionID(null);
+                    manager.setLocalSessionID(null, false);
                     WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
                 });
             });

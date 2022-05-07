@@ -36,7 +36,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             midAction = true;
 
             LoadScreenController controller = GUIManager.getInstance().showLoadScreen("Logging out...");
-            SessionManager.getInstance().setLocalSessionID(null);
+            SessionManager.getInstance().setLocalSessionID(null, true);
             SessionManager.getInstance().setLoggedIn(false);
 
             controller.remove(() -> {

@@ -152,9 +152,9 @@ public class ProfileOverlayController extends AttachableAdapter {
         currentSessionField.setText(arguments.get("current_session", String.class));
         seasonField.setText(arguments.get("season", String.class));
         currentRankField.setText(arguments.get("current_rank", String.class));
-        currentRatingField.setText(Utils.formatNumber(arguments.get("current_rating", Integer.class)));
+        currentRatingField.setText(arguments.get("current_rating", String.class));
         highestRankField.setText(arguments.get("highest_rank", String.class));
-        highestRatingField.setText(Utils.formatNumber(arguments.get("highest_rating", Integer.class)));
+        highestRatingField.setText(arguments.get("highest_rating", String.class));
         solveTimeField.setText(arguments.get("solve_time", String.class));
         openerField.setText(arguments.get("opener", String.class));
         guessesField.setText(arguments.get("guesses", String.class));

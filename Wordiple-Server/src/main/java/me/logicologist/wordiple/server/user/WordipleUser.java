@@ -14,6 +14,7 @@ public class WordipleUser {
     private final UUID id;
     private String username;
     private int rating;
+    private int highestRating;
     private int level;
     private int experience;
     private int wins;
@@ -25,13 +26,16 @@ public class WordipleUser {
     private boolean onlineBan;
     private boolean globalBan;
     private int guesses;
+    private int rank;
+    private int highestRank;
     private PacketHolder socket;
 
-    public WordipleUser(String email, UUID id, String username, int rating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, PacketHolder socket) {
+    public WordipleUser(String email, UUID id, String username, int rating, int highestRating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, int guesses, int rank, int highestRank, PacketHolder socket) {
         this.email = email;
         this.id = id;
         this.username = username;
         this.rating = rating;
+        this.highestRating = highestRating;
         this.level = level;
         this.experience = experience;
         this.wins = wins;
@@ -41,11 +45,14 @@ public class WordipleUser {
         this.competitiveBan = competitiveBan;
         this.onlineBan = onlineBan;
         this.globalBan = globalBan;
+        this.guesses = guesses;
+        this.rank = rank;
+        this.highestRank = highestRank;
         this.socket = socket;
     }
 
     public WordipleUser(String email, String username) {
-        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, false, false, false, null);
+        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, 0, 0, 0, null);
     }
 
     // Generate getters and setters
@@ -153,11 +160,11 @@ public class WordipleUser {
     }
 
     public int getGuesses() {
-        return 0;
+        return this.guesses;
     }
 
     public void setGuesses(int guesses) {
-
+        this.guesses = guesses;
     }
 
     public ObjectOutputStream getOutputStream() {
@@ -190,5 +197,29 @@ public class WordipleUser {
             total += Math.min((int) ((Math.pow(Math.log(i * 10) / Math.log(2), 2)) * Math.sqrt(i) + 100), 2000);
         }
         return total;
+    }
+
+    public int getHighestRank() {
+        return this.highestRank;
+    }
+
+    public void setHighestRank(int highestRank) {
+        this.highestRank = highestRank;
+    }
+
+    public int getRank() {
+        return this.rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getHighestRating() {
+        return this.highestRating;
+    }
+
+    public void setHighestRating(int highestRating) {
+        this.highestRating = highestRating;
     }
 }

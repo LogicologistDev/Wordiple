@@ -106,7 +106,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                         });
                         return false;
                     }
-                    SessionManager.getInstance().setLocalSessionID(uuidResponse);
+                    SessionManager.getInstance().setLocalSessionID(uuidResponse, true);
                     Platform.runLater(() -> {
                         PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
                                 .sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(uuidResponse))

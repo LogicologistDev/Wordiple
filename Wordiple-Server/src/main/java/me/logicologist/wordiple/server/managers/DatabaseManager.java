@@ -116,6 +116,7 @@ public class DatabaseManager {
                     UUID.fromString(rs.getString("uuid")),
                     rs.getString("username"),
                     rs.getInt("rating"),
+                    rs.getInt("highest_rating"),
                     rs.getInt("level"),
                     rs.getInt("experience"),
                     rs.getInt("wins"),
@@ -125,6 +126,9 @@ public class DatabaseManager {
                     rs.getBoolean("competitiveban"),
                     rs.getBoolean("onlineban"),
                     rs.getBoolean("globalban"),
+                    rs.getInt("guesses"),
+                    rs.getInt("rank"),
+                    rs.getInt("highest_rank"),
                     socket
             );
         } catch (Exception ex) {
@@ -137,18 +141,22 @@ public class DatabaseManager {
         try {
             user.setPlaytime(user.getPlaytime() + (user.getLoggedInTime() == null ? 0 : System.currentTimeMillis() - user.getLoggedInTime().getTime()));
             user.setLoggedInTime(null);
-            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=? WHERE uuid=?");
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, highest_rating =?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=?, guesses=?, rank=?, highest_rank=? WHERE uuid=?");
             ps.setInt(1, user.getRating());
-            ps.setInt(2, user.getLevel());
-            ps.setInt(3, user.getExperience());
-            ps.setInt(4, user.getWins());
-            ps.setInt(5, user.getGamesPlayed());
-            ps.setLong(6, user.getPlaytime());
-            ps.setLong(7, user.getBannedTime());
-            ps.setBoolean(8, user.isCompetitiveBan());
-            ps.setBoolean(9, user.isOnlineBan());
-            ps.setBoolean(10, user.isGlobalBan());
-            ps.setString(11, user.getId().toString());
+            ps.setInt(2, user.getHighestRating());
+            ps.setInt(3, user.getLevel());
+            ps.setInt(4, user.getExperience());
+            ps.setInt(5, user.getWins());
+            ps.setInt(6, user.getGamesPlayed());
+            ps.setLong(7, user.getPlaytime());
+            ps.setLong(8, user.getBannedTime());
+            ps.setBoolean(9, user.isCompetitiveBan());
+            ps.setBoolean(10, user.isOnlineBan());
+            ps.setBoolean(11, user.isGlobalBan());
+            ps.setInt(11, user.getGuesses());
+            ps.setInt(12, user.getRank());
+            ps.setInt(13, user.getHighestRank());
+            ps.setString(14, user.getId().toString());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

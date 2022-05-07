@@ -1,4 +1,4 @@
-package me.logicologist.wordiple.common.rank;
+package me.logicologist.wordiple.server.rank;
 
 public class Rank {
 
@@ -28,5 +28,9 @@ public class Rank {
 
     public int getMaximum() {
         return this.maximum;
+    }
+
+    public boolean isValid(int rank) {
+        return rank >= this.minimum && (this.maximum == -1 || rank <= this.maximum);
     }
 }
