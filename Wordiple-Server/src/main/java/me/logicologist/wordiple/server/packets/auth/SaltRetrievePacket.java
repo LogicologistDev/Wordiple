@@ -27,7 +27,7 @@ public class SaltRetrievePacket extends PacketAdapter implements PacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setValues("username", String.class)
-                .setValues("salt", String.class);
+                .setArgument("username", String.class)
+                .setArgument("salt", String.class);
     }
 }
