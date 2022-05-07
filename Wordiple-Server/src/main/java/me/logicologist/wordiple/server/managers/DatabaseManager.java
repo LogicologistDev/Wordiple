@@ -100,7 +100,7 @@ public class DatabaseManager {
                 salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
             }
             String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
-            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ? AND SET passwordsalt = ? WHERE username=?");
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ?, passwordsalt = ? WHERE username = ?");
             ps.setString(1, username);
             ps.setString(2, hashed);
             ps.setString(3, salt.toString());
