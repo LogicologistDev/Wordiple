@@ -1,4 +1,4 @@
-package me.logicologist.wordiple.client.gui.controllers;
+package me.logicologist.wordiple.client.gui.controllers.auth;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
+import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalTransitionAdapter;
+import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.packets.auth.SignupPacket;

@@ -8,9 +8,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.*;
+import me.logicologist.wordiple.client.gui.controllers.auth.LoginController;
+import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
+import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
+import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
+import me.logicologist.wordiple.client.gui.controllers.auth.SignupConfirmController;
+import me.logicologist.wordiple.client.gui.controllers.auth.SignupController;
+import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
+import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
+import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
 import me.logicologist.wordiple.client.packets.StatInfoPacket;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

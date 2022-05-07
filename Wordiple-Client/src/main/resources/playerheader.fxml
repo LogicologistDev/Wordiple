@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 
-<AnchorPane fx:id="headerPane" prefHeight="238.0" prefWidth="1440.0" styleClass="bar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.PlayerHeaderController">
+<AnchorPane fx:id="headerPane" prefHeight="238.0" prefWidth="1440.0" styleClass="bar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController">
    <children>
       <Button fx:id="profileButton" layoutY="-97.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="238.0" prefWidth="1440.0" styleClass="button-overlay" stylesheets="@style.css" />
       <Label fx:id="nameLabel" alignment="CENTER" layoutX="516.0" layoutY="22.0" mouseTransparent="true" prefHeight="72.0" prefWidth="409.0" styleClass="label-level" stylesheets="@style.css" text="N/A">
