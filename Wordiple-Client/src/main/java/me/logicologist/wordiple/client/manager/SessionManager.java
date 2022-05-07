@@ -1,5 +1,7 @@
 package me.logicologist.wordiple.client.manager;
 
+import com.olziedev.olziesocket.framework.PacketArguments;
+import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.client.WordipleClient;
 
 import java.io.File;
@@ -93,6 +95,14 @@ public class SessionManager {
 
     public void setNeededXp(int neededXp) {
         this.neededXp = neededXp;
+    }
+
+    public void load(PacketArguments arguments, String username) {
+        this.setCurrentXp(arguments.get("xp", Integer.class));
+        this.setNeededXp(arguments.get("neededXp", Integer.class));
+        this.setLevel(arguments.get("level", Integer.class));
+        this.setUsername(username);
+        this.setLoggedIn(true);
     }
 
     public static SessionManager getInstance() {

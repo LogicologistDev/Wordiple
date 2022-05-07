@@ -17,17 +17,18 @@ public class PacketManager {
     private final OlzieSocket socket;
 
     public PacketManager() {
-        SocketConfig config = new SocketConfig("157.90.218.221", 11184, "", false, new SocketConfig.SocketHeartbeatConfig(2000, 20));
+        SocketConfig config = new SocketConfig("157.90.218.221", 11184, "", false, new SocketConfig.SocketHeartbeatConfig(2000, 20), (short) 0);
         this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
         instance = this;
     }
 
     public void load() {
+        SessionManager manager = SessionManager.getInstance();
         this.socket.registerPackets();
         this.socket.connect(true, socket -> {
             if (GUIManager.getInstance() != null) return; // game already launched.
 
-            UUID id = SessionManager.getInstance().getLocalSessionID();
+            UUID id = manager.getLocalSessionID();
             this.socket.getPacket(UserInfoPacket.class)
                     .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", id))
                     .waitForResponse(response -> {
@@ -36,20 +37,15 @@ public class PacketManager {
                             GUIManager.addReadyListener(instance -> instance.showLoginScreen(true));
                             return false;
                         }
-                        SessionManager.getInstance().setCurrentXp(response.get("xp", Integer.class));
-                        SessionManager.getInstance().setNeededXp(response.get("neededXp", Integer.class));
-                        SessionManager.getInstance().setLevel(response.get("level", Integer.class));
-                        SessionManager.getInstance().setUsername(username);
-
+                        manager.load(response, username);
                         GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> {
                             GUIManager.getInstance().showGameSelectScreen(false);
                         }));
-                        SessionManager.getInstance().setLoggedIn(true);
                         return false;
                     }, null, 5, TimeUnit.SECONDS);
         });
         this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> {
-            if (!SessionManager.getInstance().isLoggedIn()) return;
+            if (!manager.isLoggedIn()) return;
 
             GUIManager.addReadyListener(instance -> {
                 instance.showMainScreen(false);

@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
-import me.logicologist.wordiple.client.packets.SignupPacket;
+import me.logicologist.wordiple.client.packets.auth.SignupPacket;
 
 import java.net.URL;
 import java.util.ResourceBundle;

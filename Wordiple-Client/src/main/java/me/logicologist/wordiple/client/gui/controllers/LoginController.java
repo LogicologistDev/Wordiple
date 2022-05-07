@@ -10,7 +10,7 @@ import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.packets.LoginPacket;
+import me.logicologist.wordiple.client.packets.auth.LoginPacket;
 import me.logicologist.wordiple.client.packets.UserInfoPacket;
 
 import java.net.URL;
@@ -93,12 +93,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                                     GUIManager.addReadyListener(instance -> instance.showLoginScreen(true));
                                     return false;
                                 }
-                                SessionManager.getInstance().setCurrentXp(response.get("xp", Integer.class));
-                                SessionManager.getInstance().setNeededXp(response.get("neededXp", Integer.class));
-                                SessionManager.getInstance().setLevel(response.get("level", Integer.class));
-                                SessionManager.getInstance().setUsername(username);
-
-                                SessionManager.getInstance().setLoggedIn(true);
+                                SessionManager.getInstance().load(response, username);
                                 loadScreen.remove(() -> {
                                     super.transitionOut(() -> {
                                         GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));
