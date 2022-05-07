@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.GameSelectController">
    <children>
       <AnchorPane fx:id="movablePane" prefHeight="810.0" prefWidth="1440.0">
          <children>
-            <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1301.0" layoutY="767.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
+            <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1276.0" layoutY="767.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="409.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-casual" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="189.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="299.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="519.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="629.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
             <Button fx:id="rankButton" layoutX="-162.0" layoutY="210.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="498.0" prefWidth="498.0" styleClass="button-overlay-right" stylesheets="@style.css" />
-            <Label layoutX="49.0" layoutY="244.0" mouseTransparent="true" prefHeight="330.0" prefWidth="250.0" styleClass="rectangle-chirank" stylesheets="@style.css" />
-            <Label alignment="CENTER" layoutX="130.0" layoutY="614.0" mouseTransparent="true" styleClass="label-level" stylesheets="@style.css" text="Chi">
+            <Label layoutX="28.0" layoutY="243.0" mouseTransparent="true" prefHeight="330.0" prefWidth="250.0" styleClass="rectangle-chirank" stylesheets="@style.css" />
+            <Label alignment="CENTER" layoutX="63.0" layoutY="619.0" mouseTransparent="true" styleClass="label-level" stylesheets="@style.css" text="Delta I" textAlignment="CENTER">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -33,7 +38,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" layoutX="134.0" layoutY="587.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Rank">
+            <Label alignment="CENTER" layoutX="112.0" layoutY="591.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Rank">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -51,6 +56,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
+            <ProgressBar layoutX="77.0" layoutY="449.0" mouseTransparent="true" prefHeight="18.0" prefWidth="470.0" progress="0.0" rotate="-90.0" styleClass="progress-bar-rank" stylesheets="@style.css" />
          </children>
       </AnchorPane>
    </children>
