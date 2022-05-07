@@ -58,7 +58,7 @@ public class SessionManager {
                 properties.setProperty("sessionID", localSessionID.toString());
                 this.loggedIn = true;
             }
-            properties.store(Files.newOutputStream(file.toPath()), "Please do not give share/touch this file.");
+            properties.store(Files.newOutputStream(file.toPath()), "Please do not share/touch this file.");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

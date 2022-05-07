@@ -32,7 +32,7 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
             return;
         }
         ObjectOutputStream oldStream = wordipleUser.getOutputStream();
-        if (!oldStream.equals(PacketManager.getInstance().getSocket().getOutputStream(arguments.getPacketHolder()))) {
+        if (!PacketManager.getInstance().getSocket().getOutputStream(arguments.getPacketHolder()).equals(oldStream)) {
             PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class)
                     .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), oldStream);
         }
