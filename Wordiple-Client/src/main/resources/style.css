@@ -79,6 +79,22 @@
     -fx-background-radius: 10px;
 }
 
+.text-field-stats {
+    -fx-background-radius: 8px;
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(60, 60, 60, 0.67);
+}
+
+.text-field-substats {
+    -fx-background-radius: 8px;
+    -fx-font-size: 15px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(60, 60, 60, 0.67);
+}
+
 .label-title {
     -fx-font-size: 30px;
     -fx-font-family: 'Nexa Bold';
@@ -112,6 +128,13 @@
     -fx-font-family: 'Nexa Bold';
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
+
+.label-25-light {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
 
 .label-level-progress {
     -fx-font-size: 15px;
@@ -237,4 +260,10 @@
     -fx-background-radius: 8px;
     -fx-padding: 1px;
     -fx-background-insets: 0;
+}
+
+.pane-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }

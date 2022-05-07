@@ -147,13 +147,49 @@ public class GUIManager extends Application {
 
     public RankOverlayController showRankOverlay(Runnable runAfter) {
         try {
+            OverlayController overlayController = showOverlay(false);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
             fxmlLoader.load();
             RankOverlayController rankOverlayController = fxmlLoader.getController();
             rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
             rankOverlayController.attach();
-            rankOverlayController.transitionIn(runAfter);
+            rankOverlayController.transitionIn(overlayController, runAfter);
             return rankOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ProfileOverlayController showProfileOverlay(String username, Runnable runAfter) {
+        try {
+            OverlayController overlayController = showOverlay(true);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/profileoverlay.fxml"));
+            fxmlLoader.load();
+            ProfileOverlayController profileOverlayController = fxmlLoader.getController();
+            profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            profileOverlayController.attach();
+            profileOverlayController.transitionIn(overlayController, runAfter);
+            return profileOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public OverlayController showOverlay(boolean visible) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/overlay.fxml"));
+            fxmlLoader.load();
+            OverlayController overlayController = fxmlLoader.getController();
+            overlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            overlayController.attach();
+            if (visible) {
+                overlayController.transitionIn();
+                return overlayController;
+            }
+            overlayController.addAsInvisible();
+            return overlayController;
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.net.URL;
@@ -41,10 +42,22 @@ public class PlayerHeaderController extends AttachableAdapter {
 
     public static PlayerHeaderController instance = null;
 
+    private boolean midAction = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
         super.setAttachment(headerPane);
+
+        profileButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+            if (!profileButton.isHover()) return;
+
+            GUIManager.getInstance().showProfileOverlay(SessionManager.getInstance().getUsername(), () -> {
+                midAction = false;
+            });
+        });
     }
 
     public void setBarPercentage(double percentage, Runnable runAfter) {
