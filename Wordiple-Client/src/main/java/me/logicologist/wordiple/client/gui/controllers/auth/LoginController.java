@@ -41,6 +41,9 @@ public class LoginController extends FadeVerticalTransitionAdapter {
     @FXML
     private Button mainScreenButton;
 
+    @FXML
+    private Button forgotPasswordButton;
+
     private boolean midAction = false;
 
     @Override
@@ -56,7 +59,6 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 GUIManager.getInstance().showMainScreen(true);
             });
         });
-
         loginButton.setOnAction(event -> {
             Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
             errorMessageLabel.setText("");
@@ -115,5 +117,6 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
             }), 10, TimeUnit.SECONDS);
         });
+        forgotPasswordButton.setOnAction(event -> super.transitionOut(() -> GUIManager.getInstance().showForgotPasswordScreen(true)));
     }
 }

@@ -8,12 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.*;
-import me.logicologist.wordiple.client.gui.controllers.auth.LoginController;
+import me.logicologist.wordiple.client.gui.controllers.auth.*;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
-import me.logicologist.wordiple.client.gui.controllers.auth.SignupConfirmController;
-import me.logicologist.wordiple.client.gui.controllers.auth.SignupController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
@@ -95,6 +93,30 @@ public class GUIManager extends Application {
             SignupConfirmController controller = fxmlLoader.getController();
             controller.setEmail(email);
             controller.setUsername(username);
+            if (fadeIn) controller.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showResetPasswordScreen(boolean fadeIn, String email, String code) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/resetpassword.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            ResetPasswordController controller = fxmlLoader.getController();
+            controller.setEmail(email);
+            controller.setCode(code);
+            if (fadeIn) controller.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showForgotPasswordScreen(boolean fadeIn) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/forgotpassword.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            ForgotPasswordController controller = fxmlLoader.getController();
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();

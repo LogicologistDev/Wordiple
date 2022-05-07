@@ -4,10 +4,10 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
 
-public class ForgotUrPasswordPacket extends PacketAdapter implements PacketType {
+public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
 
-    public ForgotUrPasswordPacket() {
-        super("forgot_ur_password_packet");
+    public ResetUrPasswordPacket() {
+        super("reset_ur_password_packet");
         this.packetType = this;
     }
 
@@ -25,6 +25,6 @@ public class ForgotUrPasswordPacket extends PacketAdapter implements PacketType 
     public PacketArguments getArguments() {
         return new PacketArguments()
                 .setArgument("email", String.class)
-                .setArgument("response", String.class);
+                .setArgument("password", String.class);
     }
 }

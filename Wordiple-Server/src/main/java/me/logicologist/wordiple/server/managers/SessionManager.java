@@ -108,12 +108,12 @@ public class SessionManager {
 
 
             message.setText("Hello, " + packetArguments.get("username", String.class) + "!\n" +
-                    "You have signed up for a wordiple account! In order to finish registration, please type in this verification code below:\n" +
+                    "You have signed up for a Wordiple account! In order to finish registration, please type in this verification code below:\n" +
                     stringBuilder.toString() + " (This code will expire in 10 minutes.)\n" +
                     "\n" +
                     "If you have not signed up or do not recognise this action, simply ignore this email.\n" +
                     "\n" +
-                    "We hope you enjoy wordiple!\n" +
+                    "We hope you enjoy Wordiple!\n" +
                     "\n" +
                     "[Do not reply to this email. You will not be given a response.]"
             );
@@ -135,6 +135,54 @@ public class SessionManager {
             e.printStackTrace();
         }
         return "There was an error processing your request. Please try again!";
+    }
+
+    public void resetPassword(String email, UUID code, String name) {
+        final String username = "wordiple@gmail.com";
+        final String password = "LK8!MUY'^{-qW%es";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("wordiple@gmail.com", "Wordiple System"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(email)
+            );
+            message.setSubject("Wordiple Reset Password");
+            message.setText("Hello, " + name + "!\n" +
+                    "You have requested to reset your password for your Wordiple account! In order to reset your password, please type in this verification code below:\n" + code + "\n" +
+                    "\n" +
+                    "If you have not requested to reset your password or do not recognise this action, simply ignore this email.\n" +
+                    "\n" +
+                    "We hope you enjoy Wordiple!\n" +
+                    "\n" +
+                    "[Do not reply to this email. You will not be given a response.]"
+            );
+            WordipleServer.getLogger().info("Sending email to " + email);
+
+            WordipleServer.getExecutor().submit(() -> {
+                try {
+                    Transport.send(message);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            WordipleServer.getLogger().info("Email sent!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public UUID createNewAccount(String verificationCode, String email) {

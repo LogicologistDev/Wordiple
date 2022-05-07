@@ -92,6 +92,24 @@ public class DatabaseManager {
         }
     }
 
+    public void setPassword(String username, String password) {
+        try {
+            StringBuilder salt = new StringBuilder();
+            String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            for (int i = 0; i < 16; i++) {
+                salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
+            }
+            String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ? AND SET passwordsalt = ? WHERE username=?");
+            ps.setString(1, username);
+            ps.setString(2, hashed);
+            ps.setString(3, salt.toString());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public WordipleUser constructWordipleUser(String username, PacketHolder socket) {
         try {
             PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM users WHERE username=?");
@@ -209,5 +227,20 @@ public class DatabaseManager {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public String getUsername(String email) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT username FROM users WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+
+            return rs.getString("username");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

@@ -176,6 +176,14 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.BaseLockedSkin';
 }
 
+.button-2-small {
+    -fx-font-size: 15px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-color: #ff4f4f;
+    -fx-border-radius: 60px;
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.BaseLockedSkin';
+}
+
 .button-3 {
     -fx-font-size: 25px;
     -fx-font-family: 'Nexa Bold';
