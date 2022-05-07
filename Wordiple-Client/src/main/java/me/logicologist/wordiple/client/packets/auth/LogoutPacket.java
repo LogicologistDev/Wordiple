@@ -29,7 +29,7 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
         Platform.runLater(() -> GUIManager.getInstance().startSwipeTransition(null, () -> {
             guiManager.showMainScreen(false);
             LoadScreenController lsc = guiManager.showLoadScreen(packetArguments.get("reason", String.class));
-            SessionManager.getInstance().setLocalSessionID(null);
+            SessionManager.getInstance().setLocalSessionID(null, true);
             WordipleClient.getExecutor().schedule(() -> lsc.remove(null), 2, TimeUnit.SECONDS);
         }));
     }

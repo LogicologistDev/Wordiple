@@ -46,13 +46,15 @@ public class SessionManager {
         return null;
     }
 
-    public void setLocalSessionID(UUID localSessionID) {
+    public void setLocalSessionID(UUID localSessionID, boolean sendPacket) {
         try {
             if (localSessionID == null) {
                 this.loggedIn = false;
                 PlayerHeaderController.instance = null;
-                PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
-                        packet.getPacketType(AuthPacketType.class).getArguments(this.getLocalSessionID()).setValues("logout", true));
+                if (sendPacket) {
+                    PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
+                            packet.getPacketType(AuthPacketType.class).getArguments(this.getLocalSessionID()).setValues("logout", true));
+                }
             }
             Properties properties = new Properties();
             if (localSessionID != null) {

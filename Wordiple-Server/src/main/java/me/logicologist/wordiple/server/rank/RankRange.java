@@ -1,9 +1,11 @@
-package me.logicologist.wordiple.common.rank;
+package me.logicologist.wordiple.server.rank;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RankRange {
+
+    private static RankRange instance;
 
     private final List<Rank> ranks = new ArrayList<>();
 
@@ -21,6 +23,26 @@ public class RankRange {
         this.ranks.add(new Rank("Alpha II", 2, 2001, 2200));
         this.ranks.add(new Rank("Alpha III", 3, 2201, 2400));
         this.ranks.add(new Rank("Sigma", -1, 2401, -1));
-        this.ranks.add(new Rank("Omega", -1, 2401, -1));
+        this.ranks.add(new OmegaRank("Omega", -1, 2401, -1));
+    }
+
+    public static RankRange getInstance() {
+        if (instance == null) {
+            instance = new RankRange();
+        }
+        return instance;
+    }
+
+    public Rank getRank(int rank) {
+        for (Rank r : this.ranks) {
+            boolean valid = r.isValid(rank);
+            if (r instanceof OmegaRank) {
+                valid = ((OmegaRank) r).isTopTen();
+            }
+            if (valid) {
+                return r;
+            }
+        }
+        return null;
     }
 }
