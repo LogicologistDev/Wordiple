@@ -18,8 +18,9 @@ public class WordipleClient {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        new SessionManager(Arrays.asList(args).contains("-developer"));
-        new PacketManager().load();
+        boolean developerMode = Arrays.asList(args).contains("-developer");
+        new SessionManager(developerMode);
+        new PacketManager(developerMode).load();
         GUIManager.launch(args);
     }
 

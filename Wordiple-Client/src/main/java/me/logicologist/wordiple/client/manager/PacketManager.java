@@ -16,8 +16,8 @@ public class PacketManager {
     private static PacketManager instance;
     private final OlzieSocket socket;
 
-    public PacketManager() {
-        SocketConfig config = new SocketConfig("157.90.218.221", 11184, "", false, new SocketConfig.SocketHeartbeatConfig(2000, 20), (short) 0);
+    public PacketManager(boolean developerMode) {
+        SocketConfig config = new SocketConfig("157.90.218.221", 11184, "", developerMode, new SocketConfig.SocketHeartbeatConfig(2000, 20), (short) 0);
         this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
         instance = this;
     }
