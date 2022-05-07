@@ -207,4 +207,8 @@ public class SessionManager {
     public static SessionManager getInstance() {
         return instance;
     }
+
+    public void close() {
+        this.sessions.forEach((k, v) -> DatabaseManager.instance.saveUser(v));
+    }
 }

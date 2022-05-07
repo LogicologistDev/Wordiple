@@ -26,13 +26,14 @@ public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
         WordipleServer.getLogger().info("Received stat info packet from " + user);
         if (user == null) return; // THIS SHOULD NEVER HAPPEN, BUT JUST IN CASE!
 
+        long currentSession = System.currentTimeMillis() - user.getLoggedInTime().getTime();
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("username", user.getUsername())
                 .setValues("games_played", Utils.formatNumber(user.getGamesPlayed()))
                 .setValues("wins", Utils.formatNumber(user.getWins()))
                 .setValues("losses", Utils.formatNumber(user.getGamesPlayed() - user.getWins()))
-                .setValues("playtime", Utils.formatShortTime(user.getPlaytime() / 1000))
-                .setValues("curren_session", Utils.formatShortTime((System.currentTimeMillis() - user.getLoggedInTime().getTime()) / 1000))
+                .setValues("playtime", Utils.formatShortTime((user.getPlaytime() + currentSession) / 1000))
+                .setValues("current_session", Utils.formatShortTime(currentSession / 1000))
                 .setValues("season", "")
                 .setValues("current_rank", "")
                 .setValues("current_rating", "")
@@ -53,7 +54,7 @@ public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("wins", String.class)
                 .setArgument("losses", String.class)
                 .setArgument("playtime", String.class)
-                .setArgument("curren_session", String.class)
+                .setArgument("current_session", String.class)
                 .setArgument("season", String.class)
                 .setArgument("current_rank", String.class)
                 .setArgument("current_rating", String.class)

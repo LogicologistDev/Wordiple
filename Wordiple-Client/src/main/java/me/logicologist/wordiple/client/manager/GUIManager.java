@@ -17,6 +17,7 @@ import me.logicologist.wordiple.client.gui.controllers.select.GameSelectControll
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
 import me.logicologist.wordiple.client.packets.StatInfoPacket;
+import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.util.ArrayList;
@@ -48,7 +49,10 @@ public class GUIManager extends Application {
         stage.setOnCloseRequest(e -> {
             try {
                 Platform.exit();
+                PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
+                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("logout", false));
                 PacketManager.getInstance().getSocket().shutdownClient();
+                WordipleClient.getExecutor().shutdownNow();
                 System.exit(0);
             } catch (Exception e1) {
                 e1.printStackTrace();

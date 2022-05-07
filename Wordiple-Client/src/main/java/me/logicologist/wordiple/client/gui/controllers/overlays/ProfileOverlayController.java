@@ -127,7 +127,7 @@ public class ProfileOverlayController extends AttachableAdapter {
         winsField.setText(args.get("wins", String.class));
         lossesField.setText(args.get("losses", String.class));
         playtimeField.setText(args.get("playtime", String.class));
-        currentSessionField.setText(args.get("curren_session", String.class));
+        currentSessionField.setText(args.get("current_session", String.class));
         seasonField.setText(args.get("season", String.class));
         currentRankField.setText(args.get("current_rank", String.class));
         currentRatingField.setText(args.get("current_rating", String.class));

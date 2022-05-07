@@ -138,6 +138,8 @@ public class DatabaseManager {
 
     public void saveUser(WordipleUser user) {
         try {
+            user.setPlaytime(user.getPlaytime() + (user.getLoggedInTime() == null ? 0 : System.currentTimeMillis() - user.getLoggedInTime().getTime()));
+            user.setLoggedInTime(null);
             PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=? WHERE uuid=?");
             ps.setInt(1, user.getRating());
             ps.setInt(2, user.getLevel());

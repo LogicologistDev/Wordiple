@@ -18,6 +18,12 @@ public class WordipleServer {
         new PacketManager().load();
         new DatabaseManager().setup();
         new SessionManager();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            logger.info("Shutting down...");
+            executor.shutdownNow();
+            SessionManager.getInstance().close();
+            PacketManager.getInstance().getSocket().shutdownServer();
+        }));
     }
 
     public static ScheduledExecutorService getExecutor() {

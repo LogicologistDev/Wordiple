@@ -29,7 +29,7 @@ public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("wins", String.class)
                 .setArgument("losses", String.class)
                 .setArgument("playtime", String.class)
-                .setArgument("curren_session", String.class)
+                .setArgument("current_session", String.class)
                 .setArgument("season", String.class)
                 .setArgument("current_rank", String.class)
                 .setArgument("current_rating", String.class)

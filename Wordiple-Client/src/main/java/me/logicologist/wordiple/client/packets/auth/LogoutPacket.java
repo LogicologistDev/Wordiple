@@ -36,6 +36,6 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments().setArgument("reason", String.class);
+        return new PacketArguments().setArgument("logout", Boolean.class).setArgument("reason", String.class);
     }
 }
