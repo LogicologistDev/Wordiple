@@ -65,6 +65,12 @@ public class ProfileOverlayController extends AttachableAdapter {
     @FXML
     public TextField guessesField;
 
+    @FXML
+    public TextField levelField;
+
+    @FXML
+    public TextField xpField;
+
     private boolean midAction = false;
     private OverlayController overlayController = null;
 
@@ -127,5 +133,7 @@ public class ProfileOverlayController extends AttachableAdapter {
         solveTimeField.setText(args.get("solve_time", String.class));
         openerField.setText(args.get("opener", String.class));
         guessesField.setText(args.get("guesses", String.class));
+        levelField.setText(args.get("level", String.class));
+        xpField.setText(args.get("total_xp", String.class));
     }
 }

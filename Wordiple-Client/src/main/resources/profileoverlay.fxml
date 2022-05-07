@@ -306,7 +306,7 @@
          </textFill>
       </Label>
       <TextField fx:id="solveTimeField" focusTraversable="false" layoutX="800.0" layoutY="330.0" mouseTransparent="true" prefHeight="48.0" prefWidth="233.0" styleClass="text-field-stats" stylesheets="@style.css" text="43.23 seconds" />
-      <Label layoutX="800.0" layoutY="500.0" mouseTransparent="true" prefHeight="37.0" prefWidth="190.0" styleClass="label-30-light" stylesheets="@style.css" text="Fav. Opener:">
+      <Label layoutX="848.0" layoutY="380.0" mouseTransparent="true" prefHeight="37.0" prefWidth="233.0" styleClass="label-25-light" stylesheets="@style.css" text="Avg. Guesses">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -324,8 +324,8 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="openerField" focusTraversable="false" layoutX="800.0" layoutY="540.0" mouseTransparent="true" prefHeight="48.0" prefWidth="233.0" styleClass="text-field-stats" stylesheets="@style.css" text="CRANE" />
-      <Label layoutX="800.0" layoutY="395.0" mouseTransparent="true" prefHeight="37.0" prefWidth="251.0" styleClass="label-30-light" stylesheets="@style.css" text="Avg. Guesses:">
+      <TextField fx:id="guessesField" focusTraversable="false" layoutX="848.0" layoutY="415.0" mouseTransparent="true" prefHeight="29.0" prefWidth="190.0" styleClass="text-field-substats" stylesheets="@style.css" text="3.4 guesses" />
+      <Label layoutX="848.0" layoutY="440.0" mouseTransparent="true" prefHeight="37.0" prefWidth="233.0" styleClass="label-25-light" stylesheets="@style.css" text="Fav. Opener">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -343,6 +343,80 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextField fx:id="guessesField" focusTraversable="false" layoutX="800.0" layoutY="435.0" mouseTransparent="true" prefHeight="48.0" prefWidth="233.0" styleClass="text-field-stats" stylesheets="@style.css" text="3.4 guesses" />
+      <TextField fx:id="openerField" focusTraversable="false" layoutX="848.0" layoutY="475.0" mouseTransparent="true" prefHeight="29.0" prefWidth="190.0" styleClass="text-field-substats" stylesheets="@style.css" text="CRANE" />
+      <Line endX="-100.0" endY="120.0" layoutX="940.0" layoutY="385.0" mouseTransparent="true" startX="-100.0" startY="5.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Label layoutX="800.0" layoutY="515.0" mouseTransparent="true" prefHeight="37.0" prefWidth="233.0" styleClass="label-30-light" stylesheets="@style.css" text="Level:">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextField fx:id="levelField" focusTraversable="false" layoutX="800.0" layoutY="555.0" mouseTransparent="true" prefHeight="48.0" prefWidth="233.0" styleClass="text-field-stats" stylesheets="@style.css" text="200" />
+      <Line endX="-100.0" endY="58.0" layoutX="935.0" layoutY="605.0" mouseTransparent="true" startX="-100.0" startY="5.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Label layoutX="845.0" layoutY="600.0" mouseTransparent="true" prefHeight="37.0" prefWidth="233.0" styleClass="label-25-light" stylesheets="@style.css" text="Total XP:">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextField focusTraversable="false" layoutX="845.0" layoutY="635.0" mouseTransparent="true" prefHeight="29.0" prefWidth="190.0" styleClass="text-field-substats" stylesheets="@style.css" text="4332" fx:id="xpField" />
    </children>
 </AnchorPane>
