@@ -217,6 +217,9 @@ public class SessionManager {
     }
 
     public boolean isCodeValid(String email, String code) {
-        return resetPasswords.get(email) != null && resetPasswords.get(email).equals(code);
+        boolean success = resetPasswords.get(email) != null && resetPasswords.get(email).equals(code);
+        if (success) resetPasswords.remove(email);
+
+        return success;
     }
 }

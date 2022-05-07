@@ -27,7 +27,7 @@ public class ResetUrPasswordPacket extends PacketAdapter implements PacketType {
         SessionManager manager = SessionManager.getInstance();
         boolean success = manager.isCodeValid(packetArguments.get("email", String.class), packetArguments.get("code", String.class));
         if (success) {
-            SessionManager.getInstance().logoutMatchingUsers(DatabaseManager.instance.getUUID(packetArguments.get("email", String.class)));
+            manager.logoutMatchingUsers(DatabaseManager.instance.getUUID(packetArguments.get("email", String.class)));
             DatabaseManager.instance.setPassword(packetArguments.get("email", String.class), packetArguments.get("password", String.class));
         }
         this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("success", success));

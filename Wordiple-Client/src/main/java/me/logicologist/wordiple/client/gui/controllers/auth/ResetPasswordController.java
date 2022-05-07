@@ -74,13 +74,13 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("email", email).setValues("code", codeField.getText()).setValues("password", passwordField.getText())
             ).waitForResponse(x -> {
-                if (!x.get("success", Boolean.class)) {
-                    errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
-                    new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
-                    return false;
-                }
                 Platform.runLater(() -> {
                     loadScreen.remove(null);
+                    if (!x.get("success", Boolean.class)) {
+                        errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
+                        new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                        return;
+                    }
                     super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
                 });
                 return false;
