@@ -23,7 +23,7 @@ public class Utils {
         addUnit(sb, seconds, 1, s -> s + "s, ");
 
         String timeString = sb.toString().replaceFirst("(?s)(.*), ", "$1");
-        timeString = timeString.replaceFirst("(?s)(.*),", "$1 and");
+        timeString = timeString.replaceFirst("(?s)(.*),", "$1,");
         return timeString.isEmpty() ? "0s" : timeString;
     }
 
@@ -36,7 +36,7 @@ public class Utils {
         addUnit(sb, seconds, 1, s -> s + " second" + (s == 1 ? "" : "s") + ", ");
 
         String timeString = sb.toString().replaceFirst("(?s)(.*), ", "$1");
-        timeString = timeString.replaceFirst("(?s)(.*),", "$1 and");
+        timeString = timeString.replaceFirst("(?s)(.*),", "$1,");
         return timeString.isEmpty() ? "0 seconds" : timeString;
     }
 
