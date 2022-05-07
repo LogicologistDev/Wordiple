@@ -10,10 +10,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
+import me.logicologist.wordiple.common.utils.Utils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class ProfileOverlayController extends AttachableAdapter {
 
@@ -75,6 +80,9 @@ public class ProfileOverlayController extends AttachableAdapter {
     private boolean midAction = false;
     private OverlayController overlayController = null;
 
+    private ScheduledFuture<?> future = null;
+    private PacketArguments arguments;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
@@ -85,6 +93,12 @@ public class ProfileOverlayController extends AttachableAdapter {
             midAction = true;
             transitionOut();
         });
+        AtomicLong openedTime = new AtomicLong();
+        future = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
+            playtimeField.setText(Utils.formatShortTime(arguments.get("playtime_raw", Long.class) + openedTime.get()));
+            currentSessionField.setText(Utils.formatShortTime(arguments.get("current_session_raw", Long.class) + openedTime.get()));
+            openedTime.incrementAndGet();
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
     public void transitionIn(OverlayController overlayController, Runnable runAfter) {
@@ -117,26 +131,34 @@ public class ProfileOverlayController extends AttachableAdapter {
         );
         timeline.play();
         timeline.setOnFinished(x -> {
-            super.detach();
+            this.detach();
         });
     }
 
-    public void setData(PacketArguments args) {
-        usernameLabel.setText(args.get("username", String.class));
-        gamesPlayedField.setText(args.get("games_played", String.class));
-        winsField.setText(args.get("wins", String.class));
-        lossesField.setText(args.get("losses", String.class));
-        playtimeField.setText(args.get("playtime", String.class));
-        currentSessionField.setText(args.get("current_session", String.class));
-        seasonField.setText(args.get("season", String.class));
-        currentRankField.setText(args.get("current_rank", String.class));
-        currentRatingField.setText(args.get("current_rating", String.class));
-        highestRankField.setText(args.get("highest_rank", String.class));
-        highestRatingField.setText(args.get("highest_rating", String.class));
-        solveTimeField.setText(args.get("solve_time", String.class));
-        openerField.setText(args.get("opener", String.class));
-        guessesField.setText(args.get("guesses", String.class));
-        levelField.setText(args.get("level", String.class));
-        xpField.setText(args.get("total_xp", String.class));
+    @Override
+    public void detach() {
+        super.detach();
+        if (future != null) future.cancel(true);
+        this.arguments = null;
+    }
+
+    public void setData(PacketArguments arguments) {
+        this.arguments = arguments;
+        usernameLabel.setText(arguments.get("username", String.class));
+        gamesPlayedField.setText(arguments.get("games_played", String.class));
+        winsField.setText(arguments.get("wins", String.class));
+        lossesField.setText(arguments.get("losses", String.class));
+        playtimeField.setText(arguments.get("playtime", String.class));
+        currentSessionField.setText(arguments.get("current_session", String.class));
+        seasonField.setText(arguments.get("season", String.class));
+        currentRankField.setText(arguments.get("current_rank", String.class));
+        currentRatingField.setText(Utils.formatNumber(arguments.get("current_rating", Integer.class)));
+        highestRankField.setText(arguments.get("highest_rank", String.class));
+        highestRatingField.setText(Utils.formatNumber(arguments.get("highest_rating", Integer.class)));
+        solveTimeField.setText(arguments.get("solve_time", String.class));
+        openerField.setText(arguments.get("opener", String.class));
+        guessesField.setText(arguments.get("guesses", String.class));
+        levelField.setText(arguments.get("level", String.class));
+        xpField.setText(arguments.get("total_xp", String.class));
     }
 }

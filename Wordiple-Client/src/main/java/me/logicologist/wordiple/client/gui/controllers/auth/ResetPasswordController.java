@@ -43,7 +43,6 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
     private boolean midAction = false;
 
     private String email = null;
-    private String code = null;
 
 
     @Override
@@ -58,11 +57,6 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
         });
 
         resetButton.setOnAction(event -> {
-            if (!codeField.getText().equals(code)) {
-                errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
-                new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
-                return;
-            }
             if (passwordField.getText().isEmpty() || passwordField.getText().length() <= 5) {
                 errorMessageLabel.setText("Invalid password.");
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
@@ -75,8 +69,13 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             }
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Resetting...");
             PacketManager.getInstance().getSocket().getPacket(ResetUrPasswordPacket.class).sendPacket(packet ->
-                    packet.getPacketType().getArguments().setValues("email", email).setValues("password", passwordField.getText())
+                    packet.getPacketType().getArguments().setValues("email", email).setValues("code", codeField.getText()).setValues("password", passwordField.getText())
             ).waitForResponse(x -> {
+                if (!x.get("success", Boolean.class)) {
+                    errorMessageLabel.setText("Incorrect code, please make sure you copied the code correctly.");
+                    new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
+                    return false;
+                }
                 Platform.runLater(() -> {
                     loadScreen.remove(null);
                     super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
@@ -94,9 +93,5 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
         if (this.email != null) return;
 
         this.email = email;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }

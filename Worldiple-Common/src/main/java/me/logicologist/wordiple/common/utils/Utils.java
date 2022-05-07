@@ -27,6 +27,19 @@ public class Utils {
         return timeString.isEmpty() ? "0s" : timeString;
     }
 
+    public static String formatTime(long seconds) {
+        StringBuilder sb = new StringBuilder();
+        seconds = addUnit(sb, seconds, 604800, w -> w + " week" + (w == 1 ? "" : "s") + ", ");
+        seconds = addUnit(sb, seconds, 86400, d -> d + " day" + (d == 1 ? "" : "s") + ", ");
+        seconds = addUnit(sb, seconds, 3600, h -> h + " hour" + (h == 1 ? "" : "s") + ", ");
+        seconds = addUnit(sb, seconds, 60, m -> m + " minute" + (m == 1 ? "" : "s") + ", ");
+        addUnit(sb, seconds, 1, s -> s + " second" + (s == 1 ? "" : "s") + ", ");
+
+        String timeString = sb.toString().replaceFirst("(?s)(.*), ", "$1");
+        timeString = timeString.replaceFirst("(?s)(.*),", "$1 and");
+        return timeString.isEmpty() ? "0 seconds" : timeString;
+    }
+
     private static long addUnit(StringBuilder sb, long sec, long unit, Function<Long, String> s) {
         long n;
         if ((n = sec / unit) > 0) {

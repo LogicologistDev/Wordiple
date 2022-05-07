@@ -24,6 +24,7 @@ public class WordipleUser {
     private boolean competitiveBan;
     private boolean onlineBan;
     private boolean globalBan;
+    private int guesses;
     private PacketHolder socket;
 
     public WordipleUser(String email, UUID id, String username, int rating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, PacketHolder socket) {
@@ -151,6 +152,14 @@ public class WordipleUser {
         this.globalBan = globalBan;
     }
 
+    public int getGuesses() {
+        return 0;
+    }
+
+    public void setGuesses(int guesses) {
+
+    }
+
     public ObjectOutputStream getOutputStream() {
         try {
             return PacketManager.getInstance().getSocket().getOutputStream(this.socket);
@@ -170,5 +179,10 @@ public class WordipleUser {
 
     public void setLoggedInTime(Date loggedInTime) {
         this.loggedInTime = loggedInTime;
+    }
+
+    public double getTotalExperience() {
+        //TODO: here
+        return 0;
     }
 }
