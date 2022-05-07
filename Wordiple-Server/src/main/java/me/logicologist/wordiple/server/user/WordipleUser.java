@@ -92,7 +92,7 @@ public class WordipleUser {
         if (level == 0) {
             return 100;
         }
-        return Math.min((int) ((Math.pow(Math.log(182 * 10) / Math.log(2), 2)) * Math.sqrt(182) + 100), 2000);
+        return Math.min((int) ((Math.pow(Math.log(this.level * 10) / Math.log(2), 2)) * Math.sqrt(this.level) + 100), 2000);
     }
 
     public int getExperience() {
@@ -189,8 +189,14 @@ public class WordipleUser {
     }
 
     public double getTotalExperience() {
-        //TODO: here
-        return 0;
+        int total = this.experience;
+        for (int i = 0; i < this.level; i++) {
+            if (i == 0) {
+                total += 100;
+            }
+            total += Math.min((int) ((Math.pow(Math.log(i * 10) / Math.log(2), 2)) * Math.sqrt(i) + 100), 2000);
+        }
+        return total;
     }
 
     public int getHighestRank() {
