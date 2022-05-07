@@ -92,7 +92,7 @@ public class DatabaseManager {
         }
     }
 
-    public void setPassword(String username, String password) {
+    public void setPassword(String email, String password) {
         try {
             StringBuilder salt = new StringBuilder();
             String saltChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -100,8 +100,8 @@ public class DatabaseManager {
                 salt.append(saltChars.charAt(new Random().nextInt(saltChars.length())));
             }
             String hashed = Hashing.sha256().hashString(password + salt, Charset.defaultCharset()).toString();
-            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ?, passwordsalt = ? WHERE username = ?");
-            ps.setString(1, username);
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET passwordhash = ?, passwordsalt = ? WHERE email = ?");
+            ps.setString(1, email);
             ps.setString(2, hashed);
             ps.setString(3, salt.toString());
             ps.executeUpdate();
