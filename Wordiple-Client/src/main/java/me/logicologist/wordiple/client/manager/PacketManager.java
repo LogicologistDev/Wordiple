@@ -29,6 +29,8 @@ public class PacketManager {
             if (GUIManager.getInstance() != null) return; // game already launched.
 
             UUID id = manager.getLocalSessionID();
+            if (id == null) return;
+
             this.socket.getPacket(UserInfoPacket.class)
                     .sendPacket(packet -> packet.getPacketType().getArguments().setValues("session_id", id))
                     .waitForResponse(response -> {

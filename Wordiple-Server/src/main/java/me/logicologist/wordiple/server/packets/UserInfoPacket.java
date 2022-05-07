@@ -31,8 +31,6 @@ public class UserInfoPacket extends PacketAdapter implements PacketType {
             return;
         }
         wordipleUser.setSocket(arguments.getPacketHolder());
-        this.sendPacket(packet -> packet.getPacketType().getArguments(), wordipleUser.getOutputStream());
-
         this.sendPacket(packet -> arguments.replace(this.getArguments())
                 .setValues("email", wordipleUser.getEmail())
                 .setValues("id", wordipleUser.getId())
