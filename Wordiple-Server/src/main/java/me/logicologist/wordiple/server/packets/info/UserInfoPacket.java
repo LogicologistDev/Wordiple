@@ -1,4 +1,4 @@
-package me.logicologist.wordiple.server.packets;
+package me.logicologist.wordiple.server.packets.info;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;

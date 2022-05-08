@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.manager;
 
+import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +14,11 @@ import me.logicologist.wordiple.client.gui.controllers.auth.*;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
+import me.logicologist.wordiple.client.gui.controllers.queue.CompetitiveQueueController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
-import me.logicologist.wordiple.client.packets.StatInfoPacket;
+import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
@@ -144,6 +146,20 @@ public class GUIManager extends Application {
         }
     }
 
+    public void showCompetitiveQueueScreen(boolean fadeIn, PacketArguments playerInfo, PacketArguments queueInfo) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/competitivequeue.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            attachPlayerHeader();
+            CompetitiveQueueController controller = fxmlLoader.getController();
+            controller.setInfo(playerInfo, queueInfo);
+            if (fadeIn) controller.transitionIn();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public LoadScreenController showLoadScreen(String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/loadscreen.fxml"));
@@ -201,10 +217,10 @@ public class GUIManager extends Application {
         return null;
     }
 
-    public void showProfileOverlay(String username, Runnable runAfter, Consumer<ProfileOverlayController> controller) {
+    public void showProfileOverlay(String username, Runnable runAfter) {
         LoadScreenController loadScreenController = showLoadScreen("Fetching profile...");
         PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
-                packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
+                packet.getPacketType().getArguments().setValues("username", username)
         ).waitForResponse(packet -> {
             loadScreenController.remove(() -> {
                 try {
@@ -216,7 +232,6 @@ public class GUIManager extends Application {
                     profileOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
                     profileOverlayController.attach();
                     profileOverlayController.transitionIn(overlayController, runAfter);
-                    if (controller != null) controller.accept(profileOverlayController);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

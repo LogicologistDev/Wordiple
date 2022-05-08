@@ -16,9 +16,14 @@
     -fx-background-repeat: no-repeat;
 }
 
+.rectangle-chirank-fill {
+    -fx-background-image: url("chirankbig.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
 .button-zen {
-    -fx-font-size: 50px;
-    -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./zenbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
@@ -26,17 +31,27 @@
 }
 
 .button-competitive {
-    -fx-font-size: 50px;
-    -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./competitivebutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
+.button-competitive-queue-enter-button {
+    -fx-background-image: url("./competitiveenterqueuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
+.button-competitive-queue-leave-button {
+    -fx-background-image: url("./competitiveleavequeuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
 .button-casual {
-    -fx-font-size: 50px;
-    -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./casualbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
@@ -44,8 +59,6 @@
 }
 
 .button-time-royale {
-    -fx-font-size: 50px;
-    -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./timeroyalebutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
@@ -53,12 +66,17 @@
 }
 
 .button-private-match {
-    -fx-font-size: 50px;
-    -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./privatematchbutton.png");
     -fx-background-color: transparent;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
+.button-back {
+    -fx-background-image: url("./backbutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.RightSkin';
 }
 
 .text-field-1 {
@@ -93,6 +111,22 @@
     -fx-font-family: 'Nexa Bold';
     -fx-text-fill: #ffffff;
     -fx-background-color: rgba(60, 60, 60, 0.67);
+}
+
+.text-field-queuetime {
+    -fx-background-radius: 8px;
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(28, 28, 28, 0.8);
+}
+
+.text-field-active {
+    -fx-background-radius: 8px;
+    -fx-font-size: 100px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(28, 28, 28, 0.8);
 }
 
 .label-title {

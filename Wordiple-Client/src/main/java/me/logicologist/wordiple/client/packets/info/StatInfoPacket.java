@@ -1,10 +1,10 @@
-package me.logicologist.wordiple.client.packets;
+package me.logicologist.wordiple.client.packets.info;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import me.logicologist.wordiple.common.packets.AuthPacketType;
+import com.olziedev.olziesocket.framework.api.packet.PacketType;
 
-public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
+public class StatInfoPacket extends PacketAdapter implements PacketType {
 
     public StatInfoPacket() {
         super("stat_info_packet");

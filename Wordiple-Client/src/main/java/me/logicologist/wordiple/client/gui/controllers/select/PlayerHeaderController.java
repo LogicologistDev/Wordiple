@@ -55,9 +55,7 @@ public class PlayerHeaderController extends AttachableAdapter {
             midAction = true;
             if (!profileButton.isHover()) return;
 
-            GUIManager.getInstance().showProfileOverlay(SessionManager.getInstance().getUsername(), () -> {
-                midAction = false;
-            }, null);
+            GUIManager.getInstance().showProfileOverlay(SessionManager.getInstance().getUsername(), () -> midAction = false);
         });
     }
 

@@ -35,6 +35,10 @@ public class SessionManager {
         return sessions.get(token);
     }
 
+    public WordipleUser getSessionFromUsername(String username) {
+        return sessions.values().stream().filter(user -> user.getUsername().equals(username)).findFirst().orElse(null);
+    }
+
     public void removeSession(UUID session) {
         sessions.remove(session);
     }

@@ -1,7 +1,8 @@
-package me.logicologist.wordiple.server.packets;
+package me.logicologist.wordiple.server.packets.info;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
+import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
 import me.logicologist.wordiple.server.WordipleServer;
@@ -9,7 +10,7 @@ import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.rank.RankRange;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
-public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
+public class StatInfoPacket extends PacketAdapter implements PacketType {
 
     public StatInfoPacket() {
         super("stat_info_packet");
@@ -23,7 +24,7 @@ public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
-        WordipleUser user = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
+        WordipleUser user = SessionManager.getInstance().getSessionFromUsername(arguments.get("username", String.class));
         WordipleServer.getLogger().info("Received stat info packet from " + user);
         if (user == null) return; // THIS SHOULD NEVER HAPPEN, BUT JUST IN CASE!
 

@@ -3,13 +3,19 @@ package me.logicologist.wordiple.client.gui.controllers.select;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
+import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class GameSelectController extends FadeHorizontalTransitionAdapter {
 
@@ -24,6 +30,9 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
     @FXML
     private Button rankButton;
 
+    @FXML
+    private Button competitiveButton;
+
     private boolean midAction = false;
 
     @Override
@@ -31,7 +40,6 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
         super.setPane(movablePane);
 
         logoutButton.setOnAction(event -> {
-            if (!logoutButton.isHover()) return;
             if (midAction) return;
             midAction = true;
 
@@ -47,11 +55,40 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
         rankButton.setOnAction(event -> {
             if (midAction) return;
             midAction = true;
-            if (!rankButton.isHover()) return;
 
             GUIManager.getInstance().showRankOverlay(() -> {
                 midAction = false;
             });
+        });
+
+        competitiveButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Data...");
+            PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class).sendPacket(packet ->
+                    packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
+            ).waitForResponse(data -> {
+                PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
+                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
+                ).waitForResponse(queue -> {
+                    super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue));
+                    return false;
+                }, () -> {
+                    loadScreenController.remove(() -> {
+                        LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
+                        WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                        midAction = false;
+                    });
+                }, 10, TimeUnit.SECONDS);
+                return false;
+            }, () -> {
+                loadScreenController.remove(() -> {
+                    LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
+                    WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                    midAction = false;
+                });
+            }, 10, TimeUnit.SECONDS);
         });
 
     }
