@@ -41,10 +41,7 @@ public class GUIManager extends Application {
 
         stage.setHeight(849);
         stage.setWidth(1456);
-        String OS = (System.getProperty("os.name")).toUpperCase();
-        if (!OS.contains("WIN")) {
-            stage.setResizable(true);
-        }
+
         showMainScreen(false);
 
         stage.show();
