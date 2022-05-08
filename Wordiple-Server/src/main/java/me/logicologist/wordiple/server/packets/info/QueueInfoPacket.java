@@ -8,6 +8,7 @@ public class QueueInfoPacket extends PacketAdapter implements AuthPacketType {
 
     public QueueInfoPacket() {
         super("queue_info_packet");
+        this.packetType = this;
     }
 
     @Override

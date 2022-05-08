@@ -70,7 +70,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
             ).waitForResponse(data -> {
                 PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
-                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
+                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", "competitive")
                 ).waitForResponse(queue -> {
                     super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue));
                     return false;
