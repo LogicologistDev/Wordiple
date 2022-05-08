@@ -10,6 +10,7 @@ import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
+import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
@@ -65,14 +66,14 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             if (midAction) return;
             midAction = true;
 
-            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Data...");
-            PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class).sendPacket(packet ->
+            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
+            PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
             ).waitForResponse(data -> {
                 PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
                         packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", "competitive")
                 ).waitForResponse(queue -> {
-                    super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue));
+                    loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue)));
                     return false;
                 }, () -> {
                     loadScreenController.remove(() -> {

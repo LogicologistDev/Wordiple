@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
+import me.logicologist.wordiple.client.manager.GUIManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,10 +34,20 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
     @FXML
     private Label ratingLabel;
 
+    private boolean midAction = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
+
+        backButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            super.transitionOut(() -> {
+                GUIManager.getInstance().showGameSelectScreen(true);
+            });
+        });
     }
 
     public void setInfo(PacketArguments playerInfo, PacketArguments queueInfo) {

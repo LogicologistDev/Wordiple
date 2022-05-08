@@ -214,7 +214,7 @@ public class WordipleUser {
         for (double solveTime : solveTimes) {
             sb.append(solveTime).append(",");
         }
-        return sb.substring(0, sb.length() - 1);
+        return sb.substring(0, (sb.length() != 0 ? sb.length() - 1 : 0));
     }
 
     public String getGuessesAsString() {
@@ -222,7 +222,7 @@ public class WordipleUser {
         for (int guess : guesses) {
             sb.append(guess).append(",");
         }
-        return sb.substring(0, sb.length() - 1);
+        return sb.substring(0, (sb.length() != 0 ? sb.length() - 1 : 0));
     }
 
     public String getOpenersAsString() {
@@ -230,7 +230,7 @@ public class WordipleUser {
         for (String opener : openers) {
             sb.append(opener).append(",");
         }
-        return sb.substring(0, sb.length() - 1);
+        return sb.substring(0, (sb.length() != 0 ? sb.length() - 1 : 0));
     }
 
     public void addGuess(int guesses) {
