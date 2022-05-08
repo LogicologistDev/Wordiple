@@ -48,22 +48,26 @@ public class WordipleUser {
         this.globalBan = globalBan;
         this.socket = socket;
         this.guesses = new ArrayList<Integer>() {{
-            for (String guess : guesses.split(",")) {
-                add(Integer.parseInt(guess));
+            if (guesses != null) {
+                for (String guess : guesses.split(",")) {
+                    add(Integer.parseInt(guess));
+                }
             }
         }};
         this.solveTimes = new ArrayList<Double>() {{
-            for (String solveTime : solveTimes.split(",")) {
-                add(Double.parseDouble(solveTime));
+            if (solveTimes != null) {
+                for (String solveTime : solveTimes.split(",")) {
+                    add(Double.parseDouble(solveTime));
+                }
             }
         }};
         this.openers = new ArrayList<String>() {{
-            this.addAll(Arrays.asList(openers.split(",")));
+            if (openers != null) this.addAll(Arrays.asList(openers.split(",")));
         }};
     }
 
     public WordipleUser(String email, String username) {
-        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, "", null, null, null);
+        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, "", "", "", null);
     }
 
     // Generate getters and setters
