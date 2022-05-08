@@ -211,7 +211,7 @@ public class SessionManager {
 
         WordipleUser wordipleUser = new WordipleUser(packetArguments.get("email", String.class), packetArguments.get("username", String.class));
         DatabaseManager.instance.createUser(wordipleUser, packetArguments.get("password_hash", String.class), packetArguments.get("salt", String.class));
-        return createSession(packetArguments.get("username", String.class), packetArguments.get("password", String.class), packetArguments.getPacketHolder());
+        return createSession(packetArguments.get("username", String.class), packetArguments.get("password_hash", String.class), packetArguments.getPacketHolder());
     }
 
     public void logoutMatchingUsers(UUID uuid) {

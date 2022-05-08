@@ -48,21 +48,21 @@ public class WordipleUser {
         this.globalBan = globalBan;
         this.socket = socket;
         this.guesses = new ArrayList<Integer>() {{
-            if (guesses != null) {
+            if (guesses != null && !guesses.isEmpty()) {
                 for (String guess : guesses.split(",")) {
                     add(Integer.parseInt(guess));
                 }
             }
         }};
         this.solveTimes = new ArrayList<Double>() {{
-            if (solveTimes != null) {
+            if (solveTimes != null && !solveTimes.isEmpty()) {
                 for (String solveTime : solveTimes.split(",")) {
                     add(Double.parseDouble(solveTime));
                 }
             }
         }};
         this.openers = new ArrayList<String>() {{
-            if (openers != null) this.addAll(Arrays.asList(openers.split(",")));
+            if (openers != null && !openers.isEmpty()) this.addAll(Arrays.asList(openers.split(",")));
         }};
     }
 

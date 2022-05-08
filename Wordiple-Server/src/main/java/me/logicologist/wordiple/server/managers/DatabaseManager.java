@@ -167,12 +167,12 @@ public class DatabaseManager {
     public void createUser(WordipleUser user, String hashed, String salt) {
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO users (uuid, username, email, passwordhash, passwordsalt, rating, level, experience, wins, games_played, playtime, bannedtime, competitiveban, onlineban, globalban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users (uuid, username, email, passwordhash, passwordsalt, rating, highest_rating, level, experience, wins, games_played, playtime, bannedtime, competitiveban, onlineban, globalban, solvetimes, guesses, openers) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, user.getId().toString());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getEmail());
             ps.setString(4, hashed);
-            ps.setString(5, salt.toString());
+            ps.setString(5, salt);
             ps.setInt(6, 0);
             ps.setInt(7, 0);
             ps.setInt(8, 0);
@@ -180,9 +180,13 @@ public class DatabaseManager {
             ps.setInt(10, 0);
             ps.setLong(11, 0);
             ps.setLong(12, 0);
-            ps.setBoolean(13, false);
+            ps.setLong(13, 0);
             ps.setBoolean(14, false);
             ps.setBoolean(15, false);
+            ps.setBoolean(16, false);
+            ps.setString(17, "");
+            ps.setString(18, "");
+            ps.setString(19, "");
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

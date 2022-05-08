@@ -64,10 +64,10 @@ public class LoginController extends FadeVerticalTransitionAdapter {
             });
         });
         loginButton.setOnAction(event -> {
-            Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
+            Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{1,16}$");
             errorMessageLabel.setText("");
             if (!usernamePattern.matcher(usernameField.getText()).matches()) {
-                errorMessageLabel.setText("Usernames can only contain letters, numbers, underscores, and must be 3-16 characters.");
+                errorMessageLabel.setText("Usernames can only contain letters, numbers, and underscores.");
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }
