@@ -128,7 +128,7 @@ public class DatabaseManager {
                     rs.getBoolean("onlineban"),
                     rs.getBoolean("globalban"),
                     rs.getString("guesses"),
-                    rs.getString("solve_times"),
+                    rs.getString("solvetimes"),
                     rs.getString("openers"),
                     socket
             );
