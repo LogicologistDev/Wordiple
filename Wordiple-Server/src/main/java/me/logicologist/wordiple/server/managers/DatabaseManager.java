@@ -37,6 +37,7 @@ public class DatabaseManager {
                     "passwordhash VARCHAR(255)," +
                     "passwordsalt VARCHAR(255)," +
                     "rating INTEGER," +
+                    "highest_rating INTEGER" +
                     "level INTEGER, " +
                     "experience INTEGER," +
                     "wins INTEGER," +
@@ -46,6 +47,9 @@ public class DatabaseManager {
                     "competitiveban BOOLEAN," +
                     "onlineban BOOLEAN," +
                     "globalban BOOLEAN," +
+                    "solvetimes VARCHAR(255)," +
+                    "guesses VARCHAR(255)" +
+                    "openers VARCHAR(255)," +
                     "PRIMARY KEY(email))"
             ).executeUpdate();
             this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS replays(" +
@@ -141,7 +145,7 @@ public class DatabaseManager {
         try {
             user.setPlaytime(user.getPlaytime() + (user.getLoggedInTime() == null ? 0 : System.currentTimeMillis() - user.getLoggedInTime().getTime()));
             user.setLoggedInTime(null);
-            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, highest_rating =?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=?, guesses=?, rank=?, highest_rank=? WHERE uuid=?");
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, highest_rating =?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=?, guesses=?, rank=?, highest_rank=?, solvetimes=?, guesses=?, openers=? WHERE uuid=?");
             ps.setInt(1, user.getRating());
             ps.setInt(2, user.getHighestRating());
             ps.setInt(3, user.getLevel());
@@ -157,6 +161,10 @@ public class DatabaseManager {
             ps.setInt(12, user.getRank());
             ps.setInt(13, user.getHighestRank());
             ps.setString(14, user.getId().toString());
+//            ps.setString(15, user.getSolveTimes());
+//            ps.setString(16, user.getSolveTimes());
+//            ps.setString(17, user.getSolveTimes());
+
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

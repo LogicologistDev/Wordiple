@@ -15,9 +15,10 @@ public class WordipleClient {
 
     private static File appData;
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-    private static final Logger logger = LogManager.getLogger();
+    private static Logger logger;
 
     public static void main(String[] args) {
+        logger = LogManager.getLogger("WordipleClient");
         boolean developerMode = Arrays.asList(args).contains("-developer");
         new SessionManager(developerMode);
         new PacketManager(developerMode).load();
