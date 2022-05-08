@@ -43,11 +43,11 @@ public class StatInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setValues("current_rating", Utils.formatNumber(user.getRating()))
                 .setValues("highest_rank", rankRange.getRank(user.getHighestRank()).getName())
                 .setValues("highest_rating", Utils.formatNumber(user.getHighestRating()))
-                .setValues("solve_time", "")
-                .setValues("opener", "")
+                .setValues("solve_time", user.getAverageSolveTime() + "s")
+                .setValues("opener", user.getMostUsedOpener())
                 .setValues("level", Utils.formatNumber(user.getLevel()))
                 .setValues("total_xp", Utils.formatNumber(user.getTotalExperience()))
-                .setValues("guesses", Utils.formatNumber(user.getGuesses())));
+                .setValues("guesses", Utils.formatNumber(user.getAverageGuesses())));
     }
 
     @Override

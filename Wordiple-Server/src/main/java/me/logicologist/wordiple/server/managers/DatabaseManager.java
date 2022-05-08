@@ -1,16 +1,13 @@
 package me.logicologist.wordiple.server.managers;
 
-import com.google.common.hash.Hashing;
 import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.File;
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -130,9 +127,9 @@ public class DatabaseManager {
                     rs.getBoolean("competitiveban"),
                     rs.getBoolean("onlineban"),
                     rs.getBoolean("globalban"),
-                    rs.getInt("guesses"),
-                    rs.getInt("rank"),
-                    rs.getInt("highest_rank"),
+                    rs.getString("guesses"),
+                    rs.getString("solve_times"),
+                    rs.getString("openers"),
                     socket
             );
         } catch (Exception ex) {
@@ -145,7 +142,7 @@ public class DatabaseManager {
         try {
             user.setPlaytime(user.getPlaytime() + (user.getLoggedInTime() == null ? 0 : System.currentTimeMillis() - user.getLoggedInTime().getTime()));
             user.setLoggedInTime(null);
-            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, highest_rating =?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=?, guesses=?, rank=?, highest_rank=?, solvetimes=?, guesses=?, openers=? WHERE uuid=?");
+            PreparedStatement ps = getConnection().prepareStatement("UPDATE users SET rating=?, highest_rating =?, level=?, experience=?, wins=?, games_played=?, playtime=?, bannedtime=?, competitiveban=?, onlineban=?, globalban=?, guesses=?, solvetimes=?, guesses=?, openers=? WHERE uuid=?");
             ps.setInt(1, user.getRating());
             ps.setInt(2, user.getHighestRating());
             ps.setInt(3, user.getLevel());
@@ -157,14 +154,10 @@ public class DatabaseManager {
             ps.setBoolean(9, user.isCompetitiveBan());
             ps.setBoolean(10, user.isOnlineBan());
             ps.setBoolean(11, user.isGlobalBan());
-            ps.setInt(11, user.getGuesses());
-            ps.setInt(12, user.getRank());
-            ps.setInt(13, user.getHighestRank());
-            ps.setString(14, user.getId().toString());
-//            ps.setString(15, user.getSolveTimes());
-//            ps.setString(16, user.getSolveTimes());
-//            ps.setString(17, user.getSolveTimes());
-
+            ps.setString(12, user.getId().toString());
+            ps.setString(13, user.getSolveTimesAsString());
+            ps.setString(14, user.getGuessesAsString());
+            ps.setString(15, user.getOpenersAsString());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

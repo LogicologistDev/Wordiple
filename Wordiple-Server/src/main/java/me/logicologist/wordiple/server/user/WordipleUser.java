@@ -5,8 +5,7 @@ import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 
 import java.io.ObjectOutputStream;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 public class WordipleUser {
 
@@ -25,12 +24,14 @@ public class WordipleUser {
     private boolean competitiveBan;
     private boolean onlineBan;
     private boolean globalBan;
-    private int guesses;
     private int rank;
     private int highestRank;
     private PacketHolder socket;
+    private List<Double> solveTimes;
+    private List<Integer> guesses;
+    private List<String> openers;
 
-    public WordipleUser(String email, UUID id, String username, int rating, int highestRating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, int guesses, int rank, int highestRank, PacketHolder socket) {
+    public WordipleUser(String email, UUID id, String username, int rating, int highestRating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, String guesses, String solveTimes, String openers, PacketHolder socket) {
         this.email = email;
         this.id = id;
         this.username = username;
@@ -45,14 +46,24 @@ public class WordipleUser {
         this.competitiveBan = competitiveBan;
         this.onlineBan = onlineBan;
         this.globalBan = globalBan;
-        this.guesses = guesses;
-        this.rank = rank;
-        this.highestRank = highestRank;
         this.socket = socket;
+        this.guesses = new ArrayList<Integer>() {{
+            for (String guess : guesses.split(",")) {
+                add(Integer.parseInt(guess));
+            }
+        }};
+        this.solveTimes = new ArrayList<Double>() {{
+            for (String solveTime : solveTimes.split(",")) {
+                add(Double.parseDouble(solveTime));
+            }
+        }};
+        this.openers = new ArrayList<String>() {{
+            this.addAll(Arrays.asList(openers.split(",")));
+        }};
     }
 
     public WordipleUser(String email, String username) {
-        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, 0, 0, 0, null);
+        this(email, DatabaseManager.instance.generateNewId(), username, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, "", null, null, null);
     }
 
     // Generate getters and setters
@@ -159,12 +170,84 @@ public class WordipleUser {
         this.globalBan = globalBan;
     }
 
-    public int getGuesses() {
-        return this.guesses;
+    public double getAverageSolveTime() {
+        double sum = 0;
+        for (double solveTime : solveTimes) {
+            sum += solveTime;
+        }
+        return Math.round(sum / solveTimes.size() * 100.0) / 100.0;
+    }
+    public double getAverageGuesses() {
+        double sum = 0;
+        for (int guess : guesses) {
+            sum += guess;
+        }
+        return Math.round(sum / guesses.size() * 100.0) / 100.0;
     }
 
-    public void setGuesses(int guesses) {
-        this.guesses = guesses;
+    public String getMostUsedOpener() {
+        Map<String, Integer> openerMap = new HashMap<>();
+        for (String opener : openers) {
+            if (openerMap.containsKey(opener)) {
+                openerMap.put(opener, openerMap.get(opener) + 1);
+            } else {
+                openerMap.put(opener, 1);
+            }
+        }
+        int max = 0;
+        String mostUsedOpener = "N/A";
+        for (String opener : openerMap.keySet()) {
+            if (openerMap.get(opener) > max) {
+                max = openerMap.get(opener);
+                mostUsedOpener = opener;
+            }
+        }
+        return mostUsedOpener;
+    }
+
+    public String getSolveTimesAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (double solveTime : solveTimes) {
+            sb.append(solveTime).append(",");
+        }
+        return sb.substring(0, sb.length() - 1);
+    }
+
+    public String getGuessesAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (int guess : guesses) {
+            sb.append(guess).append(",");
+        }
+        return sb.substring(0, sb.length() - 1);
+    }
+
+    public String getOpenersAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String opener : openers) {
+            sb.append(opener).append(",");
+        }
+        return sb.substring(0, sb.length() - 1);
+    }
+
+    public void addGuess(int guesses) {
+        if (this.guesses.size() >= 20) {
+            this.guesses.remove(0);
+        }
+        this.guesses.add(guesses);
+    }
+
+    public void addSolveTime(double solveTime) {
+        if (this.solveTimes.size() >= 20) {
+            this.solveTimes.remove(0);
+        }
+        this.solveTimes.add(solveTime);
+    }
+
+    public void addOpener(String opener) {
+        if (this.openers.size() >= 20) {
+            this.openers.remove(0);
+        }
+        this.openers.add(opener);
     }
 
     public ObjectOutputStream getOutputStream() {
