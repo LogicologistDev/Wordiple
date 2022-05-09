@@ -16,7 +16,7 @@ public abstract class FadeHorizontalTransitionAdapter implements Initializable {
         this.pane = pane;
     }
 
-    public void transitionIn() {
+    public void transitionIn(Runnable runnable) {
         pane.setOpacity(0);
         pane.setLayoutX(pane.getLayoutX() + 100);
 
@@ -33,7 +33,15 @@ public abstract class FadeHorizontalTransitionAdapter implements Initializable {
 
         fadeIn.play();
         timelineIn.play();
+        timelineIn.setOnFinished(event -> {
+            if (runnable != null) runnable.run();
+        });
     }
+
+    public void transitionIn() {
+        transitionIn(null);
+    }
+
 
     public void transitionOut(Runnable onFinished) {
         FadeTransition fadeOut = new FadeTransition(Duration.millis(400));
@@ -51,7 +59,7 @@ public abstract class FadeHorizontalTransitionAdapter implements Initializable {
         fadeOut.play();
 
         timelineOut.setOnFinished(event -> {
-            onFinished.run();
+            if (onFinished != null) onFinished.run();
         });
     }
 }
