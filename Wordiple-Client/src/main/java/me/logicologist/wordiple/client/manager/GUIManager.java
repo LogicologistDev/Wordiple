@@ -140,8 +140,12 @@ public class GUIManager extends Application {
             playerHeaderController.setUsername(SessionManager.getInstance().getUsername());
             playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
             playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
-            if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
-
+            if (fadeIn) {
+                ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> {
+                    SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC);
+                });
+                return;
+            }
             SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -156,7 +160,6 @@ public class GUIManager extends Application {
             CompetitiveQueueController controller = fxmlLoader.getController();
             controller.setInfo(playerInfo, queueInfo);
             if (fadeIn) controller.transitionIn();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

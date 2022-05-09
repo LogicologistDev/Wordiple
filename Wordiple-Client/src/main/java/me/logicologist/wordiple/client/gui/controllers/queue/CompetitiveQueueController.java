@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.utils.Utils;
 
 import java.net.URL;
@@ -51,6 +53,7 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
             if (midAction) return;
             midAction = true;
 
+            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
             super.transitionOut(() -> {
                 GUIManager.getInstance().showGameSelectScreen(true);
             });
