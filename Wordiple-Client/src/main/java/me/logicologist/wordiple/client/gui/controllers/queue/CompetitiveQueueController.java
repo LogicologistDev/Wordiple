@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
+import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SoundManager;
@@ -43,6 +44,7 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
     private Label ratingLabel;
 
     private boolean midAction = false;
+    private boolean inQueue = false;
     private ScheduledFuture<?> future = null;
 
     @Override
@@ -58,12 +60,42 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
             });
             future.cancel(true);
         });
-        AtomicLong openedTime = new AtomicLong();
-        future = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
-            Platform.runLater(() -> timeLabel.setText("Queue Elapsed: " + Utils.formatShortTime(openedTime.getAndIncrement())));
-        }, 0, 1, TimeUnit.SECONDS);
-    }
 
+        enterButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            if (!inQueue) {
+                LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Joining Queue...");
+                inQueue = true;
+                enterButton.getStyleClass().clear();
+                enterButton.getStyleClass().add("button-competitive-queue-leave-button");
+                WordipleClient.getExecutor().schedule(() -> {
+                    loadScreenController.remove(() -> {
+                        midAction = false;
+                        AtomicLong openedTime = new AtomicLong();
+                        future = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
+                            Platform.runLater(() -> timeLabel.setText("Queue Elapsed: " + Utils.formatShortTime(openedTime.getAndIncrement())));
+                        }, 0, 1, TimeUnit.SECONDS);
+                    });
+                }, 1, TimeUnit.SECONDS);
+                return;
+            }
+
+            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Leaving Queue...");
+
+            inQueue = false;
+            enterButton.getStyleClass().clear();
+            enterButton.getStyleClass().add("button-competitive-queue-enter-button");
+            WordipleClient.getExecutor().schedule(() -> {
+                loadScreenController.remove(() -> {
+                    future.cancel(true);
+                    timeLabel.setText("Not in queue!");
+                    midAction = false;
+                });
+            }, 1, TimeUnit.SECONDS);
+        });
+    }
 
 
     public void setInfo(PacketArguments playerInfo, PacketArguments queueInfo) {
