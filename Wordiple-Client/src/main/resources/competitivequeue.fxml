@@ -13,7 +13,7 @@
          <children>
             <Button fx:id="enterButton" alignment="BASELINE_LEFT" layoutX="600.0" layoutY="189.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive-queue-enter-button" stylesheets="@style.css" textFill="WHITE" />
             <Button fx:id="backButton" alignment="BASELINE_LEFT" layoutX="-200.0" layoutY="629.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-back" stylesheets="@style.css" textFill="WHITE" />
-            <Label fx:id="timeLabel" alignment="CENTER" layoutX="679.0" layoutY="304.0" prefHeight="61.0" prefWidth="702.0" styleClass="text-field-queuetime" stylesheets="@style.css" text="Queue elapsed: 3m, 53s" textAlignment="CENTER" />
+            <Label fx:id="timeLabel" alignment="CENTER" layoutX="679.0" layoutY="304.0" prefHeight="61.0" prefWidth="702.0" styleClass="text-field-queuetime" stylesheets="@style.css" text="Not in queue!" textAlignment="CENTER" />
             <Label fx:id="activeLabel" alignment="CENTER" layoutX="813.0" layoutY="619.0" prefHeight="120.0" prefWidth="620.0" styleClass="text-field-active" stylesheets="@style.css" text="6666 Active" textAlignment="CENTER" />
             <AnchorPane layoutX="293.0" layoutY="379.0" prefHeight="225.0" prefWidth="773.0" styleClass="pane-overlay" stylesheets="@style.css">
                <children>

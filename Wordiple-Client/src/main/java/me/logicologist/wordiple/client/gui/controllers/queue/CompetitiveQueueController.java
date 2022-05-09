@@ -58,7 +58,7 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
             super.transitionOut(() -> {
                 GUIManager.getInstance().showGameSelectScreen(true);
             });
-            future.cancel(true);
+            if (future != null) future.cancel(true);
         });
 
         enterButton.setOnAction(event -> {
