@@ -20,6 +20,7 @@ import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderContro
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
+import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ public class GUIManager extends Application {
     public void start(Stage stage) {
         instance = this;
         this.stage = stage;
-
         stage.setTitle("Wordiple");
         stage.setResizable(false);
 
@@ -47,7 +47,6 @@ public class GUIManager extends Application {
         showMainScreen(false);
 
         stage.show();
-
         stage.setOnCloseRequest(e -> {
             try {
                 Platform.exit();
@@ -55,6 +54,7 @@ public class GUIManager extends Application {
                         packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("logout", false));
                 PacketManager.getInstance().getSocket().shutdownClient();
                 WordipleClient.getExecutor().shutdownNow();
+                SoundManager.getInstance().stopSounds();
                 System.exit(0);
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -141,6 +141,8 @@ public class GUIManager extends Application {
             playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
             playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
             if (fadeIn) ((GameSelectController) fxmlLoader.getController()).transitionIn();
+
+            SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

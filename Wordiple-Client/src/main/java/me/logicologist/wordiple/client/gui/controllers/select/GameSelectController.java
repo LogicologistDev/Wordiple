@@ -9,9 +9,11 @@ import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizonta
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
+import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.net.URL;
@@ -47,6 +49,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             LoadScreenController controller = GUIManager.getInstance().showLoadScreen("Logging out...");
             SessionManager.getInstance().setLocalSessionID(null, true);
             SessionManager.getInstance().setLoggedIn(false);
+            SoundManager.getInstance().stopSound(SoundType.BACKGROUND_MUSIC);
 
             controller.remove(() -> {
                 GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));
@@ -66,6 +69,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             if (midAction) return;
             midAction = true;
 
+            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
             LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
             PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
