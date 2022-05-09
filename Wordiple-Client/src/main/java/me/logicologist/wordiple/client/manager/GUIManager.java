@@ -40,7 +40,6 @@ public class GUIManager extends Application {
     private static GUIManager instance;
     private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
     public Stage stage;
-    public Dimension dimension;
 
     @Override
     public void start(Stage stage) {
@@ -295,13 +294,24 @@ public class GUIManager extends Application {
     }
 
     public void handleScene(Scene scene) {
-        if (dimension == null) {
-            this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        }
+        this.handleDimension(Toolkit.getDefaultToolkit().getScreenSize(), scene);
+//        stage.widthProperty().addListener((arg0, arg1, arg2) -> {
+//            Dimension dimension = new Dimension();
+//            dimension.setSize(arg2.doubleValue(), scene.getHeight());
+//            handleDimension(dimension, scene);
+//        });
+//        stage.heightProperty().addListener((arg0, arg1, arg2) -> {
+//            Dimension dimension = new Dimension();
+//            dimension.setSize(scene.getWidth(), arg2.doubleValue());
+//            handleDimension(dimension, scene);
+//        });
+    }
+
+    private void handleDimension(Dimension dimension, Scene scene) {
         double width = dimension.getWidth();
         double height = dimension.getHeight();
-        double w = width/1439;
-        double h = height/849;
+        double w = width / 1439;
+        double h = height / 849;
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
     }
