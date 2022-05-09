@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.manager.GUIManager;
 
 public abstract class FadeHorizontalTransitionAdapter implements Initializable {
 

@@ -17,11 +17,12 @@ public class WordipleClient {
     private static File appData;
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
     private static Logger logger;
+    private static boolean developerMode;
 
     public static void main(String[] args) {
         logger = LogManager.getLogger("WordipleClient");
-        boolean developerMode = Arrays.asList(args).contains("-developer");
-        new SessionManager(developerMode);
+        developerMode = Arrays.asList(args).contains("-developer");
+        new SessionManager();
         new PacketManager(developerMode).load();
         new SoundManager().load();
         GUIManager.launch(args);
@@ -39,9 +40,13 @@ public class WordipleClient {
             workingDirectory += File.separator + "Library" + File.separator + "Application Support";
         }
 
-        appData = new File(workingDirectory + File.separator + "Wordiple");
+        appData = new File(developerMode ? "data" : workingDirectory + File.separator + "Wordiple");
         logger.info("AppData: " + appData.getAbsolutePath());
         return appData;
+    }
+
+    public static boolean isDeveloperMode() {
+        return developerMode;
     }
 
     public static ScheduledExecutorService getExecutor() {

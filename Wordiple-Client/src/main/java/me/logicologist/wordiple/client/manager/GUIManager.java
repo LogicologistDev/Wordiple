@@ -3,9 +3,14 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -23,6 +28,8 @@ import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,17 +40,17 @@ public class GUIManager extends Application {
     private static GUIManager instance;
     private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
     public Stage stage;
+    public Dimension dimension;
 
     @Override
     public void start(Stage stage) {
         instance = this;
         this.stage = stage;
         stage.setTitle("Wordiple");
-        stage.setResizable(false);
-
         stage.setHeight(849);
-        stage.setWidth(1456);
-
+        stage.setWidth(1439);
+        stage.setMaximized(true);
+//        stage.setResizable(false);
         showMainScreen(false);
 
         stage.show();
@@ -67,7 +74,7 @@ public class GUIManager extends Application {
     public void showMainScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mainscreen.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             if (fadeIn) ((MainScreenController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -77,7 +84,7 @@ public class GUIManager extends Application {
     public void showLoginScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             if (fadeIn) ((LoginController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -87,7 +94,7 @@ public class GUIManager extends Application {
     public void showSignupScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/signup.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             if (fadeIn) ((SignupController) fxmlLoader.getController()).transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -97,7 +104,7 @@ public class GUIManager extends Application {
     public void showSignupConfirmScreen(boolean fadeIn, String email, String username) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/signupconfirm.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             SignupConfirmController controller = fxmlLoader.getController();
             controller.setEmail(email);
             controller.setUsername(username);
@@ -110,7 +117,7 @@ public class GUIManager extends Application {
     public void showResetPasswordScreen(boolean fadeIn, String email, String code) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/resetpassword.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             ResetPasswordController controller = fxmlLoader.getController();
             controller.setEmail(email);
             controller.setCode(code);
@@ -123,7 +130,7 @@ public class GUIManager extends Application {
     public void showForgotPasswordScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/forgotpassword.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             ForgotPasswordController controller = fxmlLoader.getController();
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
@@ -134,7 +141,7 @@ public class GUIManager extends Application {
     public void showGameSelectScreen(boolean fadeIn) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
             PlayerHeaderController playerHeaderController = PlayerHeaderController.instance;
             playerHeaderController.setUsername(SessionManager.getInstance().getUsername());
@@ -153,7 +160,7 @@ public class GUIManager extends Application {
     public void showCompetitiveQueueScreen(boolean fadeIn, PacketArguments playerInfo, PacketArguments queueInfo) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/competitivequeue.fxml"));
-            stage.setScene(new Scene(fxmlLoader.load()));
+            this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
             CompetitiveQueueController controller = fxmlLoader.getController();
             controller.setInfo(playerInfo, queueInfo);
@@ -278,6 +285,25 @@ public class GUIManager extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public Scene loadScene(Parent parent) {
+        Scene scene = new Scene(parent);
+        handleScene(scene);
+        stage.setScene(scene);
+        return scene;
+    }
+
+    public void handleScene(Scene scene) {
+        if (dimension == null) {
+            this.dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        }
+        double width = dimension.getWidth();
+        double height = dimension.getHeight();
+        double w = width/1439;
+        double h = height/849;
+        Scale scale = new Scale(w, h, 0, 0);
+        scene.getRoot().getTransforms().setAll(scale);
     }
 
     public static void launch(String[] args) {

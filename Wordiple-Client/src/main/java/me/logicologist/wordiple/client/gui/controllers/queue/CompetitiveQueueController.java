@@ -48,7 +48,6 @@ public class CompetitiveQueueController extends FadeHorizontalTransitionAdapter 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
-
         backButton.setOnAction(event -> {
             if (midAction) return;
             midAction = true;
