@@ -22,9 +22,6 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             this.setVolume(type.getVolume());
-            if (!type.isRepeat()) return;
-
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -46,6 +43,9 @@ public class Sound {
 
         // Play clip
         clip.start();
+        if (!type.isRepeat()) return;
+
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public void stop() {

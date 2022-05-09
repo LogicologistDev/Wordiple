@@ -141,9 +141,7 @@ public class GUIManager extends Application {
             playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
             playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
             if (fadeIn) {
-                ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> {
-                    SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC);
-                });
+                ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC));
                 return;
             }
             SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC);
