@@ -2,6 +2,7 @@ package me.logicologist.wordiple.client.manager;
 
 import me.logicologist.wordiple.client.sound.Sound;
 import me.logicologist.wordiple.client.sound.SoundType;
+import me.logicologist.wordiple.common.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,15 @@ public class SoundManager {
     }
 
     public void load() {
+        SessionManager manager = SessionManager.getInstance();
+        String version = Utils.getVersion();
+        String localVersion = manager.getLocalSoundVersion();
         for (SoundType value : SoundType.values()) {
-            value.download();
+            value.download(version, localVersion);
+
             this.sounds.add(new Sound(value));
         }
+        manager.setLocalSoundVersion(version);
     }
 
     public Sound getSound(SoundType type) {

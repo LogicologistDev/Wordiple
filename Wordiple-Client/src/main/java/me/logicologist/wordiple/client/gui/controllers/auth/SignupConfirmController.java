@@ -15,6 +15,7 @@ import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.packets.auth.SignupConfirmPacket;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.utils.Utils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -98,7 +99,8 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                     });
                     return false;
                 }
-                SessionManager.getInstance().setLocalSessionID(uuidResponse, true);
+                SessionManager manager = SessionManager.getInstance();
+                manager.setLocalSessionID(uuidResponse, true);
                 Platform.runLater(() -> {
                     PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
                             .sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(uuidResponse))
@@ -108,7 +110,14 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                                     GUIManager.addReadyListener(instance -> instance.showLoginScreen(true));
                                     return false;
                                 }
-                                SessionManager.getInstance().load(response, username);
+                                manager.load(response, username);
+                                if (!Utils.getVersion().equals(manager.getVersion())) {
+                                    Platform.runLater(() -> {
+                                        loadScreen.remove(null);
+                                        errorMessageLabel.setText("You are using an outdated version of the client. Please update.");
+                                    });
+                                    return false;
+                                }
                                 loadScreen.remove(() -> {
                                     super.transitionOut(() -> {
                                         GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showGameSelectScreen(false));

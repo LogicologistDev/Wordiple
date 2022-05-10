@@ -5,6 +5,7 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.utils.Utils;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -20,6 +21,7 @@ public class SessionManager {
     private int currentXp;
     private int neededXp;
     private String username;
+    private String version;
 
 
     public SessionManager() {
@@ -46,10 +48,21 @@ public class SessionManager {
         return null;
     }
 
+    public String getLocalSoundVersion() {
+        try {
+            Properties properties = new Properties();
+            properties.load(Files.newInputStream(file.toPath()));
+            return properties.getProperty("soundVersion");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public void setLocalSessionID(UUID localSessionID, boolean sendPacket) {
         try {
+            this.loggedIn = localSessionID != null;
             if (localSessionID == null) {
-                this.loggedIn = false;
                 PlayerHeaderController.instance = null;
                 if (sendPacket) {
                     PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
@@ -57,10 +70,24 @@ public class SessionManager {
                 }
             }
             Properties properties = new Properties();
+            properties.load(Files.newInputStream(file.toPath()));
             if (localSessionID != null) {
                 properties.setProperty("sessionID", localSessionID.toString());
-                this.loggedIn = true;
             }
+            if (localSessionID == null) {
+                properties.remove("sessionID");
+            }
+            properties.store(Files.newOutputStream(file.toPath()), "Please do not share/touch this file.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void setLocalSoundVersion(String localSoundVersion) {
+        try {
+            Properties properties = new Properties();
+            properties.load(Files.newInputStream(file.toPath()));
+            properties.setProperty("soundVersion", localSoundVersion);
             properties.store(Files.newOutputStream(file.toPath()), "Please do not share/touch this file.");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -113,6 +140,15 @@ public class SessionManager {
         this.setLevel(arguments.get("level", Integer.class));
         this.setUsername(username);
         this.setLoggedIn(true);
+        this.setVersion(arguments.get("version", String.class));
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return this.version;
     }
 
     public static SessionManager getInstance() {

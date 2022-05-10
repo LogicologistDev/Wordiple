@@ -113,7 +113,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                 }, 2, TimeUnit.SECONDS);
             }));
 
-            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
 
 
         });

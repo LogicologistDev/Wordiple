@@ -3,6 +3,8 @@ package me.logicologist.wordiple.server.packets.info;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.utils.Utils;
+import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
@@ -52,6 +54,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setValues("playtime", wordipleUser.getPlaytime())
                 .setValues("competitiveBan", wordipleUser.isCompetitiveBan())
                 .setValues("onlineBan", wordipleUser.isOnlineBan())
+                .setValues("version", Utils.getVersion())
                 .setValues("globalBan", wordipleUser.isGlobalBan()));
     }
 
@@ -71,6 +74,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("playtime", Long.class)
                 .setArgument("competitiveBan", Boolean.class)
                 .setArgument("onlineBan", Boolean.class)
+                .setArgument("version", String.class)
                 .setArgument("globalBan", Boolean.class);
     }
 }
