@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -49,7 +50,7 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                 GUIManager.getInstance().showMainScreen(true);
             });
         });
-        resetButton.setOnAction(event -> {
+        Runnable runnable = () -> {
             Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
             if (emailField.getText().isEmpty() || !emailPattern.matcher(emailField.getText()).matches()) {
                 errorMessageLabel.setText("Please enter a valid email address.");
@@ -80,6 +81,12 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 midAction = false;
             }), 10, TimeUnit.SECONDS);
+        };
+        movablePane.setOnKeyReleased(event -> {
+            if (event.getCode() != KeyCode.ENTER) return;
+
+            runnable.run();
         });
+        resetButton.setOnAction(event -> runnable.run());
     }
 }

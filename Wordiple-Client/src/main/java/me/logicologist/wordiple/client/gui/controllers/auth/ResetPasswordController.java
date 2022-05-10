@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -60,7 +61,7 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             super.transitionOut(() -> GUIManager.getInstance().showMainScreen(true));
         });
 
-        resetButton.setOnAction(event -> {
+        Runnable runnable = () -> {
             if (passwordField.getText().isEmpty() || passwordField.getText().length() <= 5) {
                 errorMessageLabel.setText("Invalid password.");
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
@@ -105,7 +106,13 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 midAction = false;
             }), 10, TimeUnit.SECONDS);
+        };
+        movablePane.setOnKeyReleased(event -> {
+            if (event.getCode() != KeyCode.ENTER) return;
+
+            runnable.run();
         });
+        resetButton.setOnAction(event -> runnable.run());
     }
 
     public void setEmail(String email) {

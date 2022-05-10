@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -62,8 +63,7 @@ public class SignupController extends FadeVerticalTransitionAdapter {
                 GUIManager.getInstance().showMainScreen(true);
             });
         });
-
-        signupButton.setOnAction(event -> {
+        Runnable runnable = () -> {
             Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
             Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{3,16}$");
             if (emailField.getText().isEmpty() || !emailPattern.matcher(emailField.getText()).matches()) {
@@ -130,6 +130,12 @@ public class SignupController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 midAction = false;
             }), 10, TimeUnit.SECONDS);
+        };
+        movablePane.setOnKeyReleased(event -> {
+            if (event.getCode() != KeyCode.ENTER) return;
+
+            runnable.run();
         });
+        signupButton.setOnAction(event -> runnable.run());
     }
 }

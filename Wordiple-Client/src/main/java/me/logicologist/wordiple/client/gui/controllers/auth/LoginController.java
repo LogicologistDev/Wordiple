@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -64,7 +65,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 GUIManager.getInstance().showMainScreen(true);
             });
         });
-        loginButton.setOnAction(event -> {
+        Runnable runnable = () -> {
             Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9_]{1,16}$");
             errorMessageLabel.setText("");
             if (!usernamePattern.matcher(usernameField.getText()).matches()) {
@@ -154,7 +155,13 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 midAction = false;
             }), 10, TimeUnit.SECONDS);
+        };
+        movablePane.setOnKeyReleased(event -> {
+            if (event.getCode() != KeyCode.ENTER) return;
+
+            runnable.run();
         });
+        loginButton.setOnAction(event -> runnable.run());
         forgotPasswordButton.setOnAction(event -> super.transitionOut(() -> GUIManager.getInstance().showForgotPasswordScreen(true)));
     }
 }
