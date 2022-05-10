@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 public class LeftSkin extends ButtonSkin {
 
@@ -98,6 +100,7 @@ public class LeftSkin extends ButtonSkin {
             if (button.isHover()) {
                 timelinePressToIn.play();
                 fadePressToIn.play();
+                SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                 return;
             }
             timelinePressToOut.play();

@@ -112,6 +112,8 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                     });
                 }, 2, TimeUnit.SECONDS);
             }));
+
+
         });
 
         enterButton.setOnAction(event -> {
