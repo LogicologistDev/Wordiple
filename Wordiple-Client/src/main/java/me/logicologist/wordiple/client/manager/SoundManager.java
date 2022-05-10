@@ -18,24 +18,34 @@ public class SoundManager {
     private static SoundManager instance;
 
     private final List<Sound> sounds;
+    private final String version;
+    private final String localVersion;
 
     public SoundManager() {
         instance = this;
         this.sounds = new ArrayList<>();
+        this.version = Utils.getVersion();
+        this.localVersion = SessionManager.getInstance().getLocalSoundVersion();
     }
 
-    public void load(GUIManager guiManager, Runnable runnable) {
-        SessionManager manager = SessionManager.getInstance();
-        String version = Utils.getVersion();
-        String localVersion = manager.getLocalSoundVersion();
+    public long neededDownloaded() {
+        return Arrays.stream(SoundType.values()).filter(x -> x.needDownload(version, localVersion)).count();
+    }
 
-        AtomicReference<LoadScreenController> controller = new AtomicReference<>();
-        AtomicInteger downloaded = new AtomicInteger();
-        long neededDownloaded = Arrays.stream(SoundType.values()).filter(x -> x.needDownload(version, localVersion)).count();
-        if (neededDownloaded > 0) {
-            controller.set(guiManager.showLoadScreen("Fetching Assets (0%)"));
+    public void load(GUIManager guiManager, Runnable runnable, long neededDownloaded) {
+        if (sounds.size() == SoundType.values().length) {
+            runnable.run();
+            return;
         }
+        if (neededDownloaded <= 0) {
+            for (SoundType value : SoundType.values()) {
+                this.sounds.add(new Sound(value));
+            }
+            return;
+        }
+        LoadScreenController controller = guiManager.showLoadScreen("Fetching Assets (0%)");
         WordipleClient.getExecutor().submit(() -> {
+            AtomicInteger downloaded = new AtomicInteger();
             WordipleClient.getLogger().info("Needed sounds: " + neededDownloaded);
             for (SoundType value : SoundType.values()) {
                 if (!value.needDownload(version, localVersion)) {
@@ -47,15 +57,15 @@ public class SoundManager {
                     float result = downloaded.get() == 0 ? 0 : ((float) downloaded.get() / (float) neededDownloaded) * 100.0f;
                     Platform.runLater(() -> {
                         String s = "Fetching Assets (" + ((int) result) + "%)";
-                        controller.get().setText(s);
+                        controller.setText(s);
                     });
                 });
                 downloaded.incrementAndGet();
                 this.sounds.add(new Sound(value));
             }
-            if (controller.get() != null) controller.get().remove(null);
+            controller.remove(null);
 
-            manager.setLocalSoundVersion(version);
+            SessionManager.getInstance().setLocalSoundVersion(version);
             WordipleClient.getLogger().info("Loaded sounds successfully");
             Platform.runLater(runnable);
         });

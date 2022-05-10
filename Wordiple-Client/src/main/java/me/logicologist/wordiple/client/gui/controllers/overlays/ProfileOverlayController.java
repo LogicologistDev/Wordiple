@@ -27,9 +27,6 @@ public class ProfileOverlayController extends AttachableAdapter {
     public AnchorPane movablePane;
 
     @FXML
-    public Button backgroundButton;
-
-    @FXML
     public TextField gamesPlayedField;
 
     @FXML
@@ -88,7 +85,7 @@ public class ProfileOverlayController extends AttachableAdapter {
         super.setAttachment(movablePane);
         movablePane.setLayoutY(-200);
         movablePane.setOpacity(0);
-        backgroundButton.setOnAction(x -> {
+        movablePane.setOnMouseClicked(x -> {
             if (midAction) return;
             midAction = true;
             transitionOut();

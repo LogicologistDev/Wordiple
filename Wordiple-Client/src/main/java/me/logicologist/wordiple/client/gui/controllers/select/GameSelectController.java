@@ -2,6 +2,7 @@ package me.logicologist.wordiple.client.gui.controllers.select;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
@@ -139,7 +140,14 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
                 });
             }, 10, TimeUnit.SECONDS);
         });
+        movablePane.setOnKeyReleased(event -> {
+            if (midAction) return;
+            midAction = true;
+            if (event.getCode() != KeyCode.ESCAPE || GUIManager.getInstance() == null) return;
 
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+            GUIManager.getInstance().showConfirmExitOverlay(() -> midAction = false);
+        });
     }
 
     public void setLevelBar() {

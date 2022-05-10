@@ -14,6 +14,7 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.auth.*;
+import me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
@@ -49,7 +50,6 @@ public class GUIManager extends Application {
         this.stage = stage;
         stage.setTitle("Wordiple");
 
-
         String OS = (System.getProperty("os.name")).toUpperCase();
         stage.setHeight(849);
         stage.setWidth(1439);
@@ -61,8 +61,12 @@ public class GUIManager extends Application {
         stage.setMaximized(true);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
-        showMainScreen(false);
 
+        SoundManager soundManager = new SoundManager();
+        long neededSongs = soundManager.neededDownloaded();
+        if (neededSongs <= 0) soundManager.load(this, null, neededSongs);
+
+        showMainScreen(false);
         stage.show();
         stage.setOnCloseRequest(e -> {
             try {
@@ -77,11 +81,11 @@ public class GUIManager extends Application {
                 e1.printStackTrace();
             }
         });
-        new SoundManager().load(this, () -> {
+        soundManager.load(this, () -> {
             instance = this;
             readyListeners.forEach(x -> x.accept(this));
             readyListeners.clear();
-        });
+        }, neededSongs);
     }
 
     public void showMainScreen(boolean fadeIn) {
@@ -268,6 +272,23 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
             fxmlLoader.load();
             RankOverlayController rankOverlayController = fxmlLoader.getController();
+            rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            rankOverlayController.attach();
+            rankOverlayController.transitionIn(overlayController, runAfter);
+            return rankOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ConfirmExitOverlayController showConfirmExitOverlay(Runnable runAfter) {
+        //TODO: do this.
+        try {
+            OverlayController overlayController = showOverlay(true);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/confirmexitoverlay.fxml"));
+            fxmlLoader.load();
+            ConfirmExitOverlayController rankOverlayController = fxmlLoader.getController();
             rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
             rankOverlayController.attach();
             rankOverlayController.transitionIn(overlayController, runAfter);

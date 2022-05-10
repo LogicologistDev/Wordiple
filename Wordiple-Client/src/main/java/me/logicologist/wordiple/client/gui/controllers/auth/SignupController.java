@@ -13,7 +13,9 @@ import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.packets.auth.SignupPacket;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -134,6 +136,7 @@ public class SignupController extends FadeVerticalTransitionAdapter {
         movablePane.setOnKeyReleased(event -> {
             if (event.getCode() != KeyCode.ENTER) return;
 
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             runnable.run();
         });
         signupButton.setOnAction(event -> runnable.run());

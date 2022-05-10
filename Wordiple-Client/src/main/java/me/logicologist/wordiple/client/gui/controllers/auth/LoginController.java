@@ -14,9 +14,11 @@ import me.logicologist.wordiple.client.gui.controllers.transitions.FadeVerticalT
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.packets.auth.LoginPacket;
 import me.logicologist.wordiple.client.packets.auth.SaltRetrievePacket;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
+import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
 
@@ -159,6 +161,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
         movablePane.setOnKeyReleased(event -> {
             if (event.getCode() != KeyCode.ENTER) return;
 
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             runnable.run();
         });
         loginButton.setOnAction(event -> runnable.run());
