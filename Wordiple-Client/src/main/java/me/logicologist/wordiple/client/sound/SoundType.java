@@ -17,14 +17,14 @@ public enum SoundType {
 
     OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", 0.22f),
     BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", 0.22f, true),
-    VANILLA_FLAVORED_SODA("https://www.dropbox.com/s/hjlxarid3lys7ml/vanilla_flavored_soda.wav?dl=1", "background_music.wav", 0.22f, true),
-    GREAT_ESCAPE("https://www.dropbox.com/s/4nk296nkkaopdlp/great_escape.wav?dl=1", "background_music.wav", 0.22f, true),
+    VANILLA_FLAVORED_SODA("https://www.dropbox.com/s/hjlxarid3lys7ml/vanilla_flavored_soda.wav?dl=1", "vanilla_flavored_soda.wav", 0.22f, true),
+    GREAT_ESCAPE("https://www.dropbox.com/s/4nk296nkkaopdlp/great_escape.wav?dl=1", "great_escape.wav", 0.22f, true),
 
     BACKGROUND_MUSIC(OVERWORLD, BACKGROUND, VANILLA_FLAVORED_SODA, GREAT_ESCAPE),
 
-    DROPBUBBLE("https://www.dropbox.com/s/vw1k9lgozbtso7r/dropbubble.wav?dl=1", "overworld.wav", 0.22f),
-    TIMELINE("https://www.dropbox.com/s/o1kbisqvp7mymqv/timeline.wav?dl=1", "background_music.wav", 0.22f, true),
-    UP_IN_MY_JAM("https://www.dropbox.com/s/oiwl44jp3wz0ytw/up_in_my_jam.wav?dl=1", "background_music.wav", 0.22f, true),
+    DROPBUBBLE("https://www.dropbox.com/s/vw1k9lgozbtso7r/dropbubble.wav?dl=1", "dropbubble.wav", 0.22f),
+    TIMELINE("https://www.dropbox.com/s/o1kbisqvp7mymqv/timeline.wav?dl=1", "timeline.wav", 0.22f, true),
+    UP_IN_MY_JAM("https://www.dropbox.com/s/oiwl44jp3wz0ytw/up_in_my_jam.wav?dl=1", "up_in_my_jam.wav", 0.22f, true),
 
     CALM_MUSIC(DROPBUBBLE, TIMELINE, UP_IN_MY_JAM),
 
