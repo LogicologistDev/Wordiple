@@ -22,11 +22,21 @@ public class Sound {
     public Sound(SoundType type) {
         this.type = type;
         try {
-            clip = AudioSystem.getClip();
             if (type.getChildren() != null) {
                 this.playedSounds = new ArrayList<>();
                 this.children = new ArrayList<>(Arrays.asList(type.getChildren()));
                 Collections.shuffle(children);
+            }
+            this.loadSound(this.children == null ? type : this.children.get(0));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void loadSound(SoundType type) {
+        try {
+            clip = AudioSystem.getClip();
+            if (this.children != null) {
                 clip.addLineListener(event -> {
                     if (event.getType() != LineEvent.Type.STOP || this.children == null) return;
                     if (children.size() == playedSounds.size()) playedSounds.clear();
@@ -40,14 +50,6 @@ public class Sound {
                     this.play();
                 });
             }
-            this.loadSound(this.children == null ? type : this.children.get(0));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void loadSound(SoundType type) {
-        try {
             if (this.playedSounds != null) this.playedSounds.add(type);
             WordipleClient.getLogger().info("Loading sound: " + type.getFile());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
