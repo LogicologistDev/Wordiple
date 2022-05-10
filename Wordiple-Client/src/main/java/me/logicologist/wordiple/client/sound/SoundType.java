@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public enum SoundType {
 
@@ -36,7 +38,7 @@ public enum SoundType {
 
 
     private final String url;
-    private final String fileName;
+    private final File file;
     private final float volume;
     private final boolean repeat;
     private SoundType[] children;
@@ -47,9 +49,12 @@ public enum SoundType {
 
     SoundType(String url, String fileName, float volume, boolean repeat) {
         this.url = url;
-        this.fileName = fileName;
+        this.file = fileName == null ? null : new File(WordipleClient.getAppData() + File.separator + "sounds", fileName);
         this.volume = volume;
         this.repeat = repeat;
+        if (file != null && !file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
     }
 
     SoundType(SoundType... children) {
@@ -57,21 +62,23 @@ public enum SoundType {
         this.children = children;
     }
 
-    public void download(String version, String localVersion) {
-        if (this.url == null) return;
+    public boolean needDownload(String version, String localVersion) {
+        if (file == null) return false;
+
+        boolean exists = file.exists();
+        return !exists || !version.equals(localVersion);
+    }
+
+    public void download(String version, String localVersion, Runnable update) {
+        if (this.url == null) {
+            return;
+        }
 
 
         try {
-            File file = new File(WordipleClient.getAppData() + File.separator + "sounds", fileName);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
+            if (!this.needDownload(version, localVersion)) return;
 
-            boolean exists = file.exists();
-            if (exists && version.equals(localVersion)) {
-                return;
-            }
-            if (!exists) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             HttpURLConnection httpcon = (HttpURLConnection) new URL(url).openConnection();
@@ -96,15 +103,16 @@ public enum SoundType {
             }
 
             //DONWLOAD HERE
-            WordipleClient.getLogger().info("Downloaded sound file " + fileName);
+            WordipleClient.getLogger().info("Downloaded sound file " + this.file);
             Files.copy(httpcon.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            update.run();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public String getFileName() {
-        return fileName;
+    public File getFile() {
+        return file;
     }
 
     public float getVolume() {

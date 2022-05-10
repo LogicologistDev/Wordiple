@@ -50,9 +50,8 @@ public class Sound {
 
     private void loadSound(SoundType type) {
         try {
-            File sound = new File(WordipleClient.getAppData() + File.separator + "sounds", type.getFileName());
-            WordipleClient.getLogger().info("Loading sound: " + sound);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sound);
+            WordipleClient.getLogger().info("Loading sound: " + type.getFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
             clip.open(audioInputStream);
             this.setVolume(type.getVolume());
         } catch (Exception ex) {

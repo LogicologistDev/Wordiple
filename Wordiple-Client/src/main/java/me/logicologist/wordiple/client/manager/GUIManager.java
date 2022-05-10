@@ -78,8 +78,10 @@ public class GUIManager extends Application {
                 e1.printStackTrace();
             }
         });
-        readyListeners.forEach(x -> x.accept(this));
-        readyListeners.clear();
+        new SoundManager().load(this, () -> {
+            readyListeners.forEach(x -> x.accept(this));
+            readyListeners.clear();
+        });
     }
 
     public void showMainScreen(boolean fadeIn) {
