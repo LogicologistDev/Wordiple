@@ -80,7 +80,11 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                 new ShakeAnimation(2, movablePane.layoutXProperty(), 200).play();
                 return;
             }
-
+            SessionManager manager = SessionManager.getInstance();
+            if (manager.getVersion() != null && !Utils.getVersion().equals(manager.getVersion())) {
+                errorMessageLabel.setText("You are using an outdated version of the client. Please update.");
+                return;
+            }
             if (midAction) return;
             midAction = true;
             LoadScreenController loadScreen = GUIManager.getInstance().showLoadScreen("Logging in...");
@@ -111,7 +115,6 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                         });
                         return false;
                     }
-                    SessionManager manager = SessionManager.getInstance();
                     manager.setLocalSessionID(uuidResponse, true);
                     Platform.runLater(() -> {
                         PacketManager.getInstance().getSocket().getPacket(UserInfoPacket.class)
@@ -128,6 +131,7 @@ public class LoginController extends FadeVerticalTransitionAdapter {
                                             loadScreen.remove(null);
                                             errorMessageLabel.setText("You are using an outdated version of the client. Please update.");
                                         });
+                                        PacketManager.getInstance().getSocket().shutdownClient();
                                         return false;
                                     }
                                     loadScreen.remove(() -> {

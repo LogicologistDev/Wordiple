@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 public class Utils {
 
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.0.1";
     private static final String SOUND_VERSIONS = "1.0.0";
 
     public static String formatNumber(double number) {
