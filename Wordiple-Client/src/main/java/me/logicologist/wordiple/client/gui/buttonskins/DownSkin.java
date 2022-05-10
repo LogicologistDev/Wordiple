@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.input.MouseButton;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 
 public class DownSkin extends ButtonSkin {
@@ -102,6 +104,10 @@ public class DownSkin extends ButtonSkin {
             }
             timelinePressToOut.play();
             fadePressToOut.play();
+        });
+
+        button.setOnAction(e -> {
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
         });
 
         button.setOpacity(0.6);

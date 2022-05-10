@@ -6,6 +6,8 @@ import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 public class BaseLockedSkin extends ButtonSkin {
 
@@ -61,6 +63,10 @@ public class BaseLockedSkin extends ButtonSkin {
             }
             fadeOut.play();
             button.setEffect(fromShadow);
+        });
+
+        button.setOnAction(e -> {
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
         });
 
         button.setOpacity(0.6);
