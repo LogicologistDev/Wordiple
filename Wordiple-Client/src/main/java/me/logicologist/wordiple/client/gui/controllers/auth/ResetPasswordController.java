@@ -49,7 +49,6 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
     private boolean midAction = false;
 
     private String email = null;
-    private String code = null;
 
 
     @Override
@@ -110,10 +109,17 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
             }), 10, TimeUnit.SECONDS);
         };
         movablePane.setOnKeyReleased(event -> {
-            if (event.getCode() != KeyCode.ENTER) return;
+            switch (event.getCode()) {
+                case ESCAPE:
+                    if (midAction) return;
+                    midAction = true;
 
-            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
-            runnable.run();
+                    super.transitionOut(() -> GUIManager.getInstance().showMainScreen(true));
+                    return;
+                case ENTER:
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                    runnable.run();
+            }
         });
         resetButton.setOnAction(event -> runnable.run());
     }
@@ -122,9 +128,5 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
         if (this.email != null) return;
 
         this.email = email;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }

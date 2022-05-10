@@ -4,6 +4,7 @@ import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import me.logicologist.wordiple.client.manager.SoundManager;
@@ -59,7 +60,7 @@ public class BaseLockedSkin extends ButtonSkin {
             if (!exited) {
                 fadeIn.play();
                 button.setEffect(hoverShadow);
-                SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                if (e.getButton() == MouseButton.PRIMARY) SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                 return;
             }
             fadeOut.play();

@@ -49,7 +49,7 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
             midAction = true;
 
             super.transitionOut(() -> {
-                GUIManager.getInstance().showMainScreen(true);
+                GUIManager.getInstance().showLoginScreen(true);
             });
         });
         Runnable runnable = () -> {
@@ -75,7 +75,7 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                     midAction = false;
                     return false;
                 }
-                loadScreen.remove(() -> Platform.runLater(() -> super.transitionOut(() -> GUIManager.getInstance().showResetPasswordScreen(true, emailField.getText(), code))));
+                loadScreen.remove(() -> Platform.runLater(() -> super.transitionOut(() -> GUIManager.getInstance().showResetPasswordScreen(true, emailField.getText()))));
                 return false;
             }, () -> Platform.runLater(() -> {
                 errorMessageLabel.setText("Timed out. The connection could not be established, or the server may be down.");
@@ -85,10 +85,17 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
             }), 10, TimeUnit.SECONDS);
         };
         movablePane.setOnKeyReleased(event -> {
-            if (event.getCode() != KeyCode.ENTER) return;
+            switch (event.getCode()) {
+                case ESCAPE:
+                    if (midAction) return;
+                    midAction = true;
 
-            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
-            runnable.run();
+                    super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
+                    return;
+                case ENTER:
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                    runnable.run();
+            }
         });
         resetButton.setOnAction(event -> runnable.run());
     }

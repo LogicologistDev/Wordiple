@@ -142,10 +142,17 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
             }), 10, TimeUnit.SECONDS);
         };
         movablePane.setOnKeyReleased(event -> {
-            if (event.getCode() != KeyCode.ENTER) return;
+            switch (event.getCode()) {
+                case ESCAPE:
+                    if (midAction) return;
+                    midAction = true;
 
-            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
-            runnable.run();
+                    super.transitionOut(() -> GUIManager.getInstance().showMainScreen(true));
+                    return;
+                case ENTER:
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                    runnable.run();
+            }
         });
         signupButton.setOnAction(event -> {
             runnable.run();

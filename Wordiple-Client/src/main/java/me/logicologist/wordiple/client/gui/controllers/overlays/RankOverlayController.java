@@ -31,6 +31,13 @@ public class RankOverlayController extends AttachableAdapter {
             midAction = true;
             transitionOut();
         });
+        movablePane.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case ESCAPE:
+                    transitionOut();
+                    return;
+            }
+        });
     }
 
     public void transitionIn(OverlayController overlayController, Runnable runAfter) {
@@ -51,6 +58,7 @@ public class RankOverlayController extends AttachableAdapter {
         timeline.setOnFinished(x -> {
             midAction = false;
             if (runAfter != null) runAfter.run();
+            this.movablePane.requestFocus();
         });
     }
 

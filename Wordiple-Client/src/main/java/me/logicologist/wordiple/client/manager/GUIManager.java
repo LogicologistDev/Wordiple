@@ -131,13 +131,12 @@ public class GUIManager extends Application {
         }
     }
 
-    public void showResetPasswordScreen(boolean fadeIn, String email, String code) {
+    public void showResetPasswordScreen(boolean fadeIn, String email) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/resetpassword.fxml"));
             this.loadScene(fxmlLoader.load());
             ResetPasswordController controller = fxmlLoader.getController();
             controller.setEmail(email);
-            controller.setCode(code);
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -268,10 +267,10 @@ public class GUIManager extends Application {
 
     public RankOverlayController showRankOverlay(Runnable runAfter) {
         try {
-            OverlayController overlayController = showOverlay(true);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
             fxmlLoader.load();
             RankOverlayController rankOverlayController = fxmlLoader.getController();
+            OverlayController overlayController = showOverlay(true);
             rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
             rankOverlayController.attach();
             rankOverlayController.transitionIn(overlayController, runAfter);

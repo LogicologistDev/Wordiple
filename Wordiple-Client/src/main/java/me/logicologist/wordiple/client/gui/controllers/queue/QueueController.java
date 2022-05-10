@@ -76,8 +76,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                 }, 2, TimeUnit.SECONDS);
             });
         });
-
-        backButton.setOnAction(event -> {
+        Runnable runnable = () -> {
             if (midAction) return;
             midAction = true;
 
@@ -112,8 +111,9 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                     });
                 }, 2, TimeUnit.SECONDS);
             }));
-
-
+        };
+        backButton.setOnAction(event -> {
+            runnable.run();
         });
 
         enterButton.setOnAction(event -> {
@@ -147,6 +147,14 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                 return;
             }
             dequeue(() -> midAction = false);
+        });
+
+        movablePane.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case ESCAPE:
+                    runnable.run();
+                    return;
+            }
         });
     }
 

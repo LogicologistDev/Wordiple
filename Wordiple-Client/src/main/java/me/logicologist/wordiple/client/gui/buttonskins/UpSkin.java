@@ -100,7 +100,7 @@ public class UpSkin extends ButtonSkin {
             if (button.isHover()) {
                 timelinePressToIn.play();
                 fadePressToIn.play();
-                SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                if (e.getButton() == MouseButton.PRIMARY) SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                 return;
             }
             timelinePressToOut.play();

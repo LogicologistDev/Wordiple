@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import me.logicologist.wordiple.client.WordipleClient;
@@ -89,9 +90,16 @@ public class ProfileOverlayController extends AttachableAdapter {
         movablePane.setLayoutY(-200);
         movablePane.setOpacity(0);
         movablePane.setOnMouseClicked(x -> {
-            if (midAction) return;
+            if (midAction || x.getButton() != MouseButton.PRIMARY) return;
             midAction = true;
             transitionOut();
+        });
+        movablePane.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case ESCAPE:
+                    transitionOut();
+                    return;
+            }
         });
         backgroundButton.setOnAction(x -> {
             if (midAction) return;
@@ -120,6 +128,7 @@ public class ProfileOverlayController extends AttachableAdapter {
         timeline.setOnFinished(x -> {
             midAction = false;
             if (runAfter != null) runAfter.run();
+            this.movablePane.requestFocus();
         });
     }
 
@@ -136,7 +145,7 @@ public class ProfileOverlayController extends AttachableAdapter {
         );
         timeline.play();
         timeline.setOnFinished(x -> {
-            this.detach();
+            super.detach();
         });
     }
 
