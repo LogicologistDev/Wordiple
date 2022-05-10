@@ -45,6 +45,7 @@ public class PacketManager {
                         GUIManager.addReadyListener(instance -> {
                             if (!Utils.getVersion().equals(manager.getVersion())) {
                                 instance.showLoginScreen(true);
+                                PacketManager.getInstance().getSocket().shutdownClient();
                                 return;
                             }
                             instance.startSwipeTransition(null, () -> {
