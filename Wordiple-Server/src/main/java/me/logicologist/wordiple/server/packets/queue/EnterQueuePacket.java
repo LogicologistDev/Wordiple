@@ -25,6 +25,7 @@ public class EnterQueuePacket extends PacketAdapter implements AuthPacketType {
         QueueType queueType = arguments.get("queuetype", QueueType.class);
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
         QueueManager.getInstance().getQueue(queueType).queue(wordipleUser);
+        this.sendPacket(packet -> arguments.replace(this.getArguments()));
     }
 
     @Override

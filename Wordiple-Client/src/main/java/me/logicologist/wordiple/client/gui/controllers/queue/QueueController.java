@@ -65,6 +65,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
 
             if (!inQueue) {
                 LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Joining Queue...");
+
                 inQueue = true;
                 enterButton.getStyleClass().clear();
                 enterButton.getStyleClass().add(dequeueStyle);
