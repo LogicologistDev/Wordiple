@@ -66,12 +66,12 @@ public class GUIManager extends Application {
         stage.show();
         stage.setOnCloseRequest(e -> {
             try {
-                Platform.exit();
                 PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
                         packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("logout", false));
                 PacketManager.getInstance().getSocket().shutdownClient();
                 WordipleClient.getExecutor().shutdownNow();
                 SoundManager.getInstance().stopSounds();
+                Platform.exit();
                 System.exit(0);
             } catch (Exception e1) {
                 e1.printStackTrace();

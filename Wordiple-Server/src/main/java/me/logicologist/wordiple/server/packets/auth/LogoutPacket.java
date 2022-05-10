@@ -34,6 +34,7 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
         }
         if (wordipleUser == null) return; // WHAT?
         QueueManager.getInstance().removeFromAllQueues(wordipleUser);
+        QueueManager.getInstance().removeAllQueueViewers(wordipleUser);
         DatabaseManager.instance.saveUser(wordipleUser);
     }
 
