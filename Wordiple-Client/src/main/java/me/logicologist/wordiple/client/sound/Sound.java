@@ -27,8 +27,6 @@ public class Sound {
                 this.playedSounds = new ArrayList<>();
                 this.children = new ArrayList<>(Arrays.asList(type.getChildren()));
                 Collections.shuffle(children);
-                this.playedSounds.add(children.get(0));
-
                 clip.addLineListener(event -> {
                     if (event.getType() != LineEvent.Type.STOP || this.children == null) return;
                     if (children.size() == playedSounds.size()) playedSounds.clear();
@@ -42,7 +40,7 @@ public class Sound {
                     this.play();
                 });
             }
-            this.loadSound(this.playedSounds == null ? type : this.playedSounds.get(0));
+            this.loadSound(this.children == null ? type : this.children.get(0));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -50,6 +48,7 @@ public class Sound {
 
     private void loadSound(SoundType type) {
         try {
+            if (this.playedSounds != null) this.playedSounds.add(type);
             WordipleClient.getLogger().info("Loading sound: " + type.getFile());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
             clip.open(audioInputStream);
