@@ -67,7 +67,7 @@ public class Sound {
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
 
-    private void play() {
+    public void play() {
         try {
             // Stop clip if it's already running
             if (clip.isRunning()) return;
