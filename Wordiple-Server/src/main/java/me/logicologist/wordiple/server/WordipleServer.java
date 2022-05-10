@@ -1,9 +1,6 @@
 package me.logicologist.wordiple.server;
 
-import me.logicologist.wordiple.server.managers.DatabaseManager;
-import me.logicologist.wordiple.server.managers.PacketManager;
-import me.logicologist.wordiple.server.managers.QueueManager;
-import me.logicologist.wordiple.server.managers.SessionManager;
+import me.logicologist.wordiple.server.managers.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +13,7 @@ public class WordipleServer {
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
     public static void main(String[] args) {
+        new WordManager();
         new PacketManager().load();
         new DatabaseManager().setup();
         new SessionManager();
