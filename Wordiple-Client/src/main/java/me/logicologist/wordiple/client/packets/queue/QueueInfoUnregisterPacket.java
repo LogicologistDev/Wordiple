@@ -27,6 +27,4 @@ public class QueueInfoUnregisterPacket extends PacketAdapter implements AuthPack
         return new PacketArguments()
                 .setArgument("queuetype", QueueType.class);
     }
-
-    // Packet for removing the session ID from the list of people getting updates on a certain queue.
 }
