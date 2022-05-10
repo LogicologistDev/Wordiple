@@ -36,6 +36,9 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
     @FXML
     private Button competitiveButton;
 
+    @FXML
+    private Button casualButton;
+
     private boolean midAction = false;
 
     @Override
@@ -78,6 +81,37 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
                         packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.COMPETITIVE)
                 ).waitForResponse(queue -> {
                     loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue)));
+                    return false;
+                }, () -> {
+                    loadScreenController.remove(() -> {
+                        LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
+                        WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                        midAction = false;
+                    });
+                }, 10, TimeUnit.SECONDS);
+                return false;
+            }, () -> {
+                loadScreenController.remove(() -> {
+                    LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
+                    WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                    midAction = false;
+                });
+            }, 10, TimeUnit.SECONDS);
+        });
+
+        casualButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
+            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
+            PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
+                    packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
+            ).waitForResponse(data -> {
+                PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
+                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.CASUAL)
+                ).waitForResponse(queue -> {
+                    loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCasualQueueScreen(true, data, queue)));
                     return false;
                 }, () -> {
                     loadScreenController.remove(() -> {

@@ -58,6 +58,20 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
+.button-casual-queue-enter-button {
+    -fx-background-image: url("./casualenterqueuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
+.button-casual-queue-leave-button {
+    -fx-background-image: url("./casualleavequeuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
 .button-time-royale {
     -fx-background-image: url("./timeroyalebutton.png");
     -fx-background-color: transparent;
@@ -152,7 +166,7 @@
 }
 
 .label-40-light {
-    -fx-font-size: 60px;
+    -fx-font-size: 40px;
     -fx-font-family: 'Nexa Bold';
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
