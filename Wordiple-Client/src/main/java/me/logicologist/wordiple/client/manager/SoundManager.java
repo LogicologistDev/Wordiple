@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SoundManager {
 
@@ -24,7 +23,7 @@ public class SoundManager {
     public SoundManager() {
         instance = this;
         this.sounds = new ArrayList<>();
-        this.version = Utils.getVersion();
+        this.version = Utils.getSoundVersion();
         this.localVersion = SessionManager.getInstance().getLocalSoundVersion();
     }
 

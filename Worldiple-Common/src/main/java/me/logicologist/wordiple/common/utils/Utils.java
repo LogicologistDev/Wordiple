@@ -55,4 +55,8 @@ public class Utils {
     public static String getVersion() {
         return VERSION;
     }
+
+    public static String getSoundVersion() {
+        return SOUND_VERSIONS;
+    }
 }
