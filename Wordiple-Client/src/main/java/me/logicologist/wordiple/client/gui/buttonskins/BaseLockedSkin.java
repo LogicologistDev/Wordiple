@@ -59,14 +59,11 @@ public class BaseLockedSkin extends ButtonSkin {
             if (!exited) {
                 fadeIn.play();
                 button.setEffect(hoverShadow);
+                SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                 return;
             }
             fadeOut.play();
             button.setEffect(fromShadow);
-        });
-
-        button.setOnAction(e -> {
-            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
         });
 
         button.setOpacity(0.6);

@@ -100,14 +100,11 @@ public class LeftSkin extends ButtonSkin {
             if (button.isHover()) {
                 timelinePressToIn.play();
                 fadePressToIn.play();
+                SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                 return;
             }
             timelinePressToOut.play();
             fadePressToOut.play();
-        });
-
-        button.setOnAction(e -> {
-            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
         });
 
         button.setOpacity(0.8);
