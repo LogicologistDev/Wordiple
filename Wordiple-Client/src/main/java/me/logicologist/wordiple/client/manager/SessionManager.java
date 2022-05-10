@@ -62,20 +62,18 @@ public class SessionManager {
     public void setLocalSessionID(UUID localSessionID, boolean sendPacket) {
         try {
             this.loggedIn = localSessionID != null;
+            Properties properties = new Properties();
+            properties.load(Files.newInputStream(file.toPath()));
             if (localSessionID == null) {
                 PlayerHeaderController.instance = null;
                 if (sendPacket) {
                     PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
                             packet.getPacketType(AuthPacketType.class).getArguments(this.getLocalSessionID()).setValues("logout", true));
                 }
+                properties.remove("sessionID");
             }
-            Properties properties = new Properties();
-            properties.load(Files.newInputStream(file.toPath()));
             if (localSessionID != null) {
                 properties.setProperty("sessionID", localSessionID.toString());
-            }
-            if (localSessionID == null) {
-                properties.remove("sessionID");
             }
             properties.store(Files.newOutputStream(file.toPath()), "Please do not share/touch this file.");
         } catch (Exception ex) {

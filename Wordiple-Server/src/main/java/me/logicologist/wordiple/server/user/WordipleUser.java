@@ -255,6 +255,8 @@ public class WordipleUser {
     }
 
     public ObjectOutputStream getOutputStream() {
+        if (this.socket == null) return null;
+
         try {
             return PacketManager.getInstance().getSocket().getOutputStream(this.socket);
         } catch (Exception ex) {

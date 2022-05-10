@@ -32,10 +32,14 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
             WordipleServer.getLogger().info("Logging out user.");
             SessionManager.getInstance().removeSession(this.getSessionID(arguments));
         }
+        WordipleServer.getLogger().info("Logging out and saving user data?");
         if (wordipleUser == null) return; // WHAT?
+
+        WordipleServer.getLogger().info("Logging out and saving user data: " + wordipleUser.getEmail());
         QueueManager.getInstance().removeFromAllQueues(wordipleUser);
         QueueManager.getInstance().removeAllQueueViewers(wordipleUser);
         DatabaseManager.instance.saveUser(wordipleUser);
+        wordipleUser.setSocket(null);
     }
 
     @Override

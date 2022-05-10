@@ -158,6 +158,7 @@ public class DatabaseManager {
             ps.setString(13, user.getSolveTimesAsString());
             ps.setString(14, user.getGuessesAsString());
             ps.setString(15, user.getOpenersAsString());
+            ps.setString(16, user.getId().toString());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
