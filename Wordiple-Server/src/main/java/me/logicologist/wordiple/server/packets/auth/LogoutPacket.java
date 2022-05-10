@@ -6,6 +6,7 @@ import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
+import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
@@ -32,7 +33,7 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
             SessionManager.getInstance().removeSession(this.getSessionID(arguments));
         }
         if (wordipleUser == null) return; // WHAT?
-
+        QueueManager.getInstance().removeFromAllQueues(wordipleUser);
         DatabaseManager.instance.saveUser(wordipleUser);
     }
 

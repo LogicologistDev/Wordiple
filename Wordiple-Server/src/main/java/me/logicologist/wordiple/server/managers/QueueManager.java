@@ -4,6 +4,7 @@ import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.queue.CasualQueue;
 import me.logicologist.wordiple.server.queue.CompetitiveQueue;
 import me.logicologist.wordiple.server.queue.Queue;
+import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,12 @@ public class QueueManager {
 
     public Queue getQueue(QueueType queueType) {
         return this.queues.stream().filter(x -> x.getQueueType().equals(queueType)).findFirst().orElse(null);
+    }
+
+    public void removeFromAllQueues(WordipleUser user) {
+        for (Queue queue : this.queues) {
+            queue.dequeue(user);
+        }
     }
 
     public static QueueManager getInstance() {

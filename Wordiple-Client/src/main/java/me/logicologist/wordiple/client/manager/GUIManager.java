@@ -17,6 +17,7 @@ import me.logicologist.wordiple.client.gui.controllers.auth.*;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
+import me.logicologist.wordiple.client.gui.controllers.queue.CasualQueueController;
 import me.logicologist.wordiple.client.gui.controllers.queue.CompetitiveQueueController;
 import me.logicologist.wordiple.client.gui.controllers.queue.QueueController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
@@ -175,9 +176,8 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/casualqueue.fxml"));
             this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
-            CompetitiveQueueController controller = fxmlLoader.getController();
+            CasualQueueController controller = fxmlLoader.getController();
             controller.setActive(queueInfo.get("active", Integer.class));
-            controller.setInfo(playerInfo);
             controller.setQueueButtonStyles("button-casual-queue-enter-button", "button-casual-queue-leave-button");
             this.queueController = controller;
             if (fadeIn) controller.transitionIn();
