@@ -71,13 +71,14 @@ public class SessionManager {
         if (!validEmail.matcher(packetArguments.get("email", String.class)).matches())
             return "Invalid email address.";
 
-        if (!DatabaseManager.instance.emailAvailable(packetArguments.get("email", String.class)) || signupSessions.values().stream().anyMatch(x -> x.get("email", String.class).equals(packetArguments.get("email", String.class))))
+        Collection<PacketArguments> signups = signupSessions.values();
+        if (!DatabaseManager.instance.emailAvailable(packetArguments.get("email", String.class)) || signups.stream().anyMatch(x -> x.get("email", String.class).equals(packetArguments.get("email", String.class))))
             return "Email address already in use.";
 
         if (!usernamePattern.matcher(packetArguments.get("username", String.class)).matches())
             return "Invalid username.";
 
-        if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)) || signupSessions.values().stream().anyMatch(x -> x.get("username", String.class).equals(packetArguments.get("username", String.class))))
+        if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)) || signups.stream().anyMatch(x -> x.get("username", String.class).equals(packetArguments.get("username", String.class))))
             return "Username already taken.";
 
         if (!validSalt.matcher(packetArguments.get("salt", String.class)).matches()) {
