@@ -27,6 +27,7 @@ public abstract class Queue {
 
     public void startQueueInformer() {
         WordipleServer.getExecutor().scheduleAtFixedRate(() -> {
+            viewingQueue.removeIf(x -> x.getOutputStream() == null);
             for (WordipleUser user : viewingQueue) {
                 PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                 .setValues("active", getActive())
