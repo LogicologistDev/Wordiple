@@ -50,6 +50,7 @@ public class PacketManager {
         this.socket.getActionRegister().registerAction(SocketActionType.CONNECTION_LOST, (action) -> {
             if (!manager.isLoggedIn()) return;
 
+            SoundManager.getInstance().stopSounds();
             GUIManager.addReadyListener(instance -> {
                 instance.startSwipeTransition(null, () -> {
                     instance.showMainScreen(false);

@@ -19,6 +19,7 @@ public class SoundManager {
 
     public void load() {
         for (SoundType value : SoundType.values()) {
+            value.download();
             this.sounds.add(new Sound(value));
         }
     }
