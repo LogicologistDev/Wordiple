@@ -47,8 +47,16 @@ public class GUIManager extends Application {
         instance = this;
         this.stage = stage;
         stage.setTitle("Wordiple");
+
+
+        String OS = (System.getProperty("os.name")).toUpperCase();
         stage.setHeight(849);
         stage.setWidth(1439);
+        if (!OS.contains("WIN")) {
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+            stage.setHeight(dimension.getHeight());
+            stage.setWidth(dimension.getWidth());
+        }
         stage.setMaximized(true);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
