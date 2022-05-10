@@ -23,6 +23,7 @@ public class QueueInfoRegisterPacket extends PacketAdapter implements AuthPacket
     public void onReceive(PacketArguments arguments) {
         QueueType queueType = arguments.get("queuetype", QueueType.class);
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
+        if (wordipleUser == null) return;
         QueueManager.getInstance().getQueue(queueType).addQueueViewer(wordipleUser);
         this.sendPacket(packet -> arguments.replace(this.getArguments()));
     }

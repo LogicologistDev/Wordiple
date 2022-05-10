@@ -24,6 +24,7 @@ public class LeaveQueuePacket extends PacketAdapter implements AuthPacketType {
     public void onReceive(PacketArguments arguments) {
         QueueType queueType = arguments.get("queuetype", QueueType.class);
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
+        if (wordipleUser == null) return;
         QueueManager.getInstance().getQueue(queueType).dequeue(wordipleUser);
         this.sendPacket(packet -> arguments.replace(this.getArguments()));
     }

@@ -2,6 +2,7 @@ package me.logicologist.wordiple.server;
 
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
+import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ public class WordipleServer {
         new PacketManager().load();
         new DatabaseManager().setup();
         new SessionManager();
+        new QueueManager().load();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             logger.info("Shutting down...");
             executor.shutdownNow();

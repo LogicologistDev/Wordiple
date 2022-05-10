@@ -15,6 +15,7 @@ public class QueueManager {
 
     public QueueManager() {
         this.queues = new ArrayList<>();
+        instance = this;
     }
 
     public void load() {

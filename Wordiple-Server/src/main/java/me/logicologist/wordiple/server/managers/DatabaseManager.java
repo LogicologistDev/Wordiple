@@ -45,7 +45,7 @@ public class DatabaseManager {
                     "onlineban BOOLEAN," +
                     "globalban BOOLEAN," +
                     "solvetimes VARCHAR(255)," +
-                    "guesses VARCHAR(255)" +
+                    "guesses VARCHAR(255)," +
                     "openers VARCHAR(255)," +
                     "PRIMARY KEY(email))"
             ).executeUpdate();

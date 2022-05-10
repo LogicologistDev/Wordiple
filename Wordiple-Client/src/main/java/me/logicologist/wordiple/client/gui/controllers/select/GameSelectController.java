@@ -14,6 +14,7 @@ import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.queue.QueueType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -74,7 +75,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
             ).waitForResponse(data -> {
                 PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
-                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", "competitive")
+                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.COMPETITIVE)
                 ).waitForResponse(queue -> {
                     loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCompetitiveQueueScreen(true, data, queue)));
                     return false;
