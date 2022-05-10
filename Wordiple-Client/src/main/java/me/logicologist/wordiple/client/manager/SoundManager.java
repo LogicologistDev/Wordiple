@@ -38,7 +38,9 @@ public class SoundManager {
         WordipleClient.getExecutor().submit(() -> {
             WordipleClient.getLogger().info("Needed sounds: " + neededDownloaded);
             for (SoundType value : SoundType.values()) {
-                value.download(version, localVersion, () -> {
+                if (!value.needDownload(version, localVersion)) continue;
+
+                value.download(() -> {
                     float result = downloaded.get() == 0 ? 0 : ((float) downloaded.get() / (float) neededDownloaded) * 100.0f;
                     Platform.runLater(() -> {
                         String s = "Fetching Assets (" + ((int) result) + "%)";
@@ -51,6 +53,7 @@ public class SoundManager {
             if (controller.get() != null) controller.get().remove(null);
 
             manager.setLocalSoundVersion(version);
+            WordipleClient.getLogger().info("Loaded sounds successfully");
             Platform.runLater(runnable);
         });
     }
