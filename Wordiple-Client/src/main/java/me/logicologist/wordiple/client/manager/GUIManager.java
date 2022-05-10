@@ -20,6 +20,7 @@ import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayContr
 import me.logicologist.wordiple.client.gui.controllers.queue.CasualQueueController;
 import me.logicologist.wordiple.client.gui.controllers.queue.CompetitiveQueueController;
 import me.logicologist.wordiple.client.gui.controllers.queue.QueueController;
+import me.logicologist.wordiple.client.gui.controllers.queue.TimeRoyaleQueueController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
@@ -181,7 +182,7 @@ public class GUIManager extends Application {
         }
     }
 
-    public void showCasualQueueScreen(boolean fadeIn, PacketArguments playerInfo, PacketArguments queueInfo) {
+    public void showCasualQueueScreen(boolean fadeIn, PacketArguments queueInfo) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/casualqueue.fxml"));
             this.loadScene(fxmlLoader.load());
@@ -189,6 +190,21 @@ public class GUIManager extends Application {
             CasualQueueController controller = fxmlLoader.getController();
             controller.setActive(queueInfo.get("active", Integer.class));
             controller.setQueueButtonStyles("button-casual-queue-enter-button", "button-casual-queue-leave-button");
+            this.queueController = controller;
+            if (fadeIn) controller.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showTimeRoyaleQueueScreen(boolean fadeIn, PacketArguments queueInfo) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timeroyalequeue.fxml"));
+            this.loadScene(fxmlLoader.load());
+            attachPlayerHeader();
+            TimeRoyaleQueueController controller = fxmlLoader.getController();
+            controller.setActive(queueInfo.get("active", Integer.class));
+            controller.setQueueButtonStyles("button-time-royale-queue-enter-button", "button-time-royale-queue-leave-button");
             this.queueController = controller;
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {

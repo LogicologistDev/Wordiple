@@ -39,6 +39,10 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
     @FXML
     private Button casualButton;
 
+    @FXML
+    private Button timeRoyaleButton;
+
+
     private boolean midAction = false;
 
     @Override
@@ -105,21 +109,30 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
 
             SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
-            PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
-                    packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
-            ).waitForResponse(data -> {
-                PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
-                        packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.CASUAL)
-                ).waitForResponse(queue -> {
-                    loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCasualQueueScreen(true, data, queue)));
-                    return false;
-                }, () -> {
-                    loadScreenController.remove(() -> {
-                        LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
-                        WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
-                        midAction = false;
-                    });
-                }, 10, TimeUnit.SECONDS);
+            PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
+                    packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.CASUAL)
+            ).waitForResponse(queue -> {
+                loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showCasualQueueScreen(true, queue)));
+                return false;
+            }, () -> {
+                loadScreenController.remove(() -> {
+                    LoadScreenController errorPopup = GUIManager.getInstance().showLoadScreen("Error fetching data!");
+                    WordipleClient.getExecutor().schedule(() -> errorPopup.remove(null), 2, TimeUnit.SECONDS);
+                    midAction = false;
+                });
+            }, 10, TimeUnit.SECONDS);
+        });
+
+        timeRoyaleButton.setOnAction(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+            LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
+            PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet ->
+                    packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID()).setValues("queuetype", QueueType.TIME_ROYALE)
+            ).waitForResponse(queue -> {
+                loadScreenController.remove(() -> super.transitionOut(() -> GUIManager.getInstance().showTimeRoyaleQueueScreen(true, queue)));
                 return false;
             }, () -> {
                 loadScreenController.remove(() -> {
