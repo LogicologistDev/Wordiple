@@ -72,13 +72,15 @@ public class SessionManager {
             return "Invalid email address.";
 
         Collection<PacketArguments> signups = signupSessions.values();
-        if (!DatabaseManager.instance.emailAvailable(packetArguments.get("email", String.class)) || signups.stream().anyMatch(x -> x.get("email", String.class).equals(packetArguments.get("email", String.class))))
+        if (!DatabaseManager.instance.emailAvailable(packetArguments.get("email", String.class))
+                || signups.stream().anyMatch(x -> x.get("email", String.class).equals(packetArguments.get("email", String.class))))
             return "Email address already in use.";
 
         if (!usernamePattern.matcher(packetArguments.get("username", String.class)).matches())
             return "Invalid username.";
 
-        if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class)) || signups.stream().anyMatch(x -> x.get("username", String.class).equals(packetArguments.get("username", String.class))))
+        if (!DatabaseManager.instance.usernameAvailable(packetArguments.get("username", String.class))
+                || signups.stream().anyMatch(x -> x.get("username", String.class).equals(packetArguments.get("username", String.class))))
             return "Username already taken.";
 
         if (!validSalt.matcher(packetArguments.get("salt", String.class)).matches()) {
