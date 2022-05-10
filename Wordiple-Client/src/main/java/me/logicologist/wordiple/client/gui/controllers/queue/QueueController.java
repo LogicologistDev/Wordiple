@@ -9,8 +9,14 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
 import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.PacketManager;
+import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.packets.queue.EnterQueuePacket;
+import me.logicologist.wordiple.client.packets.queue.LeaveQueuePacket;
 import me.logicologist.wordiple.client.sound.SoundType;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.common.utils.Utils;
 
 import java.net.URL;
@@ -41,12 +47,14 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
     public boolean midAction = false;
     private ScheduledFuture<?> future = null;
     private boolean inQueue = false;
+    private QueueType queueType = null;
 
     public void setActive(int active) {
         activeLabel.setText(active + " Active");
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        queueType = getQueueType();
         super.setPane(movablePane);
         backButton.setOnAction(event -> {
             if (midAction) return;
@@ -66,23 +74,56 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
             if (!inQueue) {
                 LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Joining Queue...");
 
-                inQueue = true;
-                enterButton.getStyleClass().clear();
-                enterButton.getStyleClass().add(dequeueStyle);
-                WordipleClient.getExecutor().schedule(() -> {
-                    loadScreenController.remove(this::startTimer);
-                }, 1, TimeUnit.SECONDS);
+                PacketManager.getInstance().getSocket().getPacket(EnterQueuePacket.class).sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
+                        .setValues("queuetype", queueType)
+                ).waitForResponse(packet -> {
+                    Platform.runLater(() -> {
+                        inQueue = true;
+                        enterButton.getStyleClass().clear();
+                        enterButton.getStyleClass().add(dequeueStyle);
+                        WordipleClient.getExecutor().schedule(() -> {
+                            loadScreenController.remove(this::startTimer);
+                        }, 1, TimeUnit.SECONDS);
+                    });
+                    return false;
+                }, () -> {
+                    Platform.runLater(() -> {
+                        LoadScreenController failController = GUIManager.getInstance().showLoadScreen("Failed to join queue.");
+                        WordipleClient.getExecutor().schedule(() -> {
+                            failController.remove(() -> {
+                                midAction = false;
+                            });
+                        }, 2, TimeUnit.SECONDS);
+                    });
+                });
                 return;
             }
 
             LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Leaving Queue...");
 
-            inQueue = false;
-            enterButton.getStyleClass().clear();
-            enterButton.getStyleClass().add(queueStyle);
-            WordipleClient.getExecutor().schedule(() -> {
-                loadScreenController.remove(this::stopTimer);
-            }, 1, TimeUnit.SECONDS);
+            PacketManager.getInstance().getSocket().getPacket(LeaveQueuePacket.class).sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
+                    .setValues("queuetype", queueType)
+            ).waitForResponse(packet -> {
+                Platform.runLater(() -> {
+                    inQueue = false;
+                    enterButton.getStyleClass().clear();
+                    enterButton.getStyleClass().add(queueStyle);
+                    WordipleClient.getExecutor().schedule(() -> {
+                        loadScreenController.remove(this::stopTimer);
+                    }, 1, TimeUnit.SECONDS);
+                });
+                return false;
+            }, () -> {
+                Platform.runLater(() -> {
+                    LoadScreenController failController = GUIManager.getInstance().showLoadScreen("Failed to leave queue.");
+                    WordipleClient.getExecutor().schedule(() -> {
+                        failController.remove(() -> {
+                            midAction = false;
+                        });
+                    }, 2, TimeUnit.SECONDS);
+                });
+            });
+
         });
     }
 
@@ -104,4 +145,6 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
         this.queueStyle = queue;
         this.dequeueStyle = dequeue;
     }
+
+    public abstract QueueType getQueueType();
 }

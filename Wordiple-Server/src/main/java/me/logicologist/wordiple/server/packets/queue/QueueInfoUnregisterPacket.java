@@ -26,7 +26,6 @@ public class QueueInfoUnregisterPacket extends PacketAdapter implements AuthPack
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
         QueueManager.getInstance().getQueue(queueType).removeQueueViewer(wordipleUser);
         this.sendPacket(packet -> arguments.replace(this.getArguments()));
-
     }
 
     @Override

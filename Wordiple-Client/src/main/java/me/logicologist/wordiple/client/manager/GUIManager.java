@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
@@ -49,7 +50,8 @@ public class GUIManager extends Application {
         stage.setHeight(849);
         stage.setWidth(1439);
         stage.setMaximized(true);
-//        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         showMainScreen(false);
 
         stage.show();
@@ -317,8 +319,8 @@ public class GUIManager extends Application {
     private void handleDimension(Dimension dimension, Scene scene) {
         double width = dimension.getWidth();
         double height = dimension.getHeight();
-        double w = width / 1439;
-        double h = height / 849;
+        double w = width / 1440;
+        double h = height / 810;
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
     }
