@@ -4,6 +4,6 @@ public enum QueueType {
 
     COMPETITIVE,
     CASUAL,
-    WORD_ROYALE;
+    TIME_ROYALE;
 
 }

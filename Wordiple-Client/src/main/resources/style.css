@@ -79,6 +79,20 @@
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
+.button-time-royale-queue-enter-button {
+    -fx-background-image: url("./timeroyaleenterqueuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
+.button-time-royale-queue-leave-button {
+    -fx-background-image: url("./timeroyaleleavequeuebutton.png");
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
+}
+
 .button-private-match {
     -fx-background-image: url("./privatematchbutton.png");
     -fx-background-color: transparent;

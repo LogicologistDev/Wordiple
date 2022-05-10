@@ -4,6 +4,7 @@ import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.queue.CasualQueue;
 import me.logicologist.wordiple.server.queue.CompetitiveQueue;
 import me.logicologist.wordiple.server.queue.Queue;
+import me.logicologist.wordiple.server.queue.TimeRoyaleQueue;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class QueueManager {
     public void load() {
         this.queues.add(new CompetitiveQueue());
         this.queues.add(new CasualQueue());
+        this.queues.add(new TimeRoyaleQueue());
 
         for (Queue queue : this.queues) {
             queue.startQueueInformer();

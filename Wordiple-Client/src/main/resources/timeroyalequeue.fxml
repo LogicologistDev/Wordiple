@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.queue.TimeRoyaleQueueController">
+   <children>
+      <AnchorPane fx:id="movablePane" prefHeight="810.0" prefWidth="1440.0">
+         <children>
+            <Button fx:id="enterButton" alignment="BASELINE_LEFT" layoutX="600.0" layoutY="189.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale-queue-enter-button" stylesheets="@style.css" textFill="WHITE" />
+            <Button fx:id="backButton" alignment="BASELINE_LEFT" layoutX="-200.0" layoutY="629.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-back" stylesheets="@style.css" textFill="WHITE" />
+            <Label fx:id="timeLabel" alignment="CENTER" layoutX="398.0" layoutY="344.0" prefHeight="61.0" prefWidth="702.0" styleClass="text-field-queuetime" stylesheets="@style.css" text="Not in queue!" textAlignment="CENTER" />
+            <Label fx:id="activeLabel" alignment="CENTER" layoutX="439.0" layoutY="444.0" prefHeight="120.0" prefWidth="620.0" styleClass="text-field-active" stylesheets="@style.css" text="6666 Active" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
