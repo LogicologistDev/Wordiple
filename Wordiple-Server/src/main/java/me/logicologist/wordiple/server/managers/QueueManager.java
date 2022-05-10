@@ -27,7 +27,7 @@ public class QueueManager {
     }
 
     public Queue getQueue(QueueType queueType) {
-        return this.queues.stream().filter(x -> x.queueType.equals(queueType)).findFirst().orElse(null);
+        return this.queues.stream().filter(x -> x.getQueueType().equals(queueType)).findFirst().orElse(null);
     }
 
     public static QueueManager getInstance() {

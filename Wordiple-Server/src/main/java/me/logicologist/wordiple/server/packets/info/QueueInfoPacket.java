@@ -4,6 +4,8 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.queue.QueueType;
+import me.logicologist.wordiple.server.managers.QueueManager;
+import me.logicologist.wordiple.server.managers.SessionManager;
 
 public class QueueInfoPacket extends PacketAdapter implements AuthPacketType {
 
@@ -18,8 +20,10 @@ public class QueueInfoPacket extends PacketAdapter implements AuthPacketType {
     }
 
     @Override
-    public void onReceive(PacketArguments packetArguments) {
-        this.sendPacket(packet -> packetArguments.replace(this.getArguments()).setValues("active", 0));
+    public void onReceive(PacketArguments arguments) {
+        QueueType queueType = arguments.get("queuetype", QueueType.class);
+        int active = QueueManager.getInstance().getQueue(queueType).getActive();
+        this.sendPacket(packet -> arguments.replace(this.getArguments()).setValues("active", active));
     }
 
     @Override

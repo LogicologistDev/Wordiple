@@ -28,7 +28,7 @@ public abstract class Queue {
         WordipleServer.getExecutor().scheduleAtFixedRate(() -> {
             for (WordipleUser user : viewingQueue) {
                 PacketManager.getInstance().getSocket().getPacket(QueueInfoPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                                .setValues("active", inQueue.size() + inGame.size())
+                                .setValues("active", getActive())
                                 .setValues("queuetype", queueType),
                         user.getOutputStream()
                 );
@@ -50,6 +50,10 @@ public abstract class Queue {
 
     public void removeQueueViewer(WordipleUser user) {
         this.viewingQueue.remove(user);
+    }
+
+    public int getActive() {
+        return this.inQueue.size() + this.inGame.size();
     }
 
     public abstract void onQueue(WordipleUser user);

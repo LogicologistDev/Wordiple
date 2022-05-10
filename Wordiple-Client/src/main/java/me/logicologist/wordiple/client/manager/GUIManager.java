@@ -17,6 +17,7 @@ import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayControlle
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.RankOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.queue.CompetitiveQueueController;
+import me.logicologist.wordiple.client.gui.controllers.queue.QueueController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
@@ -35,6 +36,9 @@ public class GUIManager extends Application {
 
     private static GUIManager instance;
     private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
+
+    private QueueController queueController;
+
     public Stage stage;
 
     @Override
@@ -154,11 +158,22 @@ public class GUIManager extends Application {
             this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
             CompetitiveQueueController controller = fxmlLoader.getController();
-            controller.setInfo(playerInfo, queueInfo);
+            controller.setActive(queueInfo.get("active", Integer.class));
+            controller.setInfo(playerInfo);
+            controller.setQueueButtonStyles("button-competitive-queue-enter-button", "button-competitive-queue-leave-button");
+            this.queueController = controller;
             if (fadeIn) controller.transitionIn();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public QueueController getQueueController() {
+        return queueController;
+    }
+
+    public void resetQueueController() {
+
     }
 
     public LoadScreenController showLoadScreen(String title) {
