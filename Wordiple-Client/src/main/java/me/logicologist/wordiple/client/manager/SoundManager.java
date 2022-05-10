@@ -38,7 +38,10 @@ public class SoundManager {
         WordipleClient.getExecutor().submit(() -> {
             WordipleClient.getLogger().info("Needed sounds: " + neededDownloaded);
             for (SoundType value : SoundType.values()) {
-                if (!value.needDownload(version, localVersion)) continue;
+                if (!value.needDownload(version, localVersion)) {
+                    this.sounds.add(new Sound(value));
+                    continue;
+                }
 
                 value.download(() -> {
                     float result = downloaded.get() == 0 ? 0 : ((float) downloaded.get() / (float) neededDownloaded) * 100.0f;

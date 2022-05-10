@@ -68,7 +68,9 @@ public class Sound {
     }
 
     public void play() {
+        WordipleClient.getLogger().info("Playing sound: " + this.type.getFile());
         try {
+            WordipleClient.getLogger().info("Clip running: " + this.clip.isRunning());
             // Stop clip if it's already running
             if (clip.isRunning()) return;
 
