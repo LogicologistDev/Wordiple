@@ -3,6 +3,7 @@ package me.logicologist.wordiple.server.queue;
 import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
+import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
@@ -37,6 +38,8 @@ public abstract class Queue {
     }
 
     public void queue(WordipleUser user) {
+        QueueManager.getInstance().removeFromAllQueues(user);
+        if (inQueue.contains(user)) return;
         this.inQueue.add(user);
     }
 
