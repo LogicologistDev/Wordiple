@@ -95,6 +95,9 @@ public class ProfileOverlayController extends AttachableAdapter {
             transitionOut();
         });
         movablePane.setOnKeyReleased(event -> {
+            if (midAction) return;
+            midAction = true;
+
             switch (event.getCode()) {
                 case ESCAPE:
                     transitionOut();

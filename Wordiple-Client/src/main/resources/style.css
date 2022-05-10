@@ -161,8 +161,17 @@
     -fx-font-size: 30px;
     -fx-font-family: 'Nexa Bold';
 }
+.label-title-big {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
+}
 
 .label-subtitle {
+    -fx-font-size: 30px;
+    -fx-font-family: 'Nexa Light';
+}
+
+.label-subtitle-big {
     -fx-font-size: 30px;
     -fx-font-family: 'Nexa Light';
 }

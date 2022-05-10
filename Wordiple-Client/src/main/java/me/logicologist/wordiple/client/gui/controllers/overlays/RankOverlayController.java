@@ -32,6 +32,9 @@ public class RankOverlayController extends AttachableAdapter {
             transitionOut();
         });
         movablePane.setOnKeyReleased(event -> {
+            if (midAction) return;
+            midAction = true;
+
             switch (event.getCode()) {
                 case ESCAPE:
                     transitionOut();

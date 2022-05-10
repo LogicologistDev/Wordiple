@@ -8,19 +8,21 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
+import me.logicologist.wordiple.client.manager.GUIManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ConfirmExitOverlayController extends AttachableAdapter {
 
-    //TODO: Add a confirmation dialog. Yes Or no.
-
     @FXML
     public AnchorPane movablePane;
 
     @FXML
-    public Button backgroundButton;
+    public Button cancelButton;
+
+    @FXML
+    public Button confirmButton;
 
     private boolean midAction = false;
     private OverlayController overlayController = null;
@@ -28,10 +30,29 @@ public class ConfirmExitOverlayController extends AttachableAdapter {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
-        backgroundButton.setOnAction(x -> {
+        movablePane.setLayoutY(-200);
+        movablePane.setOpacity(0);
+        confirmButton.setOnAction(x -> {
+            if (midAction || GUIManager.getInstance() == null) return;
+            midAction = true;
+            GUIManager.getInstance().stage.getOnCloseRequest().handle(null);
+        });
+
+        cancelButton.setOnAction(x -> {
             if (midAction) return;
             midAction = true;
             transitionOut();
+        });
+
+        movablePane.setOnKeyReleased(event -> {
+            if (midAction) return;
+            midAction = true;
+
+            switch (event.getCode()) {
+                case ESCAPE:
+                    transitionOut();
+                    return;
+            }
         });
     }
 
@@ -53,6 +74,7 @@ public class ConfirmExitOverlayController extends AttachableAdapter {
         timeline.setOnFinished(x -> {
             midAction = false;
             if (runAfter != null) runAfter.run();
+            this.movablePane.requestFocus();
         });
     }
 

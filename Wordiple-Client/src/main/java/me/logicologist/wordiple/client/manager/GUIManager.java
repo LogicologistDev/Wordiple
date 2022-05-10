@@ -282,16 +282,15 @@ public class GUIManager extends Application {
     }
 
     public ConfirmExitOverlayController showConfirmExitOverlay(Runnable runAfter) {
-        //TODO: do this.
         try {
             OverlayController overlayController = showOverlay(true);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/confirmexitoverlay.fxml"));
             fxmlLoader.load();
-            ConfirmExitOverlayController rankOverlayController = fxmlLoader.getController();
-            rankOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
-            rankOverlayController.attach();
-            rankOverlayController.transitionIn(overlayController, runAfter);
-            return rankOverlayController;
+            ConfirmExitOverlayController confirmExitOverlayController = fxmlLoader.getController();
+            confirmExitOverlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            confirmExitOverlayController.attach();
+            confirmExitOverlayController.transitionIn(overlayController, runAfter);
+            return confirmExitOverlayController;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
