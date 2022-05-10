@@ -40,6 +40,12 @@ public class QueueManager {
         }
     }
 
+    public void removeAllQueueViewers(WordipleUser user) {
+        for (Queue queue : this.queues) {
+            queue.removeQueueViewer(user);
+        }
+    }
+
     public static QueueManager getInstance() {
         return instance;
     }
