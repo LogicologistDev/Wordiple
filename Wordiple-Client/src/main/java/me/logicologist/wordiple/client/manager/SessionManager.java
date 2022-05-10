@@ -3,8 +3,8 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
-import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.io.File;
 import java.nio.file.Files;

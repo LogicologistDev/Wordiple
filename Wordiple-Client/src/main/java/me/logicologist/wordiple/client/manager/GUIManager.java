@@ -3,13 +3,10 @@ package me.logicologist.wordiple.client.manager;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import me.logicologist.wordiple.client.WordipleClient;
@@ -23,13 +20,12 @@ import me.logicologist.wordiple.client.gui.controllers.queue.CompetitiveQueueCon
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
-import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
+import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -142,10 +138,6 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
             this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
-            PlayerHeaderController playerHeaderController = PlayerHeaderController.instance;
-            playerHeaderController.setUsername(SessionManager.getInstance().getUsername());
-            playerHeaderController.setLevel(SessionManager.getInstance().getLevel());
-            playerHeaderController.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
             if (fadeIn) {
                 ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC));
                 return;

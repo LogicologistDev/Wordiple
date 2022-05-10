@@ -48,6 +48,11 @@ public class PlayerHeaderController extends AttachableAdapter {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         instance = this;
+
+        this.setUsername(SessionManager.getInstance().getUsername());
+        this.setLevel(SessionManager.getInstance().getLevel());
+        this.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
+
         super.setAttachment(headerPane);
 
         profileButton.setOnAction(event -> {

@@ -12,7 +12,6 @@ import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
-import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 

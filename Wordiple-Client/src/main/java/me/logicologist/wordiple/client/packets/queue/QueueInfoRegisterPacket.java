@@ -1,6 +1,29 @@
 package me.logicologist.wordiple.client.packets.queue;
 
-public class QueueInfoRegisterPacket {
+import com.olziedev.olziesocket.framework.PacketArguments;
+import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.queue.QueueType;
 
-    // Packet for adding a session ID to a list of users looking at a certain queue so you can send them the amount of people in that queue
+public class QueueInfoRegisterPacket extends PacketAdapter implements AuthPacketType {
+    public QueueInfoRegisterPacket() {
+        super("queue_info_register_packet");
+        this.packetType = this;
+    }
+
+    @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
+    public void onReceive(PacketArguments arguments) {
+
+    }
+
+    @Override
+    public PacketArguments getArguments() {
+        return new PacketArguments()
+                .setArgument("queuetype", QueueType.class);
+    }
 }
