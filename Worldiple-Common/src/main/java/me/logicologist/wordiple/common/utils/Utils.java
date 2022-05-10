@@ -5,6 +5,9 @@ import java.util.function.Function;
 
 public class Utils {
 
+    private static final String VERSION = "1.0.0";
+    private static final String SOUND_VERSIONS = "1.0.0";
+
     public static String formatNumber(double number) {
         return new DecimalFormat(number % 1 == 0 ? "#,###.##" : "#,##0.00").format(number);
     }
@@ -47,5 +50,9 @@ public class Utils {
             sec %= (n * unit);
         }
         return sec;
+    }
+
+    public static String getVersion() {
+        return VERSION;
     }
 }

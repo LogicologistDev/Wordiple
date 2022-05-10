@@ -11,15 +11,19 @@ import java.nio.file.StandardCopyOption;
 
 public enum SoundType {
 
-    BUTTON_CLICK("", "button_click.wav", 1f),
-    BACKGROUND_MUSIC("", "background_music.wav", 0.22f, true),
-    DANCE_OF_THE_DERPY_CHICKEN("", "dance_of_the_derpy_chicken.wav", 0.22f, false),
-    END_OF_FRIENDSHIP("", "end_of_friendship.wav", 0.22f, false),
-    GAELIC_CONCLUSION("", "gaelic_conclusion.wav", 0.22f, false),
-    JOE_LOOKS_CONCERNED("", "joe_looks_concerned.wav", 0.22f, false),
-    MOVE_OR_DIE("", "move_or_die.wav", 0.22f, false),
-    TICK_TOCK("", "tick_tock.wav", 0.22f, false),
-    WHATS_UP_FURBALL("", "whats_up_furball.wav", 0.22f, false),
+    BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 1f),
+
+    OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", 0.22f),
+    BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", 0.22f, true),
+    BACKGROUND_MUSIC(OVERWORLD, BACKGROUND),
+
+    DANCE_OF_THE_DERPY_CHICKEN("https://www.dropbox.com/s/1ovi11uh6i7nh1r/dance_of_the_derpy_chicken.wav?dl=1", "dance_of_the_derpy_chicken.wav", 0.22f, false),
+    END_OF_FRIENDSHIP("https://www.dropbox.com/s/l8vg1vqivfyja81/end_of_friendship.wav?dl=1", "end_of_friendship.wav", 0.22f, false),
+    GAELIC_CONCLUSION("https://www.dropbox.com/s/unxklg86zbh383q/gaelic_conclusion.wav?dl=1", "gaelic_conclusion.wav", 0.22f, false),
+    JOE_LOOKS_CONCERNED("https://www.dropbox.com/s/u0rcvwiz99svsdf/joe_looks_concerned.wav?dl=1", "joe_looks_concerned.wav", 0.22f, false),
+    MOVE_OR_DIE("https://www.dropbox.com/s/d2yq6lcu3tblsc9/move_or_die.wav?dl=1", "move_or_die.wav", 0.22f, false),
+    TICK_TOCK("https://www.dropbox.com/s/q1912ts2zukkgpb/tick_tock.wav?dl=1", "tick_tock.wav", 0.22f, false),
+    WHATS_UP_FURBALL("https://www.dropbox.com/s/8gg5ki4ipip6x9i/whats_up_furball.wav?dl=1", "whats_up_furball.wav", 0.22f, false),
     FIGHTING_MUSIC(
             DANCE_OF_THE_DERPY_CHICKEN,
             END_OF_FRIENDSHIP,
@@ -53,21 +57,35 @@ public enum SoundType {
         this.children = children;
     }
 
-    public void download() {
+    public void download(String version, String localVersion) {
         if (this.url == null) return;
 
+
         try {
-            File file = new File(WordipleClient.getAppData() + File.separator + "sounds" + fileName);
+            File file = new File(WordipleClient.getAppData() + File.separator + "sounds", fileName);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+
+            boolean exists = file.exists();
+            if (exists && version.equals(localVersion)) {
+                return;
+            }
+            if (!exists) {
+                file.createNewFile();
+            }
             HttpURLConnection httpcon = (HttpURLConnection) new URL(url).openConnection();
             httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
             httpcon.setConnectTimeout(5 * 1000);
             httpcon.setReadTimeout(5 * 1000);
 
-            long fileModified = file.lastModified();
-            long urlModified = httpcon.getLastModified();
-            if (urlModified == fileModified) {
-                return;
-            }
+//            long fileModified = file.lastModified();
+//            long urlModified = httpcon.getLastModified();
+//
+//            if (urlModified == fileModified) {
+//                WordipleClient.getLogger().info("Sound file " + fileName + " is up to date. local: " + fileModified + " url: " + urlModified);
+//                return;
+//            }
 
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
@@ -78,9 +96,10 @@ public enum SoundType {
             }
 
             //DONWLOAD HERE
+            WordipleClient.getLogger().info("Downloaded sound file " + fileName);
             Files.copy(httpcon.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

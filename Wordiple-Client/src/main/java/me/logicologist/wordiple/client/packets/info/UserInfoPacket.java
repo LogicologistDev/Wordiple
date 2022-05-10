@@ -38,6 +38,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("playtime", Long.class)
                 .setArgument("competitiveBan", Boolean.class)
                 .setArgument("onlineBan", Boolean.class)
+                .setArgument("version", String.class)
                 .setArgument("globalBan", Boolean.class);
     }
 }

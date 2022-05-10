@@ -7,6 +7,7 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.utils.Utils;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.UUID;
@@ -41,9 +42,15 @@ public class PacketManager {
                             return false;
                         }
                         manager.load(response, username);
-                        GUIManager.addReadyListener(instance -> instance.startSwipeTransition(null, () -> {
-                            GUIManager.getInstance().showGameSelectScreen(false);
-                        }));
+                        GUIManager.addReadyListener(instance -> {
+                            if (!Utils.getVersion().equals(manager.getVersion())) {
+                                instance.showLoginScreen(true);
+                                return;
+                            }
+                            instance.startSwipeTransition(null, () -> {
+                                GUIManager.getInstance().showGameSelectScreen(false);
+                            });
+                        });
                         return false;
                     }, null, 5, TimeUnit.SECONDS);
         });

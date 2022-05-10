@@ -97,7 +97,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                 });
             });
 
-            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
 
             PacketManager.getInstance().getSocket().getPacket(LeaveQueuePacket.class).sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
                     .setValues("queuetype", queueType)

@@ -72,7 +72,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             if (midAction) return;
             midAction = true;
 
-            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
             PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())
@@ -103,7 +103,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             if (midAction) return;
             midAction = true;
 
-            SoundManager.getInstance().getSound(SoundType.BUTTON_CLICK).play();
+            SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             LoadScreenController loadScreenController = GUIManager.getInstance().showLoadScreen("Fetching Queue Data...");
             PacketManager.getInstance().getSocket().getPacket(StatInfoPacket.class).sendPacket(packet ->
                     packet.getPacketType().getArguments().setValues("username", SessionManager.getInstance().getUsername())

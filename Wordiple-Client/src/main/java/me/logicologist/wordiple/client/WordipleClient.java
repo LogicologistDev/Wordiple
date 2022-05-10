@@ -23,8 +23,8 @@ public class WordipleClient {
         logger = LogManager.getLogger("WordipleClient");
         developerMode = Arrays.asList(args).contains("-developer");
         new SessionManager();
-        new PacketManager(developerMode).load();
         new SoundManager().load();
+        new PacketManager(developerMode).load();
         GUIManager.launch(args);
     }
 
