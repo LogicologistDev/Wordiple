@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.managers;
 
 import me.logicologist.wordiple.common.queue.QueueType;
+import me.logicologist.wordiple.server.queue.CasualQueue;
 import me.logicologist.wordiple.server.queue.CompetitiveQueue;
 import me.logicologist.wordiple.server.queue.Queue;
 
@@ -20,6 +21,7 @@ public class QueueManager {
 
     public void load() {
         this.queues.add(new CompetitiveQueue());
+        this.queues.add(new CasualQueue());
 
         for (Queue queue : this.queues) {
             queue.startQueueInformer();

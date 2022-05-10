@@ -170,6 +170,23 @@ public class GUIManager extends Application {
         }
     }
 
+    public void showCasualQueueScreen(boolean fadeIn, PacketArguments playerInfo, PacketArguments queueInfo) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/casualqueue.fxml"));
+            this.loadScene(fxmlLoader.load());
+            attachPlayerHeader();
+            CompetitiveQueueController controller = fxmlLoader.getController();
+            controller.setActive(queueInfo.get("active", Integer.class));
+            controller.setInfo(playerInfo);
+            controller.setQueueButtonStyles("button-casual-queue-enter-button", "button-casual-queue-leave-button");
+            this.queueController = controller;
+            if (fadeIn) controller.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public QueueController getQueueController() {
         return queueController;
     }
