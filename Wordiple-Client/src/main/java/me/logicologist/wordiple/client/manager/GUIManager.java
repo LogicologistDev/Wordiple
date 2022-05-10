@@ -46,7 +46,6 @@ public class GUIManager extends Application {
 
     @Override
     public void start(Stage stage) {
-        instance = this;
         this.stage = stage;
         stage.setTitle("Wordiple");
 
@@ -79,6 +78,7 @@ public class GUIManager extends Application {
             }
         });
         new SoundManager().load(this, () -> {
+            instance = this;
             readyListeners.forEach(x -> x.accept(this));
             readyListeners.clear();
         });

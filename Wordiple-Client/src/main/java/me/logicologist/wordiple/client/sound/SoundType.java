@@ -78,15 +78,11 @@ public enum SoundType {
         return !exists || !version.equals(localVersion);
     }
 
-    public void download(String version, String localVersion, Runnable update) {
+    public void download(Runnable update) {
         if (this.url == null) {
             return;
         }
-
-
         try {
-            if (!this.needDownload(version, localVersion)) return;
-
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -102,14 +98,6 @@ public enum SoundType {
 //                WordipleClient.getLogger().info("Sound file " + fileName + " is up to date. local: " + fileModified + " url: " + urlModified);
 //                return;
 //            }
-
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-
-            if (!file.exists()) {
-                file.createNewFile();
-            }
 
             //DONWLOAD HERE
             WordipleClient.getLogger().info("Downloaded sound file " + this.file);
