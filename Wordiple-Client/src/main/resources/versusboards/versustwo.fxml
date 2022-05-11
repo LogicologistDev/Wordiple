@@ -65,7 +65,7 @@
                   <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
                </children>
             </AnchorPane>
-            <Label fx:id="playerOneName" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="8.0" layoutY="6.0" prefHeight="61.0" prefWidth="423.0" styleClass="label-50" stylesheets="@../style.css" text="Logicologist" textAlignment="CENTER">
+            <Label fx:id="playerOneName" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="8.0" layoutY="6.0" prefHeight="61.0" prefWidth="423.0" styleClass="label-50" stylesheets="@../style.css" text="Unknown" textAlignment="CENTER">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -140,7 +140,7 @@
                   <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
                </children>
             </AnchorPane>
-            <Label fx:id="playerTwoName" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="8.0" layoutY="5.0" prefHeight="61.0" prefWidth="423.0" styleClass="label-50" stylesheets="@../style.css" text="uu360" textAlignment="CENTER">
+            <Label fx:id="playerTwoName" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="8.0" layoutY="5.0" prefHeight="61.0" prefWidth="423.0" styleClass="label-50" stylesheets="@../style.css" text="Unknown" textAlignment="CENTER">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -161,9 +161,9 @@
          </children>
       </AnchorPane>
       <AnchorPane layoutY="52.0" prefHeight="100.0" prefWidth="1440.0" styleClass="versus-banner" stylesheets="@../style.css" />
-      <Label fx:id="playerScoreLabel" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="252.0" layoutY="41.0" prefHeight="120.0" prefWidth="438.0" styleClass="versus-score-label" stylesheets="@../style.css" text="8" textAlignment="RIGHT" textFill="WHITE" />
-      <Label fx:id="opponentScoreLabel" focusTraversable="false" layoutX="750.0" layoutY="41.0" prefHeight="120.0" prefWidth="367.0" styleClass="versus-score-label" stylesheets="@../style.css" text="3" textFill="WHITE" />
-      <Label fx:id="goalLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="52.0" prefWidth="1440.0" styleClass="versus-goal-label" stylesheets="@../style.css" text="Competitive - First to 12" textAlignment="CENTER" textFill="WHITE" />
-      <TextField fx:id="responsebox" layoutX="646.0" layoutY="463.0" />
+      <Label fx:id="playerScoreLabel" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="252.0" layoutY="41.0" prefHeight="120.0" prefWidth="438.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textAlignment="RIGHT" textFill="WHITE" />
+      <Label fx:id="opponentScoreLabel" focusTraversable="false" layoutX="750.0" layoutY="41.0" prefHeight="120.0" prefWidth="367.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textFill="WHITE" />
+      <Label fx:id="goalLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="52.0" prefWidth="1440.0" styleClass="versus-goal-label" stylesheets="@../style.css" text="Unknown - First to 0" textAlignment="CENTER" textFill="WHITE" />
+      <TextField fx:id="playTextField" layoutX="646.0" layoutY="463.0" />
    </children>
 </AnchorPane>
