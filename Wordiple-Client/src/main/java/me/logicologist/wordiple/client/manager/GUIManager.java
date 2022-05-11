@@ -14,6 +14,7 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.auth.*;
+import me.logicologist.wordiple.client.gui.controllers.game.CompetitiveIntroController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
@@ -215,13 +216,12 @@ public class GUIManager extends Application {
         }
     }
 
-
     public QueueController getQueueController() {
         return queueController;
     }
 
     public void resetQueueController() {
-
+        this.queueController = null;
     }
 
     public LoadScreenController showLoadScreen(String title) {
@@ -291,6 +291,22 @@ public class GUIManager extends Application {
             confirmExitOverlayController.attach();
             confirmExitOverlayController.transitionIn(overlayController, runAfter);
             return confirmExitOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfter, String opponentName, int opponentRating, boolean transitionIn) {
+        if (runFirst != null) runFirst.run();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
+            handleDimension(Toolkit.getDefaultToolkit().getScreenSize(), (Parent) fxmlLoader.load());
+            CompetitiveIntroController competitiveIntroController = fxmlLoader.getController();
+            competitiveIntroController.setParent((AnchorPane) stage.getScene().getRoot());
+            competitiveIntroController.setOpponentData(opponentName, opponentRating);
+            if (transitionIn) competitiveIntroController.transitionIn(runAfter);
+            return competitiveIntroController;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -385,6 +401,14 @@ public class GUIManager extends Application {
         double h = height / 810;
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
+    }
+
+    private void handleDimension(Dimension dimension, Parent parent) {
+        double width = dimension.getWidth();
+        double height = dimension.getHeight();
+        System.out.println(width + " " + height);
+        Scale scale = new Scale(0.75, 0.75, 0, 0);
+        parent.getTransforms().setAll(scale);
     }
 
     public static void launch(String[] args) {

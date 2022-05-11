@@ -23,19 +23,16 @@
 
 .versus-banner {
     -fx-background-image: url("./versusbanner.png");
-    -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
 }
 
 .versus-intro-player {
     -fx-background-image: url("./versusintroplayer.png");
-    -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
 }
 
 .versus-intro-opponent {
     -fx-background-image: url("./versusintroopponent.png");
-    -fx-background-size: 100% 100%;
     -fx-background-color: transparent;
 }
 

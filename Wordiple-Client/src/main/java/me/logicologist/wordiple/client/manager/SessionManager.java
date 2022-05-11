@@ -20,6 +20,7 @@ public class SessionManager {
     private int level;
     private int currentXp;
     private int neededXp;
+    private int rating;
     private String username;
     private String version;
 
@@ -108,6 +109,10 @@ public class SessionManager {
         return neededXp;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -132,10 +137,15 @@ public class SessionManager {
         this.neededXp = neededXp;
     }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     public void load(PacketArguments arguments, String username) {
         this.setCurrentXp(arguments.get("xp", Integer.class));
         this.setNeededXp(arguments.get("neededXp", Integer.class));
         this.setLevel(arguments.get("level", Integer.class));
+        this.setRating(arguments.get("rating", Integer.class));
         this.setUsername(username);
         this.setLoggedIn(true);
         this.setVersion(arguments.get("version", String.class));
