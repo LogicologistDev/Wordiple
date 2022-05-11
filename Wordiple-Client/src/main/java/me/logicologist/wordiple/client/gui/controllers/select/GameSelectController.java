@@ -74,10 +74,6 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
         });
 
         competitiveButton.setOnAction(event -> {
-            if (true) {
-                GUIManager.getInstance().showCompetitiveIntro(null, null, "uu360", 0, true);
-                return;
-            }
             if (midAction) return;
             midAction = true;
 

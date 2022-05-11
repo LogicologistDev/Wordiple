@@ -301,7 +301,7 @@ public class GUIManager extends Application {
         if (runFirst != null) runFirst.run();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
-            handleDimension(Toolkit.getDefaultToolkit().getScreenSize(), (Parent) fxmlLoader.load());
+            handleBigAttachment(fxmlLoader.load());
             CompetitiveIntroController competitiveIntroController = fxmlLoader.getController();
             competitiveIntroController.setParent((AnchorPane) stage.getScene().getRoot());
             competitiveIntroController.setOpponentData(opponentName, opponentRating);
@@ -403,10 +403,8 @@ public class GUIManager extends Application {
         scene.getRoot().getTransforms().setAll(scale);
     }
 
-    private void handleDimension(Dimension dimension, Parent parent) {
-        double width = dimension.getWidth();
-        double height = dimension.getHeight();
-        System.out.println(width + " " + height);
+    // Used to resize ATTACHABLE 1920X1808 SCREENS (will be new standard for higher quality later)
+    private void handleBigAttachment(Parent parent) {
         Scale scale = new Scale(0.75, 0.75, 0, 0);
         parent.getTransforms().setAll(scale);
     }

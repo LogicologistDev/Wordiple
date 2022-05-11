@@ -91,8 +91,8 @@ public class CompetitiveIntroController extends AttachableAdapter {
 
     public void setOpponentData(String name, int rating) {
         opponentNameLabel.setText(name);
-        opponentRatingLabel.setText(String.valueOf(rating));
+        opponentRatingLabel.setText(rating + " WR");
         playerNameLabel.setText(SessionManager.getInstance().getUsername());
-        playerRatingLabel.setText(String.valueOf(SessionManager.getInstance().getRating()));
+        playerRatingLabel.setText(SessionManager.getInstance().getRating() + " WR");
     }
 }
