@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
+import me.logicologist.wordiple.client.manager.WordManager;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -72,6 +74,7 @@ public class VersusTwoController implements Initializable {
     private TextField playTextField;
 
     int guessNumber = 1;
+    int maxRows = 6;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,6 +82,8 @@ public class VersusTwoController implements Initializable {
         Pattern charPattern = Pattern.compile("[a-zA-Z]");
 
         playTextField.setOnKeyTyped(e -> {
+            if (guessNumber > 6) return;
+
             StringBuilder verifiedString = new StringBuilder();
             for (String c : playTextField.getText().split("")) {
                 if (charPattern.matcher(c).matches()) continue;
@@ -91,30 +96,66 @@ public class VersusTwoController implements Initializable {
             }
 
             setPlayerGuess(playTextField.getText());
+
+            // Send packet to update board
         });
     }
 
-    public void setPlayerGuess(String value) {
-        AnchorPane guessRow = null;
-
+    public AnchorPane getCurrentRow() {
         switch (guessNumber) {
             case 1:
-                guessRow = playerOneRow1;
+                return playerOneRow1;
+            case 2:
+                return playerOneRow2;
+            case 3:
+                return playerOneRow3;
+            case 4:
+                return playerOneRow4;
+            case 5:
+                return playerOneRow5;
+            case 6:
+                return playerOneRow6;
+        }
+        return null;
+    }
+
+    public void setPlayerGuess(String value) {
+        AnchorPane guessRow = getCurrentRow();
+
+        if (guessRow == null) return;
+
+        List<Label> rowLabels = getGuessLabels(guessRow);
+
+        for (int i = 0; i < 5; i++) {
+            if (i < value.length()) {
+                rowLabels.get(i).setText(String.valueOf(value.charAt(i)));
+                continue;
+            }
+            rowLabels.get(i).setText("");
+        }
+    }
+
+    public void setOpponentGuess(int guess, String value) {
+        AnchorPane guessRow = null;
+
+        switch (guess) {
+            case 1:
+                guessRow = playerTwoRow1;
                 break;
             case 2:
-                guessRow = playerOneRow2;
+                guessRow = playerTwoRow2;
                 break;
             case 3:
-                guessRow = playerOneRow3;
+                guessRow = playerTwoRow3;
                 break;
             case 4:
-                guessRow = playerOneRow4;
+                guessRow = playerTwoRow4;
                 break;
             case 5:
-                guessRow = playerOneRow5;
+                guessRow = playerTwoRow5;
                 break;
             case 6:
-                guessRow = playerOneRow6;
+                guessRow = playerTwoRow6;
                 break;
         }
 
@@ -131,7 +172,18 @@ public class VersusTwoController implements Initializable {
         }
     }
 
-    public void setOpponentGuess(int guess, String value) {
+    public void submitGuess(String value) {
+        if (!WordManager.getInstance().isValid(value)) {
+            new ShakeAnimation(1, getCurrentRow().layoutXProperty(), 100);
+            return;
+        }
+        guessNumber++;
+        playTextField.clear();
+
+        // Send packet to submit
+    }
+
+    public void updateOpponentGuess(int guess, String codes) {
 
     }
 
