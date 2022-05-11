@@ -6,12 +6,14 @@ public class Rank {
     private final int level;
     private final int minimum;
     private final int maximum;
+    private final int competitiveRounds;
 
-    public Rank(String name, int level, int minimum, int maximum) {
+    public Rank(String name, int level, int minimum, int maximum, int competitiveRounds) {
         this.name = name;
         this.level = level;
         this.minimum = minimum;
         this.maximum = maximum;
+        this.competitiveRounds = competitiveRounds;
     }
 
     public String getName() {
@@ -28,6 +30,10 @@ public class Rank {
 
     public int getMaximum() {
         return this.maximum;
+    }
+
+    public int getCompetitiveRounds() {
+        return this.competitiveRounds;
     }
 
     public boolean isValid(int rank) {
