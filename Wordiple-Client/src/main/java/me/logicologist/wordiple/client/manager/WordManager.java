@@ -1,12 +1,7 @@
 package me.logicologist.wordiple.client.manager;
 
-import me.logicologist.wordiple.client.WordipleClient;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +13,10 @@ public class WordManager {
     public WordManager() {
         this.validWords = new ArrayList<>();
         try {
-            File words = new File(WordipleClient.getAppData(), "validwords.txt");
-
-            if (!words.exists()) words.createNewFile();
-
-            Files.copy(getClass().getResourceAsStream("/validwords.txt"), words.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            BufferedReader br = new BufferedReader(new FileReader(words));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/validwords.txt")));
             String st;
             while ((st = br.readLine()) != null) this.validWords.add(st);
+            System.out.println("Loaded " + validWords.size() + " valid words.");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
