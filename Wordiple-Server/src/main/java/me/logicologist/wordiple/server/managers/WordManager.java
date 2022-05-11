@@ -17,7 +17,7 @@ public class WordManager {
     private final List<String> guessableWords;
 
     public WordManager() {
-        instance = null
+        instance = null;
         this.validWords = new ArrayList<>();
         this.guessableWords = new ArrayList<>();
         try {
