@@ -373,6 +373,7 @@ public class GUIManager extends Application {
         }
     }
 
+    @Deprecated // Will remove after standard is 1920x1080
     public Scene loadScene(Parent parent) {
         Scene scene = new Scene(parent);
         handleScene(scene);
@@ -380,6 +381,14 @@ public class GUIManager extends Application {
         return scene;
     }
 
+    public Scene loadBigScene(Parent parent) {
+        Scene scene = new Scene(parent);
+        handleBigScene(scene);
+        stage.setScene(scene);
+        return scene;
+    }
+
+    @Deprecated // Will remove after standard is 1920x1080
     public void handleScene(Scene scene) {
         this.handleDimension(Toolkit.getDefaultToolkit().getScreenSize(), scene);
 //        stage.widthProperty().addListener((arg0, arg1, arg2) -> {
@@ -394,11 +403,25 @@ public class GUIManager extends Application {
 //        });
     }
 
+    public void handleBigScene(Scene scene) {
+        this.handleBigDimension(Toolkit.getDefaultToolkit().getScreenSize(), scene);
+    }
+
+    @Deprecated // Will remove after standard is 1920x1080
     private void handleDimension(Dimension dimension, Scene scene) {
         double width = dimension.getWidth();
         double height = dimension.getHeight();
         double w = width / 1440;
         double h = height / 810;
+        Scale scale = new Scale(w, h, 0, 0);
+        scene.getRoot().getTransforms().setAll(scale);
+    }
+
+    private void handleBigDimension(Dimension dimension, Scene scene) {
+        double width = dimension.getWidth();
+        double height = dimension.getHeight();
+        double w = width / 1920;
+        double h = height / 1080;
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
     }
