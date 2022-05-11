@@ -16,6 +16,104 @@
     -fx-background-repeat: no-repeat;
 }
 
+.background-versus {
+    -fx-background-image: url("./versusbackground.png");
+    -fx-background-repeat: no-repeat;
+}
+
+.versus-banner {
+    -fx-background-image: url("./versusbanner.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+}
+
+.versus-intro-player {
+    -fx-background-image: url("./versusintroplayer.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+}
+
+.versus-intro-opponent {
+    -fx-background-image: url("./versusintroopponent.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+}
+
+.board-default {
+    -fx-background-image: url("./boards/board_default.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
+.versus-intro-label {
+    -fx-font-size: 125px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.2, 0, 0);
+}
+
+.versus-score-label {
+    -fx-font-size: 100px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.1, 0, 0);
+}
+
+.versus-rank-label {
+    -fx-font-size: 75px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.1, 0, 0);
+}
+
+.versus-goal-label {
+    -fx-font-size: 40px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.1, 0, 0);
+}
+
+.board-default-ready {
+    -fx-font-size: 55px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #272727;
+    -fx-background-radius: 6px;
+}
+
+.board-default-used {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #fff333;
+    -fx-background-radius: 6px;
+}
+
+.board-default-correct {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #5eff33;
+    -fx-background-radius: 6px;
+}
+
+.board-default-unused {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #1b1b1b;
+    -fx-background-radius: 6px;
+}
+
+.board-default-locked {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-image: url("./gridlock.png");
+    -fx-background-size: 100% 100%;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #ff4f4f;
+    -fx-background-radius: 6px;
+}
+
+
+
 .rectangle-chirank-fill {
     -fx-background-image: url("chirankbig.png");
     -fx-background-color: transparent;
@@ -161,6 +259,7 @@
     -fx-font-size: 30px;
     -fx-font-family: 'Nexa Bold';
 }
+
 .label-title-big {
     -fx-font-size: 50px;
     -fx-font-family: 'Nexa Bold';
@@ -180,6 +279,11 @@
     -fx-font-size: 60px;
     -fx-font-family: 'Nexa Bold';
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+}
+
+.label-50 {
+    -fx-font-size: 50px;
+    -fx-font-family: 'Nexa Bold';
 }
 
 .label-60-light {
