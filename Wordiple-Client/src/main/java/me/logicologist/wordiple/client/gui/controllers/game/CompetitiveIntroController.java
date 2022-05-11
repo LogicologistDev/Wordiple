@@ -49,13 +49,13 @@ public class CompetitiveIntroController extends AttachableAdapter {
         Duration duration = Duration.seconds(0.7);
 
         Timeline playerTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(playerSide.layoutXProperty(), -1920)),// end value of rotate
-                new KeyFrame(duration, new KeyValue(playerSide.layoutXProperty(), 0)) // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(playerSide.layoutXProperty(), -1920)),
+                new KeyFrame(duration, new KeyValue(playerSide.layoutXProperty(), 0))
         );
 
         Timeline opponentTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(opponentSide.layoutXProperty(), 1920)),// end value of rotate
-                new KeyFrame(duration, new KeyValue(opponentSide.layoutXProperty(), 0)) // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(opponentSide.layoutXProperty(), 1920)),
+                new KeyFrame(duration, new KeyValue(opponentSide.layoutXProperty(), 0))
         );
 
         playerTimeline.play();
@@ -72,13 +72,13 @@ public class CompetitiveIntroController extends AttachableAdapter {
         Duration duration = Duration.seconds(1.5);
 
         Timeline playerTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(playerSide.layoutXProperty(), 0)),// end value of rotate
-                new KeyFrame(duration, new KeyValue(playerSide.layoutXProperty(), -1920)) // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(playerSide.layoutXProperty(), 0)),
+                new KeyFrame(duration, new KeyValue(playerSide.layoutXProperty(), -1920))
         );
 
         Timeline opponentTimeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(opponentSide.layoutXProperty(), 0)),// end value of rotate
-                new KeyFrame(duration, new KeyValue(opponentSide.layoutXProperty(), 1920)) // initial rotate
+                new KeyFrame(Duration.ZERO, new KeyValue(opponentSide.layoutXProperty(), 0)),
+                new KeyFrame(duration, new KeyValue(opponentSide.layoutXProperty(), 1920))
         );
 
         playerTimeline.play();
