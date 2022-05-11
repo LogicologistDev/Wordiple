@@ -183,6 +183,10 @@ public class VersusTwoController implements Initializable {
         // Send packet to submit
     }
 
+    public void updateOpponentGuess(int guess, String codes) {
+
+    }
+
     public List<Label> getGuessLabels(AnchorPane guessRow) {
         List<Label> labels = new ArrayList<>();
 
