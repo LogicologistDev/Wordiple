@@ -151,6 +151,7 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
                     if (midAction) return;
                     midAction = true;
 
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                     super.transitionOut(() -> GUIManager.getInstance().showMainScreen(true));
                     return;
                 case ENTER:

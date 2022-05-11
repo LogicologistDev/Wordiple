@@ -90,6 +90,7 @@ public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
                     if (midAction) return;
                     midAction = true;
 
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                     super.transitionOut(() -> GUIManager.getInstance().showLoginScreen(true));
                     return;
                 case ENTER:

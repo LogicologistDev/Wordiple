@@ -4,10 +4,13 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import me.logicologist.wordiple.client.WordipleClient;
@@ -54,15 +57,17 @@ public class GUIManager extends Application {
         String OS = (System.getProperty("os.name")).toUpperCase();
         stage.setHeight(849);
         stage.setWidth(1439);
+        stage.setMaximized(true);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         if (!OS.contains("WIN")) {
             Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
             stage.setHeight(dimension.getHeight());
             stage.setWidth(dimension.getWidth());
+            stage.setFullScreenExitHint("");
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.setFullScreen(true);
         }
-        stage.setMaximized(true);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setResizable(false);
-
         SoundManager soundManager = new SoundManager();
         long neededSongs = soundManager.neededDownloaded();
         if (neededSongs <= 0) soundManager.load(this, null, neededSongs);
@@ -375,6 +380,11 @@ public class GUIManager extends Application {
 
     @Deprecated // Will remove after standard is 1920x1080
     public Scene loadScene(Parent parent) {
+        if (stage.getScene() != null) {
+            stage.getScene().setRoot(parent);
+            handleScene(stage.getScene());
+            return null;
+        }
         Scene scene = new Scene(parent);
         handleScene(scene);
         stage.setScene(scene);

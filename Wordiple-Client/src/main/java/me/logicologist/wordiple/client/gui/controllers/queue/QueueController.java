@@ -154,6 +154,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
         movablePane.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case ESCAPE:
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
                     runnable.run();
                     return;
             }
