@@ -18,6 +18,8 @@ import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.auth.*;
 import me.logicologist.wordiple.client.gui.controllers.game.CompetitiveIntroController;
+import me.logicologist.wordiple.client.gui.controllers.game.GameController;
+import me.logicologist.wordiple.client.gui.controllers.game.VersusTwoController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
@@ -46,7 +48,7 @@ public class GUIManager extends Application {
     private static final List<Consumer<GUIManager>> readyListeners = new ArrayList<>();
 
     private QueueController queueController;
-
+    private GameController gameController;
     public Stage stage;
 
     @Override
@@ -221,6 +223,18 @@ public class GUIManager extends Application {
         }
     }
 
+    public void showVersusTwoBoard(PacketArguments gameInfo) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusboards/versustwo.fxml"));
+            this.loadScene(fxmlLoader.load());
+            VersusTwoController controller = fxmlLoader.getController();
+            controller.setGameMeta("Competitive: First-to-3", "Seven");
+            this.gameController = controller;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public QueueController getQueueController() {
         return queueController;
     }
@@ -270,6 +284,38 @@ public class GUIManager extends Application {
         return null;
     }
 
+    public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfter, String opponentName, int opponentRating) {
+        if (runFirst != null) runFirst.run();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
+            handleBigAttachment(fxmlLoader.load());
+            CompetitiveIntroController competitiveIntroController = fxmlLoader.getController();
+            competitiveIntroController.setParent((AnchorPane) stage.getScene().getRoot());
+            competitiveIntroController.setOpponentData(opponentName, opponentRating);
+            competitiveIntroController.transitionIn(() -> {
+                WordipleClient.getExecutor().schedule(() -> {
+                    Platform.runLater(() -> {
+                        try {
+                            runAfter.run();
+                            FXMLLoader outTransition = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
+                            handleBigAttachment(outTransition.load());
+                            CompetitiveIntroController competitiveOutroController = outTransition.getController();
+                            competitiveOutroController.setParent((AnchorPane) stage.getScene().getRoot());
+                            competitiveOutroController.setOpponentData(opponentName, opponentRating);
+                            competitiveOutroController.transitionOut(null);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                }, 5, TimeUnit.SECONDS);
+            });
+            return competitiveIntroController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public RankOverlayController showRankOverlay(Runnable runAfter) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/rankoverlay.fxml"));
@@ -296,22 +342,6 @@ public class GUIManager extends Application {
             confirmExitOverlayController.attach();
             confirmExitOverlayController.transitionIn(overlayController, runAfter);
             return confirmExitOverlayController;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfter, String opponentName, int opponentRating, boolean transitionIn) {
-        if (runFirst != null) runFirst.run();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
-            handleBigAttachment(fxmlLoader.load());
-            CompetitiveIntroController competitiveIntroController = fxmlLoader.getController();
-            competitiveIntroController.setParent((AnchorPane) stage.getScene().getRoot());
-            competitiveIntroController.setOpponentData(opponentName, opponentRating);
-            if (transitionIn) competitiveIntroController.transitionIn(runAfter);
-            return competitiveIntroController;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -378,7 +408,6 @@ public class GUIManager extends Application {
         }
     }
 
-    @Deprecated // Will remove after standard is 1920x1080
     public Scene loadScene(Parent parent) {
         if (stage.getScene() != null) {
             stage.getScene().setRoot(parent);
@@ -391,14 +420,6 @@ public class GUIManager extends Application {
         return scene;
     }
 
-    public Scene loadBigScene(Parent parent) {
-        Scene scene = new Scene(parent);
-        handleBigScene(scene);
-        stage.setScene(scene);
-        return scene;
-    }
-
-    @Deprecated // Will remove after standard is 1920x1080
     public void handleScene(Scene scene) {
         this.handleDimension(Toolkit.getDefaultToolkit().getScreenSize(), scene);
 //        stage.widthProperty().addListener((arg0, arg1, arg2) -> {
@@ -413,25 +434,11 @@ public class GUIManager extends Application {
 //        });
     }
 
-    public void handleBigScene(Scene scene) {
-        this.handleBigDimension(Toolkit.getDefaultToolkit().getScreenSize(), scene);
-    }
-
-    @Deprecated // Will remove after standard is 1920x1080
     private void handleDimension(Dimension dimension, Scene scene) {
         double width = dimension.getWidth();
         double height = dimension.getHeight();
         double w = width / 1440;
         double h = height / 810;
-        Scale scale = new Scale(w, h, 0, 0);
-        scene.getRoot().getTransforms().setAll(scale);
-    }
-
-    private void handleBigDimension(Dimension dimension, Scene scene) {
-        double width = dimension.getWidth();
-        double height = dimension.getHeight();
-        double w = width / 1920;
-        double h = height / 1080;
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
     }

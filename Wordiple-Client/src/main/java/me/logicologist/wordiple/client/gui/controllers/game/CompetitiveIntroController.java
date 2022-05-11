@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class CompetitiveIntroController extends AttachableAdapter {
 
@@ -68,7 +70,6 @@ public class CompetitiveIntroController extends AttachableAdapter {
 
     public void transitionOut(Runnable runnable) {
         super.attach();
-
         Duration duration = Duration.seconds(1.5);
 
         Timeline playerTimeline = new Timeline(
@@ -81,10 +82,14 @@ public class CompetitiveIntroController extends AttachableAdapter {
                 new KeyFrame(duration, new KeyValue(opponentSide.layoutXProperty(), 1920))
         );
 
-        playerTimeline.play();
-        opponentTimeline.play();
+        WordipleClient.getExecutor().schedule(() -> {
+            playerTimeline.play();
+            opponentTimeline.play();
+        }, 1, TimeUnit.SECONDS);
+
 
         playerTimeline.setOnFinished(x -> {
+            super.detach();
             if (runnable != null) runnable.run();
         });
     }
