@@ -85,6 +85,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
             PacketManager.getInstance().getSocket().getPacket(QueueInfoUnregisterPacket.class).sendPacket(packet -> packet.getPacketType(AuthPacketType.class).getArguments(SessionManager.getInstance().getLocalSessionID())
                     .setValues("queuetype", queueType)
             ).waitForResponse(response1 -> {
+                GUIManager.getInstance().resetQueueController();
                 loadScreenController.remove(() -> {
                     if (future != null) future.cancel(true);
                     if (inQueue) {
@@ -112,6 +113,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                 }, 2, TimeUnit.SECONDS);
             }));
         };
+
         backButton.setOnAction(event -> {
             runnable.run();
         });
