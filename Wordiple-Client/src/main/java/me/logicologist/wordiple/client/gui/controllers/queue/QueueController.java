@@ -185,6 +185,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                     .setValues("queuetype", queueType)
             ).waitForResponse(packet -> {
                 Platform.runLater(() -> {
+                    inQueue = false;
                     enterButton.getStyleClass().clear();
                     enterButton.getStyleClass().add(queueStyle);
                     this.stopTimer();
