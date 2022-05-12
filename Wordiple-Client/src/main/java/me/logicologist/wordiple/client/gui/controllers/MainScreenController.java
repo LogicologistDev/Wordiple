@@ -51,8 +51,8 @@ public class MainScreenController extends FadeVerticalTransitionAdapter {
 
         movablePane.setOnKeyReleased(event -> {
             if (midAction) return;
-            midAction = true;
             if (event.getCode() != KeyCode.ESCAPE || GUIManager.getInstance() == null) return;
+            midAction = true;
 
             SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             GUIManager.getInstance().showConfirmExitOverlay(() -> midAction = false);

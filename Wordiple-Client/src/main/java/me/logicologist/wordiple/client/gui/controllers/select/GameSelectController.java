@@ -52,6 +52,10 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
 
+        WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
+            System.out.println(midAction);
+        }, 1, 1, TimeUnit.SECONDS);
+
         logoutButton.setOnAction(event -> {
             if (midAction) return;
             midAction = true;
@@ -151,8 +155,8 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
 
         movablePane.setOnKeyReleased(event -> {
             if (midAction) return;
-            midAction = true;
             if (event.getCode() != KeyCode.ESCAPE || GUIManager.getInstance() == null) return;
+            midAction = true;
 
             SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
             GUIManager.getInstance().showConfirmExitOverlay(() -> midAction = false);
