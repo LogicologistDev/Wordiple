@@ -68,6 +68,7 @@ public class GUIManager extends Application {
             stage.setWidth(dimension.getWidth());
             stage.setFullScreenExitHint("");
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setFullScreen(true);
         }
         stage.setResizable(false);
@@ -77,7 +78,6 @@ public class GUIManager extends Application {
 
         showMainScreen(false);
         stage.show();
-        stage.requestFocus();
         stage.setOnCloseRequest(e -> {
             try {
                 PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
