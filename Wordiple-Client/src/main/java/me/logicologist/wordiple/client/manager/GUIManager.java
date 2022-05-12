@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
@@ -58,8 +59,8 @@ public class GUIManager extends Application {
         if (OS.contains("WIN")) {
             stage.setHeight(849);
             stage.setWidth(1439);
-            stage.setMaximized(true);
-            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setFullScreen(true);
+            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         }
         stage.setResizable(false);
         if (!OS.contains("WIN")) {
@@ -77,6 +78,7 @@ public class GUIManager extends Application {
         showMainScreen(false);
         stage.show();
         stage.requestFocus();
+        stage.setAlwaysOnTop(true);
         stage.setOnCloseRequest(e -> {
             try {
                 PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
@@ -418,6 +420,11 @@ public class GUIManager extends Application {
             return null;
         }
         Scene scene = new Scene(parent);
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.CONTEXT_MENU) {
+                event.consume();
+            }
+        });
         handleScene(scene);
         stage.setScene(scene);
         return scene;

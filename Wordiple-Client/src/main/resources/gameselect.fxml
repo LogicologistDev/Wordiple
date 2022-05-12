@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.select.GameSelectController">
    <children>
       <AnchorPane fx:id="movablePane" prefHeight="810.0" prefWidth="1440.0">
          <children>
+            <AnchorPane fx:id="rankPane" layoutX="-163.0" layoutY="209.0" prefHeight="283.0" prefWidth="891.0">
+               <children>
+                  <Button fx:id="rankButton" mnemonicParsing="false" pickOnBounds="false" prefHeight="498.0" prefWidth="498.0" styleClass="button-overlay-right-container" stylesheets="@style.css" />
+                  <Label alignment="CENTER" layoutX="-257.0" layoutY="-471.0" mouseTransparent="true" prefHeight="1316.0" prefWidth="1148.0" scaleX="0.25" scaleY="0.25" styleClass="rank-unranked" stylesheets="@style.css" textAlignment="CENTER" />
+                  <ProgressBar layoutX="246.0" layoutY="240.0" mouseTransparent="true" prefHeight="18.0" prefWidth="470.0" progress="0.0" rotate="-90.0" styleClass="progress-bar-rank" stylesheets="@style.css" />
+                  <Label alignment="CENTER" layoutX="277.0" layoutY="368.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Rank">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9729938507080078" green="1.0" blue="0.18981482088565826" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="0.5574845671653748" blue="0.14351852238178253" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="147.0" layoutY="405.0" mouseTransparent="true" prefHeight="72.0" prefWidth="343.0" styleClass="label-level" stylesheets="@style.css" text="Unranked" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7647058963775635" green="0.7647058963775635" blue="0.7647058963775635" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.7647058963775635" green="0.7647058963775635" blue="0.7647058963775635" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+               </children>
+            </AnchorPane>
             <Button fx:id="logoutButton" alignment="TOP_CENTER" layoutX="1276.0" layoutY="767.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="180.0" prefWidth="139.0" styleClass="button-3" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
             <Button fx:id="casualButton" alignment="BASELINE_LEFT" layoutX="750.0" layoutY="409.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-casual" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="189.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-zen" stylesheets="@style.css" textFill="WHITE" />
             <Button fx:id="competitiveButton" alignment="BASELINE_LEFT" layoutX="750.0" layoutY="299.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-competitive" stylesheets="@style.css" textFill="WHITE" />
             <Button fx:id="timeRoyaleButton" alignment="BASELINE_LEFT" layoutX="750.0" layoutY="519.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-time-royale" stylesheets="@style.css" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" layoutX="750.0" layoutY="629.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="100.0" prefWidth="1000.0" styleClass="button-private-match" stylesheets="@style.css" textFill="WHITE" />
-            <Button fx:id="rankButton" layoutX="-162.0" layoutY="210.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="498.0" prefWidth="498.0" styleClass="button-overlay-right" stylesheets="@style.css" />
-            <Label layoutX="28.0" layoutY="243.0" mouseTransparent="true" prefHeight="330.0" prefWidth="250.0" styleClass="rectangle-chirank" stylesheets="@style.css" />
-            <Label alignment="CENTER" layoutX="63.0" layoutY="619.0" mouseTransparent="true" styleClass="label-level" stylesheets="@style.css" text="Delta I" textAlignment="CENTER">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.6705882549285889" green="0.250980406999588" blue="0.007843137718737125" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.6705882549285889" green="0.250980406999588" blue="0.007843137718737125" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="112.0" layoutY="591.0" mouseTransparent="true" prefHeight="37.0" prefWidth="82.0" styleClass="label-title" stylesheets="@style.css" text="Rank">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.9729938507080078" green="1.0" blue="0.18981482088565826" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="0.5574845671653748" blue="0.14351852238178253" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <ProgressBar layoutX="77.0" layoutY="449.0" mouseTransparent="true" prefHeight="18.0" prefWidth="470.0" progress="0.0" rotate="-90.0" styleClass="progress-bar-rank" stylesheets="@style.css" />
          </children>
       </AnchorPane>
    </children>

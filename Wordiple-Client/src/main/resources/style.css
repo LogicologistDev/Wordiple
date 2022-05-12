@@ -16,6 +16,10 @@
     -fx-background-repeat: no-repeat;
 }
 
+.none {
+    -fx-background-color: transparent;
+}
+
 .background-versus {
     -fx-background-image: url("./versusbackground.png");
     -fx-background-repeat: no-repeat;
@@ -40,91 +44,76 @@
 .rank-delta-1 {
     -fx-background-image: url("./ranks/delta1.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-delta-2 {
     -fx-background-image: url("./ranks/delta2.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-delta-3 {
     -fx-background-image: url("./ranks/delta3.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-gamma-1 {
     -fx-background-image: url("./ranks/gamma1.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-gamma-2 {
     -fx-background-image: url("./ranks/gamma2.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-gamma-3 {
     -fx-background-image: url("./ranks/gamma3.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-beta-1 {
     -fx-background-image: url("./ranks/beta1.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-beta-2 {
     -fx-background-image: url("./ranks/beta2.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-beta-3 {
     -fx-background-image: url("./ranks/beta3.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-alpha-1 {
     -fx-background-image: url("./ranks/alpha1.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-alpha-2 {
     -fx-background-image: url("./ranks/alpha2.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-alpha-3 {
     -fx-background-image: url("./ranks/alpha3.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-sigma {
     -fx-background-image: url("./ranks/sigma.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-omega {
     -fx-background-image: url("./ranks/omega.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .rank-unranked {
     -fx-background-image: url("./ranks/unranked.png");
     -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
 }
 
 .board-default {
@@ -480,6 +469,13 @@
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.RightSkin';
+}
+
+.button-overlay-right-container {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.RightContainerSkin';
 }
 
 .progress-bar-level > .track {
