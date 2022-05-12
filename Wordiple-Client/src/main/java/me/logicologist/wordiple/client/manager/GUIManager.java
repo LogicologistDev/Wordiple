@@ -55,10 +55,12 @@ public class GUIManager extends Application {
         stage.setTitle("Wordiple");
 
         String OS = (System.getProperty("os.name")).toUpperCase();
-        stage.setHeight(849);
-        stage.setWidth(1439);
-        stage.setMaximized(true);
-        stage.initStyle(StageStyle.UNDECORATED);
+        if (!OS.contains("WIN")) {
+            stage.setHeight(849);
+            stage.setWidth(1439);
+            stage.setMaximized(true);
+            stage.initStyle(StageStyle.UNDECORATED);
+        }
         stage.setResizable(false);
         if (!OS.contains("WIN")) {
             Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
