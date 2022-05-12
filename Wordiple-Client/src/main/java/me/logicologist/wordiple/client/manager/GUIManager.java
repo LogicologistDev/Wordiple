@@ -420,11 +420,6 @@ public class GUIManager extends Application {
             return null;
         }
         Scene scene = new Scene(parent);
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.CONTEXT_MENU) {
-                event.consume();
-            }
-        });
         handleScene(scene);
         stage.setScene(scene);
         return scene;
