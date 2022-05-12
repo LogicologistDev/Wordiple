@@ -6,19 +6,25 @@ import javafx.animation.Timeline;
 import javafx.beans.value.WritableValue;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ShakeAnimation {
 
-    private final int intensity;
+    private static List<WritableValue> inProgressAnimations = new ArrayList<>();
+    private final double intensity;
     private final WritableValue writableValue;
     private final int duration;
 
-    public ShakeAnimation(int intensity, WritableValue writableValue, int duration) {
+    public ShakeAnimation(double intensity, WritableValue writableValue, int duration) {
         this.intensity = intensity;
         this.writableValue = writableValue;
         this.duration = duration;
     }
 
     public void play() {
+        if (inProgressAnimations.contains(writableValue)) return;
+        inProgressAnimations.add(writableValue);
         int portions = this.duration / 12;
         Timeline shakeOne = new Timeline();
         shakeOne.setCycleCount(1);
@@ -51,6 +57,9 @@ public class ShakeAnimation {
                     shakeFour.getKeyFrames().add(kfFour);
                     shakeFour.setAutoReverse(false);
                     shakeFour.play();
+                    shakeFour.setOnFinished(event4 -> {
+                        inProgressAnimations.remove(writableValue);
+                    });
                 });
             });
         });
