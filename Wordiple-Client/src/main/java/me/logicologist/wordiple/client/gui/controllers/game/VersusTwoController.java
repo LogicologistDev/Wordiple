@@ -222,7 +222,7 @@ public class VersusTwoController extends GameController {
 
     public void submitGuess(String value) {
         if (!WordManager.getInstance().isValid(value)) {
-            new ShakeAnimation(1, getCurrentRow().layoutXProperty(), 100).play();
+            new ShakeAnimation(1, getCurrentRow().layoutYProperty(), 100).play();
             return;
         }
         guessNumber++;
