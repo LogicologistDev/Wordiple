@@ -4,7 +4,6 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
-import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;

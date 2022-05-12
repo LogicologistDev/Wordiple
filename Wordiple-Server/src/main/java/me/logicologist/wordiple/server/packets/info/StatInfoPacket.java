@@ -3,7 +3,6 @@ package me.logicologist.wordiple.server.packets.info;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import com.olziedev.olziesocket.framework.api.packet.PacketType;
-import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.SessionManager;

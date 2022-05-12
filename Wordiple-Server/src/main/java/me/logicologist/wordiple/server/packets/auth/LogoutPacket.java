@@ -2,15 +2,12 @@ package me.logicologist.wordiple.server.packets.auth;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
-import com.olziedev.olziesocket.framework.api.packet.PacketType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.user.WordipleUser;
-
-import java.util.UUID;
 
 public class LogoutPacket extends PacketAdapter implements AuthPacketType {
 

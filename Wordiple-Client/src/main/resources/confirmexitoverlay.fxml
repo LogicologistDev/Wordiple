@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane fx:id="movablePane" maxHeight="810.0" maxWidth="1440.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController">
    <children>
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="269.0" layoutX="336.0" layoutY="321.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="rectangle-bg" width="691.0" />

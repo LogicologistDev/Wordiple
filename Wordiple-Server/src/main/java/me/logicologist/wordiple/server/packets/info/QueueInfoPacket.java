@@ -5,7 +5,6 @@ import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.managers.QueueManager;
-import me.logicologist.wordiple.server.managers.SessionManager;
 
 public class QueueInfoPacket extends PacketAdapter implements AuthPacketType {
 

@@ -5,7 +5,6 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
-import me.logicologist.wordiple.common.utils.Utils;
 
 import java.io.File;
 import java.nio.file.Files;
