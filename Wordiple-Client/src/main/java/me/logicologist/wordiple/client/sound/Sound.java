@@ -80,7 +80,7 @@ public class Sound {
             // Play clip
             clip.start();
 
-            if (true) {
+            if (this.type.isFade()) {
                 WordipleClient.getExecutor().submit(() -> {
                     FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                     float current = 20f * (float) Math.log10(0.01f);
