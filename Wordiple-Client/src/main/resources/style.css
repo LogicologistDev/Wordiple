@@ -37,6 +37,96 @@
     -fx-background-color: transparent;
 }
 
+.rank-delta-1 {
+    -fx-background-image: url("./ranks/delta1.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-delta-2 {
+    -fx-background-image: url("./ranks/delta2.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-delta-3 {
+    -fx-background-image: url("./ranks/delta3.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-gamma-1 {
+    -fx-background-image: url("./ranks/gamma1.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-gamma-2 {
+    -fx-background-image: url("./ranks/gamma2.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-gamma-3 {
+    -fx-background-image: url("./ranks/gamma3.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-beta-1 {
+    -fx-background-image: url("./ranks/beta1.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-beta-2 {
+    -fx-background-image: url("./ranks/beta2.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-beta-3 {
+    -fx-background-image: url("./ranks/beta3.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-alpha-1 {
+    -fx-background-image: url("./ranks/alpha1.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-alpha-2 {
+    -fx-background-image: url("./ranks/alpha2.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-alpha-3 {
+    -fx-background-image: url("./ranks/alpha3.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-sigma {
+    -fx-background-image: url("./ranks/sigma.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-omega {
+    -fx-background-image: url("./ranks/omega.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
+.rank-unranked {
+    -fx-background-image: url("./ranks/unranked.png");
+    -fx-background-color: transparent;
+    -fx-background-size: 100% 100%;
+}
+
 .board-default {
     -fx-background-image: url("./boards/board_default.png");
     -fx-background-size: 100% 100%;
@@ -108,13 +198,6 @@
     -fx-text-fill: #ffffff;
     -fx-background-color: #ff4f4f;
     -fx-background-radius: 6px;
-}
-
-.rectangle-chirank-fill {
-    -fx-background-image: url("chirankbig.png");
-    -fx-background-color: transparent;
-    -fx-background-size: 100% 100%;
-    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
 
 .button-zen {
@@ -383,20 +466,6 @@
 .rectangle-swipetransition {
     -fx-background-image: url("./swipetransition.png");
     -fx-background-color: transparent;
-}
-
-.rectangle-chirank {
-    -fx-background-image: url("chirankbig.png");
-    -fx-background-color: transparent;
-    -fx-border-radius: 60px;
-    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
-}
-
-.rectangle-chirank-small {
-    -fx-background-image: url("chiranksmall.png");
-    -fx-background-color: transparent;
-    -fx-border-radius: 60px;
-    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
 }
 
 .button-overlay {
