@@ -11,6 +11,7 @@ public class WordManager {
     private static WordManager instance;
 
     public WordManager() {
+        instance = this;
         this.validWords = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/validwords.txt")));
@@ -24,7 +25,7 @@ public class WordManager {
 
     public boolean isValid(String word) {
         if (word.length() != 5) return false;
-        return validWords.contains(word);
+        return validWords.contains(word.toLowerCase());
     }
 
     public static WordManager getInstance() {
