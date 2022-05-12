@@ -55,7 +55,7 @@ public class GUIManager extends Application {
         stage.setTitle("Wordiple");
 
         String OS = (System.getProperty("os.name")).toUpperCase();
-        if (!OS.contains("WIN")) {
+        if (OS.contains("WIN")) {
             stage.setHeight(849);
             stage.setWidth(1439);
             stage.setMaximized(true);
