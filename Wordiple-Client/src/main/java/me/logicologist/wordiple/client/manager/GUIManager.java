@@ -291,7 +291,9 @@ public class GUIManager extends Application {
             CompetitiveIntroController competitiveIntroController = fxmlLoader.getController();
             competitiveIntroController.setParent((AnchorPane) stage.getScene().getRoot());
             competitiveIntroController.setOpponentData(opponentName, opponentRating);
+            SoundManager.getInstance().stopSound(SoundType.BACKGROUND_MUSIC);
             competitiveIntroController.transitionIn(() -> {
+                SoundManager.getInstance().playSound(SoundType.FIGHTING_MUSIC);
                 WordipleClient.getExecutor().schedule(() -> {
                     Platform.runLater(() -> {
                         try {

@@ -10,7 +10,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class WordipleServer {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
 
     public static void main(String[] args) {
         new WordManager();

@@ -1,5 +1,7 @@
 package me.logicologist.wordiple.client.manager;
 
+import me.logicologist.wordiple.client.WordipleClient;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -13,14 +15,16 @@ public class WordManager {
     public WordManager() {
         instance = this;
         this.validWords = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/validwords.txt")));
-            String st;
-            while ((st = br.readLine()) != null) this.validWords.add(st);
-            System.out.println("Loaded " + validWords.size() + " valid words.");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        WordipleClient.getExecutor().submit(() -> {
+            try {
+                BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/validwords.txt")));
+                String st;
+                while ((st = br.readLine()) != null) this.validWords.add(st);
+                System.out.println("Loaded " + validWords.size() + " valid words.");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public boolean isValid(String word) {

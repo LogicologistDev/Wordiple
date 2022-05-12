@@ -15,7 +15,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class WordipleClient {
 
     private static File appData;
-    private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
     private static Logger logger;
     private static boolean developerMode;
 
