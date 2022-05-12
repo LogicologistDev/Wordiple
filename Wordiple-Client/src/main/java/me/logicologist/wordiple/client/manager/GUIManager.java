@@ -74,6 +74,7 @@ public class GUIManager extends Application {
 
         showMainScreen(false);
         stage.show();
+        stage.requestFocus();
         stage.setOnCloseRequest(e -> {
             try {
                 PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->

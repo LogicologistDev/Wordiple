@@ -1,19 +1,20 @@
 package me.logicologist.wordiple.client.sound;
 
 import me.logicologist.wordiple.client.WordipleClient;
-import me.logicologist.wordiple.client.manager.PacketManager;
 
 import javax.sound.sampled.*;
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Sound {
 
     private final SoundType type;
+    private SoundType selected;
     private Clip clip;
 
     private List<SoundType> playedSounds;
@@ -35,6 +36,7 @@ public class Sound {
 
     private void loadSound(SoundType type) {
         try {
+            this.selected = type;
             clip = AudioSystem.getClip();
             if (this.children != null) {
                 clip.addLineListener(event -> {
@@ -54,7 +56,7 @@ public class Sound {
             WordipleClient.getLogger().info("Loading sound: " + type.getFile());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
             clip.open(audioInputStream);
-            this.setVolume(type.getVolume());
+            this.setVolume(this.selected.isFade() ? 0.1f : type.getVolume());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -68,7 +70,7 @@ public class Sound {
     }
 
     public void play() {
-        WordipleClient.getLogger().info("Playing sound: " + this.type.getFile());
+        WordipleClient.getLogger().info("Playing sound: " + this.selected.getFile());
         try {
             WordipleClient.getLogger().info("Clip running: " + this.clip.isRunning());
             // Stop clip if it's already running
@@ -80,6 +82,23 @@ public class Sound {
             // Play clip
             clip.start();
 
+            if (this.selected.isFade()) {
+                WordipleClient.getExecutor().submit(() -> {
+                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                    float current = 20f * (float) Math.log10(0.01f);
+                    float targetDB = 20f * (float) Math.log10(selected.getVolume());
+                    while (current < targetDB) {
+                        WordipleClient.getLogger().info("Current volume: " + current);
+                        WordipleClient.getLogger().info("Target volume: " + targetDB);
+                        current += 0.1;
+                        gainControl.setValue(current);
+                        try {
+                            Thread.sleep(15);
+                        } catch (Exception ignored) {
+                        }
+                    }
+                });
+            }
             if (!type.isRepeat()) return;
 
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -91,7 +110,24 @@ public class Sound {
     public void stop() {
         try {
             this.children = null;
-            clip.stop();
+
+            if (!this.type.isFade() || WordipleClient.getExecutor().isShutdown()) {
+                clip.stop();
+                return;
+            }
+            WordipleClient.getExecutor().submit(() -> {
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                float current = gainControl.getValue();
+                float targetDB = 20f * (float) Math.log10(0.01f);
+                while (current > targetDB) {
+                    current -= 0.1;
+                    gainControl.setValue(current);
+                    try {
+                        Thread.sleep(15);
+                    } catch (Exception ignored) {}
+                }
+                clip.stop();
+            });
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -20,13 +20,13 @@ public enum SoundType {
     VANILLA_FLAVORED_SODA("https://www.dropbox.com/s/hjlxarid3lys7ml/vanilla_flavored_soda.wav?dl=1", "vanilla_flavored_soda.wav", 0.22f, true),
     GREAT_ESCAPE("https://www.dropbox.com/s/4nk296nkkaopdlp/great_escape.wav?dl=1", "great_escape.wav", 0.22f, true),
 
-    BACKGROUND_MUSIC(OVERWORLD, BACKGROUND, VANILLA_FLAVORED_SODA, GREAT_ESCAPE),
+    BACKGROUND_MUSIC(true, OVERWORLD, BACKGROUND, VANILLA_FLAVORED_SODA, GREAT_ESCAPE),
 
     DROPBUBBLE("https://www.dropbox.com/s/vw1k9lgozbtso7r/dropbubble.wav?dl=1", "dropbubble.wav", 0.22f),
     TIMELINE("https://www.dropbox.com/s/o1kbisqvp7mymqv/timeline.wav?dl=1", "timeline.wav", 0.22f, true),
     UP_IN_MY_JAM("https://www.dropbox.com/s/oiwl44jp3wz0ytw/up_in_my_jam.wav?dl=1", "up_in_my_jam.wav", 0.22f, true),
 
-    CALM_MUSIC(DROPBUBBLE, TIMELINE, UP_IN_MY_JAM),
+    CALM_MUSIC(true, DROPBUBBLE, TIMELINE, UP_IN_MY_JAM),
 
     DANCE_OF_THE_DERPY_CHICKEN("https://www.dropbox.com/s/1ovi11uh6i7nh1r/dance_of_the_derpy_chicken.wav?dl=1", "dance_of_the_derpy_chicken.wav", 0.22f, false),
     END_OF_FRIENDSHIP("https://www.dropbox.com/s/l8vg1vqivfyja81/end_of_friendship.wav?dl=1", "end_of_friendship.wav", 0.22f, false),
@@ -35,7 +35,7 @@ public enum SoundType {
     MOVE_OR_DIE("https://www.dropbox.com/s/d2yq6lcu3tblsc9/move_or_die.wav?dl=1", "move_or_die.wav", 0.22f, false),
     TICK_TOCK("https://www.dropbox.com/s/q1912ts2zukkgpb/tick_tock.wav?dl=1", "tick_tock.wav", 0.22f, false),
     WHATS_UP_FURBALL("https://www.dropbox.com/s/8gg5ki4ipip6x9i/whats_up_furball.wav?dl=1", "whats_up_furball.wav", 0.22f, false),
-    FIGHTING_MUSIC(
+    FIGHTING_MUSIC(true,
             DANCE_OF_THE_DERPY_CHICKEN,
             END_OF_FRIENDSHIP,
             GAELIC_CONCLUSION,
@@ -50,24 +50,30 @@ public enum SoundType {
     private final File file;
     private final float volume;
     private final boolean repeat;
+    private final boolean fade;
     private SoundType[] children;
 
     SoundType(String url, String fileName, float volume) {
-        this(url, fileName, volume, false);
+        this(url, fileName, volume, false, false);
     }
 
-    SoundType(String url, String fileName, float volume, boolean repeat) {
+    SoundType(String url, String fileName, float volume, boolean fade) {
+        this(url, fileName, volume, false, fade);
+    }
+
+    SoundType(String url, String fileName, float volume, boolean repeat, boolean fade) {
         this.url = url;
         this.file = fileName == null ? null : new File(WordipleClient.getAppData() + File.separator + "sounds", fileName);
         this.volume = volume;
         this.repeat = repeat;
+        this.fade = fade;
         if (file != null && !file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
     }
 
-    SoundType(SoundType... children) {
-        this(null, null, -1, false);
+    SoundType(boolean fade, SoundType... children) {
+        this(null, null, -1, fade);
         this.children = children;
     }
 
@@ -118,6 +124,10 @@ public enum SoundType {
 
     public boolean isRepeat() {
         return repeat;
+    }
+
+    public boolean isFade() {
+        return fade;
     }
 
     public Sound getSound() {
