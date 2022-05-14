@@ -32,9 +32,11 @@ public abstract class GameController implements Initializable {
     protected TextField playTextField;
 
     @FXML
-    protected AnchorPane lettersPanel;
+    protected AnchorPane lettersPane;
 
     HashMap<String, AnchorPane> playerPanes = new HashMap<>();
+    int guessNumber = 1;
+    int maxRows = 6;
 
 
     public void setAnswerState(boolean locked) {
@@ -60,26 +62,29 @@ public abstract class GameController implements Initializable {
         List<AnchorPane> anchorPane = getOpponentPanes(playerPanes.get(username));
         AnchorPane guessRow = anchorPane.get(guess - 1);
 
-        if (username.equals(SessionManager.getInstance().getUsername())) {
+        if (username.equals(SessionManager.getInstance().getUsername()) && guessNumber > guess) {
             Platform.runLater(() -> {
                 for (int i = 0; i < code.length(); i++) {
                     Label label = getGuessLabels(guessRow).get(i);
+                    System.out.println(guessRow + "GR");
+                    System.out.println(label.getText() + "LAB");
                     char letter = label.getText().toUpperCase().charAt(0);
                     int id = letter - 65;
-                    Label characterLabel = (Label) lettersPanel.getChildren().get(id);
+                    Label characterLabel = (Label) lettersPane.getChildren().get(id);
                     switch (code.charAt(i)) {
                         case 'c':
-                            if (characterLabel.getStyleClass().contains("board-letter-default-correct")) return;
+                            if (characterLabel.getStyleClass().contains("board-letter-default-correct")) continue;
                             characterLabel.getStyleClass().clear();
                             characterLabel.getStyleClass().add("board-letter-default-correct");
                             break;
                         case 'i':
-                            if (characterLabel.getStyleClass().contains("board-letter-default-used")) return;
+                            if (characterLabel.getStyleClass().contains("board-letter-default-used")) continue;
+                            if (characterLabel.getStyleClass().contains("board-letter-default-correct")) continue;
                             characterLabel.getStyleClass().clear();
                             characterLabel.getStyleClass().add("board-letter-default-used");
                             break;
                         case 'r':
-                            if (characterLabel.getStyleClass().contains("board-letter-default-ready")) return;
+                            if (characterLabel.getStyleClass().contains("board-letter-default-ready")) continue;
                             characterLabel.getStyleClass().clear();
                             characterLabel.getStyleClass().add("board-letter-default-ready");
                             break;
