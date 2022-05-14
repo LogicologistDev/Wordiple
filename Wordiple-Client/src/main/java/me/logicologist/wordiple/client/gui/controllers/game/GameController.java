@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.client.gui.controllers.game;
 
+import com.jcraft.jsch.Session;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.animations.LetterFieldPopAnimation;
+import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,10 +27,15 @@ import java.util.concurrent.TimeUnit;
 public abstract class GameController implements Initializable {
 
 
-    HashMap<String, AnchorPane> playerPanes = new HashMap<>();
 
     @FXML
     protected TextField playTextField;
+
+    @FXML
+    protected AnchorPane lettersPanel;
+
+    HashMap<String, AnchorPane> playerPanes = new HashMap<>();
+
 
     public void setAnswerState(boolean locked) {
         this.playTextField.setDisable(locked);
@@ -52,6 +59,35 @@ public abstract class GameController implements Initializable {
     public void setPlayerGuessData(String username, int guess, String code) {
         List<AnchorPane> anchorPane = getOpponentPanes(playerPanes.get(username));
         AnchorPane guessRow = anchorPane.get(guess - 1);
+
+        if (username.equals(SessionManager.getInstance().getUsername())) {
+            Platform.runLater(() -> {
+                for (int i = 0; i < code.length(); i++) {
+                    Label label = getGuessLabels(guessRow).get(i);
+                    char letter = label.getText().toUpperCase().charAt(0);
+                    int id = letter - 65;
+                    Label characterLabel = (Label) lettersPanel.getChildren().get(id);
+                    switch (code.charAt(i)) {
+                        case 'c':
+                            if (characterLabel.getStyleClass().contains("board-letter-default-correct")) return;
+                            characterLabel.getStyleClass().clear();
+                            characterLabel.getStyleClass().add("board-letter-default-correct");
+                            break;
+                        case 'i':
+                            if (characterLabel.getStyleClass().contains("board-letter-default-used")) return;
+                            characterLabel.getStyleClass().clear();
+                            characterLabel.getStyleClass().add("board-letter-default-used");
+                            break;
+                        case 'r':
+                            if (characterLabel.getStyleClass().contains("board-letter-default-ready")) return;
+                            characterLabel.getStyleClass().clear();
+                            characterLabel.getStyleClass().add("board-letter-default-ready");
+                            break;
+                    }
+                    new LetterFieldPopAnimation(characterLabel, 1).play();
+                }
+            });
+        }
 
         setRowData(guessRow, code);
     }

@@ -160,6 +160,36 @@
             </Label>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="lettersPane" layoutX="595.0" layoutY="260.0" prefHeight="424.0" prefWidth="240.0" styleClass="pane-overlay" stylesheets="@../style.css">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="A" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="10.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="B" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="10.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="C" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="D" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="70.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="E" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="70.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="F" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="70.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="G" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="70.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="H" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="I" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="J" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="K" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="130.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="L" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="190.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="M" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="190.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="N" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="190.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="O" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="190.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="P" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="250.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="Q" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="250.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="R" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="250.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="S" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="250.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="T" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="U" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="310.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="V" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="310.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="W" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="310.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="X" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="370.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="Y" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="370.0" prefHeight="40.0" prefWidth="40.0" styleClass="board-letter-default-unused" text="Z" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
       <AnchorPane layoutY="52.0" prefHeight="100.0" prefWidth="1440.0" styleClass="versus-banner" stylesheets="@../style.css" />
       <Label fx:id="playerScoreLabel" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="252.0" layoutY="41.0" prefHeight="120.0" prefWidth="438.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textAlignment="RIGHT" textFill="WHITE" />
       <Label fx:id="opponentScoreLabel" focusTraversable="false" layoutX="750.0" layoutY="41.0" prefHeight="120.0" prefWidth="367.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textFill="WHITE" />
