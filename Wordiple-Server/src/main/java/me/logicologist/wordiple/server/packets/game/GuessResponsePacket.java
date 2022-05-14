@@ -13,6 +13,11 @@ public class GuessResponsePacket extends PacketAdapter implements AuthPacketType
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
 
     }
@@ -20,7 +25,7 @@ public class GuessResponsePacket extends PacketAdapter implements AuthPacketType
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("player", QueueType.class)
+                .setArgument("player", String.class)
                 .setArgument("guess", String.class)
                 .setArgument("data", Integer.class);
     }

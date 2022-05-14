@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
 <AnchorPane fx:id="movablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" styleClass="background-versus" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.logicologist.wordiple.client.gui.controllers.game.VersusTwoController">
    <children>
       <AnchorPane fx:id="playerOnePane" layoutX="50.0" layoutY="170.0" prefHeight="610.0" prefWidth="438.0" styleClass="board-default" stylesheets="@../style.css">
@@ -160,6 +164,6 @@
       <Label fx:id="playerScoreLabel" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="252.0" layoutY="41.0" prefHeight="120.0" prefWidth="438.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textAlignment="RIGHT" textFill="WHITE" />
       <Label fx:id="opponentScoreLabel" focusTraversable="false" layoutX="750.0" layoutY="41.0" prefHeight="120.0" prefWidth="367.0" styleClass="versus-score-label" stylesheets="@../style.css" text="0" textFill="WHITE" />
       <Label fx:id="goalLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="52.0" prefWidth="1440.0" styleClass="versus-goal-label" stylesheets="@../style.css" text="Unknown - First to 0" textAlignment="CENTER" textFill="WHITE" />
-      <TextField fx:id="playTextField" layoutX="646.0" layoutY="463.0" opacity="0.0" />
+      <TextField fx:id="playTextField" disable="true" layoutX="646.0" layoutY="463.0" opacity="0.0" />
    </children>
 </AnchorPane>

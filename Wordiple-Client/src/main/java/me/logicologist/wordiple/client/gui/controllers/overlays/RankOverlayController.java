@@ -46,7 +46,7 @@ public class RankOverlayController extends AttachableAdapter {
     public void transitionIn(OverlayController overlayController, Runnable runAfter) {
         this.overlayController = overlayController;
         midAction = true;
-        double duration = 0.5;
+        double duration = 1;
 
         movablePane.setLayoutX(-100);
         movablePane.setLayoutY(-500);

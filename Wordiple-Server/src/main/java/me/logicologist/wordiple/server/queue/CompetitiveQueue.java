@@ -2,6 +2,8 @@ package me.logicologist.wordiple.server.queue;
 
 import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.WordipleServer;
+import me.logicologist.wordiple.server.managers.MatchManager;
+import me.logicologist.wordiple.server.match.CompetitiveMatch;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
@@ -30,21 +32,28 @@ public class CompetitiveQueue extends Queue {
     @Override
     public void startQueueMatchmaker() {
         WordipleServer.getExecutor().scheduleAtFixedRate(() -> {
-            for (WordipleUser queued : new ArrayList<>(super.inQueue)) {
-                this.ratingDisparity.put(queued, this.ratingDisparity.get(queued) + 5);
-                int queuedRating = queued.getRating();
-                for (WordipleUser others : super.inQueue) {
-                    if (queued == others) continue;
-                    int otherRating = others.getRating();
-                    if (otherRating >= queuedRating - this.ratingDisparity.get(queued) && otherRating <= queuedRating + this.ratingDisparity.get(queued) && queuedRating >= otherRating - this.ratingDisparity.get(others) && queuedRating <= otherRating + this.ratingDisparity.get(others)) {
-                        super.inQueue.remove(queued);
-                        super.inQueue.remove(others);
-                        super.inGame.add(queued);
-                        super.inGame.add(others);
-                        // TODO: Start match
-                        break;
+            try {
+                for (WordipleUser queued : new ArrayList<>(super.inQueue)) {
+                    this.ratingDisparity.put(queued, this.ratingDisparity.get(queued) + 5);
+                    int queuedRating = queued.getRating();
+                    for (WordipleUser others : super.inQueue) {
+                        if (queued == others) continue;
+                        int otherRating = others.getRating();
+                        if (otherRating >= queuedRating - this.ratingDisparity.get(queued) && otherRating <= queuedRating + this.ratingDisparity.get(queued) && queuedRating >= otherRating - this.ratingDisparity.get(others) && queuedRating <= otherRating + this.ratingDisparity.get(others)) {
+                            super.inQueue.remove(queued);
+                            super.inQueue.remove(others);
+                            super.inGame.add(queued);
+                            super.inGame.add(others);
+                            CompetitiveMatch match = new CompetitiveMatch(queued, others);
+                            match.match();
+                            MatchManager.getInstance().addMatch(match);
+                            new CompetitiveMatch(queued, others);
+                            break;
+                        }
                     }
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }, 0, 1, TimeUnit.SECONDS);
     }

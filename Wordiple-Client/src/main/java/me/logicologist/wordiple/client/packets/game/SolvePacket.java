@@ -10,6 +10,10 @@ public class SolvePacket extends PacketAdapter implements AuthPacketType {
         super("solve_packet");
         this.packetType = this;
     }
+    @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
 
     @Override
     public void onReceive(PacketArguments packetArguments) {

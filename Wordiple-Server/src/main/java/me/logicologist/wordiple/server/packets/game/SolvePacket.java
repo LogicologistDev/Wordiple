@@ -12,6 +12,11 @@ public class SolvePacket extends PacketAdapter implements AuthPacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
 
     }

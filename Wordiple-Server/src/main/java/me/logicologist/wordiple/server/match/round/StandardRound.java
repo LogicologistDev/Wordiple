@@ -7,17 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StandardRound {
+public class StandardRound extends Round {
 
-    private final String word;
-    private final HashMap<WordipleUser, List<String>> guesses;
+
 //    private final List<> replay; need to add some replay packet or something for replays
 
     public StandardRound(WordipleUser playerOne, WordipleUser playerTwo) {
-        this.word = WordManager.getInstance().getRandomGuessableWord();
-        this.guesses = new HashMap<>();
-
-        guesses.put(playerOne, new ArrayList<>());
-        guesses.put(playerTwo, new ArrayList<>());
+        super();
+        addPlayer(playerOne);
+        addPlayer(playerTwo);
     }
 }

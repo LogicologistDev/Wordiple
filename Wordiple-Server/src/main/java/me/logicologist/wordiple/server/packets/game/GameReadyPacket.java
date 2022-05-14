@@ -7,10 +7,10 @@ import me.logicologist.wordiple.server.managers.MatchManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
-public class GuessWordPacket extends PacketAdapter implements AuthPacketType {
+public class GameReadyPacket extends PacketAdapter implements AuthPacketType {
 
-    public GuessWordPacket() {
-        super("guess_word_packet");
+    public GameReadyPacket() {
+        super("game_ready_packet");
         this.packetType = this;
     }
 
@@ -21,14 +21,14 @@ public class GuessWordPacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
+        // Packet used to unlock board (to client) and confirm ready to start game (to server)
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
         if (wordipleUser == null) return;
-        MatchManager.getInstance().getMatch(wordipleUser).getCurrentRound().addGuess(wordipleUser, arguments.get("word", String.class));
+        MatchManager.getInstance().getMatch(wordipleUser).readyClient(wordipleUser);
     }
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments()
-                .setArgument("word", String.class);
+        return new PacketArguments();
     }
 }

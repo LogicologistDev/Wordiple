@@ -86,6 +86,7 @@ public abstract class QueueController extends FadeHorizontalTransitionAdapter {
                     .setValues("queuetype", queueType)
             ).waitForResponse(response1 -> {
                 GUIManager.getInstance().resetQueueController();
+                GUIManager.getInstance().resetGameController();
                 loadScreenController.remove(() -> {
                     if (future != null) future.cancel(true);
                     if (inQueue) {

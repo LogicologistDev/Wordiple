@@ -230,7 +230,7 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusboards/versustwo.fxml"));
             this.loadScene(fxmlLoader.load());
             VersusTwoController controller = fxmlLoader.getController();
-            controller.setGameMeta("Competitive: First-to-3", "Seven");
+            controller.setGameMeta(gameInfo.get("goal", String.class), gameInfo.get("opponent", String.class));
             this.gameController = controller;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -241,8 +241,16 @@ public class GUIManager extends Application {
         return queueController;
     }
 
+    public GameController getGameController() {
+        return gameController;
+    }
+
     public void resetQueueController() {
         this.queueController = null;
+    }
+
+    public void resetGameController() {
+        this.gameController = null;
     }
 
     public LoadScreenController showLoadScreen(String title) {
@@ -286,7 +294,7 @@ public class GUIManager extends Application {
         return null;
     }
 
-    public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfter, String opponentName, int opponentRating) {
+    public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfterIn, Runnable runAfterOut, String opponentName, int opponentRating) {
         if (runFirst != null) runFirst.run();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
@@ -300,13 +308,13 @@ public class GUIManager extends Application {
                 WordipleClient.getExecutor().schedule(() -> {
                     Platform.runLater(() -> {
                         try {
-                            runAfter.run();
+                            runAfterIn.run();
                             FXMLLoader outTransition = new FXMLLoader(getClass().getResource("/versusintrocompetitive.fxml"));
                             handleBigAttachment(outTransition.load());
                             CompetitiveIntroController competitiveOutroController = outTransition.getController();
                             competitiveOutroController.setParent((AnchorPane) stage.getScene().getRoot());
                             competitiveOutroController.setOpponentData(opponentName, opponentRating);
-                            competitiveOutroController.transitionOut(null);
+                            competitiveOutroController.transitionOut(runAfterOut);
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }

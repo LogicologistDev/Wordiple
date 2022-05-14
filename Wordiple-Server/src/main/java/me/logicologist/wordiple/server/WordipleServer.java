@@ -18,6 +18,7 @@ public class WordipleServer {
         new DatabaseManager().setup();
         new SessionManager();
         new QueueManager().load();
+        new MatchManager();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             logger.info("Shutting down...");
             executor.shutdownNow();

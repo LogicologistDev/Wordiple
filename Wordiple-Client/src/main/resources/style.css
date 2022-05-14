@@ -156,18 +156,18 @@
 }
 
 .board-default-used {
-    -fx-font-size: 25px;
+    -fx-font-size: 55px;
     -fx-font-family: 'Nexa Bold';
     -fx-text-fill: #ffffff;
-    -fx-background-color: #fff333;
+    -fx-background-color: #a79c00;
     -fx-background-radius: 6px;
 }
 
 .board-default-correct {
-    -fx-font-size: 25px;
+    -fx-font-size: 55px;
     -fx-font-family: 'Nexa Bold';
     -fx-text-fill: #ffffff;
-    -fx-background-color: #5eff33;
+    -fx-background-color: #24a000;
     -fx-background-radius: 6px;
 }
 

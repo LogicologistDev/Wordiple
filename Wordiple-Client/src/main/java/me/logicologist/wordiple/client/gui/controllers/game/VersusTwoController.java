@@ -7,8 +7,12 @@ import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.animations.LetterFieldPopAnimation;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
+import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.manager.WordManager;
+import me.logicologist.wordiple.client.packets.game.GuessWordPacket;
+import me.logicologist.wordiple.client.packets.game.UpdateDisplayPacket;
+import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +36,9 @@ public class VersusTwoController extends GameController {
 
     @FXML
     private AnchorPane playerOnePane;
+
+    @FXML
+    private AnchorPane playerTwoPane;
 
     @FXML
     private Label playerOneName;
@@ -58,24 +65,6 @@ public class VersusTwoController extends GameController {
     private AnchorPane playerOneRow6;
 
     @FXML
-    private AnchorPane playerTwoRow1;
-
-    @FXML
-    private AnchorPane playerTwoRow2;
-
-    @FXML
-    private AnchorPane playerTwoRow3;
-
-    @FXML
-    private AnchorPane playerTwoRow4;
-
-    @FXML
-    private AnchorPane playerTwoRow5;
-
-    @FXML
-    private AnchorPane playerTwoRow6;
-
-    @FXML
     private Label playerScoreLabel;
 
     @FXML
@@ -83,9 +72,6 @@ public class VersusTwoController extends GameController {
 
     @FXML
     private Label goalLabel;
-
-    @FXML
-    private TextField playTextField;
 
     int guessNumber = 1;
     int maxRows = 6;
@@ -122,7 +108,12 @@ public class VersusTwoController extends GameController {
 
             setPlayerGuess(playTextField.getText());
 
-            // Send packet to update board
+            PacketManager.getInstance().getSocket().getPacket(UpdateDisplayPacket.class).sendPacket(packet -> packet
+                    .getPacketType(AuthPacketType.class)
+                    .getArguments(SessionManager.getInstance().getLocalSessionID())
+                    .setValues("name", SessionManager.getInstance().getUsername())
+                    .setValues("text", playTextField.getText().toUpperCase())
+            );
         });
 
         playTextField.setOnKeyReleased(e -> {
@@ -157,84 +148,6 @@ public class VersusTwoController extends GameController {
     }
 
     /**
-     * This method retrieves the AnchorPane representing the opponent's current guess.
-     *
-     * @return The AnchorPane representing the opponent's current guess.
-     */
-    public AnchorPane getOpponentRow(int row) {
-        switch (row) {
-            case 1:
-                return playerTwoRow1;
-            case 2:
-                return playerTwoRow2;
-            case 3:
-                return playerTwoRow3;
-            case 4:
-                return playerTwoRow4;
-            case 5:
-                return playerTwoRow5;
-            case 6:
-                return playerTwoRow6;
-        }
-        return null;
-    }
-
-    /**
-     * This method retrieves the Labels of a AnchorPane representing a guess row.
-     *
-     * @param guessRow The AnchorPane representing the guess row.
-     * @return A list of labels contained in the guess row in order.
-     */
-    public List<Label> getGuessLabels(AnchorPane guessRow) {
-        List<Label> labels = new ArrayList<>();
-
-        guessRow.getChildren().forEach(x -> labels.add((Label) x));
-        return labels;
-    }
-
-    /**
-     * This method is used to set the row's colors/data for a guess.
-     * Received by the server as a packet to update the board.
-     *
-     * @param row  The row to set.
-     * @param code The data to set.
-     */
-    public void setRowData(AnchorPane row, String code) {
-        List<Label> rowLabels = getGuessLabels(row);
-
-        for (int i = 0; i < 5; i++) {
-            Label label = rowLabels.get(i);
-            char c = code.charAt(i);
-            WordipleClient.getExecutor().schedule(() -> {
-                switch (c) {
-                    case 'r': // Ready
-                        label.getStyleClass().clear();
-                        label.getStyleClass().add("board-default-ready");
-                        break;
-                    case 'c': // Correct
-                        label.getStyleClass().clear();
-                        label.getStyleClass().add("board-default-correct");
-                        break;
-                    case 'i': // Incorrect
-                        label.getStyleClass().clear();
-                        label.getStyleClass().add("board-default-used");
-                        break;
-                    case 'u': // Unused
-                        label.getStyleClass().clear();
-                        label.getStyleClass().add("board-default-unused");
-                        break;
-                    case 'l': // Locked
-                        label.getStyleClass().clear();
-                        label.getStyleClass().add("board-default-locked");
-                        break;
-                }
-                label.setText("");
-                new LetterFieldPopAnimation(label, 1).play();
-            }, i * 40, TimeUnit.MILLISECONDS);
-        }
-    }
-
-    /**
      * This method is used to set the player's current guess
      * It is used to display to the player their current guess.
      *
@@ -257,21 +170,6 @@ public class VersusTwoController extends GameController {
     }
 
     /**
-     * This method is used to set the player's data for a guess.
-     * Received by the server as a packet to update the board.
-     *
-     * @param row   The row to set.
-     * @param value The data to set for that row.
-     */
-    public void updatePlayerGuess(int row, String value) {
-        AnchorPane guessRow = getCurrentRow();
-
-        if (guessRow == null) return;
-
-        setRowData(guessRow, value);
-    }
-
-    /**
      * This method is used to sumbit the current guess the player has made.
      * <p>
      * Before submitting as a packet to the server, the player's guess is validated through WordManager.
@@ -288,48 +186,12 @@ public class VersusTwoController extends GameController {
         }
         guessNumber++;
         playTextField.clear();
-        updatePlayerGuess(guessNumber, "rrrrr");
-        // Send packet to submit
-    }
-
-    /**
-     * This method is used to set the opponent's current guess.
-     * It is used to display to the player their opponent's current guess.
-     * Prevents showing the actual content of their guess.
-     *
-     * @param guess Their current guess number.
-     * @param length The length of their guess
-     */
-
-    public void setOpponentGuess(int guess, int length) {
-        AnchorPane guessRow = getOpponentRow(guess);
-
-        if (guessRow == null) return;
-
-        List<Label> rowLabels = getGuessLabels(guessRow);
-
-        for (int i = 0; i < 5; i++) {
-            if (i < length) {
-                rowLabels.get(i).setText("?");
-                continue;
-            }
-            rowLabels.get(i).setText("");
-        }
-    }
-
-    /**
-     * This method is used to set the opponent's data for a guess.
-     * Received by the server as a packet to update the board.
-     *
-     * @param guess The guess to set.
-     * @param code  The data to set.
-     */
-    public void updateOpponentGuess(int guess, String code) {
-        AnchorPane guessRow = getOpponentRow(guess);
-
-        if (guessRow == null) return;
-
-        setRowData(guessRow, code);
+        if (guessNumber < 6) super.setPlayerGuessData(SessionManager.getInstance().getUsername(), guessNumber, "rrrrr");
+        PacketManager.getInstance().getSocket().getPacket(GuessWordPacket.class).sendPacket(packet -> packet
+                .getPacketType(AuthPacketType.class)
+                .getArguments(SessionManager.getInstance().getLocalSessionID())
+                .setValues("word", value)
+        );
     }
 
     /**
@@ -355,5 +217,7 @@ public class VersusTwoController extends GameController {
         this.goalLabel.setText(goal);
         this.playerOneName.setText(SessionManager.getInstance().getUsername());
         this.playerTwoName.setText(opponentName);
+        super.setOpponentPane(SessionManager.getInstance().getUsername(), playerOnePane);
+        super.setOpponentPane(opponentName, playerTwoPane);
     }
 }

@@ -40,12 +40,14 @@ public abstract class Queue {
 
     public void queue(WordipleUser user) {
         QueueManager.getInstance().removeFromAllQueues(user);
-        if (inQueue.contains(user)) return;
+        if (QueueManager.getInstance().isPlayerActive(user)) return;
         this.inQueue.add(user);
+        onQueue(user);
     }
 
     public void dequeue(WordipleUser user) {
         this.inQueue.remove(user);
+        onDequeue(user);
     }
 
     public void addQueueViewer(WordipleUser user) {
@@ -68,6 +70,10 @@ public abstract class Queue {
 
     public QueueType getQueueType() {
         return queueType;
+    }
+
+    public boolean isActive(WordipleUser user) {
+        return inQueue.contains(user) || inGame.contains(user);
     }
 
 }

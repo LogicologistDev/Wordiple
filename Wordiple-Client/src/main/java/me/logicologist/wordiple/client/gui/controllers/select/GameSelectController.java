@@ -67,12 +67,6 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
         });
 
         rankButton.setOnAction(event -> {
-//            if (true) {
-//                GUIManager.getInstance().showCompetitiveIntro(null, () -> {
-//                    GUIManager.getInstance().showVersusTwoBoard(null);
-//                }, "Seven", 100);
-//                return;
-//            }
             if (midAction) return;
             midAction = true;
 

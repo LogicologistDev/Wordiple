@@ -5,12 +5,13 @@ import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.server.managers.MatchManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
+import me.logicologist.wordiple.server.match.round.Round;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
-public class GuessWordPacket extends PacketAdapter implements AuthPacketType {
+public class UpdateDisplayPacket extends PacketAdapter implements AuthPacketType {
 
-    public GuessWordPacket() {
-        super("guess_word_packet");
+    public UpdateDisplayPacket() {
+        super("update_display_packet");
         this.packetType = this;
     }
 
@@ -23,12 +24,16 @@ public class GuessWordPacket extends PacketAdapter implements AuthPacketType {
     public void onReceive(PacketArguments arguments) {
         WordipleUser wordipleUser = SessionManager.getInstance().getSessionFromToken(this.getSessionID(arguments));
         if (wordipleUser == null) return;
-        MatchManager.getInstance().getMatch(wordipleUser).getCurrentRound().addGuess(wordipleUser, arguments.get("word", String.class));
+        Round round = MatchManager.getInstance().getMatch(wordipleUser).getCurrentRound();
+        round.setDisplayText(arguments.get("name", String.class), arguments.get("text", String.class));
     }
 
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("word", String.class);
+                .setArgument("name", String.class)
+                .setArgument("length", Integer.class)
+                .setArgument("guess", Integer.class)
+                .setArgument("text", String.class);
     }
 }

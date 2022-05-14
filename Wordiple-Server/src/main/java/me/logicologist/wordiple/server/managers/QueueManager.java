@@ -28,6 +28,7 @@ public class QueueManager {
 
         for (Queue queue : this.queues) {
             queue.startQueueInformer();
+            System.out.println("Loading queue " + queue.getQueueType());
             queue.startQueueMatchmaker();
         }
     }
@@ -40,6 +41,15 @@ public class QueueManager {
         for (Queue queue : this.queues) {
             queue.dequeue(user);
         }
+    }
+
+    public boolean isPlayerActive(WordipleUser user) {
+        for (Queue queue : this.queues) {
+            if (queue.isActive(user)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeAllQueueViewers(WordipleUser user) {

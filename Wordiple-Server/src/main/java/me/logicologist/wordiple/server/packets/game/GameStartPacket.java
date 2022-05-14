@@ -13,6 +13,11 @@ public class GameStartPacket extends PacketAdapter implements AuthPacketType {
     }
 
     @Override
+    public boolean onlySendToServer() {
+        return true;
+    }
+
+    @Override
     public void onReceive(PacketArguments packetArguments) {
 
     }
@@ -23,6 +28,6 @@ public class GameStartPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("type", QueueType.class)
                 .setArgument("opponent", String.class)
                 .setArgument("rating", Integer.class)
-                .setArgument("goal", Integer.class);
+                .setArgument("goal", String.class);
     }
 }
