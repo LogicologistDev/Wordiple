@@ -87,8 +87,6 @@ public class Sound {
                     float targetDB = 20f * (float) Math.log10(selected.getVolume());
                     WordipleClient.getLogger().info(current);
                     while (current < targetDB) {
-                        WordipleClient.getLogger().info("Current volume: " + current);
-                        WordipleClient.getLogger().info("Target volume: " + targetDB);
                         current += 0.1;
                         gainControl.setValue(current);
                         try {

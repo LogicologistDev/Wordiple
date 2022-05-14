@@ -1,6 +1,6 @@
 package me.logicologist.wordiple.server.user;
 
-import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
+import com.olziedev.olziesocket.framework.PacketArguments;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 
@@ -26,12 +26,12 @@ public class WordipleUser {
     private boolean globalBan;
     private int rank;
     private int highestRank;
-    private PacketHolder socket;
+    private PacketArguments.PacketHolder socket;
     private List<Double> solveTimes;
     private List<Integer> guesses;
     private List<String> openers;
 
-    public WordipleUser(String email, UUID id, String username, int rating, int highestRating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, String guesses, String solveTimes, String openers, PacketHolder socket) {
+    public WordipleUser(String email, UUID id, String username, int rating, int highestRating, int level, int experience, int wins, int gamesPlayed, long playtime, long bannedTime, boolean competitiveBan, boolean onlineBan, boolean globalBan, String guesses, String solveTimes, String openers, PacketArguments.PacketHolder socket) {
         this.email = email;
         this.id = id;
         this.username = username;
@@ -265,7 +265,7 @@ public class WordipleUser {
         return null;
     }
 
-    public void setSocket(PacketHolder socket) {
+    public void setSocket(PacketArguments.PacketHolder socket) {
         this.socket = socket;
     }
 

@@ -1,6 +1,6 @@
 package me.logicologist.wordiple.server.managers;
 
-import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
+import com.olziedev.olziesocket.framework.PacketArguments;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.File;
@@ -106,7 +106,7 @@ public class DatabaseManager {
         return false;
     }
 
-    public WordipleUser constructWordipleUser(String username, PacketHolder socket) {
+    public WordipleUser constructWordipleUser(String username, PacketArguments.PacketHolder socket) {
         try {
             PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM users WHERE username=?");
             ps.setString(1, username);

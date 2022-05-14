@@ -1,7 +1,6 @@
 package me.logicologist.wordiple.server.managers;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
-import com.olziedev.olziesocket.framework.api.packet.PacketHolder;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
@@ -43,7 +42,7 @@ public class SessionManager {
         sessions.remove(session);
     }
 
-    public UUID createSession(String username, String passwordHash, PacketHolder socket) {
+    public UUID createSession(String username, String passwordHash, PacketArguments.PacketHolder socket) {
         if (!DatabaseManager.instance.validateLogin(username, passwordHash)) {
             return null;
         }
