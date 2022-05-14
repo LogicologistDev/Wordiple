@@ -23,8 +23,19 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used as the controller for the signup screen.
+ * It is used to handle the user input and send the appropriate packet(s) to the server.
+ * This class is part of the authentication controller set.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class SignupController extends FadeVerticalTransitionAdapter {
 
+    /**
+     * The FXML fields for the signup screen.
+     */
     @FXML
     private AnchorPane movablePane;
 
@@ -50,6 +61,15 @@ public class SignupController extends FadeVerticalTransitionAdapter {
     private Button mainScreenButton;
 
     private boolean midAction = false;
+
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @see javafx.fxml.Initializable
+     * @param url The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

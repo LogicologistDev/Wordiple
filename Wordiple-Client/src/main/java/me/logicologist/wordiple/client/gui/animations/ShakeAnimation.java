@@ -9,6 +9,12 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is used to animate the shaking of any node.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class ShakeAnimation {
 
     private static List<WritableValue> inProgressAnimations = new ArrayList<>();
@@ -16,12 +22,21 @@ public class ShakeAnimation {
     private final WritableValue writableValue;
     private final int duration;
 
+    /**
+     * This method is used to animate the shaking of any object.
+     * @param intensity The intensity of the animation.
+     * @param writableValue The object to animate.
+     * @param duration The duration to span the animation.
+     */
     public ShakeAnimation(double intensity, WritableValue writableValue, int duration) {
         this.intensity = intensity;
         this.writableValue = writableValue;
         this.duration = duration;
     }
 
+    /*
+     * Plays the animation. The animation uses a realistic speed reduction curve to create a nicer and smoother animation.
+     */
     public void play() {
         if (inProgressAnimations.contains(writableValue)) return;
         inProgressAnimations.add(writableValue);

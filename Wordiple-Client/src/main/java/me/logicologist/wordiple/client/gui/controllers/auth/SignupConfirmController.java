@@ -25,8 +25,19 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used as the controller for the signup confirmation screen.
+ * It is used to handle the user input and send the appropriate packet(s) to the server.
+ * This class is part of the authentication controller set.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class SignupConfirmController extends FadeVerticalTransitionAdapter {
 
+    /**
+     * The FXML fields for the signup confirmation screen.
+     */
     @FXML
     private AnchorPane movablePane;
 
@@ -48,6 +59,14 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
     private boolean midAction = false;
     private String email = null;
 
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @see javafx.fxml.Initializable
+     * @param url The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
@@ -163,11 +182,25 @@ public class SignupConfirmController extends FadeVerticalTransitionAdapter {
         });
     }
 
+    /**
+     * Sets the email of the user to be then used to create a new account.
+     * Typically called from SignupController.
+     *
+     * @see SignupController
+     * @param email The email of the user.
+     */
     public void setEmail(String email) {
         if (this.email != null) return;
         this.email = email;
     }
 
+    /**
+     * Sets the email of the user to be then used to create a new account.
+     * Typically called from SignupController.
+     *
+     * @see me.logicologist.wordiple.client.gui.controllers.auth.SignupController
+     * @param username The username of the user.
+     */
     public void setUsername(String username) {
         this.titleLabel.setText("Hello, " + username + "!");
     }

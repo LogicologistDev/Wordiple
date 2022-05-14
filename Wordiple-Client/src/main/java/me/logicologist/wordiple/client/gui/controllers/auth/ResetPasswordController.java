@@ -22,8 +22,19 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class is used as the controller for the reset password screen.
+ * It is used to handle the user input and send the appropriate packet(s) to the server.
+ * This class is part of the authentication controller set.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class ResetPasswordController extends FadeVerticalTransitionAdapter {
 
+    /**
+     * The FXML fields for the reset password screen.
+     */
     @FXML
     private AnchorPane movablePane;
 
@@ -49,7 +60,15 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
 
     private String email = null;
 
-
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @see javafx.fxml.Initializable
+     * @see javafx.fxml.Initializable#initialize(URL, ResourceBundle)
+     * @param url The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);
@@ -124,6 +143,13 @@ public class ResetPasswordController extends FadeVerticalTransitionAdapter {
         resetButton.setOnAction(event -> runnable.run());
     }
 
+    /**
+     * Sets the email of the user.
+     * Typically called from ForgotPasswordController.
+     *
+     * @see me.logicologist.wordiple.client.gui.controllers.auth.ForgotPasswordController
+     * @param email The email of the user.
+     */
     public void setEmail(String email) {
         if (this.email != null) return;
 

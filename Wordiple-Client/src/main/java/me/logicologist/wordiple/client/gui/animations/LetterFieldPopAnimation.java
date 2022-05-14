@@ -6,16 +6,30 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * This class is used to animate the popping of a letter from the letter field.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class LetterFieldPopAnimation {
 
     private final Label writableValue;
     private final double duration;
 
+    /**
+     * This method is used to animate the popping of a letter from the letter field.
+     * @param writableValue The value to modify.
+     * @param duration The duration of the animation.
+     */
     public LetterFieldPopAnimation(Label writableValue, double duration) {
         this.writableValue = writableValue;
         this.duration = duration;
     }
 
+    /**
+     * Plays the animation. The animation uses a speed curve to create a nicer and smoother animation.
+     */
     public void play() {
         Timeline popTimeline = new Timeline();
         for (int i = 10; i >= 1; i--) {

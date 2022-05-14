@@ -11,8 +11,23 @@ import javafx.util.Duration;
 import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.sound.SoundType;
 
+/**
+ * This class is used to animate a rightwards moving button that is not Base-Locked.
+ * A Base-Locked button is a button that does not have extra room to move around on screen.
+ * Unlike other Button Skins, this class will also directly affect its parent Pane.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class RightContainerSkin extends ButtonSkin {
 
+    /**
+     * Constructor for the RightContainerSkin class.
+     *
+     * Upon instantiation, the parent's animations are automatically set.
+     *
+     * @param button The button to be animated, and referenced.
+     */
     public RightContainerSkin(Button button) {
         super(button);
 
