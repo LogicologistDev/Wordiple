@@ -35,6 +35,8 @@ public class LogoutPacket extends PacketAdapter implements AuthPacketType {
         WordipleServer.getLogger().info("Logging out and saving user data: " + wordipleUser.getEmail());
         QueueManager.getInstance().removeFromAllQueues(wordipleUser);
         QueueManager.getInstance().removeAllQueueViewers(wordipleUser);
+        //TODO: Packet here to remove the ongoing match.
+
         DatabaseManager.instance.saveUser(wordipleUser);
         wordipleUser.setSocket(null);
     }
