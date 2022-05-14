@@ -1,9 +1,6 @@
 package me.logicologist.wordiple.client;
 
-import me.logicologist.wordiple.client.manager.GUIManager;
-import me.logicologist.wordiple.client.manager.PacketManager;
-import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.manager.WordManager;
+import me.logicologist.wordiple.client.manager.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,9 +19,7 @@ public class WordipleClient {
     public static void main(String[] args) {
         logger = LogManager.getLogger("WordipleClient");
         developerMode = Arrays.asList(args).contains("-developer");
-        new SessionManager();
-        new PacketManager(developerMode).load();
-        new WordManager();
+        GenericManager.loadManagers(developerMode);
         GUIManager.launch(args);
     }
 

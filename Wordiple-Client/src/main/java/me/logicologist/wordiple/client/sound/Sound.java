@@ -53,17 +53,15 @@ public class Sound {
             WordipleClient.getLogger().info("Loading sound: " + type.getFile());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
             clip.open(audioInputStream);
-            this.setVolume(this.type.isFade() ? 0f : type.getVolume());
+            this.setVolume(this.type.isFade() ? -80 : type.getVolume());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     public void setVolume(float volume) {
-        if (volume < 0f || volume > 1f) return;
-
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(20f * (float) Math.log10(volume));
+        gainControl.setValue(volume);
 
     }
 
@@ -82,17 +80,24 @@ public class Sound {
 
             if (this.type.isFade()) {
                 WordipleClient.getExecutor().submit(() -> {
-                    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                    float current = 20f * (float) Math.log10(0.01f);
-                    float targetDB = 20f * (float) Math.log10(selected.getVolume());
-                    WordipleClient.getLogger().info(current);
-                    while (current < targetDB) {
-                        current += 0.1;
-                        gainControl.setValue(current);
-                        try {
-                            Thread.sleep(10);
-                        } catch (Exception ignored) {
+                    try {
+                        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                        float current = gainControl.getValue();
+                        WordipleClient.getLogger().info(selected.getVolume());
+                        float targetDB = selected.getVolume();
+                        WordipleClient.getLogger().info(current);
+                        while (current < targetDB) {
+                            current += 0.1;
+                            WordipleClient.getLogger().info("Fading: " + current);
+                            WordipleClient.getLogger().info("TargetDB: " + targetDB);
+                            gainControl.setValue(current);
+                            try {
+                                Thread.sleep(10);
+                            } catch (Exception ignored) {
+                            }
                         }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 });
             }
@@ -113,7 +118,7 @@ public class Sound {
                 return;
             }
             WordipleClient.getExecutor().submit(() -> {
-                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
                 float current = gainControl.getValue();
                 float targetDB = 20f * (float) Math.log10(0.01f);
                 while (current > targetDB) {

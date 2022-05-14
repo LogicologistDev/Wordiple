@@ -11,28 +11,28 @@ import java.nio.file.StandardCopyOption;
 
 public enum SoundType {
 
-    BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 1f),
+    BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 0.0f),
 
-    OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", 0.22f),
-    BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", 0.22f, true),
-    VANILLA_FLAVORED_SODA("https://www.dropbox.com/s/hjlxarid3lys7ml/vanilla_flavored_soda.wav?dl=1", "vanilla_flavored_soda.wav", 0.22f, true),
-    GREAT_ESCAPE("https://www.dropbox.com/s/4nk296nkkaopdlp/great_escape.wav?dl=1", "great_escape.wav", 0.22f, true),
+    OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", -27),
+    BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", -27, true),
+    VANILLA_FLAVORED_SODA("https://www.dropbox.com/s/hjlxarid3lys7ml/vanilla_flavored_soda.wav?dl=1", "vanilla_flavored_soda.wav", -27, true),
+    GREAT_ESCAPE("https://www.dropbox.com/s/4nk296nkkaopdlp/great_escape.wav?dl=1", "great_escape.wav", -27, true),
 
     BACKGROUND_MUSIC(true, OVERWORLD, BACKGROUND, VANILLA_FLAVORED_SODA, GREAT_ESCAPE),
 
-    DROPBUBBLE("https://www.dropbox.com/s/vw1k9lgozbtso7r/dropbubble.wav?dl=1", "dropbubble.wav", 0.22f),
-    TIMELINE("https://www.dropbox.com/s/o1kbisqvp7mymqv/timeline.wav?dl=1", "timeline.wav", 0.22f, true),
-    UP_IN_MY_JAM("https://www.dropbox.com/s/oiwl44jp3wz0ytw/up_in_my_jam.wav?dl=1", "up_in_my_jam.wav", 0.22f, true),
+    DROPBUBBLE("https://www.dropbox.com/s/vw1k9lgozbtso7r/dropbubble.wav?dl=1", "dropbubble.wav", -27),
+    TIMELINE("https://www.dropbox.com/s/o1kbisqvp7mymqv/timeline.wav?dl=1", "timeline.wav", -27, true),
+    UP_IN_MY_JAM("https://www.dropbox.com/s/oiwl44jp3wz0ytw/up_in_my_jam.wav?dl=1", "up_in_my_jam.wav", -27, true),
 
     CALM_MUSIC(true, DROPBUBBLE, TIMELINE, UP_IN_MY_JAM),
 
-    DANCE_OF_THE_DERPY_CHICKEN("https://www.dropbox.com/s/1ovi11uh6i7nh1r/dance_of_the_derpy_chicken.wav?dl=1", "dance_of_the_derpy_chicken.wav", 0.22f, false),
-    END_OF_FRIENDSHIP("https://www.dropbox.com/s/l8vg1vqivfyja81/end_of_friendship.wav?dl=1", "end_of_friendship.wav", 0.22f, false),
-    GAELIC_CONCLUSION("https://www.dropbox.com/s/unxklg86zbh383q/gaelic_conclusion.wav?dl=1", "gaelic_conclusion.wav", 0.22f, false),
-    JOE_LOOKS_CONCERNED("https://www.dropbox.com/s/u0rcvwiz99svsdf/joe_looks_concerned.wav?dl=1", "joe_looks_concerned.wav", 0.22f, false),
-    MOVE_OR_DIE("https://www.dropbox.com/s/d2yq6lcu3tblsc9/move_or_die.wav?dl=1", "move_or_die.wav", 0.22f, false),
-    TICK_TOCK("https://www.dropbox.com/s/q1912ts2zukkgpb/tick_tock.wav?dl=1", "tick_tock.wav", 0.22f, false),
-    WHATS_UP_FURBALL("https://www.dropbox.com/s/8gg5ki4ipip6x9i/whats_up_furball.wav?dl=1", "whats_up_furball.wav", 0.22f, false),
+    DANCE_OF_THE_DERPY_CHICKEN("https://www.dropbox.com/s/1ovi11uh6i7nh1r/dance_of_the_derpy_chicken.wav?dl=1", "dance_of_the_derpy_chicken.wav", -27, false),
+    END_OF_FRIENDSHIP("https://www.dropbox.com/s/l8vg1vqivfyja81/end_of_friendship.wav?dl=1", "end_of_friendship.wav", -27, false),
+    GAELIC_CONCLUSION("https://www.dropbox.com/s/unxklg86zbh383q/gaelic_conclusion.wav?dl=1", "gaelic_conclusion.wav", -27, false),
+    JOE_LOOKS_CONCERNED("https://www.dropbox.com/s/u0rcvwiz99svsdf/joe_looks_concerned.wav?dl=1", "joe_looks_concerned.wav", -27, false),
+    MOVE_OR_DIE("https://www.dropbox.com/s/d2yq6lcu3tblsc9/move_or_die.wav?dl=1", "move_or_die.wav", -27, false),
+    TICK_TOCK("https://www.dropbox.com/s/q1912ts2zukkgpb/tick_tock.wav?dl=1", "tick_tock.wav", -27, false),
+    WHATS_UP_FURBALL("https://www.dropbox.com/s/8gg5ki4ipip6x9i/whats_up_furball.wav?dl=1", "whats_up_furball.wav", -27, false),
     FIGHTING_MUSIC(true,
             DANCE_OF_THE_DERPY_CHICKEN,
             END_OF_FRIENDSHIP,
