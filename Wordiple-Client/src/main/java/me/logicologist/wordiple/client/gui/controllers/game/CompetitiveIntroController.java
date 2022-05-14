@@ -15,6 +15,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class is used as the controller for the competitive intro screen.
+ * It is used to handle the transition between the main menu and game.
+ * This class is part of the game controller set.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class CompetitiveIntroController extends AttachableAdapter {
 
     @FXML
@@ -38,11 +46,28 @@ public class CompetitiveIntroController extends AttachableAdapter {
     @FXML
     private Label opponentRatingLabel;
 
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @see javafx.fxml.Initializable
+     * @param url The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
     }
 
+    /**
+     * This method is called when the competitive intro screen is shown.
+     * It uses the AttachableAdapter class to attach the movablePane to the main screen.
+     *
+     * On animation completion, the callback is called.
+     *
+     * @see me.logicologist.wordiple.client.gui.controllers.AttachableAdapter
+     * @param runnable The callback to be called when the animation is complete.
+     */
     public void transitionIn(Runnable runnable) {
         super.attach();
         playerSide.setLayoutX(-1920);
@@ -68,6 +93,15 @@ public class CompetitiveIntroController extends AttachableAdapter {
         });
     }
 
+    /**
+     * This method is called when the competitive intro screen is hidden.
+     * It uses the AttachableAdapter class to attach and detach the movablePane from the main screen.
+     *
+     * On animation completion, the callback is called.
+     *
+     * @see me.logicologist.wordiple.client.gui.controllers.AttachableAdapter
+     * @param runnable The callback to be called when the animation is complete.
+     */
     public void transitionOut(Runnable runnable) {
         super.attach();
         Duration duration = Duration.seconds(1.5);
@@ -94,6 +128,13 @@ public class CompetitiveIntroController extends AttachableAdapter {
         });
     }
 
+    /**
+     * This method is called when the competitive intro screen is shown.
+     * It sets the player and opponents' name and rating on the screen.
+     *
+     * @param name The opponents' name.
+     * @param rating The opponents' rating.
+     */
     public void setOpponentData(String name, int rating) {
         opponentNameLabel.setText(name);
         opponentRatingLabel.setText(rating + " WR");

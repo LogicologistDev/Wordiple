@@ -17,6 +17,14 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used as the controller for 2 player versus screen.
+ * It is used to handle the user input and send the appropriate packet(s) to the server.
+ * This class is part of the game controller set.
+ *
+ * @author Logicologist
+ * @since 1.0
+ */
 public class VersusTwoController extends GameController {
 
     @FXML
@@ -82,6 +90,14 @@ public class VersusTwoController extends GameController {
     int guessNumber = 1;
     int maxRows = 6;
 
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @param url            The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -117,6 +133,11 @@ public class VersusTwoController extends GameController {
         });
     }
 
+    /**
+     * This method retrieves the AnchorPane representing the current guess the player is on.
+     *
+     * @return The AnchorPane representing the current guess the player is on.
+     */
     public AnchorPane getCurrentRow() {
         switch (guessNumber) {
             case 1:
@@ -135,6 +156,11 @@ public class VersusTwoController extends GameController {
         return null;
     }
 
+    /**
+     * This method retrieves the AnchorPane representing the opponent's current guess.
+     *
+     * @return The AnchorPane representing the opponent's current guess.
+     */
     public AnchorPane getOpponentRow(int row) {
         switch (row) {
             case 1:
@@ -153,6 +179,12 @@ public class VersusTwoController extends GameController {
         return null;
     }
 
+    /**
+     * This method retrieves the Labels of a AnchorPane representing a guess row.
+     *
+     * @param guessRow The AnchorPane representing the guess row.
+     * @return A list of labels contained in the guess row in order.
+     */
     public List<Label> getGuessLabels(AnchorPane guessRow) {
         List<Label> labels = new ArrayList<>();
 
@@ -160,6 +192,13 @@ public class VersusTwoController extends GameController {
         return labels;
     }
 
+    /**
+     * This method is used to set the row's colors/data for a guess.
+     * Received by the server as a packet to update the board.
+     *
+     * @param row  The row to set.
+     * @param code The data to set.
+     */
     public void setRowData(AnchorPane row, String code) {
         List<Label> rowLabels = getGuessLabels(row);
 
@@ -195,6 +234,12 @@ public class VersusTwoController extends GameController {
         }
     }
 
+    /**
+     * This method is used to set the player's current guess
+     * It is used to display to the player their current guess.
+     *
+     * @param value The string of their guess
+     */
     public void setPlayerGuess(String value) {
         AnchorPane guessRow = getCurrentRow();
 
@@ -211,7 +256,14 @@ public class VersusTwoController extends GameController {
         }
     }
 
-    public void updatePlayerGuess(String value) {
+    /**
+     * This method is used to set the player's data for a guess.
+     * Received by the server as a packet to update the board.
+     *
+     * @param row   The row to set.
+     * @param value The data to set for that row.
+     */
+    public void updatePlayerGuess(int row, String value) {
         AnchorPane guessRow = getCurrentRow();
 
         if (guessRow == null) return;
@@ -219,6 +271,15 @@ public class VersusTwoController extends GameController {
         setRowData(guessRow, value);
     }
 
+    /**
+     * This method is used to sumbit the current guess the player has made.
+     * <p>
+     * Before submitting as a packet to the server, the player's guess is validated through WordManager.
+     *
+     * @param value The player's guess
+     * @see WordManager
+     * @see WordManager#isValid(String)
+     */
     public void submitGuess(String value) {
         if (getCurrentRow() == null) return;
         if (!WordManager.getInstance().isValid(value)) {
@@ -227,9 +288,18 @@ public class VersusTwoController extends GameController {
         }
         guessNumber++;
         playTextField.clear();
-        updatePlayerGuess("rrrrr");
+        updatePlayerGuess(guessNumber, "rrrrr");
         // Send packet to submit
     }
+
+    /**
+     * This method is used to set the opponent's current guess.
+     * It is used to display to the player their opponent's current guess.
+     * Prevents showing the actual content of their guess.
+     *
+     * @param guess Their current guess number.
+     * @param length The length of their guess
+     */
 
     public void setOpponentGuess(int guess, int length) {
         AnchorPane guessRow = getOpponentRow(guess);
@@ -247,19 +317,40 @@ public class VersusTwoController extends GameController {
         }
     }
 
-    public void updateOpponentGuess(int guess, String codes) {
+    /**
+     * This method is used to set the opponent's data for a guess.
+     * Received by the server as a packet to update the board.
+     *
+     * @param guess The guess to set.
+     * @param code  The data to set.
+     */
+    public void updateOpponentGuess(int guess, String code) {
         AnchorPane guessRow = getOpponentRow(guess);
 
         if (guessRow == null) return;
 
-        setRowData(guessRow, codes);
+        setRowData(guessRow, code);
     }
 
+    /**
+     * This method is used to set the current score of the entire match.
+     * Received by the server as a packet to update the board.
+     *
+     * @param playerScore The player's current score.
+     * @param opponentScore The opponent's current score.
+     */
     public void setScore(int playerScore, int opponentScore) {
         this.playerScoreLabel.setText(String.valueOf(playerScoreLabel));
         this.opponentScoreLabel.setText(String.valueOf(opponentScoreLabel));
     }
 
+    /**
+     * This method is used to set the current end goal of the game.
+     * This is typically going to be Casual or Competitive, due to the nature of 2 player matches.
+     *
+     * @param goal The current end goal of the game.
+     * @param opponentName The opponent's name.
+     */
     public void setGameMeta(String goal, String opponentName) {
         this.goalLabel.setText(goal);
         this.playerOneName.setText(SessionManager.getInstance().getUsername());

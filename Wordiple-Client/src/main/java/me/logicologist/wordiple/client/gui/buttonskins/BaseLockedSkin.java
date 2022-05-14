@@ -10,12 +10,26 @@ import javafx.util.Duration;
 import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.sound.SoundType;
 
+/**
+ * This class is used to set the button animations for a Base-Locked Button.
+ * A Base-Locked button is a button that does not have extra room to move around on screen.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class BaseLockedSkin extends ButtonSkin {
 
     private boolean pressed;
 
     private boolean exited;
 
+    /**
+     * Constructor for the BaseLockedSkin class.
+     *
+     * Upon instantiation, the button's animations are automatically set.
+     *
+     * @param button The button to be animated.
+     */
     public BaseLockedSkin(Button button) {
         super(button);
 

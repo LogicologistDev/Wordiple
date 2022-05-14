@@ -28,8 +28,19 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used as the controller for the login screen.
+ * It is used to handle the user input and send the appropriate packet(s) to the server.
+ * This class is part of the authentication controller set.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class LoginController extends FadeVerticalTransitionAdapter {
 
+    /**
+     * The FXML fields for the login screen.
+     */
     @FXML
     private AnchorPane movablePane;
 
@@ -53,6 +64,15 @@ public class LoginController extends FadeVerticalTransitionAdapter {
 
     private boolean midAction = false;
 
+    /**
+     * The method run on initialization.
+     * This method is overridden from the Initializable interface.
+     *
+     * @see javafx.fxml.Initializable
+     * @see javafx.fxml.Initializable#initialize(URL, ResourceBundle)
+     * @param url The location of the FXML file.
+     * @param resourceBundle The resources used by the FXML file.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setPane(movablePane);

@@ -12,8 +12,22 @@ import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.sound.SoundType;
 
 
+/**
+ * This class is used to animate a downwards moving button that is not Base-Locked.
+ * A Base-Locked button is a button that does not have extra room to move around on screen.
+ *
+ * @author      Logicologist
+ * @since       1.0
+ */
 public class DownSkin extends ButtonSkin {
 
+    /**
+     * Constructor for the DownSkin class.
+     *
+     * Upon instantiation, the button's animations are automatically set.
+     *
+     * @param button The button to be animated.
+     */
     public DownSkin(Button button) {
         super(button);
 
