@@ -7,13 +7,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
+import me.logicologist.wordiple.client.gui.animations.BounceInAnimation;
 import me.logicologist.wordiple.client.gui.animations.LetterFieldPopAnimation;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This abstract class is used by the common game controllers.
@@ -39,6 +43,7 @@ public abstract class GameController implements Initializable {
     protected Label timerLabel;
 
     HashMap<String, AnchorPane> playerPanes = new HashMap<>();
+    private ScheduledFuture timerFuture = null;
     int guessNumber = 1;
     int maxRows = 6;
 
@@ -176,7 +181,19 @@ public abstract class GameController implements Initializable {
     }
 
     public void startTimer(int time) {
+        new BounceInAnimation(timerPane.layoutYProperty(), -100, 1).play();
         timerLabel.setText(time + "s");
+        AtomicInteger timer = new AtomicInteger(time);
 
+        this.timerFuture = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
+            if (timer.decrementAndGet() <= 0) {
+                timerFuture.cancel(true);
+                timerFuture = null;
+                return;
+            }
+            Platform.runLater(() -> {
+                timerLabel.setText(timer.get() + "s");
+            });
+        }, 0, 1, TimeUnit.SECONDS);
     }
 }
