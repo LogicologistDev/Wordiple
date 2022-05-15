@@ -209,6 +209,7 @@ public abstract class GameController implements Initializable {
 
         this.timerFuture = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
             if (timer.decrementAndGet() < 0) {
+                SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
                 timerFuture.cancel(true);
                 timerFuture = null;
                 setAnswerLocked(true);
@@ -239,10 +240,10 @@ public abstract class GameController implements Initializable {
         }
         this.guessNumber = 1;
         this.maxGuesses = 6;
+        SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
         if (timerFuture != null) {
             timerFuture.cancel(true);
             timerFuture = null;
-            SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
         }
         lettersPane.getChildren().forEach(x -> {
             x.getStyleClass().clear();
