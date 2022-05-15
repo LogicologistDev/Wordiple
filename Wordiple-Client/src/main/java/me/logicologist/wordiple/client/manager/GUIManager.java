@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
@@ -34,6 +35,7 @@ import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +73,7 @@ public class GUIManager extends Application {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setFullScreen(true);
         }
+        stage.getIcons().add(new Image("/icon.png"));
         stage.setResizable(false);
         SoundManager soundManager = new SoundManager();
         IntegrationManager integrationManager = new IntegrationManager();
@@ -455,8 +458,8 @@ public class GUIManager extends Application {
     private void handleDimension(Dimension dimension, Scene scene) {
         double width = dimension.getWidth();
         double height = dimension.getHeight();
-        double w = width / 1440;
-        double h = height / 810;
+        double w = width / (width < 1440 ? width : 1440);
+        double h = height / (height < 810 ? height : 810);
         Scale scale = new Scale(w, h, 0, 0);
         scene.getRoot().getTransforms().setAll(scale);
     }

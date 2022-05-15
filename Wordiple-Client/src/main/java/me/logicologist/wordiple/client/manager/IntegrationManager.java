@@ -3,7 +3,7 @@ package me.logicologist.wordiple.client.manager;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.integration.DiscordPresenceIntegration;
 import me.logicologist.wordiple.client.integration.Integration;
-import me.logicologist.wordiple.client.integration.IntegrationPlugins;
+import me.logicologist.wordiple.client.integration.Libraries;
 import me.logicologist.wordiple.client.integration.IntegrationStatus;
 import me.logicologist.wordiple.common.utils.Utils;
 
@@ -35,7 +35,7 @@ public class IntegrationManager {
     }
 
     public void load() {
-        for (IntegrationPlugins value : IntegrationPlugins.values()) {
+        for (Libraries value : Libraries.values()) {
             try {
                 if (!value.needDownload(version, localVersion)) {
                     addToClassPath(value.getFile());
@@ -59,7 +59,7 @@ public class IntegrationManager {
     }
 
     public long neededDownloaded() {
-        return Arrays.stream(IntegrationPlugins.values()).filter(x -> x.needDownload(version, localVersion)).count();
+        return Arrays.stream(Libraries.values()).filter(x -> x.needDownload(version, localVersion)).count();
     }
 
     /**

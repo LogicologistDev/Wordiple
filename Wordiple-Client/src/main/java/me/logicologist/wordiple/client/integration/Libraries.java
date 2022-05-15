@@ -8,16 +8,17 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-public enum IntegrationPlugins {
+public enum Libraries {
 
-    DISCORD_PRESENCE("https://www.dropbox.com/s/21y28ul3m2d0xzf/discord-rpc.jar?dl=1", "discord-rpc.jar");
+    DISCORD_PRESENCE("https://www.dropbox.com/s/21y28ul3m2d0xzf/discord-rpc.jar?dl=1", "discord-rpc.jar"),
+    UPDATER("https://www.dropbox.com/s/1x8j9j9j9j9j9j9/Updater.jar?dl=1", "Updater.jar");
 
     private final String url;
     private final File file;
 
-    IntegrationPlugins(String url, String fileName) {
+    Libraries(String url, String fileName) {
         this.url = url;
-        this.file = fileName == null ? null : new File(WordipleClient.getAppData() + File.separator + "integrations", fileName);
+        this.file = fileName == null ? null : new File(WordipleClient.getAppData() + File.separator + "libraries", fileName);
         if (file != null && !file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -50,7 +51,7 @@ public enum IntegrationPlugins {
             httpcon.addRequestProperty("User-Agent", "Mozilla/4.0");
             httpcon.setConnectTimeout(5 * 1000);
             httpcon.setReadTimeout(5 * 1000);
-            WordipleClient.getLogger().info("Downloaded integration plugin " + this.file);
+            WordipleClient.getLogger().info("Downloaded library " + this.file);
             Files.copy(httpcon.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             assetsInsert.run();
         } catch (Exception ex) {

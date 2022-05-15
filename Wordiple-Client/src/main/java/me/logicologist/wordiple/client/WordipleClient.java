@@ -20,8 +20,7 @@ public class WordipleClient {
     public static void main(String[] args) {
         logger = LogManager.getLogger("WordipleClient");
         developerMode = Arrays.asList(args).contains("-developer");
-        GenericManager.loadManagers(developerMode);
-        GUIManager.launch(args);
+        GenericManager.loadManagers(developerMode, () -> GUIManager.launch(args));
     }
 
     public static File getAppData() {
