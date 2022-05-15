@@ -64,7 +64,6 @@
                             <manifestEntries>
                                 <Main-Class>me.logicologist.wordiple.client.AgentClient</Main-Class>
                                 <Premain-Class>me.logicologist.wordiple.client.manager.IntegrationManager</Premain-Class>
-                                <Java-Agent>me.logicologist.wordiple.client.manager.IntegrationManager</Java-Agent>
                                 <Build>${project.version}</Build>
                             </manifestEntries>
                         </transformer>

@@ -15,7 +15,7 @@ public class WordipleClient {
     private static File appData;
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(10);
     private static Logger logger;
-    private static boolean developerMode;
+    static boolean developerMode;
 
     public static void main(String[] args) {
         logger = LogManager.getLogger("WordipleClient");
@@ -37,7 +37,6 @@ public class WordipleClient {
         }
 
         appData = new File(developerMode ? "data" : workingDirectory + File.separator + "Wordiple");
-        logger.info("AppData: " + appData.getAbsolutePath());
         return appData;
     }
 

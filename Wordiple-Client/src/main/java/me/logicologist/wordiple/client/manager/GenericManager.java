@@ -12,6 +12,7 @@ public class GenericManager {
     public static Runnable assetsInsert;
 
     public static void loadManagers(boolean developerMode) {
+        WordipleClient.getLogger().info("AppData: " + WordipleClient.getAppData().getAbsolutePath());
         new SessionManager();
         new PacketManager(developerMode).load();
         new WordManager();

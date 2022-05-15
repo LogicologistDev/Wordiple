@@ -51,6 +51,7 @@ public class GUIManager extends Application {
 
     @Override
     public void start(Stage stage) {
+        WordipleClient.getLogger().info("Starting GUI");
         this.stage = stage;
         stage.setTitle("Wordiple");
 
@@ -94,6 +95,7 @@ public class GUIManager extends Application {
                 e1.printStackTrace();
             }
         });
+        WordipleClient.getLogger().info("GUI started");
     }
 
     static void innit(GUIManager manager) {
@@ -466,6 +468,7 @@ public class GUIManager extends Application {
     }
 
     public static void launch(String[] args) {
+        WordipleClient.getLogger().info("Launching Wordiple GUI");
         Application.launch(args);
     }
 
