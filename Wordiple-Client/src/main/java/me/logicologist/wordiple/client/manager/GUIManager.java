@@ -246,7 +246,7 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusboards/versustwo.fxml"));
             this.loadScene(fxmlLoader.load());
             VersusTwoController controller = fxmlLoader.getController();
-            controller.setGameMeta(gameInfo.get("goal", String.class), gameInfo.get("opponent", String.class), gameInfo.get("queue", QueueType.class));
+            controller.setGameMeta(gameInfo.get("goal", String.class), gameInfo.get("opponent", String.class), gameInfo.get("type", QueueType.class));
             this.gameController = controller;
         } catch (Exception ex) {
             ex.printStackTrace();
