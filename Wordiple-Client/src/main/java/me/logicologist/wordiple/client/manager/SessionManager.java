@@ -20,6 +20,7 @@ public class SessionManager {
     private int currentXp;
     private int neededXp;
     private int rating;
+    private String rank;
     private String username;
     private String version;
 
@@ -145,9 +146,14 @@ public class SessionManager {
         this.setNeededXp(arguments.get("neededXp", Integer.class));
         this.setLevel(arguments.get("level", Integer.class));
         this.setRating(arguments.get("rating", Integer.class));
+        this.setRank(arguments.get("rank", String.class));
         this.setUsername(username);
         this.setLoggedIn(true);
         this.setVersion(arguments.get("version", String.class));
+    }
+
+    private void setRank(String rank) {
+        this.rank = rank;
     }
 
     public void setVersion(String version) {
@@ -160,5 +166,9 @@ public class SessionManager {
 
     public static SessionManager getInstance() {
         return instance;
+    }
+
+    public String getRank() {
+        return rank;
     }
 }

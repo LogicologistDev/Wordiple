@@ -1,19 +1,24 @@
 package me.logicologist.wordiple.client.gui.controllers.game;
 
+import com.jcraft.jsch.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
+import me.logicologist.wordiple.client.integration.IntegrationStatus;
+import me.logicologist.wordiple.client.manager.IntegrationManager;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.manager.WordManager;
 import me.logicologist.wordiple.client.packets.game.GuessWordPacket;
 import me.logicologist.wordiple.client.packets.game.UpdateDisplayPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.queue.QueueType;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
@@ -211,7 +216,9 @@ public class VersusTwoController extends GameController {
      * @param goal The current end goal of the game.
      * @param opponentName The opponent's name.
      */
-    public void setGameMeta(String goal, String opponentName) {
+    public void setGameMeta(String goal, String opponentName, QueueType queueType) {
+        SessionManager manager = SessionManager.getInstance();
+        IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game - (" + manager.getRating() + " WR / " + manager.getRank()).setTimer().setState(queueType.getName() + " Match (FT" + goal + ")"));
         this.goalLabel.setText(goal);
         this.playerOneName.setText(SessionManager.getInstance().getUsername());
         this.playerTwoName.setText(opponentName);

@@ -36,6 +36,7 @@ import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
+import me.logicologist.wordiple.common.queue.QueueType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -182,6 +183,8 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
             this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
+            SessionManager manager = SessionManager.getInstance();
+            IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game - (" + manager.getRating() + " WR / " + manager.getRank()).setState("Main Menu"));
             if (fadeIn) {
                 ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC));
                 return;
@@ -243,7 +246,7 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/versusboards/versustwo.fxml"));
             this.loadScene(fxmlLoader.load());
             VersusTwoController controller = fxmlLoader.getController();
-            controller.setGameMeta(gameInfo.get("goal", String.class), gameInfo.get("opponent", String.class));
+            controller.setGameMeta(gameInfo.get("goal", String.class), gameInfo.get("opponent", String.class), gameInfo.get("queue", QueueType.class));
             this.gameController = controller;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -318,7 +321,6 @@ public class GUIManager extends Application {
             SoundManager.getInstance().stopSound(SoundType.BACKGROUND_MUSIC);
             competitiveIntroController.transitionIn(() -> {
                 SoundManager.getInstance().playSound(SoundType.FIGHTING_MUSIC);
-                IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game").setTimer().setDetails("Competitive Match"));
                 WordipleClient.getExecutor().schedule(() -> {
                     Platform.runLater(() -> {
                         try {
