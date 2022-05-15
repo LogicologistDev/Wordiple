@@ -45,7 +45,7 @@ public abstract class GameController implements Initializable {
     @FXML
     protected Label timerLabel;
 
-    HashMap<String, AnchorPane> playerPanes = new HashMap<>();
+    public HashMap<String, AnchorPane> playerPanes = new HashMap<>();
     HashMap<String, Label> playerScoreLabels = new HashMap<>();
     private ScheduledFuture<?> timerFuture = null;
     int guessNumber = 1;
@@ -232,14 +232,15 @@ public abstract class GameController implements Initializable {
             List<AnchorPane> panes = getPlayerPanes(pane);
             for (int i = 0; i < 6; i++) {
                 setRowData(panes.get(i), "uuuuu");
-                if (i == 0) {
-                    setRowData(panes.get(i), "rrrrr");
-                    continue;
-                }
             }
         }
         this.guessNumber = 1;
         this.maxGuesses = 6;
+        lettersPane.getChildren().forEach(x -> {
+            x.getStyleClass().clear();
+            x.getStyleClass().add("board-letter-default-unused");
+            new PopAnimation(x, 1, 1.2).play();
+        });
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(timerPane.layoutYProperty(), timerPane.getLayoutY())),
                 new KeyFrame(Duration.seconds(1), new KeyValue(timerPane.layoutYProperty(), 818))

@@ -13,11 +13,11 @@
          <children>
             <AnchorPane fx:id="playerOneRow1" layoutY="81.0" prefHeight="80.0" prefWidth="438.0">
                <children>
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="15.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="100.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="185.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="270.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="15.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="100.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="185.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="270.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="playerOneRow2" layoutY="171.0" prefHeight="80.0" prefWidth="438.0">
@@ -88,11 +88,11 @@
          <children>
             <AnchorPane fx:id="playerTwoRow1" layoutY="81.0" prefHeight="80.0" prefWidth="438.0">
                <children>
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="15.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="100.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="185.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="270.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
-                  <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-ready" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="15.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="100.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="185.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="270.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
+                  <Label alignment="CENTER" focusTraversable="false" layoutX="355.0" layoutY="6.0" prefHeight="68.0" prefWidth="68.0" styleClass="board-default-unused" stylesheets="@../style.css" textAlignment="CENTER" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="playerTwoRow2" layoutY="171.0" prefHeight="80.0" prefWidth="438.0">
