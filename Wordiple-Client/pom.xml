@@ -26,6 +26,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>net.arika.dev</groupId>
+            <artifactId>drpc</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/discord-rpc.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>18.0.1</version>
@@ -54,7 +61,12 @@
                     <finalName>${project.name} ${project.version}</finalName>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>me.logicologist.wordiple.client.WordipleClient</mainClass>
+                            <manifestEntries>
+                                <Main-Class>me.logicologist.wordiple.client.AgentClient</Main-Class>
+                                <Premain-Class>me.logicologist.wordiple.client.manager.IntegrationManager</Premain-Class>
+                                <Java-Agent>me.logicologist.wordiple.client.manager.IntegrationManager</Java-Agent>
+                                <Build>${project.version}</Build>
+                            </manifestEntries>
                         </transformer>
                     </transformers>
                 </configuration>
