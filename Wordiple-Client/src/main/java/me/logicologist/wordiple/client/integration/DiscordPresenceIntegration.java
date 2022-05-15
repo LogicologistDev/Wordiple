@@ -23,7 +23,7 @@ public class DiscordPresenceIntegration extends Integration {
                 .setDetails("These are some details.")
                 .setBigImage("large", "Wordiple");
 
-//        DiscordRPC.discordUpdatePresence(rich);
+        DiscordRPC.discordUpdatePresence(rich.build());
     }
 
     @Override
