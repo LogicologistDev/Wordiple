@@ -21,7 +21,7 @@ public class LibraryManager {
     public enum Libraries {
 
         DISCORD_PRESENCE("https://www.dropbox.com/s/21y28ul3m2d0xzf/discord-rpc.jar?dl=1", "discord-rpc.jar"),
-        UPDATER("https://www.dropbox.com/s/1x8j9j9j9j9j9j9/Updater.jar?dl=1", "Updater.jar");
+        UPDATER("", "Updater.jar");
 
         private final String url;
         private final File file;
@@ -63,10 +63,10 @@ public class LibraryManager {
                 httpcon.setReadTimeout(5 * 1000);
                 WordipleClient.getLogger().info("Downloaded library " + this.file);
                 Files.copy(httpcon.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                assetsInsert.run();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            assetsInsert.run();
         }
     }
 
