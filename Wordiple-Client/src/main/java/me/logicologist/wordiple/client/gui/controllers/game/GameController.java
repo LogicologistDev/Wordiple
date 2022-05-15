@@ -1,6 +1,5 @@
 package me.logicologist.wordiple.client.gui.controllers.game;
 
-import com.jcraft.jsch.Session;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,11 +20,10 @@ import java.util.concurrent.TimeUnit;
  * It is used to handle game data and send the appropriate packet(s) to the server.
  * This class is part of the game controller set.
  *
- * @author      Logicologist
- * @since       1.0
+ * @author Logicologist
+ * @since 1.0
  */
 public abstract class GameController implements Initializable {
-
 
 
     @FXML
@@ -33,6 +31,12 @@ public abstract class GameController implements Initializable {
 
     @FXML
     protected AnchorPane lettersPane;
+
+    @FXML
+    protected AnchorPane timerPane;
+
+    @FXML
+    protected Label timerLabel;
 
     HashMap<String, AnchorPane> playerPanes = new HashMap<>();
     int guessNumber = 1;
@@ -169,5 +173,10 @@ public abstract class GameController implements Initializable {
                 });
             }, i * 40, TimeUnit.MILLISECONDS);
         }
+    }
+
+    public void startTimer(int time) {
+        timerLabel.setText(time + "s");
+
     }
 }

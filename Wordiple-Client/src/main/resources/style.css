@@ -221,6 +221,12 @@
     -fx-background-radius: 6px;
 }
 
+.board-timer {
+    -fx-background-image: url("./timer.png");
+    -fx-background-size: 100% 100%;
+    -fx-background-color: transparent;
+}
+
 .button-zen {
     -fx-background-image: url("./zenbutton.png");
     -fx-background-color: transparent;
