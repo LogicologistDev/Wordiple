@@ -73,9 +73,7 @@ public class Sound {
             if (clip.isRunning()) return;
 
             WordipleClient.getLogger().info("Clip playing: " + this.clip.isRunning());
-
             clip.setFramePosition(0);
-            // Play clip
             clip.start();
 
             if (this.type.isFade()) {
