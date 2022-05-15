@@ -2,6 +2,7 @@ package me.logicologist.wordiple.client;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.List;
 
 public class AgentClient {
 
@@ -14,6 +15,7 @@ public class AgentClient {
                 WordipleClient.main(args);
                 return;
             }
+            List<String> argsList = Arrays.asList(args);
             setupLogger(Arrays.asList(args).contains("-developer"));
             String name = file.getName().replace("%20", " ");
             log("Using " + name);
@@ -21,9 +23,10 @@ public class AgentClient {
             if (OS.contains("WIN")) {
                 name = "\"" + name + "\"";
             }
-            String command = "java -javaagent:" + name + " -cp " + name + " me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args);
+            String module = argsList.contains("-module") ? argsList.get(argsList.indexOf("-module") + 1) : "";
+            String command = "java -javaagent:" + name + " " + (module.isEmpty() ? "" : "--module-path " + module + " --add-modules javafx.controls,javafx.fxml ") + "-cp " + name + " me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args);
             log("Executing " + command);
-            Process process = Runtime.getRuntime().exec(command);
+            Process process = Runtime.getRuntime().exec(command, System.getenv().values().toArray(new String[0]), null);
             new Thread(() -> {
                 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
