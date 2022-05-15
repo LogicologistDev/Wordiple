@@ -10,6 +10,7 @@ public class UpdateScoreboardPacket extends PacketAdapter implements PacketType 
 
     public UpdateScoreboardPacket() {
         super("update_scoreboard_packet");
+        this.packetType = this;
     }
 
     @Override
