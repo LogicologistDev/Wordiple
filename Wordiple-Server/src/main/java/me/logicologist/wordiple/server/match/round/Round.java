@@ -1,12 +1,12 @@
 package me.logicologist.wordiple.server.match.round;
 
 import me.logicologist.wordiple.server.WordipleServer;
+import me.logicologist.wordiple.server.managers.MatchManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.managers.WordManager;
-import me.logicologist.wordiple.server.packets.game.GuessResponsePacket;
-import me.logicologist.wordiple.server.packets.game.SolvePacket;
-import me.logicologist.wordiple.server.packets.game.UpdateDisplayPacket;
+import me.logicologist.wordiple.server.match.Match;
+import me.logicologist.wordiple.server.packets.game.*;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public abstract class Round {
     private final long startTime;
     private ScheduledFuture<?> roundTimer;
     private int maxGuesses = 6;
+    private WordipleUser winner;
 
 
     public Round() {
@@ -75,11 +76,23 @@ public abstract class Round {
 
         if (possibleTimer > 0 && text.equals(word)) {
             maxGuesses = guessNumber;
+            winner = (winner == null ? guesser : null);
             guesser.addGuess(guessNumber);
             guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
             roundTimer = WordipleServer.getExecutor().schedule(() -> {
-                // end round
+                endRound(guesser);
             }, System.currentTimeMillis() - timerEnd, TimeUnit.MILLISECONDS);
+            if (winner == null) {
+                endRound(guesser);
+                roundTimer.cancel(true);
+                return;
+            }
+        }
+
+        if (!guessesLeft() && winner != null) {
+            endRound(guesser);
+            if (roundTimer != null) roundTimer.cancel(true);
+            return;
         }
 
         for (int i = 0; i < text.length(); i++) {
@@ -113,6 +126,8 @@ public abstract class Round {
             code.setCharAt(4, 'l');
             return;
         }
+
+        if (roundTimer != null) return;
 
         for (WordipleUser user : guesses.keySet()) {
 
@@ -155,5 +170,39 @@ public abstract class Round {
                     user.getOutputStream()
             );
         }
+    }
+
+    public void endRound(WordipleUser reference) {
+        Match match = MatchManager.getInstance().getMatch(reference);
+        match.setRoundWinner(winner);
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : guesses.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "The word was..."),
+                        user.getOutputStream()
+                );
+            }
+        }, 1, TimeUnit.SECONDS);
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : guesses.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", this.word + "!"),
+                        user.getOutputStream()
+                );
+            }
+        }, 2, TimeUnit.SECONDS);
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : guesses.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(ResetBoardsPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
+                        user.getOutputStream()
+                );
+            }
+        }, 5, TimeUnit.SECONDS);
+        WordipleServer.getExecutor().schedule(match::startRound, 8, TimeUnit.SECONDS);
+    }
+
+    private boolean guessesLeft() {
+        for (List<String> guess : guesses.values()) {
+            if (guess.size() < maxGuesses) return true;
+        }
+        return false;
     }
 }

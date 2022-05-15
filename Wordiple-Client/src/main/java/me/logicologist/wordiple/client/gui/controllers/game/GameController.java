@@ -1,14 +1,18 @@
 package me.logicologist.wordiple.client.gui.controllers.game;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.animations.BounceInAnimation;
-import me.logicologist.wordiple.client.gui.animations.LetterFieldPopAnimation;
+import me.logicologist.wordiple.client.gui.animations.PopAnimation;
 import me.logicologist.wordiple.client.manager.SessionManager;
 
 import java.util.ArrayList;
@@ -42,6 +46,7 @@ public abstract class GameController implements Initializable {
     protected Label timerLabel;
 
     HashMap<String, AnchorPane> playerPanes = new HashMap<>();
+    HashMap<String, Label> playerScoreLabels = new HashMap<>();
     private ScheduledFuture<?> timerFuture = null;
     int guessNumber = 1;
     int maxGuesses = 6;
@@ -52,7 +57,7 @@ public abstract class GameController implements Initializable {
     }
 
     public void setOpponentDisplay(String username, int guess, int length) {
-        List<AnchorPane> anchorPane = getOpponentPanes(playerPanes.get(username));
+        List<AnchorPane> anchorPane = getPlayerPanes(playerPanes.get(username));
         AnchorPane guessRow = anchorPane.get(guess - 1);
 
         List<Label> rowLabels = getGuessLabels(guessRow);
@@ -67,7 +72,7 @@ public abstract class GameController implements Initializable {
     }
 
     public void setPlayerGuessData(String username, int guess, String code) {
-        List<AnchorPane> anchorPane = getOpponentPanes(playerPanes.get(username));
+        List<AnchorPane> anchorPane = getPlayerPanes(playerPanes.get(username));
         AnchorPane guessRow = anchorPane.get(guess - 1);
 
         if (username.equals(SessionManager.getInstance().getUsername()) && guessNumber > guess) {
@@ -97,7 +102,7 @@ public abstract class GameController implements Initializable {
                             characterLabel.getStyleClass().add("board-letter-default-ready");
                             break;
                     }
-                    new LetterFieldPopAnimation(characterLabel, 1).play();
+                    new PopAnimation(characterLabel, 1, 1.2).play();
                 }
             });
         }
@@ -105,11 +110,15 @@ public abstract class GameController implements Initializable {
         setRowData(guessRow, code);
     }
 
-    public void setOpponentPane(String username, AnchorPane pane) {
+    public void setPlayerPane(String username, AnchorPane pane) {
         playerPanes.put(username, pane);
     }
 
-    public List<AnchorPane> getOpponentPanes(AnchorPane anchorPane) {
+    public void setPlayerScoreLabels(String username, Label label) {
+        playerScoreLabels.put(username, label);
+    }
+
+    public List<AnchorPane> getPlayerPanes(AnchorPane anchorPane) {
         List<AnchorPane> panes = new ArrayList<>();
 
         anchorPane.getChildren().forEach(x -> {
@@ -174,7 +183,7 @@ public abstract class GameController implements Initializable {
                             label.setText("");
                             break;
                     }
-                    new LetterFieldPopAnimation(label, 1).play();
+                    new PopAnimation(label, 1, 1.2).play();
                 });
             }, i * 40, TimeUnit.MILLISECONDS);
         }
@@ -187,7 +196,6 @@ public abstract class GameController implements Initializable {
 
         if (guessNumber >= maxGuesses) {
             setAnswerLocked(true);
-            return;
         }
 
         Platform.runLater(() -> {
@@ -206,5 +214,33 @@ public abstract class GameController implements Initializable {
                 timerLabel.setText(timer.get() + "s");
             });
         }, 0, 1, TimeUnit.SECONDS);
+    }
+
+    public void setScore(String player, int score) {
+        Label label = playerScoreLabels.get(player);
+        if (label.getText().equals(String.valueOf(score))) return;
+        Platform.runLater(() -> {
+            label.setText(String.valueOf(score));
+            new PopAnimation(label, 3, 1.5).play();
+        });
+    }
+
+    public void resetBoards() {
+        setAnswerLocked(true);
+        for (AnchorPane pane : playerPanes.values()) {
+            List<AnchorPane> panes = getPlayerPanes(pane);
+            for (int i = 0; i < 6; i++) {
+                if (i == 0) {
+                    setRowData(panes.get(i), "rrrrr");
+                    continue;
+                }
+                setRowData(panes.get(i), "uuuuu");
+            }
+        }
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(timerPane.layoutYProperty(), timerPane.getLayoutY())),
+                new KeyFrame(Duration.seconds(1), new KeyValue(timerPane.layoutYProperty(), 818))
+        );
+        timeline.play();
     }
 }
