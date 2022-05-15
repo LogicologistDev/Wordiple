@@ -5,7 +5,6 @@ import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import javafx.application.Platform;
 import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
-import me.logicologist.wordiple.common.queue.QueueType;
 
 public class GuessResponsePacket extends PacketAdapter implements AuthPacketType {
 

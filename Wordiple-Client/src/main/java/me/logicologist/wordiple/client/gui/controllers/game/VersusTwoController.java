@@ -2,10 +2,7 @@ package me.logicologist.wordiple.client.gui.controllers.game;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import me.logicologist.wordiple.client.WordipleClient;
-import me.logicologist.wordiple.client.gui.animations.LetterFieldPopAnimation;
 import me.logicologist.wordiple.client.gui.animations.ShakeAnimation;
 import me.logicologist.wordiple.client.manager.PacketManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
@@ -15,10 +12,8 @@ import me.logicologist.wordiple.client.packets.game.UpdateDisplayPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 /**

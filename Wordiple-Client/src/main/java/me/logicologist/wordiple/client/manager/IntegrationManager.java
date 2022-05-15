@@ -3,7 +3,9 @@ package me.logicologist.wordiple.client.manager;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.integration.DiscordPresenceIntegration;
 import me.logicologist.wordiple.client.integration.Integration;
+import me.logicologist.wordiple.client.integration.IntegrationPlugins;
 import me.logicologist.wordiple.client.integration.IntegrationStatus;
+import me.logicologist.wordiple.common.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +15,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarFile;
 
@@ -21,25 +24,30 @@ public class IntegrationManager {
     private static IntegrationManager instance;
 
     private final List<Integration> integrations;
+    private final String version;
+    private final String localVersion;
 
     public IntegrationManager() {
         integrations = new ArrayList<>();
         instance = this;
+        this.version = Utils.getAssetVersion();
+        this.localVersion = SessionManager.getInstance().getLocalAssetVersion();
     }
 
     public void load() {
-        File file = new File(WordipleClient.getAppData() + File.separator + "integrations");
-        try {
-            for (File listFile : file.listFiles(x -> x.getName().endsWith(".jar"))) {
-                try {
-                    addToClassPath(listFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        for (IntegrationPlugins value : IntegrationPlugins.values()) {
+            try {
+                if (!value.needDownload(version, localVersion)) {
+                    addToClassPath(value.getFile());
+                    continue;
                 }
+                value.download(GenericManager.assetsInsert);
+                addToClassPath(value.getFile());
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        } catch (Throwable e) {
-            WordipleClient.getLogger().info("Running jar in IDE mode.");
         }
+        WordipleClient.getLogger().info("Integration plugins loaded successfully");
         this.integrations.add(new DiscordPresenceIntegration());
         this.integrations.forEach(x -> {
             try {
@@ -51,7 +59,7 @@ public class IntegrationManager {
     }
 
     public long neededDownloaded() {
-        return 0;
+        return Arrays.stream(IntegrationPlugins.values()).filter(x -> x.needDownload(version, localVersion)).count();
     }
 
     /**
@@ -62,6 +70,7 @@ public class IntegrationManager {
      * @throws IOException if there is an error accessing the JAR file
      */
     public static synchronized void addToClassPath(File jarFile) throws IOException {
+        WordipleClient.getLogger().info("Loading integration plugin: " + jarFile);
         if (jarFile == null) {
             throw new NullPointerException();
         }
@@ -85,6 +94,8 @@ public class IntegrationManager {
             getAddUrlMethod().invoke(addUrlThis, jarFile.toURI().toURL());
         } catch (SecurityException iae) {
             throw new RuntimeException("security model prevents access to method", iae);
+        } catch (UnsupportedOperationException e) {
+            WordipleClient.getLogger().info("Running jar in IDE mode: " + jarFile);
         } catch (Throwable t) {
             // IllegalAccessException
             // IllegalArgumentException
