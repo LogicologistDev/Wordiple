@@ -70,13 +70,11 @@ public class Sound {
         try {
             WordipleClient.getLogger().info("Clip running: " + this.clip.isRunning());
             // Stop clip if it's already running
-            if (!this.selected.isOverlap() && clip.isRunning()) return;
+            if (clip.isRunning()) return;
 
             WordipleClient.getLogger().info("Clip playing: " + this.clip.isRunning());
 
-            clip.stop();
-            clip.setMicrosecondPosition(0);
-
+            clip.setFramePosition(0);
             // Play clip
             clip.start();
 

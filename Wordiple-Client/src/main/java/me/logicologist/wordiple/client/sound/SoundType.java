@@ -13,8 +13,8 @@ public enum SoundType {
 
     BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 0.0f),
     CLOCK_TICK("https://www.dropbox.com/s/5hpl3j6d66e4di5/clock_tick.wav?dl=1", "clock_tick.wav", -7.0f, false),
-    COUNTDOWN_STAGE_1("https://www.dropbox.com/s/gh6rzv7cwr33cd0/countdown_stage_1.wav?dl=1", "countdown_stage_1.wav", -27.0f, false, false, true),
-    COUNTDOWN_STAGE_2("https://www.dropbox.com/s/0hh4fl4pgc1i434/countdown_stage_2.wav?dl=1", "countdown_stage_2.wav", -27.0f, false, false, true),
+    COUNTDOWN_STAGE_1("https://www.dropbox.com/s/gh6rzv7cwr33cd0/countdown_stage_1.wav?dl=1", "countdown_stage_1.wav", -20.0f, false, false),
+    COUNTDOWN_STAGE_2("https://www.dropbox.com/s/0hh4fl4pgc1i434/countdown_stage_2.wav?dl=1", "countdown_stage_2.wav", -20.0f, false, false),
 
     OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", -27),
     BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", -27, true),
@@ -52,7 +52,6 @@ public enum SoundType {
     private final float volume;
     private final boolean repeat;
     private final boolean fade;
-    private final boolean overlap;
     private SoundType[] children;
 
     SoundType(String url, String fileName, float volume) {
@@ -64,16 +63,11 @@ public enum SoundType {
     }
 
     SoundType(String url, String fileName, float volume, boolean repeat, boolean fade) {
-        this(url, fileName, volume, repeat, fade, false);
-    }
-
-    SoundType(String url, String fileName, float volume, boolean repeat, boolean fade, boolean overlap) {
         this.url = url;
         this.file = fileName == null ? null : new File(WordipleClient.getAppData() + File.separator + "sounds", fileName);
         this.volume = volume;
         this.repeat = repeat;
         this.fade = fade;
-        this.overlap = overlap;
         if (file != null && !file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -134,9 +128,5 @@ public enum SoundType {
 
     public SoundType[] getChildren() {
         return this.children;
-    }
-
-    public boolean isOverlap() {
-        return overlap;
     }
 }
