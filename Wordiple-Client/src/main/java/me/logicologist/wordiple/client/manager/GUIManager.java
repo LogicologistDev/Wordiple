@@ -76,14 +76,14 @@ public class GUIManager extends Application {
         stage.getIcons().add(new Image("/icon.png"));
         stage.setResizable(false);
         SoundManager soundManager = new SoundManager();
-        IntegrationManager integrationManager = new IntegrationManager();
+        LibraryManager libraryManager = new LibraryManager();
         showMainScreen(false);
         stage.show();
 
         GenericManager.downloadAssets(this);
         WordipleClient.getExecutor().submit(() -> {
             soundManager.load(); // download and load sounds.
-            integrationManager.load(); // download and load integrations.
+            libraryManager.load(); // download and load integrations.
         });
         stage.setOnCloseRequest(e -> {
             try {

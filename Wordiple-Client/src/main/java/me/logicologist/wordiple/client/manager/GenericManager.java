@@ -21,11 +21,12 @@ public class GenericManager {
 
     public static void downloadAssets(GUIManager guiManager) {
         Runnable assetsFinished = () -> {
+            new IntegrationManager().load();
             SessionManager.getInstance().setAssetVersion(Utils.getAssetVersion());
             Platform.runLater(() -> GUIManager.innit(guiManager));
         };
         long soundAmount = SoundManager.getInstance().neededDownloaded();
-        long libraryAmount = IntegrationManager.getInstance().neededDownloaded();
+        long libraryAmount = LibraryManager.getInstance().neededDownloaded();
 
         WordipleClient.getLogger().info("Sound amount: " + soundAmount);
         WordipleClient.getLogger().info("Library amount: " + libraryAmount);
