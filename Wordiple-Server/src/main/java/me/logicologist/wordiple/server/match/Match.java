@@ -39,6 +39,7 @@ public abstract class Match<T extends Round> {
                     user.getOutputStream()
             );
             QueueManager.getInstance().removeAllQueueViewers(user);
+            user.setGamesPlayed(user.getGamesPlayed() + 1);
         }
         startNewRound();
     }

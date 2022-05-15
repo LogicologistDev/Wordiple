@@ -19,12 +19,15 @@ public abstract class Round {
 
     private final String word;
     private final HashMap<WordipleUser, List<String>> guesses;
+    private final long startTime;
     private ScheduledFuture<?> roundTimer;
     private int maxGuesses = 6;
+
 
     public Round() {
         this.word = WordManager.getInstance().getRandomGuessableWord().toUpperCase();
         System.out.println("The word is: " + word);
+        startTime = System.currentTimeMillis();
         this.guesses = new HashMap<>();
     }
 
@@ -51,6 +54,10 @@ public abstract class Round {
 
         int guessNumber = guesses.get(guesser).size();
 
+        if (guessNumber == 1) {
+            guesser.addOpener(text);
+        }
+
         List<Character> wordLetters = new ArrayList<>();
         for (int i = 0; i < word.length(); i++) {
             wordLetters.add(word.charAt(i));
@@ -66,19 +73,19 @@ public abstract class Round {
         int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
 
-        if (WordManager.getInstance().isValid(text)) {
+        if (!WordManager.getInstance().isValid(text)) {
             guesses.get(guesser).add(text);
-            if (guesses.get(guesser).size() >= maxGuesses) {
-                code.setCharAt(0, 'l');
-                code.setCharAt(1, 'l');
-                code.setCharAt(2, 'l');
-                code.setCharAt(3, 'l');
-                code.setCharAt(4, 'l');
-            }
+            code.setCharAt(0, 'l');
+            code.setCharAt(1, 'l');
+            code.setCharAt(2, 'l');
+            code.setCharAt(3, 'l');
+            code.setCharAt(4, 'l');
         }
 
         if (possibleTimer > 0 && text.equals(word)) {
             maxGuesses = guessNumber;
+            guesser.addGuess(guessNumber);
+            guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
             roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 // end round
             }, System.currentTimeMillis() - timerEnd, TimeUnit.MILLISECONDS);
