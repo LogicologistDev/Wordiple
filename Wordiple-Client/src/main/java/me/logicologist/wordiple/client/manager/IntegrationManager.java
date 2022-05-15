@@ -23,7 +23,7 @@ public class IntegrationManager {
         this.integrations.forEach(x -> {
             try {
                 x.load();
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 ex.printStackTrace();
             }
         });
@@ -34,10 +34,22 @@ public class IntegrationManager {
     }
 
     public void unload(boolean shutdown) {
-        this.integrations.forEach(x -> x.unload(shutdown));
+        this.integrations.forEach(x -> {
+            try {
+                x.unload(shutdown);
+            } catch (Throwable ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void update(IntegrationStatus status) {
-        this.integrations.forEach(x -> x.update(status));
+        this.integrations.forEach(x -> {
+            try {
+                x.update(status);
+            } catch (Throwable ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
