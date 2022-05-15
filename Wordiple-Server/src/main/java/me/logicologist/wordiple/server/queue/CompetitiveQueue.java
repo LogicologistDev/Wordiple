@@ -34,11 +34,13 @@ public class CompetitiveQueue extends Queue {
         WordipleServer.getExecutor().scheduleAtFixedRate(() -> {
             try {
                 for (WordipleUser queued : new ArrayList<>(super.inQueue)) {
+                    if (!super.inQueue.contains(queued)) continue;
                     this.ratingDisparity.put(queued, this.ratingDisparity.get(queued) + 5);
                     int queuedRating = queued.getRating();
                     for (WordipleUser others : super.inQueue) {
                         if (queued == others) continue;
                         int otherRating = others.getRating();
+                        if (!super.inQueue.contains(others)) continue;
                         if (otherRating >= queuedRating - this.ratingDisparity.get(queued) && otherRating <= queuedRating + this.ratingDisparity.get(queued) && queuedRating >= otherRating - this.ratingDisparity.get(others) && queuedRating <= otherRating + this.ratingDisparity.get(others)) {
                             super.inQueue.remove(queued);
                             super.inQueue.remove(others);

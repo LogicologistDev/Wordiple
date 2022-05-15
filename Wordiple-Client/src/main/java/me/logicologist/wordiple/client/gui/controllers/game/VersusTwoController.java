@@ -73,9 +73,6 @@ public class VersusTwoController extends GameController {
     @FXML
     private Label goalLabel;
 
-    int guessNumber = 1;
-    int maxRows = 6;
-
     /**
      * The method run on initialization.
      * This method is overridden from the Initializable interface.
@@ -186,7 +183,7 @@ public class VersusTwoController extends GameController {
         }
         guessNumber++;
         playTextField.clear();
-        if (guessNumber < 6) super.setPlayerGuessData(SessionManager.getInstance().getUsername(), guessNumber, "rrrrr");
+        if (guessNumber <= 6) super.setPlayerGuessData(SessionManager.getInstance().getUsername(), guessNumber, "rrrrr");
         PacketManager.getInstance().getSocket().getPacket(GuessWordPacket.class).sendPacket(packet -> packet
                 .getPacketType(AuthPacketType.class)
                 .getArguments(SessionManager.getInstance().getLocalSessionID())

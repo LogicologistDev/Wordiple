@@ -189,6 +189,38 @@
     -fx-background-radius: 6px;
 }
 
+.board-letter-default-unused {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #272727;
+    -fx-background-radius: 6px;
+}
+
+.board-letter-default-used {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #a79c00;
+    -fx-background-radius: 6px;
+}
+
+.board-letter-default-correct {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #24a000;
+    -fx-background-radius: 6px;
+}
+
+.board-letter-default-ready {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #9e0101;
+    -fx-background-radius: 6px;
+}
+
 .button-zen {
     -fx-background-image: url("./zenbutton.png");
     -fx-background-color: transparent;
