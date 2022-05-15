@@ -84,20 +84,14 @@ public abstract class Round {
             guesser.addGuess(guessNumber);
             guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
             System.out.println(timerEnd - System.currentTimeMillis() + " milliseconds left");
-            roundTimer = WordipleServer.getExecutor().schedule(() -> {
+            if (winner != null) roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 endRound(guesser);
             }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-            if (winner == null) {
-                System.out.println("Ending from double correct");
-                endRound(guesser);
-                roundTimer.cancel(true);
-                roundTimer = null;
-            }
         }
 
         System.out.println("Are guesses left?");
 
-        if (!guessesLeft() && winner != null) {
+        if (!guessesLeft()) {
             System.out.println("Nope. Ending round");
             endRound(guesser);
             if (roundTimer != null) roundTimer.cancel(true);
