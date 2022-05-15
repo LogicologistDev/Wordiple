@@ -17,6 +17,7 @@ import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.auth.*;
 import me.logicologist.wordiple.client.gui.controllers.game.CompetitiveIntroController;
 import me.logicologist.wordiple.client.gui.controllers.game.GameController;
+import me.logicologist.wordiple.client.gui.controllers.game.GameTextOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.game.VersusTwoController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
@@ -411,6 +412,20 @@ public class GUIManager extends Application {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public void showGameTextOverlay(String text) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gametextoverlay.fxml"));
+            fxmlLoader.load();
+            GameTextOverlayController overlayController = fxmlLoader.getController();
+            overlayController.setParent((AnchorPane) stage.getScene().getRoot());
+            overlayController.attach();
+            overlayController.setTextLabel(text);
+            overlayController.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void attachPlayerHeader() {

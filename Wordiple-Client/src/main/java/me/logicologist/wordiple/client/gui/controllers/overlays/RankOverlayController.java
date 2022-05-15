@@ -21,6 +21,7 @@ public class RankOverlayController extends AttachableAdapter {
     public Button backgroundButton;
 
     private boolean midAction = false;
+
     private OverlayController overlayController = null;
 
     @Override

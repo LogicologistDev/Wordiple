@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.server.match;
 
+import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.match.round.Round;
@@ -9,6 +10,7 @@ import me.logicologist.wordiple.server.user.WordipleUser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Match<T extends Round> {
 
@@ -35,13 +37,36 @@ public abstract class Match<T extends Round> {
 
     public void startRound() {
         for (WordipleUser user : score.keySet()) {
-            PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
-                    user.getOutputStream()
-            );
             QueueManager.getInstance().removeAllQueueViewers(user);
             user.setGamesPlayed(user.getGamesPlayed() + 1);
         }
-        startNewRound();
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : score.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Ready..."),
+                        user.getOutputStream()
+                );
+            }
+        }, 1, TimeUnit.SECONDS);
+
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : score.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Set..."),
+                        user.getOutputStream()
+                );
+            }
+        }, 2, TimeUnit.SECONDS);
+
+        WordipleServer.getExecutor().schedule(() -> {
+            for (WordipleUser user : score.keySet()) {
+                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Go!"),
+                        user.getOutputStream()
+                );
+                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
+                        user.getOutputStream()
+                );
+            }
+            startNewRound();
+        }, 3, TimeUnit.SECONDS);
     }
 
     public List<WordipleUser> getPlayers() {
