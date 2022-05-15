@@ -72,7 +72,8 @@ public abstract class Round {
         for (List<String> guess : guesses.values()) {
             leastGuesses = Math.min(leastGuesses, guess.size());
         }
-        int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
+        int possibleTimer = (guessNumber - leastGuesses) * 20;
+        if (possibleTimer > 0) possibleTimer += 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
 
         System.out.println("Checking if correct");
@@ -144,7 +145,7 @@ public abstract class Round {
                     user.getOutputStream()
             );
 
-            if (text.equals(word) && roundTimer != null) {
+            if (text.equals(word) && (roundTimer != null || !guessesLeft())) {
                 if (possibleTimer > 0) {
                     PacketManager.getInstance().getSocket().getPacket(SolvePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                     .setValues("player", guesser.getUsername())
