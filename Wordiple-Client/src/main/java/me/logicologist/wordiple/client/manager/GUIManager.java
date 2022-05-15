@@ -62,8 +62,11 @@ public class GUIManager extends Application {
         if (OS.contains("WIN")) {
             stage.setHeight(849);
             stage.setWidth(1439);
-            stage.setFullScreen(true);
+            stage.setFullScreenExitHint("");
             stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setMaximized(true);
+//            stage.setFullScreen(true);
         }
         if (!OS.contains("WIN")) {
             Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -75,7 +78,6 @@ public class GUIManager extends Application {
             stage.setFullScreen(true);
         }
         stage.getIcons().add(new Image("/icon.png"));
-        stage.setResizable(false);
         SoundManager soundManager = new SoundManager();
         LibraryManager libraryManager = new LibraryManager();
         showMainScreen(false);
