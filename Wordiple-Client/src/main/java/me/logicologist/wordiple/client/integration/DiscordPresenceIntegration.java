@@ -16,7 +16,6 @@ public class DiscordPresenceIntegration extends Integration {
         }).setErroredEventHandler((e, e2) -> WordipleClient.getLogger().info(e2)).build();
         DiscordRPC.discordInitialize("975144169225998346", handlers, true);
         DiscordRPC.discordRunCallbacks();
-        this.update(new IntegrationStatus().setDetails("In-Game").setState("Main Menu"));
     }
 
     @Override
