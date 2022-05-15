@@ -4,6 +4,7 @@ import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.match.round.Round;
+import me.logicologist.wordiple.server.packets.game.GameOverlayPacket;
 import me.logicologist.wordiple.server.packets.game.GameReadyPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
@@ -42,7 +43,7 @@ public abstract class Match<T extends Round> {
         }
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Ready..."),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Ready..."),
                         user.getOutputStream()
                 );
             }
@@ -50,7 +51,7 @@ public abstract class Match<T extends Round> {
 
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Set..."),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Set..."),
                         user.getOutputStream()
                 );
             }
@@ -58,7 +59,7 @@ public abstract class Match<T extends Round> {
 
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Go!"),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Go!"),
                         user.getOutputStream()
                 );
                 PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
