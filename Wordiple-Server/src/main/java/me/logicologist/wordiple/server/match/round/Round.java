@@ -80,6 +80,7 @@ public abstract class Round {
             code.setCharAt(2, 'l');
             code.setCharAt(3, 'l');
             code.setCharAt(4, 'l');
+            return;
         }
 
         if (possibleTimer > 0 && text.equals(word)) {
