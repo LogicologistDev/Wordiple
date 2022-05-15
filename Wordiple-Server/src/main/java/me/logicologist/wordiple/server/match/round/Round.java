@@ -1,20 +1,26 @@
 package me.logicologist.wordiple.server.match.round;
 
+import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.managers.WordManager;
 import me.logicologist.wordiple.server.packets.game.GuessResponsePacket;
+import me.logicologist.wordiple.server.packets.game.SolvePacket;
 import me.logicologist.wordiple.server.packets.game.UpdateDisplayPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Round {
 
     private final String word;
     private final HashMap<WordipleUser, List<String>> guesses;
+    private ScheduledFuture<?> roundTimer;
+    private int maxGuesses = 6;
 
     public Round() {
         this.word = WordManager.getInstance().getRandomGuessableWord().toUpperCase();
@@ -51,6 +57,21 @@ public abstract class Round {
 
         StringBuilder code = new StringBuilder();
 
+        int leastGuesses = 6;
+        for (List<String> guess : guesses.values()) {
+            leastGuesses = Math.min(leastGuesses, guess.size());
+        }
+
+        int possibleTimer = guessNumber - leastGuesses * 20 + 5;
+        long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
+
+        if (possibleTimer > 0) {
+            maxGuesses = guessNumber;
+            roundTimer = WordipleServer.getExecutor().schedule(() -> {
+                // end round
+            }, System.currentTimeMillis() - timerEnd, TimeUnit.MILLISECONDS);
+        }
+
         for (int i = 0; i < text.length(); i++) {
             if (wordLetters.get(i).equals(text.charAt(i))) {
                 code.append("c");
@@ -77,7 +98,26 @@ public abstract class Round {
                             .setValues("data", code.toString()),
                     user.getOutputStream()
             );
-            if (guessNumber >= 6 || user == guesser) continue;
+            if (text.equals(word)) {
+                if (possibleTimer > 0) {
+                    PacketManager.getInstance().getSocket().getPacket(SolvePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                    .setValues("player", guesser.getUsername())
+                                    .setValues("timerend", timerEnd)
+                                    .setValues("guesslimit", guesses.get(guesser).size()),
+                            user.getOutputStream()
+                    );
+                }
+                for (int i = guesses.get(guesser).size() + 1; i <= 6; i++) {
+                    PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                    .setValues("player", guesser.getUsername())
+                                    .setValues("guess", guessNumber + 1)
+                                    .setValues("data", "lllll"),
+                            user.getOutputStream()
+                    );
+                }
+                continue;
+            }
+            if (guessNumber >= 6 || user == guesser || guessNumber >= maxGuesses) continue;
             PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                             .setValues("player", guesser.getUsername())
                             .setValues("guess", guessNumber + 1)

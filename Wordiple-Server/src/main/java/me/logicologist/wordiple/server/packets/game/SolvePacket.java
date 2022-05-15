@@ -23,6 +23,9 @@ public class SolvePacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public PacketArguments getArguments() {
-        return new PacketArguments().setArgument("player", String.class);
+        return new PacketArguments()
+                .setArgument("player", String.class)
+                .setArgument("timerend", Long.class)
+                .setArgument("guesslimit", Integer.class);
     }
 }
