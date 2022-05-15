@@ -33,7 +33,11 @@ public class DiscordPresenceIntegration extends Integration {
     }
 
     @Override
-    public void unload() {
-
+    public void unload(boolean shutdown) {
+        if (shutdown) {
+            DiscordRPC.discordShutdown();
+            return;
+        }
+        DiscordRPC.discordClearPresence();
     }
 }

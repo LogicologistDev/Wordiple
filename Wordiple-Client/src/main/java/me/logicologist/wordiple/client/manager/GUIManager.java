@@ -97,6 +97,7 @@ public class GUIManager extends Application {
                 PacketManager.getInstance().getSocket().shutdownClient();
                 WordipleClient.getExecutor().shutdownNow();
                 SoundManager.getInstance().stopSounds();
+                IntegrationManager.getInstance().unload(true);
                 Platform.exit();
                 System.exit(0);
             } catch (Exception e1) {
@@ -183,8 +184,7 @@ public class GUIManager extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameselect.fxml"));
             this.loadScene(fxmlLoader.load());
             attachPlayerHeader();
-            SessionManager manager = SessionManager.getInstance();
-            IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game - (" + manager.getRating() + " WR / " + manager.getRank()).setState("Main Menu"));
+            IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game").setState("Main Menu"));
             if (fadeIn) {
                 ((GameSelectController) fxmlLoader.getController()).transitionIn(() -> SoundManager.getInstance().playSound(SoundType.BACKGROUND_MUSIC));
                 return;

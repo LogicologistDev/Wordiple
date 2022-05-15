@@ -7,10 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.FadeHorizontalTransitionAdapter;
-import me.logicologist.wordiple.client.manager.GUIManager;
-import me.logicologist.wordiple.client.manager.PacketManager;
-import me.logicologist.wordiple.client.manager.SessionManager;
-import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.manager.*;
 import me.logicologist.wordiple.client.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
@@ -60,6 +57,7 @@ public class GameSelectController extends FadeHorizontalTransitionAdapter {
             SessionManager.getInstance().setLocalSessionID(null, true);
             SessionManager.getInstance().setLoggedIn(false);
             SoundManager.getInstance().stopSound(SoundType.BACKGROUND_MUSIC);
+            IntegrationManager.getInstance().unload(false);
 
             controller.remove(() -> {
                 GUIManager.getInstance().startSwipeTransition(null, () -> GUIManager.getInstance().showMainScreen(false));

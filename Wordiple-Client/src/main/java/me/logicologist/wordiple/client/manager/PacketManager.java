@@ -5,6 +5,7 @@ import com.olziedev.olziesocket.framework.SocketConfig;
 import com.olziedev.olziesocket.framework.action.SocketActionType;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
+import me.logicologist.wordiple.client.integration.IntegrationStatus;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
@@ -59,6 +60,7 @@ public class PacketManager {
             if (!manager.isLoggedIn()) return;
 
             SoundManager.getInstance().stopSounds();
+            IntegrationManager.getInstance().unload(false);
             GUIManager.addReadyListener(instance -> {
                 instance.startSwipeTransition(null, () -> {
                     instance.showMainScreen(false);

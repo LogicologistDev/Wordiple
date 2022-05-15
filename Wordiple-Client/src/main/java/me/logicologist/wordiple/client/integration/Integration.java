@@ -6,5 +6,5 @@ public abstract class Integration {
 
     public abstract void update(IntegrationStatus status);
 
-    public abstract void unload();
+    public abstract void unload(boolean shutdown);
 }

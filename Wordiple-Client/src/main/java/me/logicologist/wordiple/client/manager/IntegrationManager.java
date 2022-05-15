@@ -33,8 +33,8 @@ public class IntegrationManager {
         return instance;
     }
 
-    public void unload() {
-        this.integrations.forEach(Integration::unload);
+    public void unload(boolean shutdown) {
+        this.integrations.forEach(x -> x.unload(shutdown));
     }
 
     public void update(IntegrationStatus status) {
