@@ -175,6 +175,7 @@ public abstract class GameController implements Initializable {
                             if (label.getStyleClass().contains("board-default-unused")) return;
                             label.getStyleClass().clear();
                             label.getStyleClass().add("board-default-unused");
+                            label.setText("");
                             break;
                         case 'l': // Locked
                             if (label.getStyleClass().contains("board-default-locked")) return;
@@ -230,13 +231,15 @@ public abstract class GameController implements Initializable {
         for (AnchorPane pane : playerPanes.values()) {
             List<AnchorPane> panes = getPlayerPanes(pane);
             for (int i = 0; i < 6; i++) {
+                setRowData(panes.get(i), "uuuuu");
                 if (i == 0) {
                     setRowData(panes.get(i), "rrrrr");
                     continue;
                 }
-                setRowData(panes.get(i), "uuuuu");
             }
         }
+        this.guessNumber = 1;
+        this.maxGuesses = 6;
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(timerPane.layoutYProperty(), timerPane.getLayoutY())),
                 new KeyFrame(Duration.seconds(1), new KeyValue(timerPane.layoutYProperty(), 818))
