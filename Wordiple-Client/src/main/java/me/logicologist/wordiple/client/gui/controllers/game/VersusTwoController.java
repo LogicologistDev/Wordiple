@@ -98,6 +98,7 @@ public class VersusTwoController extends GameController {
             if (verifiedString.length() > 5) {
                 playTextField.setText(verifiedString.substring(0, 5));
                 playTextField.positionCaret(verifiedString.length());
+                return; // we don't want to send the packet if the user is typing more than 5 characters
             }
             previousField.set(playTextField.getText());
             setPlayerGuess(playTextField.getText());

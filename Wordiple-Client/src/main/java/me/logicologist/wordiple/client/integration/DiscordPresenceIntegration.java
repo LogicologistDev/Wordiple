@@ -7,6 +7,8 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 
 public class DiscordPresenceIntegration extends Integration {
 
+    public long startTime = System.currentTimeMillis();
+
     @Override
     public void load() throws Exception {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> {
@@ -14,15 +16,20 @@ public class DiscordPresenceIntegration extends Integration {
         }).setErroredEventHandler((e, e2) -> WordipleClient.getLogger().info(e2)).build();
         DiscordRPC.discordInitialize("975144169225998346", handlers, true);
         DiscordRPC.discordRunCallbacks();
-        this.update(new IntegrationStatus());
+        this.update(new IntegrationStatus().setState("In-Game").setDetails("Main Menu"));
     }
 
     @Override
     public void update(IntegrationStatus status) {
-        DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("This is the current state.")
-                .setDetails("These are some details.")
+        DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder(status.getState())
+                .setDetails(status.getDetails())
                 .setBigImage("large", "Wordiple");
-
+        if (!status.isResetTimer()) {
+            rich.setStartTimestamps(this.startTime);
+        }
+        if (status.isResetTimer()) {
+            rich.setStartTimestamps(System.currentTimeMillis());
+        }
         DiscordRPC.discordUpdatePresence(rich.build());
     }
 

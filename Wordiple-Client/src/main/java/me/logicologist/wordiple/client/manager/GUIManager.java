@@ -31,6 +31,7 @@ import me.logicologist.wordiple.client.gui.controllers.queue.TimeRoyaleQueueCont
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
+import me.logicologist.wordiple.client.integration.IntegrationStatus;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
 import me.logicologist.wordiple.client.packets.info.StatInfoPacket;
 import me.logicologist.wordiple.client.sound.SoundType;
@@ -317,6 +318,7 @@ public class GUIManager extends Application {
             SoundManager.getInstance().stopSound(SoundType.BACKGROUND_MUSIC);
             competitiveIntroController.transitionIn(() -> {
                 SoundManager.getInstance().playSound(SoundType.FIGHTING_MUSIC);
+                IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game").setTimer().setDetails("Competitive Match"));
                 WordipleClient.getExecutor().schedule(() -> {
                     Platform.runLater(() -> {
                         try {
