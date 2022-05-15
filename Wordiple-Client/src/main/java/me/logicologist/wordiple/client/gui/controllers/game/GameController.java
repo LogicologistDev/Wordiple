@@ -201,7 +201,7 @@ public abstract class GameController implements Initializable {
             setAnswerLocked(true);
         }
 
-        SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
+        SoundManager.getInstance().playSound(SoundType.CLOCK_TICK);
         Platform.runLater(() -> {
             timerLabel.setText(time + "s");
         });
