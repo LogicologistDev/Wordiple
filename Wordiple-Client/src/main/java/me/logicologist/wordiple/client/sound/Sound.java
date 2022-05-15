@@ -72,8 +72,10 @@ public class Sound {
             // Stop clip if it's already running
             if (!this.selected.isOverlap() && clip.isRunning()) return;
 
-            // Rewind clip to beginning
-            clip.setFramePosition(0);
+            WordipleClient.getLogger().info("Clip playing: " + this.clip.isRunning());
+
+            clip.stop();
+            clip.setMicrosecondPosition(0);
 
             // Play clip
             clip.start();

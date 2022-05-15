@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
 public enum SoundType {
 
     BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 0.0f),
-    CLOCK_TICK("https://www.dropbox.com/s/5hpl3j6d66e4di5/clock_tick.wav?dl=1", "clock_tick.wav", -10.0f, false),
+    CLOCK_TICK("https://www.dropbox.com/s/5hpl3j6d66e4di5/clock_tick.wav?dl=1", "clock_tick.wav", -7.0f, false),
     COUNTDOWN_STAGE_1("https://www.dropbox.com/s/gh6rzv7cwr33cd0/countdown_stage_1.wav?dl=1", "countdown_stage_1.wav", -27.0f, false, false, true),
     COUNTDOWN_STAGE_2("https://www.dropbox.com/s/0hh4fl4pgc1i434/countdown_stage_2.wav?dl=1", "countdown_stage_2.wav", -27.0f, false, false, true),
 
