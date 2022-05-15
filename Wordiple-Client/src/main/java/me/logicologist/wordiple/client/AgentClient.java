@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.client;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class AgentClient {
 
@@ -13,21 +14,32 @@ public class AgentClient {
                 WordipleClient.main(args);
                 return;
             }
-            setupLogger();
+            setupLogger(Arrays.asList(args).contains("-developer"));
             String name = file.getName().replace("%20", " ");
-            log("Running " + name);
+            log("Using " + name);
             String OS = (System.getProperty("os.name")).toUpperCase();
             if (OS.contains("WIN")) {
                 name = "\"" + name + "\"";
             }
-            String command = "java -javaagent:" + name + " -cp " + name + " me.logicologist.wordiple.client.WordipleClient";
-            log("Running " + command);
+            String command = "java -javaagent:" + name + " -cp " + name + " me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args);
+            log("Executing " + command);
             Process process = Runtime.getRuntime().exec(command);
             new Thread(() -> {
                 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
                 try {
                     while ((line = input.readLine()) != null) {
+                        log(line);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            new Thread(() -> {
+                BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                String line;
+                try {
+                    while ((line = error.readLine()) != null) {
                         log(line);
                     }
                 } catch (IOException e) {
@@ -51,15 +63,16 @@ public class AgentClient {
         }
     }
 
-    private static void setupLogger() {
+    private static void setupLogger(boolean developerMode) {
         try {
+            WordipleClient.developerMode = developerMode;
             File file = new File(WordipleClient.getAppData(), "latest.log");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
             file.delete();
             file.createNewFile();
-            logWriter = new FileWriter("log.txt", true);
+            logWriter = new FileWriter(file.getAbsolutePath(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
