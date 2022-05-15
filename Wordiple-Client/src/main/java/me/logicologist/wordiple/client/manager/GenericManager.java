@@ -11,26 +11,27 @@ public class GenericManager {
 
     public static Runnable assetsInsert;
 
-    public static void loadManagers(boolean developerMode) {
+    public static void loadManagers(boolean developerMode, Runnable runnable) {
         WordipleClient.getLogger().info("AppData: " + WordipleClient.getAppData().getAbsolutePath());
         new SessionManager();
         new PacketManager(developerMode).load();
         new WordManager();
+        runnable.run();
     }
 
     public static void downloadAssets(GUIManager guiManager) {
         Runnable assetsFinished = () -> {
+            new IntegrationManager().load();
             SessionManager.getInstance().setAssetVersion(Utils.getAssetVersion());
             Platform.runLater(() -> GUIManager.innit(guiManager));
         };
         long soundAmount = SoundManager.getInstance().neededDownloaded();
-        long integrationAmount = IntegrationManager.getInstance().neededDownloaded();
-
+        long libraryAmount = LibraryManager.getInstance().neededDownloaded();
 
         WordipleClient.getLogger().info("Sound amount: " + soundAmount);
-        WordipleClient.getLogger().info("Integration amount: " + integrationAmount);
+        WordipleClient.getLogger().info("Library amount: " + libraryAmount);
 
-        long finalAmount = soundAmount + integrationAmount;
+        long finalAmount = soundAmount + libraryAmount;
         WordipleClient.getLogger().info("Downloading " + finalAmount + " assets...");
         if (finalAmount <= 0) {
             assetsFinished.run();
