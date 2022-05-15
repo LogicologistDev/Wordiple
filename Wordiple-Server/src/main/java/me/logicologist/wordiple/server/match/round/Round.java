@@ -94,8 +94,10 @@ public abstract class Round {
         if (!guessesLeft()) {
             System.out.println("Nope. Ending round");
             endRound(guesser);
-            if (roundTimer != null) roundTimer.cancel(true);
-            return;
+            if (roundTimer != null) {
+                roundTimer.cancel(true);
+                roundTimer = null;
+            }
         }
 
         for (int i = 0; i < text.length(); i++) {
