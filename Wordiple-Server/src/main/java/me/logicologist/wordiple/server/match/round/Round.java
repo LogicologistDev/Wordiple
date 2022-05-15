@@ -46,6 +46,7 @@ public abstract class Round {
     }
 
     public void addGuess(WordipleUser guesser, String text) {
+
         guesses.get(guesser).add(text);
 
         int guessNumber = guesses.get(guesser).size();
@@ -64,8 +65,17 @@ public abstract class Round {
 
         int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
-        System.out.println("Timer end: " + timerEnd);
-        System.out.println("Timer: " + possibleTimer);
+
+        if (WordManager.getInstance().isValid(text)) {
+            guesses.get(guesser).add(text);
+            if (guesses.get(guesser).size() >= maxGuesses) {
+                code.setCharAt(0, 'l');
+                code.setCharAt(1, 'l');
+                code.setCharAt(2, 'l');
+                code.setCharAt(3, 'l');
+                code.setCharAt(4, 'l');
+            }
+        }
 
         if (possibleTimer > 0 && text.equals(word)) {
             maxGuesses = guessNumber;
