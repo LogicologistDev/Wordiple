@@ -236,6 +236,10 @@ public abstract class GameController implements Initializable {
         }
         this.guessNumber = 1;
         this.maxGuesses = 6;
+        if (timerFuture != null) {
+            timerFuture.cancel(true);
+            timerFuture = null;
+        }
         lettersPane.getChildren().forEach(x -> {
             x.getStyleClass().clear();
             x.getStyleClass().add("board-letter-default-unused");
