@@ -184,8 +184,8 @@ public class VersusTwoController extends GameController {
                 .getArguments(SessionManager.getInstance().getLocalSessionID())
                 .setValues("word", value)
         );
-        if (guessNumber < maxGuesses) {
-            super.setAnswerState(false);
+        if (guessNumber > maxGuesses) {
+            super.setAnswerState(true);
         }
     }
 

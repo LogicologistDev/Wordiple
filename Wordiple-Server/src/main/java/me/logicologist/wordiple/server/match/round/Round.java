@@ -62,10 +62,12 @@ public abstract class Round {
             leastGuesses = Math.min(leastGuesses, guess.size());
         }
 
-        int possibleTimer = guessNumber - leastGuesses * 20 + 5;
+        int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
+        System.out.println("Timer end: " + timerEnd);
+        System.out.println("Timer: " + possibleTimer);
 
-        if (possibleTimer > 0) {
+        if (possibleTimer > 0 && text.equals(word)) {
             maxGuesses = guessNumber;
             roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 // end round
@@ -92,6 +94,7 @@ public abstract class Round {
         }
 
         for (WordipleUser user : guesses.keySet()) {
+
             PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                             .setValues("player", guesser.getUsername())
                             .setValues("guess", guessNumber)
@@ -121,7 +124,9 @@ public abstract class Round {
                 }
                 continue;
             }
-            if (guessNumber >= 6 || user == guesser || guessNumber >= maxGuesses) continue;
+
+            if (guessNumber >= maxGuesses || user == guesser) continue;
+
             PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                             .setValues("player", guesser.getUsername())
                             .setValues("guess", guessNumber + 1)

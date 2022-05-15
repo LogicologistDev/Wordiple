@@ -189,7 +189,7 @@ public abstract class GameController implements Initializable {
         this.maxGuesses = maxGuesses;
 
         this.timerFuture = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
-            if (timer.decrementAndGet() <= 0) {
+            if (timer.decrementAndGet() < 0) {
                 timerFuture.cancel(true);
                 timerFuture = null;
                 return;
