@@ -26,7 +26,7 @@ public class AgentClient {
             String module = argsList.contains("-module") ? argsList.get(argsList.indexOf("-module") + 1) : "";
             String command = "java -javaagent:" + name + " " + (module.isEmpty() ? "" : "--module-path " + module + " --add-modules javafx.controls,javafx.fxml ") + "-cp " + name + " me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args);
             log("Executing " + command);
-            Process process = Runtime.getRuntime().exec(command, System.getenv().values().toArray(new String[0]), null);
+            Process process = Runtime.getRuntime().exec(command);
             new Thread(() -> {
                 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
