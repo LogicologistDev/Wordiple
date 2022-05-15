@@ -2,6 +2,7 @@ package me.logicologist.wordiple.client.packets.game;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
+import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 import me.logicologist.wordiple.client.gui.controllers.game.GameController;
 import me.logicologist.wordiple.client.manager.GUIManager;
@@ -22,11 +23,13 @@ public class GameReadyPacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
-        GameController gameController = GUIManager.getInstance().getGameController();
-        gameController.setAnswerLocked(false);
-        for (AnchorPane pane : gameController.playerPanes.values()) {
-            gameController.setRowData(gameController.getPlayerPanes(pane).get(0), "rrrrr");
-        }
+        Platform.runLater(() -> {
+            GameController gameController = GUIManager.getInstance().getGameController();
+            gameController.setAnswerLocked(false);
+            for (AnchorPane pane : gameController.playerPanes.values()) {
+                gameController.setRowData(gameController.getPlayerPanes(pane).get(0), "rrrrr");
+            }
+        });
     }
 
     @Override
