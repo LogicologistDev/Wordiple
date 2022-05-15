@@ -73,16 +73,6 @@ public abstract class Round {
         int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
 
-        if (!WordManager.getInstance().isValid(text)) {
-            guesses.get(guesser).add(text);
-            code.setCharAt(0, 'l');
-            code.setCharAt(1, 'l');
-            code.setCharAt(2, 'l');
-            code.setCharAt(3, 'l');
-            code.setCharAt(4, 'l');
-            return;
-        }
-
         if (possibleTimer > 0 && text.equals(word)) {
             maxGuesses = guessNumber;
             guesser.addGuess(guessNumber);
@@ -112,6 +102,16 @@ public abstract class Round {
                     }
                 }
             }
+        }
+
+        if (!WordManager.getInstance().isValid(text)) {
+            guesses.get(guesser).add(text);
+            code.setCharAt(0, 'l');
+            code.setCharAt(1, 'l');
+            code.setCharAt(2, 'l');
+            code.setCharAt(3, 'l');
+            code.setCharAt(4, 'l');
+            return;
         }
 
         for (WordipleUser user : guesses.keySet()) {
