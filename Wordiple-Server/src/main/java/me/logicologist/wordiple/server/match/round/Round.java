@@ -17,6 +17,10 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Round {
 
+
+    //    private final List<> replay; need to add some replay packet or something for replays
+
+
     private final String word;
     private final HashMap<WordipleUser, List<String>> guesses;
     private final long startTime;
@@ -84,7 +88,7 @@ public abstract class Round {
             }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
-        if (guessesLeft() && guessNumber >= 6) {
+        if (!text.equals(word) && guessesLeft() && guessNumber >= 6) {
             timerEnd = System.currentTimeMillis() + (guessNumber - leastGuesses) * 120 * 1000L;
             long finalTimerEnd = timerEnd;
             for (WordipleUser user : guesses.keySet()) {
