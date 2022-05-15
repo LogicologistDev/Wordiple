@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
@@ -73,11 +72,15 @@ public class GUIManager extends Application {
         }
         stage.setResizable(false);
         SoundManager soundManager = new SoundManager();
-        long neededSongs = soundManager.neededDownloaded();
-        if (neededSongs <= 0) soundManager.load(this, null, neededSongs);
-
+        IntegrationManager integrationManager = new IntegrationManager();
         showMainScreen(false);
         stage.show();
+
+        GenericManager.downloadAssets(this);
+        WordipleClient.getExecutor().submit(() -> {
+            soundManager.load(); // download and load sounds.
+            integrationManager.load(); // download and load integrations.
+        });
         stage.setOnCloseRequest(e -> {
             try {
                 PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class).sendPacket(packet ->
@@ -91,11 +94,12 @@ public class GUIManager extends Application {
                 e1.printStackTrace();
             }
         });
-        soundManager.load(this, () -> {
-            instance = this;
-            readyListeners.forEach(x -> x.accept(this));
-            readyListeners.clear();
-        }, neededSongs);
+    }
+
+    static void innit(GUIManager manager) {
+        instance = manager;
+        readyListeners.forEach(x -> x.accept(manager));
+        readyListeners.clear();
     }
 
     public void showMainScreen(boolean fadeIn) {

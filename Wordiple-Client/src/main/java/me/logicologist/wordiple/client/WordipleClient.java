@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.client;
 
-import me.logicologist.wordiple.client.manager.*;
+import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.GenericManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

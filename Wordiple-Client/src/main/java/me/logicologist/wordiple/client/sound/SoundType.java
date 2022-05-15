@@ -95,15 +95,6 @@ public enum SoundType {
             httpcon.setConnectTimeout(5 * 1000);
             httpcon.setReadTimeout(5 * 1000);
 
-//            long fileModified = file.lastModified();
-//            long urlModified = httpcon.getLastModified();
-//
-//            if (urlModified == fileModified) {
-//                WordipleClient.getLogger().info("Sound file " + fileName + " is up to date. local: " + fileModified + " url: " + urlModified);
-//                return;
-//            }
-
-            //DONWLOAD HERE
             WordipleClient.getLogger().info("Downloaded sound file " + this.file);
             Files.copy(httpcon.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             update.run();

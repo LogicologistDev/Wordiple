@@ -1,7 +1,6 @@
 package me.logicologist.wordiple.client;
 
 import java.io.File;
-import java.io.IOException;
 
 public class AgentClient {
 

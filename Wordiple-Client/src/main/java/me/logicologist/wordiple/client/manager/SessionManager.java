@@ -48,11 +48,11 @@ public class SessionManager {
         return null;
     }
 
-    public String getLocalSoundVersion() {
+    public String getLocalAssetVersion() {
         try {
             Properties properties = new Properties();
             properties.load(Files.newInputStream(file.toPath()));
-            return properties.getProperty("soundVersion");
+            return properties.getProperty("assetVersion");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -81,11 +81,11 @@ public class SessionManager {
         }
     }
 
-    public void setLocalSoundVersion(String localSoundVersion) {
+    public void setAssetVersion(String localSoundVersion) {
         try {
             Properties properties = new Properties();
             properties.load(Files.newInputStream(file.toPath()));
-            properties.setProperty("soundVersion", localSoundVersion);
+            properties.setProperty("assetVersion", localSoundVersion);
             properties.store(Files.newOutputStream(file.toPath()), "Please do not share/touch this file.");
         } catch (Exception ex) {
             ex.printStackTrace();
