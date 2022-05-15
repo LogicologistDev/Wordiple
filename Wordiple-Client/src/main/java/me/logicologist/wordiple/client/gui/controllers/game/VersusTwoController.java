@@ -14,6 +14,7 @@ import me.logicologist.wordiple.common.packets.AuthPacketType;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 /**
@@ -81,8 +82,9 @@ public class VersusTwoController extends GameController {
 
         Pattern charPattern = Pattern.compile("[a-zA-Z]");
 
+        AtomicReference<String> previousField = new AtomicReference<>();
         playTextField.setOnKeyTyped(e -> {
-            if (guessNumber > 6 || playTextField.getText().length() <= 0) return;
+            if (guessNumber > 6 || playTextField.getText().equals(previousField.get())) return;
 
             StringBuilder verifiedString = new StringBuilder();
             for (String c : playTextField.getText().split("")) {
@@ -97,7 +99,7 @@ public class VersusTwoController extends GameController {
                 playTextField.setText(verifiedString.substring(0, 5));
                 playTextField.positionCaret(verifiedString.length());
             }
-
+            previousField.set(playTextField.getText());
             setPlayerGuess(playTextField.getText());
 
             PacketManager.getInstance().getSocket().getPacket(UpdateDisplayPacket.class).sendPacket(packet -> packet
