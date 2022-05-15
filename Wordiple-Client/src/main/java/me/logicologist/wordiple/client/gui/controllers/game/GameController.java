@@ -181,7 +181,9 @@ public abstract class GameController implements Initializable {
 
     public void startTimer(int time, int maxGuesses) {
         new BounceInAnimation(timerPane.layoutYProperty(), -100, 1).play();
-        timerLabel.setText(time + "s");
+        Platform.runLater(() -> {
+            timerLabel.setText(time + "s");
+        });
         AtomicInteger timer = new AtomicInteger(time);
 
         this.maxGuesses = maxGuesses;

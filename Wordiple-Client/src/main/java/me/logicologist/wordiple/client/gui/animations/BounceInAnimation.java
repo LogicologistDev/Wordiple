@@ -17,7 +17,7 @@ public class BounceInAnimation {
 
     public BounceInAnimation(WritableValue writableValue, int change, int duration) {
         this.writableValue = writableValue;
-        this.originalValue = (int) writableValue.getValue();
+        this.originalValue = (int) (double) writableValue.getValue();
         this.finalValue = originalValue + change;
         this.change = change;
         this.duration = duration;
