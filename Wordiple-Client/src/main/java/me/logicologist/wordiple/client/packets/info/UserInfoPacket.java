@@ -30,6 +30,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("id", UUID.class)
                 .setArgument("username", String.class)
                 .setArgument("rating", Integer.class)
+                .setArgument("rank", String.class)
                 .setArgument("level", Integer.class)
                 .setArgument("xp", Integer.class)
                 .setArgument("neededXp", Integer.class)

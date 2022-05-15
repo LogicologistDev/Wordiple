@@ -7,6 +7,7 @@ import me.logicologist.wordiple.common.utils.Utils;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.SessionManager;
 import me.logicologist.wordiple.server.packets.auth.LogoutPacket;
+import me.logicologist.wordiple.server.rank.RankRange;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.io.ObjectOutputStream;
@@ -45,6 +46,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setValues("id", wordipleUser.getId())
                 .setValues("username", wordipleUser.getUsername())
                 .setValues("rating", wordipleUser.getRating())
+                .setValues("rank", RankRange.getInstance().getRank(wordipleUser.getRating()).getName())
                 .setValues("level", wordipleUser.getLevel())
                 .setValues("xp", wordipleUser.getExperience())
                 .setValues("neededXp", wordipleUser.getNeededExperience())
@@ -65,6 +67,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
                 .setArgument("id", UUID.class)
                 .setArgument("username", String.class)
                 .setArgument("rating", Integer.class)
+                .setArgument("rank", String.class)
                 .setArgument("level", Integer.class)
                 .setArgument("xp", Integer.class)
                 .setArgument("neededXp", Integer.class)
