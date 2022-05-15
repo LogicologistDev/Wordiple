@@ -14,13 +14,16 @@ public class DiscordPresenceIntegration extends Integration {
         }).setErroredEventHandler((e, e2) -> WordipleClient.getLogger().info(e2)).build();
         DiscordRPC.discordInitialize("975144169225998346", handlers, true);
         DiscordRPC.discordRunCallbacks();
-        DiscordRichPresence rich = new DiscordRichPresence.Builder("This is the current state.").setDetails("These are some details.").build();
-        DiscordRPC.discordUpdatePresence(rich);
+        this.update(new IntegrationStatus());
     }
 
     @Override
     public void update(IntegrationStatus status) {
+        DiscordRichPresence.Builder rich = new DiscordRichPresence.Builder("This is the current state.")
+                .setDetails("These are some details.")
+                .setBigImage("large", "Wordiple");
 
+        DiscordRPC.discordUpdatePresence(rich.build());
     }
 
     @Override
