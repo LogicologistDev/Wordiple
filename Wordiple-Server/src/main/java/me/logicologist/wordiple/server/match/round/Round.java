@@ -80,17 +80,20 @@ public abstract class Round {
                 wordLetters.set(i, ' ');
                 continue;
             }
+            code.append("r");
+        }
+
+        for (int i = 0; i < text.length(); i++) {
+            if (code.charAt(i) != ' ') continue;
             if (wordLetters.contains(text.charAt(i))) {
-                code.append("i");
+                code.setCharAt(i, 'i');
                 for (int i2 = 0; i2 < wordLetters.size(); i2++) {
                     if (wordLetters.get(i2).equals(text.charAt(i))) {
                         wordLetters.set(i2, ' ');
                         break;
                     }
                 }
-                continue;
             }
-            code.append('r');
         }
 
         for (WordipleUser user : guesses.keySet()) {
