@@ -14,7 +14,7 @@ public enum SoundType {
     BUTTON_CLICK("https://www.dropbox.com/s/iepp33i8d0vi3tk/button_click.wav?dl=1", "button_click.wav", 0.0f),
     CLOCK_TICK("https://www.dropbox.com/s/5hpl3j6d66e4di5/clock_tick.wav?dl=1", "clock_tick.wav", -27.0f, false, false),
     COUNTDOWN_STAGE_1("https://www.dropbox.com/s/2saucvwuo81rbol/countdown_stage_1.wav?dl=1", "countdown_stage_1.wav", -27.0f),
-    COUNTDOWN_STAGE_2("https://www.dropbox.com/s/7v53dh1vlk0cgel/countdown_stage_2.wav?dl=1", "countdown_stage_2.wav", -27.0f),
+    COUNTDOWN_STAGE_2("https://www.dropbox.com/s/pm7y4y80doawyqx/countdown_stage_2.wav?dl=1", "countdown_stage_2.wav", -27.0f),
 
     OVERWORLD("https://www.dropbox.com/s/8bbg2g80c4b6fu6/overworld.wav?dl=1", "overworld.wav", -27),
     BACKGROUND("https://www.dropbox.com/s/s7a261q3dctic50/background_music.wav?dl=1", "background_music.wav", -27, true),
