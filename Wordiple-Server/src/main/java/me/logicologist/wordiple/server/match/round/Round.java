@@ -84,7 +84,7 @@ public abstract class Round {
         }
 
         for (int i = 0; i < text.length(); i++) {
-            if (code.charAt(i) != ' ') continue;
+            if (code.charAt(i) != 'r') continue;
             if (wordLetters.contains(text.charAt(i))) {
                 code.setCharAt(i, 'i');
                 for (int i2 = 0; i2 < wordLetters.size(); i2++) {
