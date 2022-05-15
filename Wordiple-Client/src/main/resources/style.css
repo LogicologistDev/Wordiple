@@ -180,7 +180,7 @@
 }
 
 .board-default-locked {
-    -fx-font-size: 25px;
+    -fx-font-size: 0px;
     -fx-font-family: 'Nexa Bold';
     -fx-background-image: url("./gridlock.png");
     -fx-background-size: 100% 100%;

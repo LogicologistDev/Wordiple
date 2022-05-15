@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,9 +42,9 @@ public abstract class GameController implements Initializable {
     protected Label timerLabel;
 
     HashMap<String, AnchorPane> playerPanes = new HashMap<>();
-    private ScheduledFuture timerFuture = null;
+    private ScheduledFuture<?> timerFuture = null;
     int guessNumber = 1;
-    int maxRows = 6;
+    int maxGuesses = 6;
 
 
     public void setAnswerState(boolean locked) {
@@ -180,10 +179,12 @@ public abstract class GameController implements Initializable {
         }
     }
 
-    public void startTimer(int time) {
+    public void startTimer(int time, int maxGuesses) {
         new BounceInAnimation(timerPane.layoutYProperty(), -100, 1).play();
         timerLabel.setText(time + "s");
         AtomicInteger timer = new AtomicInteger(time);
+
+        this.maxGuesses = maxGuesses;
 
         this.timerFuture = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
             if (timer.decrementAndGet() <= 0) {
