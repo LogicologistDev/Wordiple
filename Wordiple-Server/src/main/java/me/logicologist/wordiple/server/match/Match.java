@@ -44,7 +44,7 @@ public abstract class Match<T extends Round> {
             for (WordipleUser user : score.keySet()) {
                 PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                 .setValues("display", "Ready...")
-                                .setValues("countdown_position", "3"),
+                                .setValues("countdown_position", 3),
                         user.getOutputStream()
                 );
             }
@@ -54,7 +54,7 @@ public abstract class Match<T extends Round> {
             for (WordipleUser user : score.keySet()) {
                 PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                 .setValues("display", "Set...")
-                                .setValues("countdown_position", "2"),
+                                .setValues("countdown_position", 2),
                         user.getOutputStream()
                 );
             }
@@ -64,7 +64,7 @@ public abstract class Match<T extends Round> {
             for (WordipleUser user : score.keySet()) {
                 PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                 .setValues("display", "Go!")
-                                .setValues("countdown_position", "1"),
+                                .setValues("countdown_position", 1),
                         user.getOutputStream()
                 );
                 PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
