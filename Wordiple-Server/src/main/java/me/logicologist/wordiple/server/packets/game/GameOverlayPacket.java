@@ -25,6 +25,7 @@ public class GameOverlayPacket extends PacketAdapter implements PacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
-                .setArgument("display", String.class);
+                .setArgument("display", String.class)
+                .setArgument("countdown_position", Integer.class);
     }
 }

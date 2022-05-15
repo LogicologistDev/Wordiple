@@ -43,7 +43,9 @@ public abstract class Match<T extends Round> {
         }
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Ready..."),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                .setValues("display", "Ready...")
+                                .setValues("displayTime", "3"),
                         user.getOutputStream()
                 );
             }
@@ -51,7 +53,9 @@ public abstract class Match<T extends Round> {
 
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Set..."),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                .setValues("display", "Set...")
+                                .setValues("displayTime", "2"),
                         user.getOutputStream()
                 );
             }
@@ -59,7 +63,9 @@ public abstract class Match<T extends Round> {
 
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : score.keySet()) {
-                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "Go!"),
+                PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                .setValues("display", "Go!")
+                                .setValues("displayTime", "1"),
                         user.getOutputStream()
                 );
                 PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
