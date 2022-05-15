@@ -81,7 +81,7 @@ public abstract class Round {
             guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
             roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 endRound(guesser);
-            }, System.currentTimeMillis() - timerEnd, TimeUnit.MILLISECONDS);
+            }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
             if (winner == null) {
                 endRound(guesser);
                 roundTimer.cancel(true);
