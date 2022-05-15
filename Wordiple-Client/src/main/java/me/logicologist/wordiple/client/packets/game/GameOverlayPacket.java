@@ -20,7 +20,7 @@ public class GameOverlayPacket extends PacketAdapter implements PacketType {
 
     @Override
     public void onReceive(PacketArguments packetArguments) {
-        GUIManager.getInstance().showGameTextOverlay(packetArguments.get("text", String.class));
+        GUIManager.getInstance().showGameTextOverlay(packetArguments.get("display", String.class));
     }
 
     @Override
