@@ -195,7 +195,7 @@ public abstract class GameController implements Initializable {
 
         this.maxGuesses = maxGuesses;
 
-        if (guessNumber >= maxGuesses) {
+        if (guessNumber > maxGuesses) {
             setAnswerLocked(true);
         }
 
