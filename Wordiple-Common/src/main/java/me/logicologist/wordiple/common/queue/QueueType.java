@@ -5,7 +5,7 @@ public enum QueueType {
     COMPETITIVE() {
         @Override
         public String getName() {
-            return "competitive";
+            return "Competitive";
         }
     },
     CASUAL() {

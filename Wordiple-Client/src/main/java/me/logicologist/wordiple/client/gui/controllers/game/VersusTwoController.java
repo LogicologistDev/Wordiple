@@ -218,7 +218,7 @@ public class VersusTwoController extends GameController {
      */
     public void setGameMeta(String goal, String opponentName, QueueType queueType) {
         SessionManager manager = SessionManager.getInstance();
-        IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game" + (queueType == QueueType.COMPETITIVE ? " - (" + manager.getRating() + " WR / " + manager.getRank() + ")" : "")).setTimer().setState(queueType.getName() + " Match (FT" + goal + ")"));
+        IntegrationManager.getInstance().update(new IntegrationStatus().setDetails("In-Game" + (queueType == QueueType.COMPETITIVE ? " - (" + manager.getRating() + " WR / " + manager.getRank() + ")" : "")).setTimer().setState(queueType.getName() + " Match (FT" + goal.substring(goal.lastIndexOf("-") + 1) + ")"));
         this.goalLabel.setText(goal);
         this.playerOneName.setText(SessionManager.getInstance().getUsername());
         this.playerTwoName.setText(opponentName);
