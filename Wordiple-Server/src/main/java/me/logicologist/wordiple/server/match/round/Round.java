@@ -66,30 +66,39 @@ public abstract class Round {
 
         StringBuilder code = new StringBuilder();
 
+        System.out.println("Calculating timer...");
+
         int leastGuesses = 6;
         for (List<String> guess : guesses.values()) {
             leastGuesses = Math.min(leastGuesses, guess.size());
         }
-
         int possibleTimer = (guessNumber - leastGuesses) * 20 + 5;
         long timerEnd = System.currentTimeMillis() + possibleTimer * 1000L;
 
+        System.out.println("Checking if correct");
+
         if (possibleTimer > 0 && text.equals(word)) {
+            System.out.println("Correct");
             maxGuesses = guessNumber;
             winner = (winner == null ? guesser : null);
             guesser.addGuess(guessNumber);
             guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
+            System.out.println(timerEnd - System.currentTimeMillis() + " milliseconds left");
             roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 endRound(guesser);
             }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
             if (winner == null) {
+                System.out.println("Ending from double correct");
                 endRound(guesser);
                 roundTimer.cancel(true);
                 return;
             }
         }
 
+        System.out.println("Are guesses left?");
+
         if (!guessesLeft() && winner != null) {
+            System.out.println("Nope. Ending round");
             endRound(guesser);
             if (roundTimer != null) roundTimer.cancel(true);
             return;
@@ -117,7 +126,10 @@ public abstract class Round {
             }
         }
 
+        System.out.println("Is word valid?");
+
         if (!WordManager.getInstance().isValid(text)) {
+            System.out.println("No. Theyre cheating");
             guesses.get(guesser).add(text);
             code.setCharAt(0, 'l');
             code.setCharAt(1, 'l');
@@ -126,8 +138,6 @@ public abstract class Round {
             code.setCharAt(4, 'l');
             return;
         }
-
-        if (roundTimer != null) return;
 
         for (WordipleUser user : guesses.keySet()) {
 
@@ -138,7 +148,7 @@ public abstract class Round {
                     user.getOutputStream()
             );
 
-            if (text.equals(word)) {
+            if (text.equals(word) && roundTimer == null) {
                 if (possibleTimer > 0) {
                     PacketManager.getInstance().getSocket().getPacket(SolvePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                     .setValues("player", guesser.getUsername())
