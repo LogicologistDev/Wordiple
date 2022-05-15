@@ -4,10 +4,10 @@ import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
-public class SolvePacket extends PacketAdapter implements AuthPacketType {
+public class StartTimerPacket extends PacketAdapter implements AuthPacketType {
 
-    public SolvePacket() {
-        super("solve_packet");
+    public StartTimerPacket() {
+        super("start_timer_packet");
         this.packetType = this;
     }
 

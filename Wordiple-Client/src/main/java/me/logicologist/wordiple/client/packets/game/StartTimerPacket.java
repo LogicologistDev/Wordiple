@@ -6,10 +6,10 @@ import me.logicologist.wordiple.client.manager.GUIManager;
 import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 
-public class SolvePacket extends PacketAdapter implements AuthPacketType {
+public class StartTimerPacket extends PacketAdapter implements AuthPacketType {
 
-    public SolvePacket() {
-        super("solve_packet");
+    public StartTimerPacket() {
+        super("start_timer_packet");
         this.packetType = this;
     }
     @Override
