@@ -1,6 +1,9 @@
 package me.logicologist.wordiple.client;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class AgentClient {
 
@@ -11,7 +14,20 @@ public class AgentClient {
                 WordipleClient.main(args);
                 return;
             }
-            Runtime.getRuntime().exec("java -javaagent:\"" + file.getName() + "\" -cp \"" + file.getName() + "\" me.logicologist.wordiple.client.WordipleClient").waitFor();
+            String name = file.getName().replace("%20", " ");
+            System.out.println("Running " + name + "...");
+            Process process = Runtime.getRuntime().exec("java -javaagent:\"" + name + "\" -cp \"" + name + "\" me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args));
+            new Thread(() -> {
+                BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                try {
+                    while ((line = input.readLine()) != null)
+                        System.out.println(line);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            process.waitFor();
             System.exit(0);
         } catch (Exception ex) {
             ex.printStackTrace();
