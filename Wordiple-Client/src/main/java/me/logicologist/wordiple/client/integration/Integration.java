@@ -1,20 +1,17 @@
 package me.logicologist.wordiple.client.integration;
 
-import me.logicologist.wordiple.client.WordipleClient;
+import me.logicologist.wordiple.client.manager.IntegrationManager;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public abstract class Integration {
 
-    public abstract void load();
+    protected static IntegrationManager manager = IntegrationManager.getInstance();
+
+    public abstract void load() throws Exception;
 
     public abstract void update(IntegrationStatus status);
 
     public abstract void unload();
-
 }

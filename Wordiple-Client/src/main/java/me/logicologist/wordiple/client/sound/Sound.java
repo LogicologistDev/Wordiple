@@ -53,7 +53,7 @@ public class Sound {
             WordipleClient.getLogger().info("Loading sound: " + type.getFile());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(type.getFile());
             clip.open(audioInputStream);
-            this.setVolume(this.type.isFade() ? -80 : type.getVolume());
+            this.setVolume(this.type.isFade() ? -60 : type.getVolume());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -88,8 +88,8 @@ public class Sound {
                         WordipleClient.getLogger().info(current);
                         while (current < targetDB) {
                             current += 0.1;
-                            WordipleClient.getLogger().info("Fading: " + current);
-                            WordipleClient.getLogger().info("TargetDB: " + targetDB);
+//                            WordipleClient.getLogger().info("Fading: " + current);
+//                            WordipleClient.getLogger().info("TargetDB: " + targetDB);
                             gainControl.setValue(current);
                             try {
                                 Thread.sleep(10);
@@ -118,11 +118,14 @@ public class Sound {
                 return;
             }
             WordipleClient.getExecutor().submit(() -> {
-                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 float current = gainControl.getValue();
-                float targetDB = 20f * (float) Math.log10(0.01f);
+                WordipleClient.getLogger().info(selected.getVolume());
+                float targetDB = -60;
                 while (current > targetDB) {
                     current -= 0.1;
+                    WordipleClient.getLogger().info("Fading: " + current);
+                    WordipleClient.getLogger().info("TargetDB: " + targetDB);
                     gainControl.setValue(current);
                     try {
                         Thread.sleep(10);
