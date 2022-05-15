@@ -91,7 +91,7 @@ public abstract class Round {
                 System.out.println("Ending from double correct");
                 endRound(guesser);
                 roundTimer.cancel(true);
-                return;
+                roundTimer = null;
             }
         }
 
@@ -148,7 +148,7 @@ public abstract class Round {
                     user.getOutputStream()
             );
 
-            if (text.equals(word) && roundTimer == null) {
+            if (text.equals(word) && roundTimer != null) {
                 if (possibleTimer > 0) {
                     PacketManager.getInstance().getSocket().getPacket(SolvePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                     .setValues("player", guesser.getUsername())

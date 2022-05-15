@@ -8,6 +8,7 @@ public class ResetBoardsPacket extends PacketAdapter implements PacketType {
 
     public ResetBoardsPacket() {
         super("reset_boards_packet");
+        this.packetType = this;
     }
 
     @Override
