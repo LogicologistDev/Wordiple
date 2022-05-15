@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.match;
 
 import me.logicologist.wordiple.server.managers.PacketManager;
+import me.logicologist.wordiple.server.managers.QueueManager;
 import me.logicologist.wordiple.server.match.round.Round;
 import me.logicologist.wordiple.server.packets.game.GameReadyPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
@@ -37,6 +38,7 @@ public abstract class Match<T extends Round> {
             PacketManager.getInstance().getSocket().getPacket(GameReadyPacket.class).sendPacket(packet -> packet.getPacketType().getArguments(),
                     user.getOutputStream()
             );
+            QueueManager.getInstance().removeAllQueueViewers(user);
         }
         startNewRound();
     }

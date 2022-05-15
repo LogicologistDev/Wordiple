@@ -98,22 +98,26 @@ public abstract class Round {
                             .setValues("data", code.toString()),
                     user.getOutputStream()
             );
+
             if (text.equals(word)) {
                 if (possibleTimer > 0) {
                     PacketManager.getInstance().getSocket().getPacket(SolvePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                                     .setValues("player", guesser.getUsername())
                                     .setValues("timerend", timerEnd)
-                                    .setValues("guesslimit", guesses.get(guesser).size()),
+                                    .setValues("guesslimit", guessNumber),
                             user.getOutputStream()
                     );
                 }
-                for (int i = guesses.get(guesser).size() + 1; i <= 6; i++) {
-                    PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                                    .setValues("player", guesser.getUsername())
-                                    .setValues("guess", guessNumber + 1)
-                                    .setValues("data", "lllll"),
-                            user.getOutputStream()
-                    );
+                for (int i = guessNumber + 1; i <= 6; i++) {
+                    int finalI = i;
+                    for (WordipleUser user2 : guesses.keySet()) {
+                        PacketManager.getInstance().getSocket().getPacket(GuessResponsePacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                                        .setValues("player", user2.getUsername())
+                                        .setValues("guess", finalI)
+                                        .setValues("data", "lllll"),
+                                user.getOutputStream()
+                        );
+                    }
                 }
                 continue;
             }
@@ -126,5 +130,4 @@ public abstract class Round {
             );
         }
     }
-
 }

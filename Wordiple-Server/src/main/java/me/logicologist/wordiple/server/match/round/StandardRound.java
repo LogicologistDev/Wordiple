@@ -1,11 +1,6 @@
 package me.logicologist.wordiple.server.match.round;
 
-import me.logicologist.wordiple.server.managers.WordManager;
 import me.logicologist.wordiple.server.user.WordipleUser;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class StandardRound extends Round {
 
