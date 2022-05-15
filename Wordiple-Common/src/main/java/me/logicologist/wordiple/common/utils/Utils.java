@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class Utils {
 
     private static final String VERSION = "1.0.1";
-    private static final String ASSET_VERSION = "1.0.1";
+    private static final String ASSET_VERSION = "1.0.2";
 
     public static String formatNumber(double number) {
         return new DecimalFormat(number % 1 == 0 ? "#,###.##" : "#,##0.00").format(number);

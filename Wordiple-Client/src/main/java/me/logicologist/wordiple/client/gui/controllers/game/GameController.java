@@ -14,6 +14,8 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.animations.BounceInAnimation;
 import me.logicologist.wordiple.client.gui.animations.PopAnimation;
 import me.logicologist.wordiple.client.manager.SessionManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -199,6 +201,7 @@ public abstract class GameController implements Initializable {
             setAnswerLocked(true);
         }
 
+        SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
         Platform.runLater(() -> {
             timerLabel.setText(time + "s");
         });
@@ -239,6 +242,7 @@ public abstract class GameController implements Initializable {
         if (timerFuture != null) {
             timerFuture.cancel(true);
             timerFuture = null;
+            SoundManager.getInstance().stopSound(SoundType.CLOCK_TICK);
         }
         lettersPane.getChildren().forEach(x -> {
             x.getStyleClass().clear();
