@@ -88,8 +88,6 @@ public class Sound {
                         WordipleClient.getLogger().info(current);
                         while (current < targetDB) {
                             current += 0.1;
-//                            WordipleClient.getLogger().info("Fading: " + current);
-//                            WordipleClient.getLogger().info("TargetDB: " + targetDB);
                             gainControl.setValue(current);
                             try {
                                 Thread.sleep(10);
@@ -124,8 +122,6 @@ public class Sound {
                 float targetDB = -60;
                 while (current > targetDB) {
                     current -= 0.1;
-                    WordipleClient.getLogger().info("Fading: " + current);
-                    WordipleClient.getLogger().info("TargetDB: " + targetDB);
                     gainControl.setValue(current);
                     try {
                         Thread.sleep(10);
