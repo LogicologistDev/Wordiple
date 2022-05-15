@@ -185,7 +185,7 @@ public class VersusTwoController extends GameController {
                 .setValues("word", value)
         );
         if (guessNumber > maxGuesses) {
-            super.setAnswerState(true);
+            super.setAnswerLocked(true);
         }
     }
 

@@ -47,7 +47,7 @@ public abstract class GameController implements Initializable {
     int maxGuesses = 6;
 
 
-    public void setAnswerState(boolean locked) {
+    public void setAnswerLocked(boolean locked) {
         this.playTextField.setDisable(locked);
     }
 
@@ -171,6 +171,7 @@ public abstract class GameController implements Initializable {
                             if (label.getStyleClass().contains("board-default-locked")) return;
                             label.getStyleClass().clear();
                             label.getStyleClass().add("board-default-locked");
+                            label.setText("");
                             break;
                     }
                     new LetterFieldPopAnimation(label, 1).play();
@@ -181,17 +182,24 @@ public abstract class GameController implements Initializable {
 
     public void startTimer(int time, int maxGuesses) {
         new BounceInAnimation(timerPane.layoutYProperty(), -100, 1).play();
+
+        this.maxGuesses = maxGuesses;
+
+        if (guessNumber >= maxGuesses) {
+            setAnswerLocked(true);
+            return;
+        }
+
         Platform.runLater(() -> {
             timerLabel.setText(time + "s");
         });
         AtomicInteger timer = new AtomicInteger(time);
 
-        this.maxGuesses = maxGuesses;
-
         this.timerFuture = WordipleClient.getExecutor().scheduleAtFixedRate(() -> {
             if (timer.decrementAndGet() < 0) {
                 timerFuture.cancel(true);
                 timerFuture = null;
+                setAnswerLocked(true);
                 return;
             }
             Platform.runLater(() -> {

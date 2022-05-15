@@ -19,7 +19,7 @@ public class GameReadyPacket extends PacketAdapter implements AuthPacketType {
 
     @Override
     public void onReceive(PacketArguments arguments) {
-        GUIManager.getInstance().getGameController().setAnswerState(false);
+        GUIManager.getInstance().getGameController().setAnswerLocked(false);
     }
 
     @Override

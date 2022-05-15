@@ -21,7 +21,7 @@ public class SolvePacket extends PacketAdapter implements AuthPacketType {
     public void onReceive(PacketArguments packetArguments) {
         int time = (int) (((packetArguments.get("timerend", Long.class) - System.currentTimeMillis()) / 1000));
         GUIManager.getInstance().getGameController().startTimer(time, packetArguments.get("guesslimit", Integer.class));
-        if (SessionManager.getInstance().getUsername().equals(packetArguments.get("player", String.class))) GUIManager.getInstance().getGameController().setAnswerState(true);
+        if (SessionManager.getInstance().getUsername().equals(packetArguments.get("player", String.class))) GUIManager.getInstance().getGameController().setAnswerLocked(true);
     }
 
     @Override
