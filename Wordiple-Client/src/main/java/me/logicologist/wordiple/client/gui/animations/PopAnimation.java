@@ -3,7 +3,7 @@ package me.logicologist.wordiple.client.gui.animations;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
 import javafx.util.Duration;
 
 /**
@@ -12,19 +12,21 @@ import javafx.util.Duration;
  * @author      Logicologist
  * @since       1.0
  */
-public class LetterFieldPopAnimation {
+public class PopAnimation {
 
-    private final Label writableValue;
+    private final Node writableValue;
     private final double duration;
+    private final double intensity;
 
     /**
      * This method is used to animate the popping of a letter from the letter field.
      * @param writableValue The value to modify.
      * @param duration The duration of the animation.
      */
-    public LetterFieldPopAnimation(Label writableValue, double duration) {
+    public PopAnimation(Node writableValue, double duration, double intensity) {
         this.writableValue = writableValue;
         this.duration = duration;
+        this.intensity = intensity;
     }
 
     /**
@@ -37,7 +39,7 @@ public class LetterFieldPopAnimation {
                 popTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(duration), new KeyValue(writableValue.scaleXProperty(), 1)));
                 popTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(duration), new KeyValue(writableValue.scaleYProperty(), 1)));
             }
-            double v = Math.pow(2, -7 * (1 - 0.1 * i)) * 0.2 + 1;
+            double v = Math.pow(2, -7 * (1 - 0.1 * i)) * (intensity - 1) + 1;
             popTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(duration - duration / 10 * i), new KeyValue(writableValue.scaleXProperty(), v)));
             popTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds(duration - duration / 10 * i), new KeyValue(writableValue.scaleYProperty(), v)));
         }

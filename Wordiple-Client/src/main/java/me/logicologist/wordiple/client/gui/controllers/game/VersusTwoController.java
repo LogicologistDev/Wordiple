@@ -212,7 +212,9 @@ public class VersusTwoController extends GameController {
         this.goalLabel.setText(goal);
         this.playerOneName.setText(SessionManager.getInstance().getUsername());
         this.playerTwoName.setText(opponentName);
-        super.setOpponentPane(SessionManager.getInstance().getUsername(), playerOnePane);
-        super.setOpponentPane(opponentName, playerTwoPane);
+        super.setPlayerPane(SessionManager.getInstance().getUsername(), playerOnePane);
+        super.setPlayerPane(opponentName, playerTwoPane);
+        super.setPlayerScoreLabels(SessionManager.getInstance().getUsername(), playerScoreLabel);
+        super.setPlayerScoreLabels(opponentName, opponentScoreLabel);
     }
 }
