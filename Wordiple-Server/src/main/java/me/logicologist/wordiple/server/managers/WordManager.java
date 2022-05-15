@@ -30,7 +30,7 @@ public class WordManager {
 
     public boolean isValid(String word) {
         if (word.length() != 5) return false;
-        return validWords.contains(word);
+        return validWords.contains(word.toLowerCase());
     }
 
     public String getRandomGuessableWord() {

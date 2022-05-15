@@ -10,9 +10,8 @@ public class PacketManager {
     private final OlzieSocket socket;
 
     public PacketManager() {
-        SocketConfig config = new SocketConfig("127.0.0.1", 11184, "", false, new SocketConfig.SocketHeartbeatConfig(2000, 20), (short) 0);
-//        this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
-        this.socket = new OlzieSocket(getClass(), config, null);
+        SocketConfig config = new SocketConfig("127.0.0.1", 11184, "", true, new SocketConfig.SocketHeartbeatConfig(2000, 20), (short) 0);
+        this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
         instance = this;
     }
 

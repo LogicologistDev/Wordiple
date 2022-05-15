@@ -35,11 +35,10 @@ public class GameTextOverlayController extends AttachableAdapter {
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 0)),
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.scaleXProperty(), 1)),
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.scaleYProperty(), 1)),
-                new KeyFrame(Duration.seconds(0.1), new KeyValue(movablePane.opacityProperty(), 1)),
-                new KeyFrame(Duration.seconds(0.7), new KeyValue(movablePane.opacityProperty(), 1)),
+                new KeyFrame(Duration.seconds(duration/2), new KeyValue(movablePane.opacityProperty(), 1)),
                 new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.opacityProperty(), 0)),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleXProperty(), 2)),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleYProperty(), 2))
+                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleXProperty(), 1.25)),
+                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleYProperty(), 1.25))
         );
 
         timeline.play();

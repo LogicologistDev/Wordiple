@@ -178,7 +178,7 @@ public class VersusTwoController extends GameController {
         }
         guessNumber++;
         playTextField.clear();
-        if (guessNumber < maxGuesses) super.setPlayerGuessData(SessionManager.getInstance().getUsername(), guessNumber, "rrrrr");
+        if (guessNumber <= maxGuesses) super.setPlayerGuessData(SessionManager.getInstance().getUsername(), guessNumber, "rrrrr");
         PacketManager.getInstance().getSocket().getPacket(GuessWordPacket.class).sendPacket(packet -> packet
                 .getPacketType(AuthPacketType.class)
                 .getArguments(SessionManager.getInstance().getLocalSessionID())
