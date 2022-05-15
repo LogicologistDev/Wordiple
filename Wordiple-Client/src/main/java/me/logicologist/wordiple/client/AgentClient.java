@@ -16,7 +16,9 @@ public class AgentClient {
             }
             String name = file.getName().replace("%20", " ");
             System.out.println("Running " + name + "...");
-            Process process = Runtime.getRuntime().exec("java -javaagent:\"" + name + "\" -cp \"" + name + "\" me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args));
+            String command = "java -javaagent:\"" + name + "\" -cp \"" + name + "\" me.logicologist.wordiple.client.WordipleClient " + String.join(" ", args);
+            System.out.println("Executing: " + command);
+            Process process = Runtime.getRuntime().exec(command);
             new Thread(() -> {
                 BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 String line;
