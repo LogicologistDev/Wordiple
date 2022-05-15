@@ -84,7 +84,7 @@ public class VersusTwoController extends GameController {
 
         AtomicReference<String> previousField = new AtomicReference<>();
         playTextField.setOnKeyTyped(e -> {
-            if (guessNumber > 6 || playTextField.getText().equals(previousField.get())) return;
+            if (guessNumber > 6 || (previousField.get() != null && previousField.get().isEmpty())) return;
 
             StringBuilder verifiedString = new StringBuilder();
             for (String c : playTextField.getText().split("")) {
