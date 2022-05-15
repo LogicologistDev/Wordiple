@@ -82,7 +82,7 @@ public class VersusTwoController extends GameController {
         Pattern charPattern = Pattern.compile("[a-zA-Z]");
 
         playTextField.setOnKeyTyped(e -> {
-            if (guessNumber > 6 || guessNumber <= 0) return;
+            if (guessNumber > 6 || playTextField.getText().length() <= 0) return;
 
             StringBuilder verifiedString = new StringBuilder();
             for (String c : playTextField.getText().split("")) {
