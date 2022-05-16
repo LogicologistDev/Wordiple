@@ -14,7 +14,7 @@ import java.util.List;
 public class CompetitiveMatch extends Match<StandardRound> {
 
     public CompetitiveMatch(WordipleUser playerOne, WordipleUser playerTwo) {
-        super(Math.max(RankRange.getInstance().getRank(playerOne.getRank()).getCompetitiveRounds(), RankRange.getInstance().getRank(playerTwo.getRank()).getCompetitiveRounds()), QueueType.COMPETITIVE);
+        super(Math.max(RankRange.getInstance().getRank(playerOne.getRating()).getCompetitiveRounds(), RankRange.getInstance().getRank(playerTwo.getRating()).getCompetitiveRounds()), QueueType.COMPETITIVE);
 
         super.addPlayer(playerOne);
         super.addPlayer(playerTwo);
@@ -122,8 +122,8 @@ public class CompetitiveMatch extends Match<StandardRound> {
                         .setValues("scoredisplay", super.score.get(winner).size() + "-" + super.score.get(loser).size())
                         .setValues("rating", winner.getRating())
                         .setValues("ratingchange", finalRatingWon)
-                        .setValues("rank", RankRange.getInstance().getRank(winner.getRank()).getName())
-                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(winner.getRank()))
+                        .setValues("rank", RankRange.getInstance().getRank(winner.getRating()).getName())
+                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(winner.getRating()))
                         .setValues("newexperience", winner.getExperience())
                         .setValues("newlevel", winner.getLevel())
                         .setValues("requiredexperience", winner.getNeededExperience()),
@@ -137,8 +137,8 @@ public class CompetitiveMatch extends Match<StandardRound> {
                         .setValues("scoredisplay", super.score.get(loser).size() + "-" + super.score.get(winner).size())
                         .setValues("rating", loser.getRating())
                         .setValues("ratingchange", -1 * finalRatingLost)
-                        .setValues("rank", RankRange.getInstance().getRank(loser.getRank()).getName())
-                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(loser.getRank()))
+                        .setValues("rank", RankRange.getInstance().getRank(loser.getRating()).getName())
+                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(loser.getRating()))
                         .setValues("newexperience", loser.getExperience())
                         .setValues("newlevel", loser.getLevel())
                         .setValues("requiredexperience", loser.getNeededExperience()),

@@ -3,6 +3,7 @@ package me.logicologist.wordiple.server.user;
 import com.olziedev.olziesocket.framework.PacketArguments;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
+import me.logicologist.wordiple.server.rank.RankRange;
 
 import java.io.ObjectOutputStream;
 import java.util.*;
@@ -24,8 +25,6 @@ public class WordipleUser {
     private boolean competitiveBan;
     private boolean onlineBan;
     private boolean globalBan;
-    private int rank;
-    private int highestRank;
     private PacketArguments.PacketHolder socket;
     private List<Double> solveTimes;
     private List<Integer> guesses;
@@ -93,6 +92,7 @@ public class WordipleUser {
 
     public void setRating(int rating) {
         if (rating < 0) rating = 0;
+        if (highestRating < rating) highestRating = rating;
         this.rating = rating;
     }
 
@@ -293,27 +293,8 @@ public class WordipleUser {
         return total;
     }
 
-    public int getHighestRank() {
-        return this.highestRank;
-    }
-
-    public void setHighestRank(int highestRank) {
-        this.highestRank = highestRank;
-    }
-
-    public int getRank() {
-        return this.rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
     public int getHighestRating() {
         return this.highestRating;
     }
 
-    public void setHighestRating(int highestRating) {
-        this.highestRating = highestRating;
-    }
 }
