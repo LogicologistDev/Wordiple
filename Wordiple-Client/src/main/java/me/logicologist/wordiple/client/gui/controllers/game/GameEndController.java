@@ -66,6 +66,14 @@ public class GameEndController extends AttachableAdapter {
         this.gameSelectButton.setOnAction(event -> {
             GUIManager.getInstance().startSwipeTransition(null, this::transitionOut);
         });
+
+        movablePane.setOnKeyReleased(event -> {
+            switch (event.getCode()) {
+                case ESCAPE:
+                    SoundManager.getInstance().playSound(SoundType.BUTTON_CLICK);
+                    transitionOut();
+            }
+        });
     }
 
     public void transitionIn(Runnable runAfter) {
