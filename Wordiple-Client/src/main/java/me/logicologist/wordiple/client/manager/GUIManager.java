@@ -398,7 +398,7 @@ public class GUIManager extends Application {
             if (args.get("type", QueueType.class) == QueueType.COMPETITIVE) {
                 gameEndController.setCompetitiveData(args.get("rating", Integer.class), args.get("ratingchange", Integer.class), args.get("rank", String.class), args.get("ratingtorankup", Integer.class));
             }
-            gameEndController.transitionIn(overlayController, this::startFlashScreenTransition);
+            gameEndController.transitionIn(this::startFlashScreenTransition);
             return gameEndController;
         } catch (Exception ex) {
             ex.printStackTrace();

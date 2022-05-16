@@ -117,6 +117,8 @@ public class CompetitiveMatch extends Match<StandardRound> {
         winner.setExperience(winner.getExperience() + experience);
         loser.setExperience(loser.getExperience() + experience);
 
+        winner.setWins(winner.getWins() + 1);
+
         int finalRatingWon = (int) ratingWon;
         int finalRatingLost = (int) ratingLost;
         WordipleServer.getExecutor().schedule(() -> {

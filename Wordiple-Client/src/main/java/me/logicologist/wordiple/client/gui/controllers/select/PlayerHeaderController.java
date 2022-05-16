@@ -111,17 +111,14 @@ public class PlayerHeaderController extends AttachableAdapter {
                 setBarPercentage(1, () -> {
                     setLevelUp(finalLevel, () -> {
                         SessionManager.getInstance().setNeededXp(newNeededXp);
-                        if (finalLevel - 1 == newLevel) {
-                            SessionManager.getInstance().setCurrentXp(newExperience);
-                            return;
-                        }
-                        SessionManager.getInstance().setCurrentXp(SessionManager.getInstance().getNeededXp());
                     });
                 });
             }, (newLevel - level - 1) * 5L, TimeUnit.SECONDS);
             this.setBarPercentage(1, null);
         }
         WordipleClient.getExecutor().schedule(() -> {
+            SessionManager.getInstance().setCurrentXp(newExperience);
+            SessionManager.getInstance().setNeededXp(newNeededXp);
             this.setBarPercentage((double) SessionManager.getInstance().getCurrentXp() / SessionManager.getInstance().getNeededXp(), null);
         }, newLevel - currentLevel * 5L, TimeUnit.SECONDS);
         this.setBarPercentage((double) newExperience / newNeededXp, null);

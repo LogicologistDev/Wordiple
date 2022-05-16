@@ -14,6 +14,8 @@ import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.SoundManager;
+import me.logicologist.wordiple.client.sound.SoundType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,9 +54,7 @@ public class GameEndController extends AttachableAdapter {
 
     @FXML
     private Label winLabel;
-
     private boolean midAction;
-    private OverlayController overlayController;
     private int newExperience;
     private int newLevel;
     private int requiredExperience;
@@ -67,8 +67,7 @@ public class GameEndController extends AttachableAdapter {
         });
     }
 
-    public void transitionIn(OverlayController overlayController, Runnable runAfter) {
-        this.overlayController = overlayController;
+    public void transitionIn(Runnable runAfter) {
 
         midAction = true;
 
@@ -100,37 +99,20 @@ public class GameEndController extends AttachableAdapter {
 
         midAction = true;
 
-        double duration = 2;
+        SoundManager.getInstance().stopSound(SoundType.FIGHTING_MUSIC);
 
-        movablePane.setOpacity(1);
-        movablePane.setScaleX(1);
-        movablePane.setScaleY(1);
 
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 0)),
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.scaleXProperty(), 1)),
-                new KeyFrame(Duration.ZERO, new KeyValue(movablePane.scaleYProperty(), 1)),
-                new KeyFrame(Duration.seconds(1.7), e -> {
-                    this.overlayController.transitionOut();
-                }),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.opacityProperty(), 0)),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleXProperty(), 0.5)),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleYProperty(), 0.5))
-        );
-
-        timeline.play();
-        timeline.setOnFinished(x -> {
-            GUIManager.getInstance().resetGameController();
-            GUIManager.getInstance().startSwipeTransition(null, () -> {
-                GUIManager.getInstance().showGameSelectScreen(false);
-                WordipleClient.getExecutor().schedule(() -> {
-                    Platform.runLater(() -> {
-                        PlayerHeaderController.instance.setExperience(newExperience, newLevel, requiredExperience);
-                    });
-                }, 1, java.util.concurrent.TimeUnit.SECONDS);
-            });
+        GUIManager.getInstance().resetGameController();
+        GUIManager.getInstance().startSwipeTransition(null, () -> {
+            GUIManager.getInstance().showGameSelectScreen(false);
+            WordipleClient.getExecutor().schedule(() -> {
+                Platform.runLater(() -> {
+                    PlayerHeaderController.instance.setExperience(newExperience, newLevel, requiredExperience);
+                });
+            }, 1, java.util.concurrent.TimeUnit.SECONDS);
         });
     }
+
 
     public void setData(boolean winner, String scoreDisplay, int newExperience, int newLevel, int requiredExperience) {
         this.newExperience = newExperience;
@@ -155,6 +137,7 @@ public class GameEndController extends AttachableAdapter {
             this.ratingNegativeChangeLabel.setText(ratingChange + " WR");
         }
         GUIManager.setRankStyleClass(rankDisplay, rank);
-        this.ratingToRankupLabel.setText(String.valueOf(ratingToRankup));
+        this.rankLabel.setText(rank);
+        this.ratingToRankupLabel.setText(ratingToRankup + " WR to Rankup");
     }
 }
