@@ -20,8 +20,8 @@ public class LibraryManager {
 
     public enum Libraries {
 
-        DISCORD_PRESENCE("https://www.dropbox.com/s/21y28ul3m2d0xzf/discord-rpc.jar?dl=1", "discord-rpc.jar"),
-        UPDATER("", "Updater.jar");
+        DISCORD_PRESENCE("https://www.dropbox.com/s/21y28ul3m2d0xzf/discord-rpc.jar?dl=1", "discord-rpc.jar");
+//        UPDATER("", "Updater.jar");
 
         private final String url;
         private final File file;
