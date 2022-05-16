@@ -136,7 +136,6 @@
                                                     <include name="me.logicologist.wordiple.client.manager.LibraryManager"/>
                                                     <include name="me.logicologist.wordiple.client.manager.GUIManager"/>
                                                     <include name="me.logicologist.wordiple.common.**"/>
-                                                    <include name="com.olziedev.olziesocket.framework.PacketArguments"/>
                                                     <include name="com.olziedev.olziesocket.framework.*"/>
                                                     <include name="javafx.**"/>
                                                 </patternset>
