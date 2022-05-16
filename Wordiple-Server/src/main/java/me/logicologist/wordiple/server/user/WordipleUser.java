@@ -92,6 +92,7 @@ public class WordipleUser {
     }
 
     public void setRating(int rating) {
+        if (rating < 0) rating = 0;
         this.rating = rating;
     }
 
