@@ -17,7 +17,6 @@
             <Label fx:id="activeLabel" alignment="CENTER" layoutX="810.0" layoutY="433.0" prefHeight="120.0" prefWidth="620.0" styleClass="text-field-active" stylesheets="@style.css" text="6666 Active" textAlignment="CENTER" />
             <AnchorPane layoutX="27.0" layoutY="380.0" prefHeight="225.0" prefWidth="773.0" styleClass="pane-overlay" stylesheets="@style.css">
                <children>
-                  <Label fx:id="rankIconLabel" layoutX="43.0" layoutY="14.0" mouseTransparent="true" prefHeight="198.0" prefWidth="150.0" styleClass="rectangle-chirank-fill" stylesheets="@style.css" />
                   <Label fx:id="ratingLabel" alignment="CENTER" layoutX="203.0" layoutY="134.0" prefHeight="72.0" prefWidth="560.0" styleClass="label-40-light" stylesheets="@style.css" text="9999 Word Rating" textAlignment="CENTER" textFill="WHITE" />
                   <Label fx:id="rankLabel" alignment="CENTER" layoutX="232.0" prefHeight="120.0" prefWidth="503.0" styleClass="label-bigtitle" stylesheets="@style.css" text="Omega" textAlignment="CENTER">
                      <textFill>
@@ -39,6 +38,7 @@
                   </Label>
                </children>
             </AnchorPane>
+            <Label fx:id="rankIconLabel" layoutX="-448.0" layoutY="-166.0" mouseTransparent="true" prefHeight="1316.0" prefWidth="1148.0" scaleX="0.15" scaleY="0.15" scaleZ="0.15" styleClass="rectangle-chirank-fill" stylesheets="@style.css" />
          </children>
       </AnchorPane>
    </children>

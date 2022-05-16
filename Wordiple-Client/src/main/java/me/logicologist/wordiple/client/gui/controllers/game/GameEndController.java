@@ -98,6 +98,7 @@ public class GameEndController extends AttachableAdapter {
         timeline.play();
         timeline.setOnFinished(x -> {
             midAction = false;
+            movablePane.requestFocus();
             if (runAfter != null) runAfter.run();
         });
     }
