@@ -102,6 +102,9 @@ public abstract class Round {
                     user.getOutputStream()
                 );
             }
+            roundTimer = WordipleServer.getExecutor().schedule(() -> {
+                endRound(guesser);
+            }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
 
         if (!guessesLeft()) {
