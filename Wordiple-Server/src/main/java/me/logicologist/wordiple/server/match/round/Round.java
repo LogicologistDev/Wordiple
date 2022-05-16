@@ -20,9 +20,9 @@ public abstract class Round {
 
     //    private final List<> replay; need to add some replay packet or something for replays
 
-
+    public final HashMap<WordipleUser, Double> solveTimes;
+    public final HashMap<WordipleUser, List<String>> guesses;
     private final String word;
-    private final HashMap<WordipleUser, List<String>> guesses;
     private final long startTime;
     private ScheduledFuture<?> roundTimer;
     private int maxGuesses = 6;
@@ -34,6 +34,7 @@ public abstract class Round {
         System.out.println("The word is: " + word);
         startTime = System.currentTimeMillis();
         this.guesses = new HashMap<>();
+        this.solveTimes = new HashMap<>();
     }
 
     public void setDisplayText(String username, String text) {
@@ -82,7 +83,9 @@ public abstract class Round {
             maxGuesses = guessNumber;
             winner = (winner == null ? guesser : null);
             guesser.addGuess(guessNumber);
-            guesser.addSolveTime(Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0);
+            double solveTime = Math.round(System.currentTimeMillis() - startTime / 10.0) / 100.0;
+            guesser.addSolveTime(solveTime);
+            solveTimes.put(guesser, solveTime);
             if (winner != null && possibleTimer > 0 && roundTimer == null) roundTimer = WordipleServer.getExecutor().schedule(() -> {
                 endRound(guesser);
             }, timerEnd - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
@@ -188,6 +191,9 @@ public abstract class Round {
     public void endRound(WordipleUser reference) {
         Match match = MatchManager.getInstance().getMatch(reference);
         match.setRoundWinner(winner);
+        for (WordipleUser user : guesses.keySet()) {
+            solveTimes.putIfAbsent(user, -1.0);
+        }
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : guesses.keySet()) {
                 PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "The word was..."),
@@ -209,7 +215,7 @@ public abstract class Round {
                 );
             }
         }, 5, TimeUnit.SECONDS);
-        WordipleServer.getExecutor().schedule(match::startRound, 8, TimeUnit.SECONDS);
+        if (winner == null || ((List<?>) match.score.get(winner)).size() < match.winGoal) WordipleServer.getExecutor().schedule(match::startRound, 8, TimeUnit.SECONDS);
     }
 
     private boolean guessesLeft() {

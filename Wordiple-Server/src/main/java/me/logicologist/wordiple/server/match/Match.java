@@ -1,5 +1,6 @@
 package me.logicologist.wordiple.server.match;
 
+import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.QueueManager;
@@ -16,18 +17,20 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Match<T extends Round> {
 
-    protected final HashMap<WordipleUser, List<T>> score;
+    public final HashMap<WordipleUser, List<T>> score;
     protected final List<T> rounds;
-    protected final int winGoal;
+    public final long matchStartTime;
+    public final int winGoal;
     private final List<WordipleUser> readyUsers;
-    private final long matchStartTime;
+    private final QueueType gameType;
 
 
-    public Match(int winGoal) {
+    public Match(int winGoal, QueueType gameType) {
         this.score = new HashMap<>();
         this.rounds = new ArrayList<>();
         this.readyUsers = new ArrayList<>();
         this.winGoal = winGoal;
+        this.gameType = gameType;
         this.matchStartTime = System.currentTimeMillis();
     }
 
@@ -89,10 +92,6 @@ public abstract class Match<T extends Round> {
         }
     }
 
-    public void terminateMatch() {
-
-    }
-
     public boolean containsPlayer(WordipleUser user) {
         return score.containsKey(user);
     }
@@ -105,7 +104,7 @@ public abstract class Match<T extends Round> {
         if (winner == null) return;
         score.get(winner).add(getCurrentRound());
         if (score.get(winner).size() == winGoal) {
-            terminateMatch();
+            terminateMatch(winner);
         }
         for (WordipleUser user : score.keySet()) {
             for (WordipleUser scoreUser : score.keySet()) {
@@ -119,4 +118,38 @@ public abstract class Match<T extends Round> {
     }
 
     public abstract void startNewRound();
+
+    public abstract void terminateMatch(WordipleUser winner);
+
+    public double getAverageGuesses(WordipleUser player) {
+        double combined = 0;
+        int solved = 0;
+        for (T round : rounds) {
+            if (round.solveTimes.get(player) > 0) {
+                combined += round.guesses.get(player).size();
+                solved++;
+            }
+        }
+        return combined / solved;
+    }
+
+    public double getAverageSolveTime(WordipleUser player) {
+        double combined = 0;
+        int solved = 0;
+        for (T round : rounds) {
+            if (round.solveTimes.get(player) > 0) {
+                combined += round.solveTimes.get(player);
+                solved++;
+            }
+        }
+        return combined / solved;
+    }
+
+    public long getAmountUnsolved(WordipleUser player) {
+        return rounds.stream().filter(x -> x.solveTimes.get(player) > 0).count();
+    }
+
+    public QueueType getGameType() {
+        return gameType;
+    }
 }

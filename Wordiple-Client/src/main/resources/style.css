@@ -41,6 +41,10 @@
     -fx-background-color: transparent;
 }
 
+.rank-none {
+    -fx-background-color: transparent;
+}
+
 .rank-delta-1 {
     -fx-background-image: url("./ranks/delta1.png");
     -fx-background-color: transparent;
@@ -131,6 +135,12 @@
 
 .versus-score-label {
     -fx-font-size: 100px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.1, 0, 0);
+}
+
+.versus-rank-gain-label {
+    -fx-font-size: 75px;
     -fx-font-family: 'Nexa Bold';
     -fx-effect: dropshadow(three-pass-box, #ffffff, 20, 0.1, 0, 0);
 }
@@ -430,6 +440,12 @@
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
 }
 
+.label-bigtitle-light {
+    -fx-font-size: 100px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.1, 0, 0);
+}
+
 .label-body {
     -fx-font-size: 15px;
     -fx-font-family: 'Nexa Light';
@@ -472,6 +488,15 @@
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
     -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.UpSkin';
+}
+
+.button-4 {
+    -fx-font-size: 25px;
+    -fx-font-family: 'Nexa Bold';
+    -fx-background-color: #ff4f4f;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, #000000, 20, 0.2, 0, 0);
+    -fx-skin: 'me.logicologist.wordiple.client.gui.buttonskins.LeftSkin';
 }
 
 .button-3-outline {

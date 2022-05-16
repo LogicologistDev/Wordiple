@@ -45,4 +45,17 @@ public class RankRange {
         }
         return null;
     }
+
+    public int getRatingToNextRank(int rating) {
+        Rank rank = getRank(rating);
+        int index = this.ranks.indexOf(rank);
+        if (index == -1) {
+            return -1;
+        }
+        // TODO: If sigma, show how much needed until omega. For now, it is just shown as -1 for uncapped.
+        if (index > this.ranks.size() - 3) {
+            return -1;
+        }
+        return this.ranks.get(index + 1).getMinimum() - rating;
+    }
 }

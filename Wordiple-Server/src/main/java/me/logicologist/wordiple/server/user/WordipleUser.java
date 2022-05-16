@@ -116,6 +116,10 @@ public class WordipleUser {
 
     public void setExperience(int experience) {
         this.experience = experience;
+        while (this.experience >= this.getNeededExperience()) {
+            this.level++;
+            this.experience -= this.getNeededExperience();
+        }
     }
 
     public int getWins() {

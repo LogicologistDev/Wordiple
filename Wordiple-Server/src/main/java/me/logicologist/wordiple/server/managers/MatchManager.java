@@ -25,6 +25,11 @@ public class MatchManager {
         return matches.stream().filter(x -> x.containsPlayer(user)).findFirst().orElse(null);
     }
 
+    public void terminateMatch(Match<? extends Round> match) {
+        matches.remove(match);
+        QueueManager.getInstance().finalizeMatch(match);
+    }
+
     public static MatchManager getInstance() {
         return matchManager;
     }

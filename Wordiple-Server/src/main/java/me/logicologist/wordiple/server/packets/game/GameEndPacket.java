@@ -25,7 +25,15 @@ public class GameEndPacket extends PacketAdapter implements AuthPacketType {
     @Override
     public PacketArguments getArguments() {
         return new PacketArguments()
+                .setArgument("type", QueueType.class)
                 .setArgument("winner", String.class)
-                .setArgument("rating", Integer.class);
+                .setArgument("scoredisplay", String.class)
+                .setArgument("rating", Integer.class)
+                .setArgument("ratingchange", Integer.class)
+                .setArgument("rank", String.class)
+                .setArgument("ratingtorankup", Integer.class)
+                .setArgument("newexperience", Integer.class)
+                .setArgument("newlevel", Integer.class)
+                .setArgument("requiredexperience", Integer.class);
     }
 }

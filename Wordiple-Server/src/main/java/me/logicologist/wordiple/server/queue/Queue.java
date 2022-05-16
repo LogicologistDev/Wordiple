@@ -4,6 +4,8 @@ import me.logicologist.wordiple.common.queue.QueueType;
 import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.managers.QueueManager;
+import me.logicologist.wordiple.server.match.Match;
+import me.logicologist.wordiple.server.match.round.Round;
 import me.logicologist.wordiple.server.packets.info.QueueInfoPacket;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
@@ -56,6 +58,10 @@ public abstract class Queue {
 
     public void removeQueueViewer(WordipleUser user) {
         this.viewingQueue.remove(user);
+    }
+
+    public void removeInGame(WordipleUser user) {
+        inGame.remove(user);
     }
 
     public int getActive() {

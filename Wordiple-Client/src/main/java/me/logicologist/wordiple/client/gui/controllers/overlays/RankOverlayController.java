@@ -71,8 +71,6 @@ public class RankOverlayController extends AttachableAdapter {
             double rotate = -1 * Math.pow(2, 7 * (i * 0.01 - 1)) * 25;
             double opacity = -1 * Math.pow(2, 7 * (i * 0.01 - 1)) * 1 + 1;
 
-            System.out.println(duration - duration / 100 * i + " - " + layoutX + " | " + layoutY + " | " + rotate + " | " + opacity);
-
             betterTimeline.getKeyFrames().add(new KeyFrame(Duration.seconds( duration - duration / 100 * i),
                     new KeyValue(movablePane.layoutXProperty(), layoutX),
                     new KeyValue(movablePane.layoutYProperty(), layoutY),

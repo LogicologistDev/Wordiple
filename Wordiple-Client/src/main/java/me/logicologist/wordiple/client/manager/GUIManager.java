@@ -16,10 +16,7 @@ import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
 import me.logicologist.wordiple.client.gui.controllers.MainScreenController;
 import me.logicologist.wordiple.client.gui.controllers.auth.*;
-import me.logicologist.wordiple.client.gui.controllers.game.CompetitiveIntroController;
-import me.logicologist.wordiple.client.gui.controllers.game.GameController;
-import me.logicologist.wordiple.client.gui.controllers.game.GameTextOverlayController;
-import me.logicologist.wordiple.client.gui.controllers.game.VersusTwoController;
+import me.logicologist.wordiple.client.gui.controllers.game.*;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ConfirmExitOverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.overlays.ProfileOverlayController;
@@ -30,6 +27,7 @@ import me.logicologist.wordiple.client.gui.controllers.queue.QueueController;
 import me.logicologist.wordiple.client.gui.controllers.queue.TimeRoyaleQueueController;
 import me.logicologist.wordiple.client.gui.controllers.select.GameSelectController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
+import me.logicologist.wordiple.client.gui.controllers.transitions.FlashScreenController;
 import me.logicologist.wordiple.client.gui.controllers.transitions.SwipeTransitionController;
 import me.logicologist.wordiple.client.integration.IntegrationStatus;
 import me.logicologist.wordiple.client.packets.auth.LogoutPacket;
@@ -38,8 +36,8 @@ import me.logicologist.wordiple.client.sound.SoundType;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.queue.QueueType;
 
-import javax.swing.*;
 import java.awt.*;
+import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -310,6 +308,18 @@ public class GUIManager extends Application {
         return null;
     }
 
+    public void startFlashScreenTransition() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/flashscreen.fxml"));
+            fxmlLoader.load();
+            FlashScreenController flashScreenController = fxmlLoader.getController();
+            flashScreenController.setParent((AnchorPane) stage.getScene().getRoot());
+            flashScreenController.transitionIn();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public CompetitiveIntroController showCompetitiveIntro(Runnable runFirst, Runnable runAfterIn, Runnable runAfterOut, String opponentName, int opponentRating) {
         if (runFirst != null) runFirst.run();
         try {
@@ -370,6 +380,27 @@ public class GUIManager extends Application {
             confirmExitOverlayController.attach();
             confirmExitOverlayController.transitionIn(overlayController, runAfter);
             return confirmExitOverlayController;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public GameEndController showGameEnd(PacketArguments args) {
+        try {
+            OverlayController overlayController = showOverlay(true);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameendscreen.fxml"));
+            fxmlLoader.load();
+            GameEndController gameEndController = fxmlLoader.getController();
+            gameEndController.setParent((AnchorPane) stage.getScene().getRoot());
+            gameEndController.setData(SessionManager.getInstance().getUsername().equals(args.get("winner", String.class)), args.get("scoredisplay", String.class), args.get("newexperience", Integer.class), args.get("newlevel", Integer.class), args.get("requiredexperience", Integer.class));
+            gameEndController.attach();
+            if (args.get("type", QueueType.class) == QueueType.COMPETITIVE) {
+                gameEndController.setCompetitiveData(args.get("rating", Integer.class), args.get("ratingchange", Integer.class), args.get("rank", String.class), args.get("ratingtorankup", Integer.class));
+            }
+            gameEndController.attach();
+            gameEndController.transitionIn(overlayController, this::startFlashScreenTransition);
+            return gameEndController;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -507,4 +538,62 @@ public class GUIManager extends Application {
     public static GUIManager getInstance() {
         return instance;
     }
+
+    public static void setRankStyleClass(Label label, String rank) {
+        String styleClass;
+        switch (rank) {
+            case "Delta I":
+                styleClass = "rank-delta-1";
+                break;
+            case "Delta II":
+                styleClass = "rank-delta-2";
+                break;
+            case "Delta III":
+                styleClass = "rank-delta-3";
+                break;
+            case "Gamma I":
+                styleClass = "rank-gamma-1";
+                break;
+            case "Gamma II":
+                styleClass = "rank-gamma-2";
+                break;
+            case "Gamma III":
+                styleClass = "rank-gamma-3";
+                break;
+            case "Beta I":
+                styleClass = "rank-beta-1";
+                break;
+            case "Beta II":
+                styleClass = "rank-beta-2";
+                break;
+            case "Beta III":
+                styleClass = "rank-beta-3";
+                break;
+            case "Alpha I":
+                styleClass = "rank-alpha-1";
+                break;
+            case "Alpha II":
+                styleClass = "rank-alpha-2";
+                break;
+            case "Alpha III":
+                styleClass = "rank-alpha-3";
+                break;
+            case "Sigma":
+                styleClass = "rank-sigma";
+                break;
+            case "Omega":
+                styleClass = "rank-omega";
+                break;
+            case "Unranked":
+                styleClass = "rank-unranked";
+                break;
+            default:
+                styleClass = "rank-none";
+        }
+        Platform.runLater(() -> {
+            label.getStyleClass().clear();
+            label.getStyleClass().add(styleClass);
+        });
+    }
+
 }
