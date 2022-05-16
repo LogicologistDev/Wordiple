@@ -14,6 +14,7 @@ import me.logicologist.wordiple.client.gui.controllers.AttachableAdapter;
 import me.logicologist.wordiple.client.gui.controllers.overlays.OverlayController;
 import me.logicologist.wordiple.client.gui.controllers.select.PlayerHeaderController;
 import me.logicologist.wordiple.client.manager.GUIManager;
+import me.logicologist.wordiple.client.manager.SessionManager;
 import me.logicologist.wordiple.client.manager.SoundManager;
 import me.logicologist.wordiple.client.sound.SoundType;
 
@@ -136,6 +137,7 @@ public class GameEndController extends AttachableAdapter {
             this.ratingPositiveChangeLabel.setVisible(false);
             this.ratingNegativeChangeLabel.setText(ratingChange + " WR");
         }
+        SessionManager.getInstance().setRating(totalRating);
         GUIManager.setRankStyleClass(rankDisplay, rank);
         this.rankLabel.setText(rank);
         this.ratingToRankupLabel.setText(ratingToRankup + " WR to Rankup");
