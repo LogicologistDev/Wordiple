@@ -87,6 +87,7 @@ public class GUIManager extends Application {
         WordipleClient.getExecutor().submit(() -> {
             soundManager.load(); // download and load sounds.
             libraryManager.load(); // download and load integrations.
+            if (GenericManager.assetsInsert != null) GenericManager.assetsInsert.run(); // no assets to download, run the insert.
         });
         stage.setOnCloseRequest(e -> {
             try {

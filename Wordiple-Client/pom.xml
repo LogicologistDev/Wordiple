@@ -59,6 +59,14 @@
                 </executions>
                 <configuration>
                     <finalName>Wordiple</finalName>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/versions/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <manifestEntries>
@@ -114,7 +122,7 @@
                                             out="${project.build.directory}\Wordiple_obf.jar"/>
                                     <rename mainclass="me.logicologist.wordiple.client.AgentClient"
                                             logfile="${project.build.directory}\yguard.log.xml"
-                                            replaceClassNameStrings="false">
+                                            replaceClassNameStrings="true">
                                         <property name="naming-scheme" value="small"/>
                                         <property name="language-conformity" value="compatible"/>
                                         <keep>
@@ -123,8 +131,19 @@
                                                     <include name="org.apache.**"/>
                                                     <include name="javassist.**"/>
                                                     <include name="org.reflections.**"/>
+                                                    <include name="com.sun.**"/>
+                                                    <include name="me.logicologist.wordiple.client.WordipleClient"/>
+                                                    <include name="me.logicologist.wordiple.client.manager.LibraryManager"/>
+                                                    <include name="me.logicologist.wordiple.client.manager.GUIManager"/>
+                                                    <include name="me.logicologist.wordiple.common.**"/>
                                                     <include name="com.olziedev.olziesocket.framework.PacketArguments"/>
-                                                    <include name="com.olziedev.olziesocket.framework.api.packet.PacketHolder"/>
+                                                    <include name="com.olziedev.olziesocket.framework.*"/>
+                                                    <include name="javafx.**"/>
+                                                </patternset>
+                                            </class>
+                                            <class classes="none" methods="none" fields="private">
+                                                <patternset>
+                                                    <include name="me.logicologist.wordiple.client.gui.**"/>
                                                 </patternset>
                                             </class>
                                             <linenumbertable>
@@ -138,6 +157,10 @@
                                                 <patternset refid="CompanyPatternSet"/>
                                             </sourcefile>
                                         </keep>
+                                        <adjust replaceContent="true" replaceName="true">
+                                            <include name="**.fxml"/>
+                                            <include name="**.css"/>
+                                        </adjust>
                                     </rename>
                                     <externalclasses>
                                         <!--suppress UnresolvedMavenProperty -->

@@ -24,6 +24,7 @@ public class GenericManager {
             new IntegrationManager().load();
             SessionManager.getInstance().setAssetVersion(Utils.getAssetVersion());
             Platform.runLater(() -> GUIManager.innit(guiManager));
+            assetsInsert = null;
         };
         long soundAmount = SoundManager.getInstance().neededDownloaded();
         long libraryAmount = LibraryManager.getInstance().neededDownloaded();
@@ -34,7 +35,7 @@ public class GenericManager {
         long finalAmount = soundAmount + libraryAmount;
         WordipleClient.getLogger().info("Downloading " + finalAmount + " assets...");
         if (finalAmount <= 0) {
-            assetsFinished.run();
+            assetsInsert = assetsFinished;
             return;
         }
         LoadScreenController controller = guiManager.showLoadScreen("Fetching Assets (0%)");
