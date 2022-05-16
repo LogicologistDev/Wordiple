@@ -190,10 +190,11 @@ public abstract class Round {
 
     public void endRound(WordipleUser reference) {
         Match match = MatchManager.getInstance().getMatch(reference);
-        match.setRoundWinner(winner);
         for (WordipleUser user : guesses.keySet()) {
             solveTimes.putIfAbsent(user, -1.0);
         }
+        match.setRoundWinner(winner);
+
         WordipleServer.getExecutor().schedule(() -> {
             for (WordipleUser user : guesses.keySet()) {
                 PacketManager.getInstance().getSocket().getPacket(GameOverlayPacket.class).sendPacket(packet -> packet.getPacketType().getArguments().setValues("display", "The word was..."),
