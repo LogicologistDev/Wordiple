@@ -63,7 +63,7 @@ public class GameEndController extends AttachableAdapter {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         super.setAttachment(movablePane);
         this.gameSelectButton.setOnAction(event -> {
-            this.gameSelectButton.getScene().getWindow().hide();
+            GUIManager.getInstance().startSwipeTransition(null, this::transitionOut);
         });
     }
 
@@ -95,7 +95,11 @@ public class GameEndController extends AttachableAdapter {
     }
 
     public void transitionOut() {
+
+        if (midAction) return;
+
         midAction = true;
+
         double duration = 2;
 
         movablePane.setOpacity(1);

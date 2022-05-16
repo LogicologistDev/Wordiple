@@ -52,7 +52,7 @@
       </Label>
       <AnchorPane layoutX="53.0" layoutY="172.0" prefHeight="1125.0" prefWidth="1334.0" styleClass="pane-overlay" stylesheets="@style.css">
          <children>
-            <Label fx:id="totalRatingLabel" layoutX="15.0" layoutY="1.0" styleClass="versus-intro-label" stylesheets="@style.css" text="223 WR">
+            <Label fx:id="totalRatingLabel" layoutX="15.0" layoutY="1.0" prefHeight="152.0" prefWidth="885.0" styleClass="versus-intro-label" stylesheets="@style.css">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -69,7 +69,7 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-            <Label fx:id="ratingPositiveChangeLabel" layoutX="16.0" layoutY="127.0" prefHeight="91.0" prefWidth="373.0" styleClass="versus-rank-gain-label" stylesheets="@style.css" text="+20 WR">
+            <Label fx:id="ratingPositiveChangeLabel" layoutX="16.0" layoutY="127.0" prefHeight="91.0" prefWidth="373.0" styleClass="versus-rank-gain-label" stylesheets="@style.css">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -86,7 +86,7 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-            <Label fx:id="ratingNegativeChangeLabel" layoutX="17.0" layoutY="127.0" prefHeight="91.0" prefWidth="373.0" styleClass="versus-rank-gain-label" stylesheets="@style.css" text="-20 WR">
+            <Label fx:id="ratingNegativeChangeLabel" layoutX="17.0" layoutY="127.0" prefHeight="91.0" prefWidth="373.0" styleClass="versus-rank-gain-label" stylesheets="@style.css">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -105,11 +105,11 @@
                </textFill>
             </Label>
             <Label fx:id="rankDisplay" alignment="CENTER" layoutX="-430.0" layoutY="-204.0" mouseTransparent="true" prefHeight="1316.0" prefWidth="1148.0" scaleX="0.25" scaleY="0.25" scaleZ="0.25" styleClass="rank-none" stylesheets="@style.css" textAlignment="CENTER" />
-            <Label fx:id="rankLabel" layoutX="302.0" layoutY="323.0" prefHeight="152.0" prefWidth="877.0" styleClass="versus-intro-label" stylesheets="@style.css" text="Unranked" textFill="WHITE" />
-            <Label fx:id="ratingToRankupLabel" layoutX="302.0" layoutY="475.0" styleClass="versus-rank-gain-label" stylesheets="@style.css" text="20 WR to Rankup" textFill="WHITE" />
+            <Label fx:id="rankLabel" layoutX="302.0" layoutY="323.0" prefHeight="152.0" prefWidth="877.0" styleClass="versus-intro-label" stylesheets="@style.css" textFill="WHITE" />
+            <Label fx:id="ratingToRankupLabel" layoutX="302.0" layoutY="475.0" styleClass="versus-rank-gain-label" stylesheets="@style.css" textFill="WHITE" />
             <AnchorPane layoutX="401.0" layoutY="173.0" prefHeight="137.0" prefWidth="532.0" styleClass="pane-overlay" stylesheets="@style.css">
                <children>
-                  <Label fx:id="scoreLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" prefHeight="102.0" prefWidth="518.0" styleClass="versus-intro-label" stylesheets="@style.css" text="3-0" textFill="WHITE" />
+                  <Label fx:id="scoreLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" prefHeight="102.0" prefWidth="518.0" styleClass="versus-intro-label" stylesheets="@style.css" textFill="WHITE" />
                </children>
             </AnchorPane>
          </children>

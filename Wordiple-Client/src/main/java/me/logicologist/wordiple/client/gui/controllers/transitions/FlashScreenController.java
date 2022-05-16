@@ -30,7 +30,7 @@ public class FlashScreenController extends AttachableAdapter {
 
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(movablePane.opacityProperty(), 1)),
-                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.scaleYProperty(), 0))
+                new KeyFrame(Duration.seconds(duration), new KeyValue(movablePane.opacityProperty(), 0))
         );
 
         timeline.play();

@@ -115,7 +115,7 @@ public class CompetitiveMatch extends Match<StandardRound> {
         winner.setExperience(winner.getExperience() + experience);
         loser.setExperience(loser.getExperience() + experience);
 
-        double finalRatingWon = ratingWon;
+        int finalRatingWon = (int) ratingWon;
         PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                         .setValues("type", QueueType.COMPETITIVE)
                         .setValues("winner", winner.getUsername())
@@ -130,7 +130,7 @@ public class CompetitiveMatch extends Match<StandardRound> {
                 winner.getOutputStream()
         );
 
-        double finalRatingLost = ratingLost;
+        int finalRatingLost = (int) ratingLost;
         PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
                         .setValues("type", QueueType.COMPETITIVE)
                         .setValues("winner", winner.getUsername())

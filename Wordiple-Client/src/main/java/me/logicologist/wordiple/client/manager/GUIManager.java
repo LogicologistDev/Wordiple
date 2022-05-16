@@ -389,7 +389,7 @@ public class GUIManager extends Application {
     public GameEndController showGameEnd(PacketArguments args) {
         try {
             OverlayController overlayController = showOverlay(true);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gameendscreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/endscreen.fxml"));
             fxmlLoader.load();
             GameEndController gameEndController = fxmlLoader.getController();
             gameEndController.setParent((AnchorPane) stage.getScene().getRoot());
@@ -398,7 +398,6 @@ public class GUIManager extends Application {
             if (args.get("type", QueueType.class) == QueueType.COMPETITIVE) {
                 gameEndController.setCompetitiveData(args.get("rating", Integer.class), args.get("ratingchange", Integer.class), args.get("rank", String.class), args.get("ratingtorankup", Integer.class));
             }
-            gameEndController.attach();
             gameEndController.transitionIn(overlayController, this::startFlashScreenTransition);
             return gameEndController;
         } catch (Exception ex) {
