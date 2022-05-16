@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.match;
 
 import me.logicologist.wordiple.common.queue.QueueType;
+import me.logicologist.wordiple.server.WordipleServer;
 import me.logicologist.wordiple.server.managers.MatchManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.match.round.StandardRound;
@@ -10,6 +11,7 @@ import me.logicologist.wordiple.server.rank.RankRange;
 import me.logicologist.wordiple.server.user.WordipleUser;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CompetitiveMatch extends Match<StandardRound> {
 
@@ -116,33 +118,36 @@ public class CompetitiveMatch extends Match<StandardRound> {
         loser.setExperience(loser.getExperience() + experience);
 
         int finalRatingWon = (int) ratingWon;
-        PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                        .setValues("type", QueueType.COMPETITIVE)
-                        .setValues("winner", winner.getUsername())
-                        .setValues("scoredisplay", super.score.get(winner).size() + "-" + super.score.get(loser).size())
-                        .setValues("rating", winner.getRating())
-                        .setValues("ratingchange", finalRatingWon)
-                        .setValues("rank", RankRange.getInstance().getRank(winner.getRating()).getName())
-                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(winner.getRating()))
-                        .setValues("newexperience", winner.getExperience())
-                        .setValues("newlevel", winner.getLevel())
-                        .setValues("requiredexperience", winner.getNeededExperience()),
-                winner.getOutputStream()
-        );
-
         int finalRatingLost = (int) ratingLost;
-        PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
-                        .setValues("type", QueueType.COMPETITIVE)
-                        .setValues("winner", winner.getUsername())
-                        .setValues("scoredisplay", super.score.get(loser).size() + "-" + super.score.get(winner).size())
-                        .setValues("rating", loser.getRating())
-                        .setValues("ratingchange", -1 * finalRatingLost)
-                        .setValues("rank", RankRange.getInstance().getRank(loser.getRating()).getName())
-                        .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(loser.getRating()))
-                        .setValues("newexperience", loser.getExperience())
-                        .setValues("newlevel", loser.getLevel())
-                        .setValues("requiredexperience", loser.getNeededExperience()),
-                loser.getOutputStream()
-        );
+        WordipleServer.getExecutor().schedule(() -> {
+            PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                            .setValues("type", QueueType.COMPETITIVE)
+                            .setValues("winner", winner.getUsername())
+                            .setValues("scoredisplay", super.score.get(winner).size() + "-" + super.score.get(loser).size())
+                            .setValues("rating", winner.getRating())
+                            .setValues("ratingchange", finalRatingWon)
+                            .setValues("rank", RankRange.getInstance().getRank(winner.getRating()).getName())
+                            .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(winner.getRating()))
+                            .setValues("newexperience", winner.getExperience())
+                            .setValues("newlevel", winner.getLevel())
+                            .setValues("requiredexperience", winner.getNeededExperience()),
+                    winner.getOutputStream()
+            );
+
+            PacketManager.getInstance().getSocket().getPacket(GameEndPacket.class).sendPacket(packet -> packet.getPacketType().getArguments()
+                            .setValues("type", QueueType.COMPETITIVE)
+                            .setValues("winner", winner.getUsername())
+                            .setValues("scoredisplay", super.score.get(loser).size() + "-" + super.score.get(winner).size())
+                            .setValues("rating", loser.getRating())
+                            .setValues("ratingchange", -1 * finalRatingLost)
+                            .setValues("rank", RankRange.getInstance().getRank(loser.getRating()).getName())
+                            .setValues("ratingtorankup", RankRange.getInstance().getRatingToNextRank(loser.getRating()))
+                            .setValues("newexperience", loser.getExperience())
+                            .setValues("newlevel", loser.getLevel())
+                            .setValues("requiredexperience", loser.getNeededExperience()),
+                    loser.getOutputStream()
+            );
+        }, 8, TimeUnit.SECONDS);
+
     }
 }
