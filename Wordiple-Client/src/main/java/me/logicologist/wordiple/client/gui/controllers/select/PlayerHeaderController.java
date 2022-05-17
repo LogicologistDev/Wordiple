@@ -4,6 +4,7 @@ import com.jcraft.jsch.Session;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -107,10 +108,12 @@ public class PlayerHeaderController extends AttachableAdapter {
         for (int level = currentLevel; level < newLevel; level++) {
             int finalLevel = level;
             WordipleClient.getExecutor().schedule(() -> {
-                SessionManager.getInstance().setCurrentXp(SessionManager.getInstance().getNeededXp());
-                setBarPercentage(1, () -> {
-                    setLevelUp(finalLevel, () -> {
-                        SessionManager.getInstance().setNeededXp(newNeededXp);
+                Platform.runLater(() -> {
+                    SessionManager.getInstance().setCurrentXp(SessionManager.getInstance().getNeededXp());
+                    setBarPercentage(1, () -> {
+                        setLevelUp(finalLevel, () -> {
+                            SessionManager.getInstance().setNeededXp(newNeededXp);
+                        });
                     });
                 });
             }, (newLevel - level - 1) * 5L, TimeUnit.SECONDS);

@@ -81,6 +81,8 @@ public class GUIManager extends Application {
         SoundManager soundManager = new SoundManager();
         LibraryManager libraryManager = new LibraryManager();
         showMainScreen(false);
+        stage.setRenderScaleX(0.75);
+        stage.setRenderScaleY(0.75);
         stage.show();
 
         GenericManager.downloadAssets(this);

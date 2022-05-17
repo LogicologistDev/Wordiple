@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
  * @author      Logicologist
  * @since       1.0
  */
+
 public class ForgotPasswordController extends FadeVerticalTransitionAdapter {
 
     /**
