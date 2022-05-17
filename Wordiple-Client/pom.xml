@@ -140,7 +140,7 @@
                                                     <include name="javafx.**"/>
                                                 </patternset>
                                             </class>
-                                            <class classes="none" methods="none" fields="private">
+                                            <class classes="private" methods="none" fields="private">
                                                 <patternset>
                                                     <include name="me.logicologist.wordiple.client.gui.**"/>
                                                 </patternset>
@@ -156,10 +156,6 @@
                                                 <patternset refid="CompanyPatternSet"/>
                                             </sourcefile>
                                         </keep>
-                                        <adjust replaceContent="true" replaceName="true">
-                                            <include name="**.fxml"/>
-                                            <include name="**.css"/>
-                                        </adjust>
                                     </rename>
                                     <externalclasses>
                                         <!--suppress UnresolvedMavenProperty -->
