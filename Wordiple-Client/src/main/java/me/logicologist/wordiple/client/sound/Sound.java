@@ -38,14 +38,12 @@ public class Sound {
             if (this.children != null) {
                 clip.addLineListener(event -> {
                     if (event.getType() != LineEvent.Type.STOP || this.children == null) return;
-                    if (playedSounds.size() + 1 >= this.children.size()) {
+                    if (playedSounds.size() >= this.children.size()) {
                         WordipleClient.getLogger().info("Resetting children");
                         playedSounds.clear();
                     }
 
                     SoundType nextSound = children.get(playedSounds.size());
-                    WordipleClient.getLogger().info("Finding sound: " + nextSound.getFile());
-
                     this.loadSound(nextSound);
                     this.play();
                 });
@@ -82,9 +80,7 @@ public class Sound {
                     try {
                         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                         float current = gainControl.getValue();
-                        WordipleClient.getLogger().info(selected.getVolume());
                         float targetDB = selected.getVolume();
-                        WordipleClient.getLogger().info(current);
                         while (current < targetDB) {
                             current += 0.1;
                             gainControl.setValue(current);
