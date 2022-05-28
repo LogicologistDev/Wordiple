@@ -38,7 +38,7 @@ public class Sound {
             if (this.children != null) {
                 clip.addLineListener(event -> {
                     if (event.getType() != LineEvent.Type.STOP || this.children == null) return;
-                    if (children.size() == playedSounds.size()) playedSounds.clear();
+                    if (children.size() >= playedSounds.size() + 1) playedSounds.clear();
 
                     SoundType nextSound;
                     do {
