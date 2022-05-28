@@ -38,12 +38,13 @@ public class Sound {
             if (this.children != null) {
                 clip.addLineListener(event -> {
                     if (event.getType() != LineEvent.Type.STOP || this.children == null) return;
-                    if (children.size() >= playedSounds.size() + 1) playedSounds.clear();
+                    if (playedSounds.size() + 1 >= this.children.size()) {
+                        WordipleClient.getLogger().info("Resetting children");
+                        playedSounds.clear();
+                    }
 
-                    SoundType nextSound;
-                    do {
-                        nextSound = children.get(playedSounds.size());
-                    } while (playedSounds.contains(nextSound));
+                    SoundType nextSound = children.get(playedSounds.size());
+                    WordipleClient.getLogger().info("Finding sound: " + nextSound.getFile());
 
                     this.loadSound(nextSound);
                     this.play();
