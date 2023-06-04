@@ -1,6 +1,7 @@
 package me.logicologist.wordiple.server.user;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
+import com.olziedev.olziesocket.socket.Client;
 import me.logicologist.wordiple.server.managers.DatabaseManager;
 import me.logicologist.wordiple.server.managers.PacketManager;
 import me.logicologist.wordiple.server.rank.RankRange;
@@ -259,7 +260,7 @@ public class WordipleUser {
         this.openers.add(opener);
     }
 
-    public ObjectOutputStream getOutputStream() {
+    public Client getOutputStream() {
         if (this.socket == null) return null;
 
         try {

@@ -2,6 +2,7 @@ package me.logicologist.wordiple.server.packets.info;
 
 import com.olziedev.olziesocket.framework.PacketArguments;
 import com.olziedev.olziesocket.framework.api.packet.PacketAdapter;
+import com.olziedev.olziesocket.socket.Client;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
 import me.logicologist.wordiple.server.managers.PacketManager;
@@ -34,7 +35,7 @@ public class UserInfoPacket extends PacketAdapter implements AuthPacketType {
             this.sendPacket(packet -> arguments.replace(this.getArguments()));
             return;
         }
-        ObjectOutputStream oldStream = wordipleUser.getOutputStream();
+        Client oldStream = wordipleUser.getOutputStream();
         if (!PacketManager.getInstance().getSocket().getOutputStream(arguments.getPacketHolder()).equals(oldStream)) {
             PacketManager.getInstance().getSocket().getPacket(LogoutPacket.class)
                     .sendPacket(packet -> packet.getPacketType().getArguments().setValues("reason", "You have been logged out."), oldStream);

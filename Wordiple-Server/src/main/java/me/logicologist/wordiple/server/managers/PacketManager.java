@@ -1,7 +1,8 @@
 package me.logicologist.wordiple.server.managers;
 
 import com.olziedev.olziesocket.OlzieSocket;
-import com.olziedev.olziesocket.framework.SocketConfig;
+import com.olziedev.olziesocket.framework.config.HeartbeatConfig;
+import com.olziedev.olziesocket.framework.config.SocketConfig;
 import org.apache.logging.log4j.LogManager;
 
 public class PacketManager {
@@ -10,7 +11,10 @@ public class PacketManager {
     private final OlzieSocket socket;
 
     public PacketManager() {
-        SocketConfig config = new SocketConfig("127.0.0.1", 11184, "", true, new SocketConfig.SocketHeartbeatConfig(2000, 20, false), (short) 0);
+        SocketConfig config = new SocketConfig().setAddress("127.0.0.1", 11184)
+                .setDebug(true)
+                .addExtraConfig(new HeartbeatConfig(2000, 20, false))
+                .setReconnectSeconds((short) 0);
         this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
         instance = this;
     }

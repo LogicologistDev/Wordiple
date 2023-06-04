@@ -1,11 +1,11 @@
 package me.logicologist.wordiple.client.manager;
 
 import com.olziedev.olziesocket.OlzieSocket;
-import com.olziedev.olziesocket.framework.SocketConfig;
 import com.olziedev.olziesocket.framework.action.SocketActionType;
+import com.olziedev.olziesocket.framework.config.HeartbeatConfig;
+import com.olziedev.olziesocket.framework.config.SocketConfig;
 import me.logicologist.wordiple.client.WordipleClient;
 import me.logicologist.wordiple.client.gui.controllers.LoadScreenController;
-import me.logicologist.wordiple.client.integration.IntegrationStatus;
 import me.logicologist.wordiple.client.packets.info.UserInfoPacket;
 import me.logicologist.wordiple.common.packets.AuthPacketType;
 import me.logicologist.wordiple.common.utils.Utils;
@@ -20,7 +20,10 @@ public class PacketManager {
     private final OlzieSocket socket;
 
     public PacketManager(boolean developerMode) {
-        SocketConfig config = new SocketConfig("157.90.218.221", 11184, "", developerMode, new SocketConfig.SocketHeartbeatConfig(2000, 20, false), (short) 0);
+        SocketConfig config = new SocketConfig().setAddress("157.90.218.221", 11184)
+                .setDebug(developerMode)
+                .addExtraConfig(new HeartbeatConfig(2000, 20, false))
+                .setReconnectSeconds((short) 0);
         this.socket = new OlzieSocket(getClass(), config, LogManager.getLogger("Wordiple-Server-Packet"));
         instance = this;
     }
